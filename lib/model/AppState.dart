@@ -1,19 +1,17 @@
 import 'package:checklist_app/controller/Storage.dart';
+import 'package:checklist_app/model/SelectionState.dart';
+import 'package:checklist_app/model/supportClasses/TaskPath.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'Task.dart';
 
 class AppState extends ChangeNotifier {
-  Storage storage = Storage();
-  Task selectedTask;
-  List<Task> selectedTaskPath;
   Task root = Task.emptyRoot;
   Task task = Task.emptyRoot;
-  List<Task> taskPath = List<Task>();
+  TaskPath taskPath = TaskPath();
 
-  ///da migliorare => inseriti per il poter selezionare più di un elemento da spostare
-  List<Task> selectedTasks = [];
-  List<Task> lastTaskPath;
+  final Storage storage = Storage();
+  final selectionState = SelectionState();
 
   AppState() {
     storage.readData().then((Task value) {
@@ -25,78 +23,55 @@ class AppState extends ChangeNotifier {
   }
 
   void selectTask(Task task) {
-    if (selectedTask == null) {
-      selectedTask = task;
-      selectedTasks.add(selectedTask);
-      selectedTaskPath = List.from(taskPath);
-      lastTaskPath =
-          selectedTaskPath.toList().sublist(0, selectedTaskPath.length - 1);
-    } else {
-      selectedTaskPath = List.from(taskPath).sublist(0, taskPath.length - 1);
-      if (selectedTaskPath == lastTaskPath) {
-        selectedTasks.add(task);
-      } else {
-        selectedTask = task;
-        selectedTaskPath = List.from(taskPath);
-        lastTaskPath = selectedTaskPath;
-        selectedTasks.clear();
-      }
-    }
+    if (!selectionState.hasSelected(task))
+      selectionState.select(task, taskPath.getCopy());
     notifyListeners();
   }
 
   void unDoSelection() {
-    selectedTask = null;
-    notifyListeners();
-  }
-
-  void updateSelectedTaskPathPercentage() {
-    selectedTaskPath.reversed.forEach((task) {
-      task.updatePercentage();
-    });
-    storage.writeData(root);
-    notifyListeners();
-  }
-
-  void updateTaskPathPercentage() {
-    taskPath.reversed.forEach((task) {
-      task.updatePercentage();
-    });
-    storage.writeData(root);
+    selectionState.clearSelection();
     notifyListeners();
   }
 
   void addTask(String title) {
     task.children.add(Task(title));
-    print(taskPath.map((e) => e.title).toString());
+    taskPath.updatePercentage();
     storage.writeData(root);
     notifyListeners();
   }
 
-  void deleteTask(Task task, Task parent) {
-    parent.children.remove(task);
-    updateTaskPathPercentage();
+  void deleteTask(Task task) {
+    this.task.children.remove(task);
+    taskPath.updatePercentage();
+    storage.writeData(root);
+    notifyListeners();
+  }
+
+  void tickTask(Task task) {
+    task.percentage = task.percentage == 0 ? 1 : 0;
+
+    taskPath.updatePercentage();
+
     storage.writeData(root);
     notifyListeners();
   }
 
   void backToTask(Task task) {
-    taskPath.removeRange(taskPath.indexOf(task) + 1, taskPath.length);
+    taskPath.backToTask(task);
     this.task = task;
     notifyListeners();
   }
 
   void backToPreviousTask() {
-    if (taskPath.length > 1) {
-      taskPath.removeLast();
-      this.task = taskPath.last;
+    if (taskPath.getLength() > 1) {
+      taskPath.backToPrevious();
+      this.task = taskPath.getLastTask();
       notifyListeners();
     }
   }
 
   void backToRoot() {
-    taskPath.clear();
-    taskPath.add(root);
+    taskPath.backToTask(root);
     this.task = root;
     notifyListeners();
   }
@@ -108,13 +83,13 @@ class AppState extends ChangeNotifier {
   }
 
   void moveTask() {
-    selectedTaskPath.last.children.remove(selectedTask);
-    updateSelectedTaskPathPercentage();
+    task.children.addAll(selectionState.tasks);
+    taskPath.updatePercentage();
 
-    task.children.add(selectedTask);
-    updateTaskPathPercentage();
-    selectedTask = null;
+    selectionState.removeTasksFromOldParents();
+    selectionState.clearSelection();
 
+    storage.writeData(root);
     notifyListeners();
   }
 }

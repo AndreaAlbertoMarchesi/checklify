@@ -20,12 +20,7 @@ class CheckboxRow extends StatelessWidget {
           Checkbox(
             value: task.percentage == 1,
             onChanged: (bool value) {
-                if (task.percentage == 0)
-                  task.percentage = 1;
-                else
-                  task.percentage = 0;
-
-                appState.updateTaskPathPercentage();
+                appState.tickTask(task);
             },
           ),
         ],

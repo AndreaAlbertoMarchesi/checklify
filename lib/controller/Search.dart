@@ -2,20 +2,19 @@ import 'package:checklist_app/model/AppState.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Search extends SearchDelegate{
-
+class Search extends SearchDelegate {
   String selectedResult;
-  List<String> titles=[];
-  List<String> recentList=[];
+  List<String> titles = [];
+  List<String> recentList = [];
 
   @override
   List<Widget> buildActions(BuildContext context) {
     return <Widget>[
       IconButton(
-          icon: Icon(Icons.close),
-          onPressed: (){
-            query= "";
-          },
+        icon: Icon(Icons.close),
+        onPressed: () {
+          query = "";
+        },
       ),
     ];
   }
@@ -24,10 +23,9 @@ class Search extends SearchDelegate{
   Widget buildLeading(BuildContext context) {
     return IconButton(
         icon: Icon(Icons.arrow_back),
-        onPressed: (){
+        onPressed: () {
           Navigator.pop(context);
-        }
-    );
+        });
   }
 
   @override
@@ -42,6 +40,7 @@ class Search extends SearchDelegate{
   @override
   Widget buildSuggestions(BuildContext context) {
     final appState = context.watch<AppState>();
+
     ///titles = appState.getTitles();
 
     List<String> suggestionList = [];
@@ -49,20 +48,19 @@ class Search extends SearchDelegate{
         ? suggestionList = recentList
         : suggestionList.addAll(titles.where(
             (element) => element.contains(query),
-    ));
+          ));
     return ListView.builder(
-      itemCount: suggestionList.length ,
-      itemBuilder: (context,index){
-        return ListTile(
-          title: Text(
-            suggestionList[index],
-          ),
-          onTap: (){
-            ///appState.goToTask(suggestionList[index]);
-            Navigator.of(context).pop();
-          },
-        );
-      }
-    );
+        itemCount: suggestionList.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(
+              suggestionList[index],
+            ),
+            onTap: () {
+              ///appState.goToTask(suggestionList[index]);
+              Navigator.of(context).pop();
+            },
+          );
+        });
   }
 }

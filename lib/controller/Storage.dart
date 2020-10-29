@@ -20,7 +20,7 @@ class Storage {
   Future<Task> readData() async {
     try {
       final file = await _localFile;
-      if(file.existsSync()) {
+      if (file.existsSync()) {
         String content = await file.readAsString();
         return Task.fromJson(jsonDecode(content));
       }

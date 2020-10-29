@@ -1,5 +1,6 @@
 import 'package:checklist_app/model/AppState.dart';
 import 'package:checklist_app/model/Task.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:swipe_to/swipe_to.dart';
 import 'CheckboxRow.dart';
@@ -16,11 +17,11 @@ class TaskItem extends StatefulWidget {
 }
 
 class TaskItemState extends State<TaskItem> {
-  bool selected = false;
 
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
+    bool isSelected = appState.selectionState.hasSelected(widget.task);
     return InkWell(
         child: SwipeTo(
           swipeDirection: SwipeDirection.swipeToLeft,
@@ -32,24 +33,22 @@ class TaskItemState extends State<TaskItem> {
             deleteDialog(appState);
           },
           child: Card(
-            color: getColor(),
+            color: getColor(isSelected),
             margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
-            child: getCardContent(widget.task, appState.updateTaskPathPercentage),
+            child: getCardContent(widget.task),
           ),
         ),
         onTap: () {
-          appState.openTask(widget.task);
+          if(!isSelected)
+            appState.openTask(widget.task);
         },
         onDoubleTap: () {
-          setState(() {
-            selected = true;
-          });
           appState.selectTask(widget.task);
         },
       );
     }
 
-  Color getColor() {
+  Color getColor(bool selected) {
     if (selected) {
       return Colors.lightGreenAccent[100];
     } else {
@@ -57,7 +56,7 @@ class TaskItemState extends State<TaskItem> {
     }
   }
 
-  Widget getCardContent(Task task, Function refresh) {
+  Widget getCardContent(Task task) {
     if (task.children.isEmpty)
       return CheckboxRow(task);
     else
@@ -74,7 +73,7 @@ class TaskItemState extends State<TaskItem> {
           FlatButton(
             child: Text("Yes"),
             onPressed: () {
-              appState.deleteTask(widget.task, appState.taskPath.last);
+              appState.deleteTask(widget.task);
               Navigator.of(context).pop();
             },
           ),

@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'taskItem/TaskItem.dart';
 
 class TasksList extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
@@ -16,9 +15,7 @@ class TasksList extends StatelessWidget {
         appState.task.handleReorder(oldIndex, newIndex);
       },
       children: appState.task.children.map((task) {
-        return Container(
-            key: PageStorageKey(task),
-            child: TaskItem(task));
+        return Container(key: PageStorageKey(task), child: TaskItem(task));
       }).toList(),
     ));
   }

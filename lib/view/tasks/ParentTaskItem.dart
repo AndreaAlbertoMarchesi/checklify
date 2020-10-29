@@ -5,7 +5,6 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
 class ParentTaskItem extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
@@ -41,7 +40,8 @@ class ParentTaskItem extends StatelessWidget {
                 radius: 35.0,
                 lineWidth: 8.0,
                 percent: appState.task.percentage.toDouble(),
-                center: isCompleted(appState.task, appState.task.percentage.toDouble()),
+                center: isCompleted(
+                    appState.task, appState.task.percentage.toDouble()),
                 progressColor: Colors.greenAccent[400],
               ),
             ),
@@ -51,13 +51,10 @@ class ParentTaskItem extends StatelessWidget {
     );
   }
 
-  Widget isCompleted(Task task, num percentage){
-    if((percentage*100) == 100.0){
+  Widget isCompleted(Task task, num percentage) {
+    if ((percentage * 100) == 100.0) {
       return Image.asset('images/completeIcon.png');
-    }else
-      return Text(
-          (task.percentage * 100).toInt().toString() +
-              "%");
+    } else
+      return Text((task.percentage * 100).toInt().toString() + "%");
   }
-
 }
