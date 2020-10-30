@@ -1,8 +1,8 @@
 import 'package:checklist_app/controller/Search.dart';
 import 'package:checklist_app/controller/Storage.dart';
 import 'package:checklist_app/model/AppState.dart';
-import 'package:checklist_app/view/home/SideMenu.dart';
 import 'package:checklist_app/view/home/buttons/AddButton.dart';
+import 'package:checklist_app/view/home/sideMenu/SideMenu.dart';
 import 'package:checklist_app/view/tasks/ParentTaskItem.dart';
 import 'package:checklist_app/view/tasks/TaskPathRow.dart';
 import 'package:checklist_app/view/tasks/tasksList/TasksList.dart';
@@ -17,10 +17,11 @@ class Home extends StatefulWidget {
 }
 
 class HomeState extends State<Home> {
-
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
+
+    int selectionLength = appState.getSelectedTasks().length;
 
     return MaterialApp(
       theme: ThemeData.light(),
@@ -31,22 +32,27 @@ class HomeState extends State<Home> {
         },
         child: Scaffold(
           appBar: AppBar(
-            actions: <Widget>[
-              Builder(
-                builder:(context) => IconButton(
-                    icon: Icon(Icons.search),
-                    onPressed: (){
-                      showSearch(context: context, delegate: Search());
-                    }
+            leading: Builder(
+              builder: (context) => Container(
+                child: Stack(
+                  children: [
+                    if (selectionLength > 0)
+                      Align(
+                          alignment: Alignment.topRight,
+                          child: Text(selectionLength.toString())),
+                    IconButton(
+                      icon: Icon(Icons.menu),
+                      onPressed: () => Scaffold.of(context).openDrawer(),
+                    ),
+                  ],
                 ),
               ),
+            ),
+            actions: <Widget>[
               Builder(
-                builder:(context) => IconButton(
+                builder: (context) => IconButton(
                     icon: Icon(Icons.notifications_active_outlined),
-                    onPressed: (){
-
-                    }
-                ),
+                    onPressed: () {}),
               ),
             ],
           ),
@@ -58,12 +64,9 @@ class HomeState extends State<Home> {
             ],
           ),
           drawer: SideMenu(),
-          //floatingActionButton: AddButton(),
           bottomNavigationBar: AddButton(),
         ),
       ),
     );
   }
-
-
 }

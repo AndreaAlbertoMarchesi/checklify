@@ -18,6 +18,11 @@ class SelectionState {
     taskPaths.add(taskPath);
   }
 
+  void deselect(Task task){
+    taskPaths.removeAt(tasks.indexOf(task));
+    tasks.remove(task);
+  }
+
   void clearSelection(){
     tasks.clear();
     taskPaths.clear();
@@ -29,6 +34,10 @@ class SelectionState {
       taskPath.getLastTask().children.remove(tasks[i]);
       taskPath.updatePercentage();
     }
+  }
+
+  int getLength(){
+    return tasks.length;
   }
 
 }

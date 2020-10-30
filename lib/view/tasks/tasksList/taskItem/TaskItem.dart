@@ -21,7 +21,7 @@ class TaskItemState extends State<TaskItem> {
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
-    bool isSelected = appState.selectionState.hasSelected(widget.task);
+    bool isSelected = appState.getSelectedTasks().contains(widget.task);
     return InkWell(
         child: SwipeTo(
           swipeDirection: SwipeDirection.swipeToLeft,

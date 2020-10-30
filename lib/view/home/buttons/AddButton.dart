@@ -8,7 +8,7 @@ class AddButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
-    if (!appState.selectionState.hasSelected()) {
+    if (appState.getSelectedTasks().isEmpty) {
       return Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
@@ -47,7 +47,7 @@ class AddButton extends StatelessWidget {
                 Align(
                   alignment: Alignment.bottomLeft,
                   child: FloatingActionButton(
-                    onPressed: appState.unDoSelection,
+                    onPressed: appState.deselect,
                     child: Icon(Icons.undo),
                     backgroundColor: Colors.grey,
                   ),

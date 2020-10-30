@@ -10,11 +10,11 @@ class AppState extends ChangeNotifier {
   Task task = Task.emptyRoot;
   TaskPath taskPath = TaskPath();
 
-  final Storage storage = Storage();
-  final selectionState = SelectionState();
+  final Storage _storage = Storage();
+  final _selectionState = SelectionState();
 
   AppState() {
-    storage.readData().then((Task value) {
+    _storage.readData().then((Task value) {
       root = value;
       task = root;
       taskPath.add(root);
@@ -23,27 +23,33 @@ class AppState extends ChangeNotifier {
   }
 
   void selectTask(Task task) {
-    if (!selectionState.hasSelected(task))
-      selectionState.select(task, taskPath.getCopy());
+    if (!_selectionState.hasSelected(task))
+      _selectionState.select(task, taskPath.getCopy());
     notifyListeners();
   }
 
-  void unDoSelection() {
-    selectionState.clearSelection();
+  void deselect([Task task]) {
+    task == null
+        ? _selectionState.clearSelection()
+        : _selectionState.deselect(task);
     notifyListeners();
+  }
+
+  List<Task> getSelectedTasks(){
+    return _selectionState.tasks;
   }
 
   void addTask(String title) {
     task.children.add(Task(title));
     taskPath.updatePercentage();
-    storage.writeData(root);
+    _storage.writeData(root);
     notifyListeners();
   }
 
   void deleteTask(Task task) {
     this.task.children.remove(task);
     taskPath.updatePercentage();
-    storage.writeData(root);
+    _storage.writeData(root);
     notifyListeners();
   }
 
@@ -52,7 +58,7 @@ class AppState extends ChangeNotifier {
 
     taskPath.updatePercentage();
 
-    storage.writeData(root);
+    _storage.writeData(root);
     notifyListeners();
   }
 
@@ -83,13 +89,13 @@ class AppState extends ChangeNotifier {
   }
 
   void moveTask() {
-    task.children.addAll(selectionState.tasks);
+    task.children.addAll(_selectionState.tasks);
     taskPath.updatePercentage();
 
-    selectionState.removeTasksFromOldParents();
-    selectionState.clearSelection();
+    _selectionState.removeTasksFromOldParents();
+    _selectionState.clearSelection();
 
-    storage.writeData(root);
+    _storage.writeData(root);
     notifyListeners();
   }
 }
