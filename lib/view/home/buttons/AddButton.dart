@@ -2,7 +2,7 @@ import 'package:checklist_app/model/AppState.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'AddDialog.dart';
+import '../dialogs/AddDialog.dart';
 
 class AddButton extends StatelessWidget {
   @override

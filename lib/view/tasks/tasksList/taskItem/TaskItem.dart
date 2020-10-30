@@ -1,5 +1,7 @@
 import 'package:checklist_app/model/AppState.dart';
 import 'package:checklist_app/model/Task.dart';
+import 'package:checklist_app/view/home/dialogs/DeleteDialog.dart';
+import 'package:checklist_app/view/home/dialogs/UpdateDialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:swipe_to/swipe_to.dart';
@@ -18,18 +20,22 @@ class TaskItem extends StatelessWidget {
     bool isSelected = appState.getSelectedTasks().contains(task);
     return InkWell(
       child: SwipeTo(
-        swipeDirection: SwipeDirection.swipeToLeft,
-        endOffset: Offset(-0.6, 0.0),
         animationDuration: const Duration(milliseconds: 300),
-        iconData: Icons.delete_outline,
-        callBack: () {
-          print('Callback from Swipe To Left');
-          deleteDialog(appState, context);
-        },
+        iconOnLeftSwipe: Icons.delete_outline,
+        iconOnRightSwipe: Icons.article_outlined,
+        onRightSwipe: () => showDialog(
+          context: context,
+          child: UpdateDialog(task),
+        ),
+        onLeftSwipe: () => showDialog(
+          context: context,
+          child: DeleteDialog(task),
+        ),
         child: Card(
-          color: getColor(isSelected),
+          color: isSelected ? Colors.lightGreenAccent[100] : Colors.white,
           margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
-          child: getCardContent(task),
+          child:
+              task.children.isEmpty ? CheckboxRow(task) : PercentageRow(task),
         ),
       ),
       onTap: () {
@@ -38,46 +44,6 @@ class TaskItem extends StatelessWidget {
       onDoubleTap: () {
         isSelected ? appState.deselect(task) : appState.selectTask(task);
       },
-    );
-  }
-
-  Color getColor(bool selected) {
-    if (selected) {
-      return Colors.lightGreenAccent[100];
-    } else {
-      return Colors.white;
-    }
-  }
-
-  Widget getCardContent(Task task) {
-    if (task.children.isEmpty)
-      return CheckboxRow(task);
-    else
-      return PercentageRow(task);
-  }
-
-  void deleteDialog(appState, context) {
-    showDialog(
-      context: context,
-      child: AlertDialog(
-        title: Text("Item Selected"),
-        content: Text("Do you want to delete it?"),
-        actions: [
-          FlatButton(
-            child: Text("Yes"),
-            onPressed: () {
-              appState.deleteTask(task);
-              Navigator.of(context).pop();
-            },
-          ),
-          FlatButton(
-            child: Text("No"),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          )
-        ],
-      ),
     );
   }
 }

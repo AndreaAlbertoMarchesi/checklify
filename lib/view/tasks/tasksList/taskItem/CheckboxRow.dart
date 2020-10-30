@@ -7,6 +7,7 @@ class CheckboxRow extends StatelessWidget {
   CheckboxRow(this.task);
 
   final Task task;
+
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
@@ -20,7 +21,8 @@ class CheckboxRow extends StatelessWidget {
           Checkbox(
             value: task.percentage == 1,
             onChanged: (bool value) {
-                appState.tickTask(task);
+              appState.updateTask(task,
+                  percentage: task.percentage == 0 ? 1 : 0);
             },
           ),
         ],

@@ -53,10 +53,14 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  void tickTask(Task task) {
-    task.percentage = task.percentage == 0 ? 1 : 0;
-
-    taskPath.updatePercentage();
+  void updateTask(Task task, {num percentage, String title}) {
+    if(percentage != null) {
+      task.percentage = percentage;
+      taskPath.updatePercentage();
+    }
+    if(title != null){
+      task.title = title;
+    }
 
     _storage.writeData(root);
     notifyListeners();
