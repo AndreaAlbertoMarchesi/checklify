@@ -1,7 +1,8 @@
+import 'package:checklist_app/model/DarkThemeState.dart';
 import 'package:checklist_app/model/Task.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:provider/provider.dart';
 
 class PercentageRow extends StatelessWidget {
   PercentageRow(this.task);
@@ -11,7 +12,25 @@ class PercentageRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    final darkState = context.watch<DarkThemeState>();
+
+    Color getColor(){
+      if(darkState.darkTheme){
+        return Colors.blueGrey;
+      }else{
+        return Colors.lightBlue[50];
+      }
+    }
+
     return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: getColor(),
+        boxShadow: [
+          BoxShadow(color: Colors.lightBlue[100], spreadRadius: 3),
+        ],
+      ),
+      constraints: BoxConstraints(maxHeight: 50) ,
       child: ConstrainedBox(
         constraints: BoxConstraints(maxHeight: 50),
         child: Row(
@@ -23,11 +42,19 @@ class PercentageRow extends StatelessWidget {
             Padding(
               padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
               child: CircularPercentIndicator(
-                radius: 35.0,
+                radius: 40.0,
                 lineWidth: 8.0,
                 percent: task.percentage.toDouble(),
+                animation: true,
+                animateFromLastPercent: true,
+                circularStrokeCap: CircularStrokeCap.round,
                 center: isCompleted(task.percentage.toDouble()),
-                progressColor: Colors.greenAccent[400],
+                linearGradient: LinearGradient(
+                    colors: [
+                      Colors.green,
+                      Colors.lightGreen,
+                    ]
+                ),
               ),
             ),
           ],
@@ -37,7 +64,10 @@ class PercentageRow extends StatelessWidget {
   }
   Widget isCompleted(num percentage){
     if((percentage*100) == 100.0){
-      return Image.asset('images/completeIcon.png');
+      return Icon(
+        IconData(0xe0de, fontFamily: 'MaterialIcons'),
+        color: Colors.greenAccent[700],
+      );
     }else
       return Text(
           (task.percentage * 100).toInt().toString() +

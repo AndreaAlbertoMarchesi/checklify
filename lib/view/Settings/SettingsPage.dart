@@ -44,16 +44,6 @@ class _SettingsPageState extends State<SettingsPage> {
               //dark mode implementation
             },
           ),
-          SwitchListTile(
-            secondary: const Icon(Icons.notifications_active_outlined),
-            value: _notification,
-            title: Text("Notification"),
-            onChanged: (value) {
-              setState(() {
-                _notification = value;
-              });
-            },
-          ),
           ListTile(
             title: Center(child: Text("Account")),
           ),

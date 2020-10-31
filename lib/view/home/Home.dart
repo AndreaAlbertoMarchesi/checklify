@@ -51,8 +51,11 @@ class HomeState extends State<Home> {
             actions: <Widget>[
               Builder(
                 builder: (context) => IconButton(
-                    icon: Icon(Icons.notifications_active_outlined),
-                    onPressed: () {}),
+                    icon: Icon(Icons.search_outlined),
+                    onPressed: (){
+                      showSearch(context: context, delegate: Search());
+                    }
+                )
               ),
             ],
           ),

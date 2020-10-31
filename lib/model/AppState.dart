@@ -1,8 +1,10 @@
 import 'package:checklist_app/controller/Storage.dart';
 import 'package:checklist_app/model/SelectionState.dart';
 import 'package:checklist_app/model/supportClasses/TaskPath.dart';
+import 'package:checklist_app/view/Settings/SharedPreferences.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'AppUser.dart';
 import 'Task.dart';
 
 class AppState extends ChangeNotifier {
@@ -13,13 +15,20 @@ class AppState extends ChangeNotifier {
   final Storage _storage = Storage();
   final _selectionState = SelectionState();
 
+  AppUser appUser = AppUser(userName: "Anonymous", photoURL:"https://icon-library.com/images/profile-42914__340.png" , isAnon: true);
+  final UserPreference _userPreference = new UserPreference();
+
   AppState() {
     _storage.readData().then((Task value) {
       root = value;
       task = root;
       taskPath.add(root);
-      notifyListeners();
+      ///notifyListeners();
     });
+    _userPreference.getUser().then((value) {
+      appUser = value;
+      notifyListeners();
+    } );
   }
 
   void selectTask(Task task) {

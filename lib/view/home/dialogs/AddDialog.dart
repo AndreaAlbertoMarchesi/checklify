@@ -53,7 +53,7 @@ class AddDialog extends StatelessWidget {
               borderSide: BorderSide(color: Colors.cyan[400], width: 2.0),
             ),
           ),
-          validator: (val) => val.isEmpty ? 'Enter a valid name' : null,
+          validator: (val) => (val.isEmpty | (val.length > 8)) ? 'Enter a valid name ( not too long ) ' : null,
           onChanged: (val) {
            taskName = val;
           },

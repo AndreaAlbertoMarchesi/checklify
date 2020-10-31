@@ -18,14 +18,18 @@ class SideMenu extends StatelessWidget {
               children: <Widget>[
                 DrawerHeader(
                     child: Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(20),
-                      child: CircleAvatar(),
-                    ),
-                    Text("nome.cognome")
-                  ],
-                )),
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(20),
+                          child: CircleAvatar(
+                            backgroundImage: NetworkImage("${appState.appUser.photoURL}"),
+                            backgroundColor: Colors.transparent,
+                          ),
+                        ),
+                        Text(appState.appUser.userName)
+                      ],
+                    )
+                ),
                 ListTile(
                   title: Text("Home"),
                   onTap: () {
