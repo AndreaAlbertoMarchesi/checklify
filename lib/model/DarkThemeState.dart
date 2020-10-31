@@ -3,29 +3,31 @@ import 'package:flutter/material.dart';
 
 class DarkThemeState with ChangeNotifier {
 
-  DarkThemePreference darkThemePreference = DarkThemePreference();
-  bool darkTheme = false;
+  final DarkThemePreferences darkThemePreferences;
+  bool darkTheme;
 
-  DarkThemeState(){
-    darkThemePreference.getTheme().then((value) {
+  DarkThemeState(this.darkThemePreferences){
+    darkTheme = darkThemePreferences.darkTheme;
+    notifyListeners();
+    /*darkThemePreference.getTheme().then((value) {
       if(value == null)
         darkTheme = false;
       else
         darkTheme = value;
       notifyListeners();
-    });
+    });*/
   }
 
-  getTheme() async {
-    darkTheme = await darkThemePreference.getTheme();
+  /*getTheme() async {
+    darkTheme = await darkThemePreferences.getTheme();
     if(darkTheme == null)
       darkTheme = false;
     notifyListeners();
-  }
+  }*/
 
   setDarkTheme(bool value) {
     darkTheme = value;
-    darkThemePreference.setDarkTheme(value);
+    darkThemePreferences.setDarkTheme(value);
     notifyListeners();
   }
 }

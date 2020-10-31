@@ -1,5 +1,8 @@
+import 'package:checklist_app/model/AppState.dart';
+import 'package:checklist_app/model/DarkThemeState.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -8,11 +11,12 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
 
-  bool _dark= false;
-  bool _notification = false;
 
   @override
   Widget build(BuildContext context) {
+    final darkThemeState = context.watch<DarkThemeState>();
+    final appState = context.watch<AppState>();
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Settings"),
@@ -23,6 +27,8 @@ class _SettingsPageState extends State<SettingsPage> {
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: CircleAvatar(
+                backgroundImage: NetworkImage("${appState.appUser.photoURL}"),
+                backgroundColor: Colors.transparent,
                 radius: 50,
                 //background image
               ),
@@ -30,22 +36,15 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text("nome.cognome@mail.com"),
+            child: Text(appState.appUser.userName),
           ),
           SwitchListTile(
             secondary: const Icon(Icons.lightbulb_outline),
-            value: _dark,
+            value: darkThemeState.darkTheme,
             title: Text("Dark mode"),
             onChanged: (value) {
-              setState(() {
-                _dark = value;
-
-              });
-              //dark mode implementation
+              darkThemeState.setDarkTheme(value);
             },
-          ),
-          ListTile(
-            title: Center(child: Text("Account")),
           ),
           ListTile(
             title: Center(child: Text("Terms & Conditions")),

@@ -9,7 +9,6 @@ class ParentTaskItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
-
     final darkState = context.watch<DarkThemeState>();
 
     Color getColor() {

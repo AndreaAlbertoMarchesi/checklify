@@ -8,6 +8,9 @@ import 'AppUser.dart';
 import 'Task.dart';
 
 class AppState extends ChangeNotifier {
+
+
+
   Task root = Task.emptyRoot;
   Task task = Task.emptyRoot;
   TaskPath taskPath = TaskPath();
@@ -15,20 +18,21 @@ class AppState extends ChangeNotifier {
   final Storage _storage = Storage();
   final _selectionState = SelectionState();
 
-  AppUser appUser = AppUser(userName: "Anonymous", photoURL:"https://icon-library.com/images/profile-42914__340.png" , isAnon: true);
-  final UserPreference _userPreference = new UserPreference();
+  AppUser appUser;
+  final UserPreferences _userPreference;
 
-  AppState() {
+  AppState(this._userPreference) {
     _storage.readData().then((Task value) {
       root = value;
       task = root;
       taskPath.add(root);
       ///notifyListeners();
     });
-    _userPreference.getUser().then((value) {
+    appUser = _userPreference.appUser;
+/*    _userPreference.getUser().then((value) {
       appUser = value;
       notifyListeners();
-    } );
+    } );*/
   }
 
   void selectTask(Task task) {
