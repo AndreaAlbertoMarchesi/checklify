@@ -1,6 +1,7 @@
 import 'package:checklist_app/model/AppState.dart';
 import 'package:checklist_app/model/DarkThemeState.dart';
 import 'package:checklist_app/model/Task.dart';
+import 'package:checklist_app/view/Settings/Styles.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
@@ -11,22 +12,15 @@ class ParentTaskItem extends StatelessWidget {
     final appState = context.watch<AppState>();
     final darkState = context.watch<DarkThemeState>();
 
-    Color getColor() {
-      if (darkState.darkTheme) {
-        return Colors.blueGrey;
-      } else {
-        return Colors.lightBlue[50];
-      }
-    }
 
     return Padding(
       padding: EdgeInsets.all(7),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: getColor(),
+          color: Styles.getColor(darkState.darkTheme),
           boxShadow: [
-            BoxShadow(color: getColor(), spreadRadius: 3),
+            BoxShadow(color: Styles.getBorder(darkState.darkTheme), spreadRadius: 2),
           ],
         ),
         child: Row(
@@ -39,7 +33,7 @@ class ParentTaskItem extends StatelessWidget {
                   fontSize: 60.0,
                   letterSpacing: 0.5,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blue,
+                  color: Styles.getFont(darkState.darkTheme),
                 ),
               ),
             ),
@@ -52,9 +46,10 @@ class ParentTaskItem extends StatelessWidget {
                 percent: appState.task.percentage.toDouble(),
                 animation: true,
                 animateFromLastPercent: true,
+                backgroundColor: Styles.getColor(darkState.darkTheme),
                 circularStrokeCap: CircularStrokeCap.round,
                 center: isCompleted(
-                    appState.task, appState.task.percentage.toDouble()),
+                    appState.task, appState.task.percentage.toDouble(), darkState.darkTheme),
                 linearGradient: LinearGradient(colors: [
                   Colors.green,
                   Colors.lightGreen,
@@ -67,13 +62,21 @@ class ParentTaskItem extends StatelessWidget {
     );
   }
 
-  Widget isCompleted(Task task, num percentage) {
+  Widget isCompleted(Task task, num percentage, bool isDarkTheme) {
     if ((percentage * 100) == 100.0) {
       return Icon(
-        IconData(0xf10d, fontFamily: 'MaterialIcons'),
+        IconData(0xe0de, fontFamily: 'MaterialIcons'),
         color: Colors.greenAccent[700],
       );
     } else
-      return Text((task.percentage * 100).toInt().toString() + "%");
+      return Text(
+        (task.percentage * 100).toInt().toString() + "%",
+        style: TextStyle(
+          fontSize: 12,
+          letterSpacing: 0.5,
+          fontWeight: FontWeight.bold,
+          color: Styles.getFont(isDarkTheme),
+        ),
+      );
   }
 }

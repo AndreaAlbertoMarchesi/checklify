@@ -1,5 +1,7 @@
 import 'package:checklist_app/model/AppState.dart';
+import 'package:checklist_app/model/DarkThemeState.dart';
 import 'package:checklist_app/model/Task.dart';
+import 'package:checklist_app/view/Settings/Styles.dart';
 import 'package:checklist_app/view/home/dialogs/DeleteDialog.dart';
 import 'package:checklist_app/view/home/dialogs/UpdateDialog.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,6 +20,7 @@ class TaskItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
+    final darkState = context.watch<DarkThemeState>();
     bool isSelected = appState.getSelectedTasks().contains(task);
 
 
@@ -33,7 +36,7 @@ class TaskItem extends StatelessWidget {
       child: SwipeTo(
         animationDuration: const Duration(milliseconds: 300),
         iconOnLeftSwipe: Icons.delete_outline,
-        iconColor: Colors.deepPurple[600],
+        iconColor: Styles.getFont(darkState.darkTheme),
         iconOnRightSwipe: Icons.article_outlined,
         onRightSwipe: () {
           Vibration.vibrate(duration: 100);

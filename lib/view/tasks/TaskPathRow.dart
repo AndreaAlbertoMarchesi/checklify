@@ -1,4 +1,6 @@
 import 'package:checklist_app/model/AppState.dart';
+import 'package:checklist_app/model/DarkThemeState.dart';
+import 'package:checklist_app/view/Settings/Styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +9,7 @@ class TaskPathRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
+    final darkState = context.watch<DarkThemeState>();
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -41,12 +44,19 @@ class TaskPathRow extends StatelessWidget {
                   child: Row(children: [
                     Padding(
                         padding: EdgeInsets.all(5.0),
-                        child: Icon(Icons.arrow_forward_ios_rounded)),
+                        child: Icon(
+                            Icons.arrow_forward_ios_rounded,
+                          color: Styles.getFont(darkState.darkTheme),
+                        )
+                    ),
                     Padding(
                       padding: EdgeInsets.all(5.0),
                       child: Text(
                         task.title,
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(
+                          color: Styles.getFont(darkState.darkTheme),
+                            fontSize: 20
+                        ),
                       ),
                     )
                   ]),

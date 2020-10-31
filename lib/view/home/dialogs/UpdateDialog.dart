@@ -1,5 +1,7 @@
 import 'package:checklist_app/model/AppState.dart';
+import 'package:checklist_app/model/DarkThemeState.dart';
 import 'package:checklist_app/model/Task.dart';
+import 'package:checklist_app/view/Settings/Styles.dart';
 import 'package:flutter/material.dart';
 import 'package:vibration/vibration.dart';
 import 'package:provider/provider.dart';
@@ -13,11 +15,19 @@ class UpdateDialog extends StatelessWidget {
 
     final _formKey = GlobalKey<FormState>();
     final appState = context.watch<AppState>();
+    final darkState = context.watch<DarkThemeState>();
     String taskName = task.title;
 
     Widget doneButton(context) {
       return FlatButton(
-        child: Text("Back"),
+        child: Text(
+            "Back",
+          style: TextStyle(
+            fontSize: 16,
+            letterSpacing: 0.6,
+            fontWeight: FontWeight.bold,
+            color: Styles.getFont(darkState.darkTheme),
+          ),),
         onPressed: () {
           Navigator.pop(context);
         },
@@ -26,7 +36,15 @@ class UpdateDialog extends StatelessWidget {
 
     Widget addButton(context) {
       return FlatButton(
-        child: Text("update"),
+        child: Text(
+            "update",
+          style: TextStyle(
+            fontSize: 16,
+            letterSpacing: 0.6,
+            fontWeight: FontWeight.bold,
+            color: Styles.getFont(darkState.darkTheme),
+          ),
+        ),
         onPressed: () {
           if (_formKey.currentState.validate()) {
             appState.updateTask(task, title: taskName);

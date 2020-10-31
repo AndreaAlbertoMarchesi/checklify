@@ -1,4 +1,6 @@
 import 'package:checklist_app/model/AppState.dart';
+import 'package:checklist_app/model/DarkThemeState.dart';
+import 'package:checklist_app/view/Settings/Styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +13,10 @@ class Search extends SearchDelegate {
   List<Widget> buildActions(BuildContext context) {
     return <Widget>[
       IconButton(
-        icon: Icon(Icons.close),
+        icon: Icon(
+            Icons.close,
+          color: Colors.red,
+        ),
         onPressed: () {
           query = "";
         },
@@ -62,5 +67,11 @@ class Search extends SearchDelegate {
             },
           );
         });
+  }
+
+  @override
+  ThemeData appBarTheme(BuildContext context) {
+    final darkState = context.watch<DarkThemeState>();
+    return Styles.themeData(darkState.darkTheme, context);
   }
 }

@@ -1,5 +1,7 @@
 import 'package:checklist_app/model/AppState.dart';
+import 'package:checklist_app/model/DarkThemeState.dart';
 import 'package:checklist_app/model/Task.dart';
+import 'package:checklist_app/view/Settings/Styles.dart';
 import 'package:flutter/material.dart';
 import 'package:vibration/vibration.dart';
 import 'package:provider/provider.dart';
@@ -13,20 +15,51 @@ class DeleteDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
+    final darkState = context.watch<DarkThemeState>();
 
     return AlertDialog(
-      title: Text("Item Selected"),
-      content: Text("Do you want to delete it?"),
+      title: Text(
+          "Item Selected",
+        style: TextStyle(
+          fontSize: 16,
+          letterSpacing: 0.6,
+          fontWeight: FontWeight.bold,
+          color: Styles.getFont(darkState.darkTheme),
+        ),
+      ),
+      content: Text(
+          "Do you want to delete it?",
+        style: TextStyle(
+          fontSize: 16,
+          letterSpacing: 0.6,
+          color: Styles.getFont(darkState.darkTheme),
+        ),),
       actions: [
         FlatButton(
-          child: Text("Yes"),
+          child: Text(
+            "Yes",
+            style: TextStyle(
+              fontSize: 16,
+              letterSpacing: 0.6,
+              fontWeight: FontWeight.bold,
+              color: Styles.getFont(darkState.darkTheme),
+            ),
+          ),
           onPressed: () {
             appState.deleteTask(task);
             Navigator.of(context).pop();
           },
         ),
         FlatButton(
-          child: Text("No"),
+          child: Text(
+            "No",
+            style: TextStyle(
+              fontSize: 16,
+              letterSpacing: 0.6,
+              fontWeight: FontWeight.bold,
+              color: Styles.getFont(darkState.darkTheme),
+            ),
+          ),
           onPressed: () {
             Navigator.of(context).pop();
           },

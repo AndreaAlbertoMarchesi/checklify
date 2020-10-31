@@ -4,13 +4,52 @@ import 'package:flutter/material.dart';
 
 class Styles {
 
+  static Color getColor(bool isDarkTheme){
+    if(isDarkTheme){
+      return Colors.grey[800];
+    }else{
+      return Colors.lightBlue[50];
+    }
+  }
+
+  static Color getFont(bool isDarkTheme){
+    if(isDarkTheme){
+      return Colors.blue[200];
+    }else{
+      return Colors.blue[800];
+    }
+  }
+  static Color getBorder(bool isDarkTheme){
+    if(isDarkTheme){
+      return Colors.black12;
+    }else{
+      return Colors.lightBlue[100];
+    }
+  }
+  static Color getSideMenu(bool isDarkTheme){
+    if(isDarkTheme){
+      return Color(0xff121212);
+    }else{
+      return Colors.lightBlue[200];
+    }
+  }
+  static Color getAppBarIcon(bool isDarkTheme){
+    if(isDarkTheme){
+      return Colors.blue[200];
+    }else{
+      return Colors.lightBlue[100];
+    }
+  }
+
+
+
+
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(
-      primarySwatch: Colors.red,
-      primaryColor: isDarkTheme ? Colors.grey[900] : Colors.blue,
-      scaffoldBackgroundColor: isDarkTheme? Colors.black87 : Colors.white,
+      primarySwatch: Colors.blue,
 
-      backgroundColor: isDarkTheme ? Colors.black87: Color(0xffF1F5FB),
+      scaffoldBackgroundColor: isDarkTheme? Color(0xff121212) : Colors.white,
+      canvasColor: isDarkTheme ? Color(0xff121212) : Colors.lightBlue[50] ,
 
       textTheme: TextTheme().apply(
         bodyColor: isDarkTheme ? Colors.black : Colors.black,
@@ -20,22 +59,23 @@ class Styles {
       indicatorColor: isDarkTheme ? Color(0xff0E1D36) : Color(0xffCBDCF8),
       buttonColor: isDarkTheme ? Color(0xff3B3B3B) : Color(0xffF1F5FB),
 
-      hintColor: isDarkTheme ? Color(0xff280C0B) : Color(0xffEECED3),
+      hintColor: isDarkTheme ? Colors.blue[200] : Colors.blue[800],
 
-      highlightColor: isDarkTheme ? Colors.blueAccent[700]: Colors.lightBlue[50],
+      highlightColor: isDarkTheme ? Colors.blueGrey: Colors.lightBlue[100],
       hoverColor: isDarkTheme ? Color(0xff3A3A3B) : Color(0xff4285F4),
 
-      focusColor: isDarkTheme ? Color(0xff0B2512) : Color(0xffA8DAB5),
+
       disabledColor: Colors.grey,
       textSelectionColor: isDarkTheme ? Colors.black : Colors.black,
       cardColor: isDarkTheme ? Color(0xFF151515) : Colors.white,
 
-      canvasColor: isDarkTheme ? Colors.black : Colors.grey[50],
+
       brightness: isDarkTheme ? Brightness.dark : Brightness.light,
       buttonTheme: Theme.of(context).buttonTheme.copyWith(
           colorScheme: isDarkTheme ? ColorScheme.dark() : ColorScheme.light()),
       appBarTheme: AppBarTheme(
-        elevation: 0.0,
+        shadowColor: Colors.black,
+        elevation: 10.0,
       ),
     );
 

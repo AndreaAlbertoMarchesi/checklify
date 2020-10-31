@@ -35,6 +35,9 @@ class HomeState extends State<Home> {
         },
         child: Scaffold(
           appBar: AppBar(
+            actionsIconTheme: IconThemeData(
+              color: Styles.getFont(darkState.darkTheme)
+            ),
             leading: Builder(
               builder: (context) => Container(
                 child: Stack(
@@ -44,7 +47,11 @@ class HomeState extends State<Home> {
                           alignment: Alignment.topRight,
                           child: Text(selectionLength.toString())),
                     IconButton(
-                      icon: Icon(Icons.menu),
+                      icon: Icon(
+                        Icons.menu,
+                        color: Styles.getAppBarIcon(darkState.darkTheme),
+                        size: 30,
+                      ),
                       onPressed: () => Scaffold.of(context).openDrawer(),
                     ),
                   ],
@@ -54,7 +61,11 @@ class HomeState extends State<Home> {
             actions: <Widget>[
               Builder(
                 builder: (context) => IconButton(
-                    icon: Icon(Icons.search_outlined),
+                    icon: Icon(
+                      Icons.search_outlined,
+                      color: Styles.getAppBarIcon(darkState.darkTheme),
+                      size: 30,
+                    ),
                     onPressed: (){
                       showSearch(context: context, delegate: Search());
                     }
