@@ -36,4 +36,8 @@ class TaskPath {
   void backToPrevious(){
     taskList.removeLast();
   }
+
+  String toString(){
+    return taskList.map((e) => e.title).join("-");
+  }
 }

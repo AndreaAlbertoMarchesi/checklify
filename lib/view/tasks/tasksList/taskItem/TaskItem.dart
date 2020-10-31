@@ -23,15 +23,6 @@ class TaskItem extends StatelessWidget {
     final darkState = context.watch<DarkThemeState>();
     bool isSelected = appState.getSelectedTasks().contains(task);
 
-
-    Color getColor() {
-      if (isSelected) {
-        return Colors.lightGreenAccent[100];
-      } else {
-        return Colors.white;
-      }
-    }
-
     return InkWell(
       child: SwipeTo(
         animationDuration: const Duration(milliseconds: 300),
@@ -53,7 +44,7 @@ class TaskItem extends StatelessWidget {
           );
         },
         child: Card(
-          color: getColor(),
+          color: isSelected ? Colors.lightGreenAccent[100] : Colors.white,
           margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
           child:
               task.children.isEmpty ? CheckboxRow(task) : PercentageRow(task),

@@ -1,4 +1,5 @@
 import 'package:checklist_app/model/AppState.dart';
+import 'package:checklist_app/model/supportClasses/TaskPath.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +20,18 @@ class AddButton extends StatelessWidget {
                   alignment: Alignment.bottomRight,
                   child: FloatingActionButton(
                     onPressed: () {
+
+
+                      //   SEARCH   DEMO
+                      // you call the search task function on the task where you start searching for tasks
+                      // you pass as parameter the title and the task path of the starting task, root in this case
+                      // you get a list of searched tasks that have title and taskPath attributes
+                      // the taskPath is needed both to open the searched task and to avoid ambiguity among titles
+                      print("SEARCH DEMO");
+                      appState.root.searchTasks("title", TaskPath()).forEach((element) {
+                        print(element.title+"  task path:  "+ element.taskPath.toString());
+                      });
+
                       openAddDialog(context);
                     },
                     child: Icon(Icons.add),

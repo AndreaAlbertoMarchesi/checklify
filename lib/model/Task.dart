@@ -1,3 +1,5 @@
+import 'package:checklist_app/model/supportClasses/SearchedTask.dart';
+import 'package:checklist_app/model/supportClasses/TaskPath.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'Task.g.dart';
@@ -34,6 +36,21 @@ class Task {
     }
     final element = this.children.removeAt(oldIndex);
     this.children.insert(newIndex, element);
+  }
+
+  List<SearchedTask> searchTasks(String searchInput, TaskPath taskPath){
+    var foundTasks = List<SearchedTask>();
+
+    children.forEach((child) {
+      var childPath = taskPath.getCopy();
+      childPath.add(this);
+
+      if(child.title.contains(searchInput))
+        foundTasks.add(SearchedTask(child.title, childPath));
+
+      foundTasks.addAll(child.searchTasks(searchInput, childPath));
+    });
+    return foundTasks;
   }
 
 }

@@ -1,5 +1,4 @@
 import 'package:checklist_app/controller/Search.dart';
-import 'package:checklist_app/controller/Storage.dart';
 import 'package:checklist_app/model/AppState.dart';
 import 'package:checklist_app/model/DarkThemeState.dart';
 import 'package:checklist_app/view/Settings/Styles.dart';
@@ -11,14 +10,7 @@ import 'package:checklist_app/view/tasks/tasksList/TasksList.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Home extends StatefulWidget {
-  final Storage storage = Storage();
-
-  @override
-  HomeState createState() => HomeState();
-}
-
-class HomeState extends State<Home> {
+class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
@@ -35,9 +27,8 @@ class HomeState extends State<Home> {
         },
         child: Scaffold(
           appBar: AppBar(
-            actionsIconTheme: IconThemeData(
-              color: Styles.getFont(darkState.darkTheme)
-            ),
+            actionsIconTheme:
+                IconThemeData(color: Styles.getFont(darkState.darkTheme)),
             leading: Builder(
               builder: (context) => Container(
                 child: Stack(
@@ -60,17 +51,15 @@ class HomeState extends State<Home> {
             ),
             actions: <Widget>[
               Builder(
-                builder: (context) => IconButton(
-                    icon: Icon(
-                      Icons.search_outlined,
-                      color: Styles.getAppBarIcon(darkState.darkTheme),
-                      size: 30,
-                    ),
-                    onPressed: (){
-                      showSearch(context: context, delegate: Search());
-                    }
-                )
-              ),
+                  builder: (context) => IconButton(
+                      icon: Icon(
+                        Icons.search_outlined,
+                        color: Styles.getAppBarIcon(darkState.darkTheme),
+                        size: 30,
+                      ),
+                      onPressed: () {
+                        showSearch(context: context, delegate: Search());
+                      })),
             ],
           ),
           body: Column(
