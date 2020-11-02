@@ -63,15 +63,16 @@ class Search extends SearchDelegate {
     return ListView.builder(
         itemCount: searchedTasks.length,
         itemBuilder: (context, index) {
+          SearchedTask searchedTask = searchedTasks[index];
           return ListTile(
             title: Text(
-              searchedTasks[index].task.title,
+              searchedTask.task.title,
             ),
             subtitle: Text(
-              searchedTasks[index].taskPath.toString(),
+              searchedTask.taskPath.toString(),
             ),
             onTap: () {
-              appState.openTask(searchedTasks[index].task);
+              appState.openTask(searchedTask.task, searchedTask.taskPath);
               Navigator.of(context).pop();
             },
           );
