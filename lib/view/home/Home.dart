@@ -11,6 +11,8 @@ import 'package:checklist_app/view/tasks/tasksList/TasksList.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'IntroApp.dart';
+
 class Home extends StatefulWidget {
   final Storage storage = Storage();
 
@@ -21,45 +23,63 @@ class Home extends StatefulWidget {
 class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    final appState = context.watch<AppState>();
     final darkState = context.watch<DarkThemeState>();
+    final appState = context.watch<AppState>();
 
-    int selectionLength = appState.getSelectedTasks().length;
 
     return MaterialApp(
       theme: Styles.themeData(darkState.darkTheme, context),
-      home: WillPopScope(
-        onWillPop: () async {
-          appState.backToPreviousTask();
-          return false;
-        },
-        child: Scaffold(
-          appBar: AppBar(
-            actionsIconTheme: IconThemeData(
+      home: appState.userPreferences.firstTime
+      ? IntroScreen()
+      : HomeScreen(),
+    );
+  }
+}
+
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  Widget build(BuildContext context) {
+    final appState = context.watch<AppState>();
+    final darkState = context.watch<DarkThemeState>();
+    int selectionLength = appState.getSelectedTasks().length;
+
+    return WillPopScope(
+      onWillPop: () async {
+        appState.backToPreviousTask();
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          actionsIconTheme: IconThemeData(
               color: Styles.getFont(darkState.darkTheme)
-            ),
-            leading: Builder(
-              builder: (context) => Container(
-                child: Stack(
-                  children: [
-                    if (selectionLength > 0)
-                      Align(
-                          alignment: Alignment.topRight,
-                          child: Text(selectionLength.toString())),
-                    IconButton(
-                      icon: Icon(
-                        Icons.menu,
-                        color: Styles.getAppBarIcon(darkState.darkTheme),
-                        size: 30,
-                      ),
-                      onPressed: () => Scaffold.of(context).openDrawer(),
+          ),
+          leading: Builder(
+            builder: (context) => Container(
+              child: Stack(
+                children: [
+                  if (selectionLength > 0)
+                    Align(
+                        alignment: Alignment.topRight,
+                        child: Text(selectionLength.toString())),
+                  IconButton(
+                    icon: Icon(
+                      Icons.menu,
+                      color: Styles.getAppBarIcon(darkState.darkTheme),
+                      size: 30,
                     ),
-                  ],
-                ),
+                    onPressed: () => Scaffold.of(context).openDrawer(),
+                  ),
+                ],
               ),
             ),
-            actions: <Widget>[
-              Builder(
+          ),
+          actions: <Widget>[
+            Builder(
                 builder: (context) => IconButton(
                     icon: Icon(
                       Icons.search_outlined,
@@ -70,19 +90,18 @@ class HomeState extends State<Home> {
                       showSearch(context: context, delegate: Search());
                     }
                 )
-              ),
-            ],
-          ),
-          body: Column(
-            children: [
-              TaskPathRow(),
-              ParentTaskItem(),
-              TasksList(),
-            ],
-          ),
-          drawer: SideMenu(),
-          bottomNavigationBar: AddButton(),
+            ),
+          ],
         ),
+        body: Column(
+          children: [
+            TaskPathRow(),
+            ParentTaskItem(),
+            TasksList(),
+          ],
+        ),
+        drawer: SideMenu(),
+        bottomNavigationBar: AddButton(),
       ),
     );
   }

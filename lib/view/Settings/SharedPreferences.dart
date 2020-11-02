@@ -32,10 +32,6 @@ class DarkThemePreferences {
       darkTheme = false;
   }
 
-  /*Future<bool> getTheme() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(THEME_STATUS);
-  }*/
 }
 
 class UserPreferences{
@@ -43,6 +39,7 @@ class UserPreferences{
   static const PHOTO_ANON = "images/dog.png";
 
   AppUser appUser;
+  bool firstTime = true;
 
   setUser(AppUser user) async{
     appUser = user;
@@ -52,19 +49,13 @@ class UserPreferences{
 
   Future<void> getUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    if(prefs.getString("user") != null)
+    if(prefs.getString("user") != null) {
       appUser = AppUser.fromJson(jsonDecode(prefs.getString("user")));
-    else
-      appUser = AppUser(userName: "Anonymous", photoURL:PHOTO_ANON , isAnon: true);
+      firstTime = false;
+    }else {
+      appUser = AppUser(userName: "Anonymous", photoURL: PHOTO_ANON, isAnon: true);
+      firstTime = true;
+    }
   }
-
-
-  /*Future<AppUser> getUser() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    if(prefs.getString("user") != null)
-      return AppUser.fromJson(jsonDecode(prefs.getString("user")));
-    else
-      return AppUser(userName: "Anonymous", photoURL:PHOTO_ANON , isAnon: true);
-  }*/
 
 }

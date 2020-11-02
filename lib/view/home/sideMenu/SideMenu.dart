@@ -4,6 +4,7 @@ import 'package:checklist_app/model/AppState.dart';
 import 'package:checklist_app/model/DarkThemeState.dart';
 import 'package:checklist_app/view/Settings/SettingsPage.dart';
 import 'package:checklist_app/view/Settings/Styles.dart';
+import 'package:checklist_app/view/home/IntroApp.dart';
 import 'package:checklist_app/view/home/sideMenu/selectionList/SelectionList.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -97,7 +98,11 @@ class SideMenu extends StatelessWidget {
                         color: Styles.getFont(darkState.darkTheme),
                       ),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(
+                              builder: (context) => IntroScreen()));
+                    },
                   ),
                 ],
               ),

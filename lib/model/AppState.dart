@@ -19,17 +19,18 @@ class AppState extends ChangeNotifier {
   final _selectionState = SelectionState();
 
   AppUser appUser;
-  final UserPreferences _userPreference;
+  UserPreferences userPreferences;
   bool isPhotoFromGallery = true;
 
-  AppState(this._userPreference) {
+  AppState(this.userPreferences) {
     _storage.readData().then((Task value) {
       root = value;
       task = root;
       taskPath.add(root);
       notifyListeners();
     });
-    appUser = _userPreference.appUser;
+    appUser = userPreferences.appUser;
+    userPreferences.setUser(appUser);
   }
 
   void selectTask(Task task) {
@@ -78,13 +79,13 @@ class AppState extends ChangeNotifier {
 
   void modifyName(String name){
     appUser.userName = name;
-    _userPreference.setUser(appUser);
+    userPreferences.setUser(appUser);
     notifyListeners();
   }
 
   void modifyPhoto(String path){
     appUser.photoURL = path;
-    _userPreference.setUser(appUser);
+    userPreferences.setUser(appUser);
     if(path.startsWith('images',0))
       isPhotoFromGallery = true;
     else
