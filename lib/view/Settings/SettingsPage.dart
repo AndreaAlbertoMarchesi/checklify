@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:checklist_app/model/AppState.dart';
 import 'package:checklist_app/model/DarkThemeState.dart';
 import 'package:checklist_app/view/Settings/BottomSheet.dart';
+import 'package:checklist_app/view/home/dialogs/ModifyName.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -43,7 +46,9 @@ class _SettingsPageState extends State<SettingsPage> {
                   overflow: Overflow.visible,
                   children : [
                     CircleAvatar(
-                      backgroundImage: NetworkImage("${appState.appUser.photoURL}"),
+                      backgroundImage: appState.isPhotoFromGallery
+                      ? AssetImage("${appState.appUser.photoURL}")
+                      : FileImage(File(appState.appUser.photoURL)),
                       backgroundColor: Colors.transparent,
                       radius: radius,
                       //background image
@@ -67,19 +72,22 @@ class _SettingsPageState extends State<SettingsPage> {
           Center(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: InkWell(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.autorenew),
-                    Container(child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(appState.appUser.userName),
-                    )),
-                  ],
+              child: ElevatedButton(
+                child: SizedBox(
+                  width: 200,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.autorenew),
+                      Container(child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(appState.appUser.userName),
+                      )),
+                    ],
+                  ),
                 ),
-                onTap: (){
-
+                onPressed: (){
+                  openAddDialog(context);
                 },
               ),
             ),
@@ -112,4 +120,13 @@ class _SettingsPageState extends State<SettingsPage> {
         }
     );
   }
+  void openAddDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return ModifyName();
+      },
+    );
+  }
+
 }

@@ -40,7 +40,7 @@ class DarkThemePreferences {
 
 class UserPreferences{
 
-  static const PHOTO_ANON = "https://icon-library.com/images/profile-42914__340.png";
+  static const PHOTO_ANON = "images/dog.png";
 
   AppUser appUser;
 

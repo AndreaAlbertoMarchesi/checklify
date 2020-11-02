@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:checklist_app/model/AppState.dart';
 import 'package:checklist_app/model/DarkThemeState.dart';
 import 'package:checklist_app/view/Settings/SettingsPage.dart';
@@ -27,14 +29,17 @@ class SideMenu extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.all(20),
                             child: CircleAvatar(
-                              backgroundImage: NetworkImage("${appState.appUser.photoURL}"),
+                              radius: 50,
+                              backgroundImage: appState.isPhotoFromGallery
+                                  ? AssetImage("${appState.appUser.photoURL}")
+                                  : FileImage(File(appState.appUser.photoURL)),
                               backgroundColor: Colors.transparent,
                             ),
                           ),
                           Text(
-                              appState.appUser.userName,
+                            appState.appUser.userName,
                             style: TextStyle(
-                              fontSize: 15,
+                              fontSize: 20,
                               letterSpacing: 0.6,
                               fontWeight: FontWeight.bold,
                               color: Styles.getFont(darkState.darkTheme),

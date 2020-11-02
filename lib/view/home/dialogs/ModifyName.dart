@@ -1,33 +1,34 @@
 import 'package:checklist_app/model/AppState.dart';
 import 'package:checklist_app/model/DarkThemeState.dart';
-import 'package:checklist_app/model/Task.dart';
 import 'package:checklist_app/view/Settings/Styles.dart';
 import 'package:flutter/material.dart';
 import 'package:vibration/vibration.dart';
 import 'package:provider/provider.dart';
 
 
-class UpdateDialog extends StatelessWidget {
-  UpdateDialog(this.task);
-  final Task task;
+class ModifyName extends StatelessWidget {
+
+
+
   @override
   Widget build(BuildContext context) {
 
     final _formKey = GlobalKey<FormState>();
     final appState = context.watch<AppState>();
     final darkState = context.watch<DarkThemeState>();
-    String taskName = task.title;
+    String userName = '';
 
     Widget doneButton(context) {
       return FlatButton(
         child: Text(
-            "Back",
+          "Back",
           style: TextStyle(
             fontSize: 16,
             letterSpacing: 0.6,
             fontWeight: FontWeight.bold,
             color: Styles.getFont(darkState.darkTheme),
-          ),),
+          ),
+        ),
         onPressed: () {
           Navigator.pop(context);
         },
@@ -37,7 +38,7 @@ class UpdateDialog extends StatelessWidget {
     Widget addButton(context) {
       return FlatButton(
         child: Text(
-            "Update",
+          "Rename",
           style: TextStyle(
             fontSize: 16,
             letterSpacing: 0.6,
@@ -47,7 +48,7 @@ class UpdateDialog extends StatelessWidget {
         ),
         onPressed: () {
           if (_formKey.currentState.validate()) {
-            appState.updateTask(task, title: taskName);
+            appState.modifyName(userName);
             Navigator.of(context).pop();
           } else {
             Vibration.vibrate(duration: 100);
@@ -61,19 +62,19 @@ class UpdateDialog extends StatelessWidget {
         key: _formKey,
         child: TextFormField(
           decoration: InputDecoration(
-            hintText: task.title,
+            hintText: "User Name",
             filled: true,
             contentPadding: EdgeInsets.all(12.0),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.cyan[100], width: 2.0),
+              borderSide: BorderSide(color: Styles.getBorder(darkState.darkTheme), width: 2.0),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.cyan[400], width: 2.0),
+              borderSide: BorderSide(color: Styles.getBorder(darkState.darkTheme), width: 2.0),
             ),
           ),
           validator: (val) => (val.isEmpty | (val.length > 8)) ? 'Enter a valid name ( not too long )' : null,
           onChanged: (val) {
-            taskName = val;
+            userName = val;
           },
         ),
       ),

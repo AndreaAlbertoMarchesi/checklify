@@ -20,19 +20,16 @@ class AppState extends ChangeNotifier {
 
   AppUser appUser;
   final UserPreferences _userPreference;
+  bool isPhotoFromGallery = true;
 
   AppState(this._userPreference) {
     _storage.readData().then((Task value) {
       root = value;
       task = root;
       taskPath.add(root);
-      ///notifyListeners();
+      notifyListeners();
     });
     appUser = _userPreference.appUser;
-/*    _userPreference.getUser().then((value) {
-      appUser = value;
-      notifyListeners();
-    } );*/
   }
 
   void selectTask(Task task) {
@@ -79,6 +76,22 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  void modifyName(String name){
+    appUser.userName = name;
+    _userPreference.setUser(appUser);
+    notifyListeners();
+  }
+
+  void modifyPhoto(String path){
+    appUser.photoURL = path;
+    _userPreference.setUser(appUser);
+    if(path.startsWith('images',0))
+      isPhotoFromGallery = true;
+    else
+      isPhotoFromGallery = false;
+    notifyListeners();
+  }
+
   void backToTask(Task task) {
     taskPath.backToTask(task);
     this.task = task;
@@ -115,4 +128,15 @@ class AppState extends ChangeNotifier {
     _storage.writeData(root);
     notifyListeners();
   }
+
+  void handleReorder(int oldIndex, int newIndex) {
+    if (oldIndex < newIndex) {
+      newIndex -= 1;
+    }
+    final element = task.children.removeAt(oldIndex);
+    task.children.insert(newIndex, element);
+
+    notifyListeners();
+  }
+
 }

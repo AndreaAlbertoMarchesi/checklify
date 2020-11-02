@@ -35,6 +35,7 @@ dependencies:
   swipe_to: 0.0.1+7
   vibration: ^1.5.0
   provider:
+  image_picker:
 
 dev_dependencies:
   flutter_test:
