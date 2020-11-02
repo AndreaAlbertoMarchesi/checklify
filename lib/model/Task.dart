@@ -46,7 +46,7 @@ class Task {
       childPath.add(this);
 
       if(child.title.contains(searchInput))
-        foundTasks.add(SearchedTask(child.title, childPath));
+        foundTasks.add(SearchedTask(child, childPath));
 
       foundTasks.addAll(child.searchTasks(searchInput, childPath));
     });

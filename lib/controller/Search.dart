@@ -1,20 +1,23 @@
 import 'package:checklist_app/model/AppState.dart';
 import 'package:checklist_app/model/DarkThemeState.dart';
+import 'package:checklist_app/model/supportClasses/SearchedTask.dart';
+import 'package:checklist_app/model/supportClasses/TaskPath.dart';
 import 'package:checklist_app/view/Settings/Styles.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Search extends SearchDelegate {
   String selectedResult;
   List<String> titles = [];
-  List<String> recentList = [];
+  //List<String> recentList = [];
 
   @override
   List<Widget> buildActions(BuildContext context) {
     return <Widget>[
       IconButton(
         icon: Icon(
-            Icons.close,
+          Icons.close,
           color: Colors.red,
         ),
         onPressed: () {
@@ -46,23 +49,29 @@ class Search extends SearchDelegate {
   Widget buildSuggestions(BuildContext context) {
     final appState = context.watch<AppState>();
 
-    ///titles = appState.getTitles();
+    List<SearchedTask> searchedTasks;
 
-    List<String> suggestionList = [];
-    query.isEmpty
-        ? suggestionList = recentList
-        : suggestionList.addAll(titles.where(
-            (element) => element.contains(query),
-          ));
+    //if (query.isEmpty)
+      //suggestionList = recentList;
+    //else
+      {
+        TaskPath taskPath = appState.taskPath.getCopy();
+        taskPath.backToPrevious();
+        searchedTasks = appState.task.searchTasks(
+            query, taskPath);
+      }
     return ListView.builder(
-        itemCount: suggestionList.length,
+        itemCount: searchedTasks.length,
         itemBuilder: (context, index) {
           return ListTile(
             title: Text(
-              suggestionList[index],
+              searchedTasks[index].task.title,
+            ),
+            subtitle: Text(
+              searchedTasks[index].taskPath.toString(),
             ),
             onTap: () {
-              ///appState.goToTask(suggestionList[index]);
+              appState.openTask(searchedTasks[index].task);
               Navigator.of(context).pop();
             },
           );
