@@ -65,7 +65,7 @@ class PercentageRow extends StatelessWidget {
   Widget isCompleted(num percentage, bool isDarkTheme){
     if((percentage*100) == 100.0){
       return Icon(
-        IconData(0xe0de, fontFamily: 'MaterialIcons'),
+        const IconData(0xe0de, fontFamily: 'MaterialIcons'),
         color: Colors.greenAccent[700],
       );
     }else

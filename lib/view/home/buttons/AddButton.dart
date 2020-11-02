@@ -28,7 +28,7 @@ class AddButton extends StatelessWidget {
                       // you get a list of searched tasks that have title and taskPath attributes
                       // the taskPath is needed both to open the searched task and to avoid ambiguity among titles
                       print("SEARCH DEMO");
-                      appState.root.searchTasks("title", TaskPath()).forEach((element) {
+                      appState.root.searchTasks("a", TaskPath()).forEach((element) {
                         print(element.title+"  task path:  "+ element.taskPath.toString());
                       });
 

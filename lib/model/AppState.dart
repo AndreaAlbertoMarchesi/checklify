@@ -26,7 +26,7 @@ class AppState extends ChangeNotifier {
       root = value;
       task = root;
       taskPath.add(root);
-      ///notifyListeners();
+      notifyListeners();
     });
     appUser = _userPreference.appUser;
 /*    _userPreference.getUser().then((value) {
