@@ -13,14 +13,7 @@ import 'package:provider/provider.dart';
 
 import 'IntroApp.dart';
 
-class Home extends StatefulWidget {
-  final Storage storage = Storage();
-
-  @override
-  HomeState createState() => HomeState();
-}
-
-class HomeState extends State<Home> {
+class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final darkState = context.watch<DarkThemeState>();
@@ -36,12 +29,8 @@ class HomeState extends State<Home> {
   }
 }
 
-class HomeScreen extends StatefulWidget {
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
 
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();

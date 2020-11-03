@@ -1,7 +1,7 @@
 import 'package:checklist_app/controller/Storage.dart';
 import 'package:checklist_app/model/SelectionState.dart';
 import 'package:checklist_app/model/supportClasses/TaskPath.dart';
-import 'package:checklist_app/view/Settings/SharedPreferences.dart';
+import 'file:///C:/Users/Ilaria/AndroidStudioProjects/checklify/lib/controller/SharedPreferences.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'AppUser.dart';

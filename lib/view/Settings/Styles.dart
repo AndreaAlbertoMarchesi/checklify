@@ -37,7 +37,7 @@ class Styles {
     if(isDarkTheme){
       return Colors.blue[200];
     }else{
-      return Colors.lightBlue[100];
+      return Colors.lightBlue[50];
     }
   }
 
@@ -47,7 +47,6 @@ class Styles {
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(
       primarySwatch: Colors.blue,
-
       scaffoldBackgroundColor: isDarkTheme? Color(0xff121212) : Colors.white,
       canvasColor: isDarkTheme ? Color(0xff121212) : Colors.lightBlue[50] ,
 
@@ -69,7 +68,7 @@ class Styles {
       textSelectionColor: isDarkTheme ? Colors.black : Colors.black,
       cardColor: isDarkTheme ? Color(0xFF151515) : Colors.white,
 
-
+      floatingActionButtonTheme: FloatingActionButtonThemeData(foregroundColor: Colors.white,),
       brightness: isDarkTheme ? Brightness.dark : Brightness.light,
       buttonTheme: Theme.of(context).buttonTheme.copyWith(
           colorScheme: isDarkTheme ? ColorScheme.dark() : ColorScheme.light()),

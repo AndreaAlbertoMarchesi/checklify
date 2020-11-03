@@ -1,7 +1,7 @@
 import 'package:checklist_app/model/AppState.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'ImageDialog.dart';
+import '../home/dialogs/ImageDialog.dart';
 import 'package:provider/provider.dart';
 
 
