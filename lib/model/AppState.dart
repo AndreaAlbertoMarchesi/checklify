@@ -122,9 +122,12 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  void openTask(Task task) {
-    taskPath.add(task);
+  void openTask(Task task, [TaskPath taskPath]) {
     this.task = task;
+    if(taskPath==null)
+      this.taskPath.add(task);
+    else
+      this.taskPath = taskPath;
     notifyListeners();
   }
 

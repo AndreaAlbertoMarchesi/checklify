@@ -1,3 +1,5 @@
+import 'package:checklist_app/model/supportClasses/SearchedTask.dart';
+import 'package:checklist_app/model/supportClasses/TaskPath.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'Task.g.dart';
@@ -26,5 +28,21 @@ class Task {
   factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
 
   Map<String, dynamic> toJson() => _$TaskToJson(this);
+
+
+  List<SearchedTask> searchTasks(String searchInput, TaskPath taskPath){
+    var foundTasks = List<SearchedTask>();
+
+    children.forEach((child) {
+      var childPath = taskPath.getCopy();
+      childPath.add(this);
+
+      if(child.title.contains(searchInput))
+        foundTasks.add(SearchedTask(child, childPath));
+
+      foundTasks.addAll(child.searchTasks(searchInput, childPath));
+    });
+    return foundTasks;
+  }
 
 }
