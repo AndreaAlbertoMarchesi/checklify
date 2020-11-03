@@ -32,8 +32,8 @@ class SideMenu extends StatelessWidget {
                             child: CircleAvatar(
                               radius: 50,
                               backgroundImage: appState.isPhotoFromGallery
-                                  ? AssetImage("${appState.appUser.photoURL}")
-                                  : FileImage(File(appState.appUser.photoURL)),
+                                  ? FileImage(File(appState.appUser.photoURL))
+                                  : AssetImage("${appState.appUser.photoURL}") ,
                               backgroundColor: Colors.transparent,
                             ),
                           ),

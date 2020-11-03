@@ -40,6 +40,7 @@ class UserPreferences{
 
   AppUser appUser;
   bool firstTime = true;
+  bool isPhotoFromGallery = false;
 
   setUser(AppUser user) async{
     appUser = user;
@@ -52,9 +53,14 @@ class UserPreferences{
     if(prefs.getString("user") != null) {
       appUser = AppUser.fromJson(jsonDecode(prefs.getString("user")));
       firstTime = false;
+      if(appUser.photoURL.startsWith('images',0))
+        isPhotoFromGallery = false;
+      else
+        isPhotoFromGallery = true;
     }else {
       appUser = AppUser(userName: "Anonymous", photoURL: PHOTO_ANON, isAnon: true);
       firstTime = true;
+      isPhotoFromGallery = false;
     }
   }
 

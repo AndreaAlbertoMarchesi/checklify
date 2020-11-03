@@ -42,8 +42,8 @@ class PercentageRow extends StatelessWidget {
           Padding(
             padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
             child: CircularPercentIndicator(
-              radius: 42.0,
-              lineWidth: 8.0,
+              radius: 43.0,
+              lineWidth: 7.0,
               percent: task.percentage.toDouble(),
               animation: true,
               animateFromLastPercent: true,
@@ -72,7 +72,7 @@ class PercentageRow extends StatelessWidget {
       return Text(
         (task.percentage * 100).toInt().toString() + "%",
         style: TextStyle(
-          fontSize: 11,
+          fontSize: 14,
           letterSpacing: 0.6,
           fontWeight: FontWeight.bold,
           color: Styles.getFont(isDarkTheme),

@@ -41,7 +41,7 @@ class ParentTaskItem extends StatelessWidget {
             Padding(
               padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
               child: CircularPercentIndicator(
-                radius: 45.0,
+                radius: 47.0,
                 lineWidth: 8.0,
                 percent: appState.task.percentage.toDouble(),
                 animation: true,
@@ -72,7 +72,7 @@ class ParentTaskItem extends StatelessWidget {
       return Text(
         (task.percentage * 100).toInt().toString() + "%",
         style: TextStyle(
-          fontSize: 12,
+          fontSize: 15,
           letterSpacing: 0.5,
           fontWeight: FontWeight.bold,
           color: Styles.getFont(isDarkTheme),

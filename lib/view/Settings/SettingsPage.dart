@@ -47,8 +47,8 @@ class _SettingsPageState extends State<SettingsPage> {
                   children : [
                     CircleAvatar(
                       backgroundImage: appState.isPhotoFromGallery
-                      ? AssetImage("${appState.appUser.photoURL}")
-                      : FileImage(File(appState.appUser.photoURL)),
+                      ? FileImage(File(appState.appUser.photoURL))
+                      : AssetImage("${appState.appUser.photoURL}"),
                       backgroundColor: Colors.transparent,
                       radius: radius,
                       //background image

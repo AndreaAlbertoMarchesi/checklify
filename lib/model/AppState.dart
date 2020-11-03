@@ -20,7 +20,9 @@ class AppState extends ChangeNotifier {
 
   AppUser appUser;
   UserPreferences userPreferences;
-  bool isPhotoFromGallery = true;
+  bool isPhotoFromGallery;
+
+  bool termsAndCondsAccepted = false;
 
   AppState(this.userPreferences) {
     _storage.readData().then((Task value) {
@@ -30,8 +32,15 @@ class AppState extends ChangeNotifier {
       notifyListeners();
     });
     appUser = userPreferences.appUser;
+    isPhotoFromGallery = userPreferences.isPhotoFromGallery;
     userPreferences.setUser(appUser);
   }
+
+  void acceptTermsConditions(){
+    termsAndCondsAccepted = true;
+    notifyListeners();
+  }
+
 
   void selectTask(Task task) {
     if (!_selectionState.hasSelected(task))
@@ -87,9 +96,9 @@ class AppState extends ChangeNotifier {
     appUser.photoURL = path;
     userPreferences.setUser(appUser);
     if(path.startsWith('images',0))
-      isPhotoFromGallery = true;
-    else
       isPhotoFromGallery = false;
+    else
+      isPhotoFromGallery = true;
     notifyListeners();
   }
 

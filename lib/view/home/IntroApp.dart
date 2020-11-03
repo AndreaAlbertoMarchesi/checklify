@@ -1,10 +1,12 @@
+import 'package:checklist_app/model/AppState.dart';
 import 'package:flutter/material.dart';
 import 'package:intro_slider/dot_animation_enum.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
-import 'package:intro_slider/scrollbar_behavior_enum.dart';
+import 'package:provider/provider.dart';
 
 import 'Home.dart';
+import 'dialogs/TermAndCondsDialog.dart';
 
 class IntroScreen extends StatefulWidget {
   IntroScreen({Key key}) : super(key: key);
@@ -207,9 +209,7 @@ class IntroScreenState extends State<IntroScreen> {
     );
   }
 
-  void onDonePress() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()),);
-  }
+
 
   void onTabChangeCompleted(index) {
     // Index of current tab is focused
@@ -283,6 +283,25 @@ class IntroScreenState extends State<IntroScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final appState = context.watch<AppState>();
+
+    showTerms(){
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return TermAndCondsDialog();
+        },
+      );
+    }
+
+
+    void onDonePress() {
+      if(appState.termsAndCondsAccepted || !appState.userPreferences.firstTime)
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()),);
+      else
+        showTerms();
+    }
+
     return new IntroSlider(
       // List slides
       slides: this.slides,
@@ -297,7 +316,7 @@ class IntroScreenState extends State<IntroScreen> {
 
       // Done button
       renderDoneBtn: this.renderDoneBtn(),
-      onDonePress: this.onDonePress,
+      onDonePress: onDonePress,
       colorDoneBtn: Colors.lightBlue[100],
       highlightColorDoneBtn: Colors.blue,
 
