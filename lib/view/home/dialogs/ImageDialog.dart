@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:checklist_app/view/Settings/Styles.dart';
 import 'package:provider/provider.dart';
 import 'package:checklist_app/model/AppState.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +52,11 @@ class _ImageDialogState extends State<ImageDialog> {
                       itemBuilder: (context, index) {
                         return ListTile(
                           title: Text(
-                              snapshot.data[index].substring(7).toUpperCase()),
+                              snapshot.data[index].substring(7).toUpperCase(),
+                            style: TextStyle(
+                              fontSize: Styles.getFontSizeChildren(appState.size),
+                            ),
+                          ),
                           leading: CircleAvatar(
                             radius: 30,
                             backgroundImage: AssetImage("${snapshot.data[index]}"),

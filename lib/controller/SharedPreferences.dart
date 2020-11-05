@@ -58,7 +58,7 @@ class UserPreferences{
       else
         isPhotoFromGallery = true;
     }else {
-      appUser = AppUser(userName: "Anonymous", photoURL: PHOTO_ANON, isAnon: true);
+      appUser = AppUser(userName: "Anonymous", photoURL: PHOTO_ANON, isAnon: true, fontSize: "Medium");
       firstTime = true;
       isPhotoFromGallery = false;
     }

@@ -41,6 +41,126 @@ class Styles {
     }
   }
 
+  static double getFontSizeChildren(String size){
+    double s;
+    switch (size){
+      case 'Small':
+        s = 13;
+        break;
+      case 'Medium':
+        s = 17;
+        break;
+      case 'Big':
+        s = 23;
+        break;
+    }
+    return s;
+  }
+  static double getFontSizeParent(String size){
+    double s;
+    switch (size){
+      case 'Small':
+        s = 22;
+        break;
+      case 'Medium':
+        s = 29;
+        break;
+      case 'Big':
+        s = 36;
+        break;
+    }
+    return s;
+  }
+  static double getTileSizeChildren(String size){
+    double s;
+    switch (size){
+      case 'Small':
+        s = 40;
+        break;
+      case 'Medium':
+        s = 45;
+        break;
+      case 'Big':
+        s = 55;
+        break;
+    }
+    return s;
+  }
+  static double getTileSizeParent(String size){
+    double s;
+    switch (size){
+      case 'Small':
+        s = 22;
+        break;
+      case 'Medium':
+        s = 29;
+        break;
+      case 'Big':
+        s = 36;
+        break;
+    }
+    return s;
+  }
+  static double getPercentageSizeChildren(String size){
+    double s;
+    switch (size){
+      case 'Small':
+        s = 33;
+        break;
+      case 'Medium':
+        s = 38;
+        break;
+      case 'Big':
+        s = 48;
+        break;
+    }
+    return s;
+  }
+  static double getPercentageSizeParent(String size){
+    double s;
+    switch (size){
+      case 'Small':
+        s = 38;
+        break;
+      case 'Medium':
+        s = 45;
+        break;
+      case 'Big':
+        s = 53;
+        break;
+    }
+    return s;
+  }
+  static double getFontPercentageChildren(String size){
+    double s;
+    switch (size){
+      case 'Small':
+        s = 9.5;
+        break;
+      case 'Medium':
+        s = 11.5;
+        break;
+      case 'Big':
+        s = 17;
+        break;
+    }
+    return s;
+  }
+  static double getFontPercentageParent(String size){
+    double s;
+    switch (size){
+      case 'Small':
+        s = 10.5;
+        break;
+      case 'Medium':
+        s = 13;
+        break;
+      case 'Big':
+        s = 18.5;
+        break;
+    }
+    return s;
+  }
 
 
 

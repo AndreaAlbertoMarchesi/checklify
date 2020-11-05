@@ -43,6 +43,7 @@ class HomeScreen extends StatelessWidget {
         return false;
       },
       child: Scaffold(
+        extendBody: true,
         appBar: AppBar(
           actionsIconTheme: IconThemeData(
               color: Styles.getFont(darkState.darkTheme)

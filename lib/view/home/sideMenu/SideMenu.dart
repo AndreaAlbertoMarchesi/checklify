@@ -28,7 +28,7 @@ class SideMenu extends StatelessWidget {
                       child: Row(
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(20),
+                            padding: EdgeInsets.all(15),
                             child: CircleAvatar(
                               radius: 50,
                               backgroundImage: appState.isPhotoFromGallery
@@ -40,7 +40,7 @@ class SideMenu extends StatelessWidget {
                           Text(
                             appState.appUser.userName,
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: Styles.getFontSizeChildren(appState.size),
                               letterSpacing: 0.6,
                               fontWeight: FontWeight.bold,
                               color: Styles.getFont(darkState.darkTheme),
@@ -57,7 +57,7 @@ class SideMenu extends StatelessWidget {
                     title: Text(
                         "Home",
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: Styles.getFontSizeChildren(appState.size),
                         letterSpacing: 0.6,
                         fontWeight: FontWeight.bold,
                         color: Styles.getFont(darkState.darkTheme),
@@ -73,7 +73,7 @@ class SideMenu extends StatelessWidget {
                     title: Text(
                         'Settings',
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: Styles.getFontSizeChildren(appState.size),
                         letterSpacing: 0.6,
                         fontWeight: FontWeight.bold,
                         color: Styles.getFont(darkState.darkTheme),
@@ -92,7 +92,7 @@ class SideMenu extends StatelessWidget {
                     title: Text(
                         'Help',
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: Styles.getFontSizeChildren(appState.size),
                         letterSpacing: 0.6,
                         fontWeight: FontWeight.bold,
                         color: Styles.getFont(darkState.darkTheme),

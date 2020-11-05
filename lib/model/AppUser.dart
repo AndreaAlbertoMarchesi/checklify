@@ -8,8 +8,9 @@ class AppUser {
   String userName;
   String photoURL;
   bool isAnon;
+  String fontSize;
 
-  AppUser({this.userName, this.photoURL, this.isAnon});
+  AppUser({this.userName, this.photoURL, this.isAnon, this.fontSize});
 
 
   factory AppUser.fromJson(Map<String, dynamic> json) => _$AppUserFromJson(json);

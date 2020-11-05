@@ -4,6 +4,8 @@ import 'package:image_picker/image_picker.dart';
 import '../home/dialogs/ImageDialog.dart';
 import 'package:provider/provider.dart';
 
+import 'Styles.dart';
+
 
 class AppBottomSheet extends StatefulWidget {
   @override
@@ -32,7 +34,12 @@ class _AppBottomSheetState extends State<AppBottomSheet> {
         children: <Widget>[
           new ListTile(
             leading: new Icon(Icons.account_circle_outlined),
-            title: new Text('Select from app avatar'),
+            title: new Text(
+                'Select from app avatar',
+              style: TextStyle(
+                fontSize: Styles.getFontSizeChildren(appState.size),
+              ),
+            ),
             onTap: () async {
               await showDialog(
                   context: context,
@@ -43,7 +50,12 @@ class _AppBottomSheetState extends State<AppBottomSheet> {
           ),
           new ListTile(
             leading: new Icon(Icons.photo_library_outlined),
-            title: new Text('Choose existing photo'),
+            title: new Text(
+                'Choose existing photo',
+              style: TextStyle(
+                fontSize: Styles.getFontSizeChildren(appState.size),
+              ),
+            ),
             onTap: () async {
               await _imgFromGallery();
               appState.modifyPhoto(_image.path);

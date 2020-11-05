@@ -24,6 +24,9 @@ class AppState extends ChangeNotifier {
 
   bool termsAndCondsAccepted = false;
 
+  String size;
+
+
   AppState(this.userPreferences) {
     _storage.readData().then((Task value) {
       root = value;
@@ -32,6 +35,7 @@ class AppState extends ChangeNotifier {
       notifyListeners();
     });
     appUser = userPreferences.appUser;
+    size = userPreferences.appUser.fontSize;
     isPhotoFromGallery = userPreferences.isPhotoFromGallery;
     userPreferences.setUser(appUser);
   }
@@ -41,6 +45,13 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
+
+  void setFontSize(String size){
+    this.size = size;
+    appUser.fontSize = size;
+    userPreferences.setUser(appUser);
+    notifyListeners();
+  }
 
   void selectTask(Task task) {
     if (!_selectionState.hasSelected(task))

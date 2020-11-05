@@ -25,7 +25,7 @@ class _TermAndCondsDialogState extends State<TermAndCondsDialog> {
         child: Text(
           "Accept",
           style: TextStyle(
-            fontSize: 16,
+            fontSize: Styles.getFontSizeChildren(appState.size),
             letterSpacing: 0.6,
             fontWeight: FontWeight.bold,
             color: Styles.getFont(darkState.darkTheme),
@@ -59,7 +59,7 @@ class _TermAndCondsDialogState extends State<TermAndCondsDialog> {
                 Text(
                   "Accept Terms & Conditions",
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: Styles.getFontSizeChildren(appState.size),
                     letterSpacing: 0.6,
                     fontWeight: FontWeight.bold,
                     color: Styles.getFont(darkState.darkTheme),

@@ -23,7 +23,7 @@ class ModifyName extends StatelessWidget {
         child: Text(
           "Back",
           style: TextStyle(
-            fontSize: 16,
+            fontSize: Styles.getFontSizeChildren(appState.size),
             letterSpacing: 0.6,
             fontWeight: FontWeight.bold,
             color: Styles.getFont(darkState.darkTheme),
@@ -40,7 +40,7 @@ class ModifyName extends StatelessWidget {
         child: Text(
           "Rename",
           style: TextStyle(
-            fontSize: 16,
+            fontSize: Styles.getFontSizeChildren(appState.size),
             letterSpacing: 0.6,
             fontWeight: FontWeight.bold,
             color: Styles.getFont(darkState.darkTheme),
@@ -72,7 +72,7 @@ class ModifyName extends StatelessWidget {
               borderSide: BorderSide(color: Styles.getBorder(darkState.darkTheme), width: 2.0),
             ),
           ),
-          validator: (val) => (val.isEmpty | (val.length > 8)) ? 'Enter a valid name ( not too long )' : null,
+          validator: (val) => (val.isEmpty | (val.length > 10)) ? 'Enter a valid name ( not too long )' : null,
           onChanged: (val) {
             userName = val;
           },

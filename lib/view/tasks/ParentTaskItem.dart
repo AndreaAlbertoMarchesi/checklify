@@ -30,7 +30,7 @@ class ParentTaskItem extends StatelessWidget {
               child: Text(
                 appState.task.title,
                 style: TextStyle(
-                  fontSize: 60.0,
+                  fontSize: Styles.getFontSizeParent(appState.size),
                   letterSpacing: 0.5,
                   fontWeight: FontWeight.bold,
                   color: Styles.getFont(darkState.darkTheme),
@@ -41,7 +41,7 @@ class ParentTaskItem extends StatelessWidget {
             Padding(
               padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
               child: CircularPercentIndicator(
-                radius: 47.0,
+                radius: Styles.getPercentageSizeParent(appState.size),
                 lineWidth: 8.0,
                 percent: appState.task.percentage.toDouble(),
                 animation: true,
@@ -49,7 +49,7 @@ class ParentTaskItem extends StatelessWidget {
                 backgroundColor: Styles.getColor(darkState.darkTheme),
                 circularStrokeCap: CircularStrokeCap.round,
                 center: isCompleted(
-                    appState.task, appState.task.percentage.toDouble(), darkState.darkTheme),
+                    appState.task, appState.task.percentage.toDouble(), darkState.darkTheme, appState.size),
                 linearGradient: LinearGradient(colors: [
                   Colors.green,
                   Colors.lightGreen,
@@ -62,17 +62,18 @@ class ParentTaskItem extends StatelessWidget {
     );
   }
 
-  Widget isCompleted(Task task, num percentage, bool isDarkTheme) {
+  Widget isCompleted(Task task, num percentage, bool isDarkTheme, String size) {
     if ((percentage * 100) == 100.0) {
       return Icon(
         const IconData(0xe0de, fontFamily: 'MaterialIcons'),
         color: Colors.greenAccent[700],
+        size: Styles.getFontSizeParent(size),
       );
     } else
       return Text(
         (task.percentage * 100).toInt().toString() + "%",
         style: TextStyle(
-          fontSize: 15,
+          fontSize: Styles.getFontPercentageParent(size),
           letterSpacing: 0.5,
           fontWeight: FontWeight.bold,
           color: Styles.getFont(isDarkTheme),

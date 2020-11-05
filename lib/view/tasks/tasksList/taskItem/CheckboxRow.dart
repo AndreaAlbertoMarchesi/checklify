@@ -18,13 +18,13 @@ class CheckboxRow extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        //borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10),
         color: Styles.getColor(darkState.darkTheme),
         boxShadow: [
-          BoxShadow(color: Styles.getBorder(darkState.darkTheme), spreadRadius: 2, blurRadius: 2),
+          BoxShadow(color: Styles.getBorder(darkState.darkTheme), spreadRadius: 2),
         ],
       ),
-      constraints: BoxConstraints(maxHeight: 50),
+      constraints: BoxConstraints(maxHeight: Styles.getTileSizeChildren(appState.size)),
       child: Row(
         children: [
           Padding(
@@ -32,6 +32,7 @@ class CheckboxRow extends StatelessWidget {
             child: Text(
               task.title,
               style: TextStyle(
+                fontSize: Styles.getFontSizeChildren(appState.size),
                 letterSpacing: 0.5,
                 fontWeight: FontWeight.bold,
                 color: Styles.getFont(darkState.darkTheme),

@@ -47,6 +47,7 @@ class TaskPathRow extends StatelessWidget {
                         child: Icon(
                             Icons.arrow_forward_ios_rounded,
                           color: Styles.getFont(darkState.darkTheme),
+                          size: Styles.getFontSizeChildren(appState.size),
                         )
                     ),
                     Padding(
@@ -55,7 +56,7 @@ class TaskPathRow extends StatelessWidget {
                         task.title,
                         style: TextStyle(
                           color: Styles.getFont(darkState.darkTheme),
-                            fontSize: 20
+                            fontSize: Styles.getFontSizeChildren(appState.size),
                         ),
                       ),
                     )

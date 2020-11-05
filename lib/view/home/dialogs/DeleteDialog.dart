@@ -21,7 +21,7 @@ class DeleteDialog extends StatelessWidget {
       title: Text(
           "Item Selected",
         style: TextStyle(
-          fontSize: 16,
+          fontSize: Styles.getFontSizeChildren(appState.size),
           letterSpacing: 0.6,
           fontWeight: FontWeight.bold,
           color: Styles.getFont(darkState.darkTheme),
@@ -30,7 +30,7 @@ class DeleteDialog extends StatelessWidget {
       content: Text(
           "Do you want to delete it?",
         style: TextStyle(
-          fontSize: 16,
+          fontSize: Styles.getFontSizeChildren(appState.size),
           letterSpacing: 0.6,
           color: Styles.getFont(darkState.darkTheme),
         ),),

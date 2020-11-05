@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'BottomSheet.dart';
+import 'Styles.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -25,6 +26,7 @@ class _SettingsPageState extends State<SettingsPage> {
     double radius = 50;
     double iconSize = 30;
     double distance = 10;
+    const List<String> FONTS =["Small", "Medium", "Big"];
 
 
     return Scaffold(
@@ -81,7 +83,12 @@ class _SettingsPageState extends State<SettingsPage> {
                       Icon(Icons.autorenew),
                       Container(child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(appState.appUser.userName),
+                        child: Text(
+                            appState.appUser.userName,
+                          style: TextStyle(
+                            fontSize: Styles.getFontSizeChildren(appState.size),
+                          ),
+                        ),
                       )),
                     ],
                   ),
@@ -95,19 +102,66 @@ class _SettingsPageState extends State<SettingsPage> {
           SwitchListTile(
             secondary: const Icon(Icons.lightbulb_outline),
             value: darkThemeState.darkTheme,
-            title: Text("Dark mode"),
+            title: Text(
+                "Dark mode",
+              style: TextStyle(
+                fontSize: Styles.getFontSizeChildren(appState.size),
+              ),
+            ),
             onChanged: (value) {
               darkThemeState.setDarkTheme(value);
             },
           ),
           ListTile(
-            title: Center(child: Text("Terms & Conditions")),
-            subtitle: Center(child: Text("Click to know more about terms and conditions")),
+            title: Text(
+                "Select the Font Size",
+              style: TextStyle(
+                fontSize: Styles.getFontSizeChildren(appState.size),
+              ),
+            ),
+            leading: Icon(Icons.text_fields_rounded),
+            trailing : PopupMenuButton(
+              itemBuilder: (BuildContext context) {
+                return FONTS.map((fontSize) {
+                  return PopupMenuItem(
+                      value: fontSize,
+                      child: Text(
+                          fontSize,
+                          style: TextStyle(
+                            fontSize: Styles.getFontSizeChildren(appState.size),
+                          ),
+                      ),);
+                }).toList();
+              },
+              tooltip: "Size",
+              onSelected: (fontSize) {
+                appState.setFontSize(fontSize);
+              },
+            ),
+          ),
+          ListTile(
+            title: Center(child: Text(
+                "Terms & Conditions",
+              style: TextStyle(
+                fontSize: Styles.getFontSizeChildren(appState.size),
+              ),
+            )),
+            subtitle: Center(child: Text(
+                "Click to know more about terms and conditions",
+              style: TextStyle(
+                fontSize: Styles.getFontSizeChildren(appState.size)-4.0,
+              ),
+            )),
             onTap: (){
               
             },
           ),
-          Center(child: Text("version 1.0.0"))
+          Center(child: Text(
+            "version 1.0.0",
+            style: TextStyle(
+              fontSize: Styles.getFontSizeChildren(appState.size),
+            ),
+          ))
         ],
       ),
     );

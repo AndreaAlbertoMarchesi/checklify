@@ -44,6 +44,7 @@ class TaskItem extends StatelessWidget {
           );
         },
         child: Card(
+          elevation: 0,
           color: isSelected ? Colors.lightGreenAccent[100] : Colors.white,
           margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
           child:
