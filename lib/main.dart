@@ -1,6 +1,6 @@
-import 'file:///C:/Users/Ilaria/AndroidStudioProjects/checklify/lib/controller/SharedPreferences.dart';
 import 'package:checklist_app/view/home/AppStateProvider.dart';
 import 'package:flutter/material.dart';
+import 'controller/SharedPreferences.dart';
 
 void main() async {
 

@@ -139,6 +139,19 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
           ),
+          SwitchListTile(
+            secondary: const Icon(Icons.vibration_rounded),
+            value: appState.appUser.vibrate,
+            title: Text(
+              "Vibration",
+              style: TextStyle(
+                fontSize: Styles.getFontSizeChildren(appState.size),
+              ),
+            ),
+            onChanged: (value) {
+              appState.setVibration(value);
+            },
+          ),
           ListTile(
             title: Center(child: Text(
                 "Terms & Conditions",

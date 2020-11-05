@@ -1,5 +1,4 @@
 import 'package:checklist_app/controller/Search.dart';
-import 'package:checklist_app/controller/Storage.dart';
 import 'package:checklist_app/model/AppState.dart';
 import 'package:checklist_app/model/DarkThemeState.dart';
 import 'package:checklist_app/view/Settings/Styles.dart';

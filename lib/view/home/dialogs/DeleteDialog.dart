@@ -3,7 +3,6 @@ import 'package:checklist_app/model/DarkThemeState.dart';
 import 'package:checklist_app/model/Task.dart';
 import 'package:checklist_app/view/Settings/Styles.dart';
 import 'package:flutter/material.dart';
-import 'package:vibration/vibration.dart';
 import 'package:provider/provider.dart';
 
 

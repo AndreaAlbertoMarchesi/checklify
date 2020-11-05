@@ -1,4 +1,5 @@
-import 'file:///C:/Users/Ilaria/AndroidStudioProjects/checklify/lib/controller/SharedPreferences.dart';
+
+import 'package:checklist_app/controller/SharedPreferences.dart';
 import 'package:flutter/material.dart';
 
 class DarkThemeState with ChangeNotifier {

@@ -50,7 +50,8 @@ class UpdateDialog extends StatelessWidget {
             appState.updateTask(task, title: taskName);
             Navigator.of(context).pop();
           } else {
-            Vibration.vibrate(duration: 100);
+            if(appState.appUser.vibrate)
+              Vibration.vibrate(duration: 80);
           }
         },
       );

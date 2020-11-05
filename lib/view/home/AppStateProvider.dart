@@ -1,8 +1,8 @@
+import 'package:checklist_app/controller/SharedPreferences.dart';
 import 'package:checklist_app/model/AppState.dart';
 import 'package:checklist_app/view/home/DarkThemeProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'file:///C:/Users/Ilaria/AndroidStudioProjects/checklify/lib/controller/SharedPreferences.dart';
 
 
 

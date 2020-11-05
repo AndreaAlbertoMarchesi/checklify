@@ -51,7 +51,8 @@ class ModifyName extends StatelessWidget {
             appState.modifyName(userName);
             Navigator.of(context).pop();
           } else {
-            Vibration.vibrate(duration: 100);
+            if(appState.appUser.vibrate)
+              Vibration.vibrate(duration: 80);
           }
         },
       );

@@ -1,7 +1,7 @@
+import 'package:checklist_app/controller/SharedPreferences.dart';
 import 'package:checklist_app/controller/Storage.dart';
 import 'package:checklist_app/model/SelectionState.dart';
 import 'package:checklist_app/model/supportClasses/TaskPath.dart';
-import 'file:///C:/Users/Ilaria/AndroidStudioProjects/checklify/lib/controller/SharedPreferences.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'AppUser.dart';
@@ -21,9 +21,7 @@ class AppState extends ChangeNotifier {
   AppUser appUser;
   UserPreferences userPreferences;
   bool isPhotoFromGallery;
-
   bool termsAndCondsAccepted = false;
-
   String size;
 
 
@@ -49,6 +47,12 @@ class AppState extends ChangeNotifier {
   void setFontSize(String size){
     this.size = size;
     appUser.fontSize = size;
+    userPreferences.setUser(appUser);
+    notifyListeners();
+  }
+
+  void setVibration(bool vibration){
+    appUser.vibrate = vibration;
     userPreferences.setUser(appUser);
     notifyListeners();
   }

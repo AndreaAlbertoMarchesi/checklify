@@ -30,14 +30,16 @@ class TaskItem extends StatelessWidget {
         iconColor: Styles.getFont(darkState.darkTheme),
         iconOnRightSwipe: Icons.article_outlined,
         onRightSwipe: () {
-          Vibration.vibrate(duration: 100);
+          if(appState.appUser.vibrate)
+            Vibration.vibrate(duration: 80);
           showDialog(
             context: context,
             child: UpdateDialog(task),
           );
         },
         onLeftSwipe: () {
-          Vibration.vibrate(duration: 100);
+          if(appState.appUser.vibrate)
+            Vibration.vibrate(duration: 80);
           showDialog(
             context: context,
             child: DeleteDialog(task),
@@ -55,7 +57,8 @@ class TaskItem extends StatelessWidget {
         if (!isSelected) appState.openTask(task);
       },
       onDoubleTap: () {
-        Vibration.vibrate(duration: 100);
+        if(appState.appUser.vibrate)
+          Vibration.vibrate(duration: 80);
         isSelected ? appState.deselect(task) : appState.selectTask(task);
       },
     );
