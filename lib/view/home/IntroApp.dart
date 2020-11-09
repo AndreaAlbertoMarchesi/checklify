@@ -4,7 +4,7 @@ import 'package:intro_slider/dot_animation_enum.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter/services.dart';
 import 'Home.dart';
 import 'dialogs/TermAndCondsDialog.dart';
 
@@ -15,135 +15,6 @@ class IntroScreen extends StatefulWidget {
   IntroScreenState createState() => new IntroScreenState();
 }
 
-//------------------ Custom config ------------------
-// class IntroScreenState extends State<IntroScreen> {
-//  List<Slide> slides = new List();
-//
-//  @override
-//  void initState() {
-//    super.initState();
-//
-//    slides.add(
-//      new Slide(
-//        title:
-//            "A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE",
-//        maxLineTitle: 2,
-//        styleTitle:
-//            TextStyle(color: Colors.white, fontSize: 30.0, fontWeight: FontWeight.bold, fontFamily: 'RobotoMono'),
-//        description:
-//            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,",
-//        styleDescription:
-//            TextStyle(color: Colors.white, fontSize: 20.0, fontStyle: FontStyle.italic, fontFamily: 'Raleway'),
-//        marginDescription: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 70.0),
-//        centerWidget: Text("Replace this with a custom widget", style: TextStyle(color: Colors.white)),
-//        colorBegin: Color(0xffFFDAB9),
-//        colorEnd: Color(0xff40E0D0),
-//        backgroundImage: 'images/photo_eraser.png',
-//        directionColorBegin: Alignment.topLeft,
-//        directionColorEnd: Alignment.bottomRight,
-//        onCenterItemPress: () {},
-//      ),
-//    );
-//    slides.add(
-//      new Slide(
-//        title: "MUSEUM",
-//        styleTitle:
-//            TextStyle(color: Color(0xffD02090), fontSize: 30.0, fontWeight: FontWeight.bold, fontFamily: 'RobotoMono'),
-//        description: "Ye indulgence unreserved connection alteration appearance",
-//        styleDescription:
-//            TextStyle(color: Color(0xffD02090), fontSize: 20.0, fontStyle: FontStyle.italic, fontFamily: 'Raleway'),
-//        pathImage: "images/photo_museum.png",
-//        colorBegin: Color(0xffFFFACD),
-//        colorEnd: Color(0xffFF6347),
-//        directionColorBegin: Alignment.topRight,
-//        directionColorEnd: Alignment.bottomLeft,
-//      ),
-//    );
-//    slides.add(
-//      new Slide(
-//        title: "COFFEE",
-//        styleTitle:
-//            TextStyle(color: Color(0xffD02090), fontSize: 30.0, fontWeight: FontWeight.bold, fontFamily: 'RobotoMono'),
-//        description:
-//            "Much evil soon high in hope do view. Out may few northward believing attempted. Yet timed being songs marry one defer men our. Although finished blessing do of",
-//        styleDescription:
-//            TextStyle(color: Color(0xffD02090), fontSize: 20.0, fontStyle: FontStyle.italic, fontFamily: 'Raleway'),
-//        pathImage: "images/photo_coffee_shop.png",
-//        colorBegin: Color(0xffFFA500),
-//        colorEnd: Color(0xff7FFFD4),
-//        directionColorBegin: Alignment.topCenter,
-//        directionColorEnd: Alignment.bottomCenter,
-//        maxLineTextDescription: 3,
-//      ),
-//    );
-//  }
-//
-//  void onDonePress() {
-// //    Do what you want
-// //    Navigator.push(
-// //      context,
-// //      MaterialPageRoute(builder: (context) => HomeScreen()),
-// //    );
-//  }
-//
-//  Widget renderNextBtn() {
-//    return Icon(
-//      Icons.navigate_next,
-//      color: Color(0xffD02090),
-//      size: 35.0,
-//    );
-//  }
-//
-//  Widget renderDoneBtn() {
-//    return Icon(
-//      Icons.done,
-//      color: Color(0xffD02090),
-//    );
-//  }
-//
-//  Widget renderSkipBtn() {
-//    return Icon(
-//      Icons.skip_next,
-//      color: Color(0xffD02090),
-//    );
-//  }
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    return new IntroSlider(
-//      // List slides
-//      slides: this.slides,
-//
-//      // Skip button
-//      renderSkipBtn: this.renderSkipBtn(),
-//      colorSkipBtn: Color(0x33000000),
-//      highlightColorSkipBtn: Color(0xff000000),
-//
-//      // Next button
-//      renderNextBtn: this.renderNextBtn(),
-//
-//      // Done button
-//      renderDoneBtn: this.renderDoneBtn(),
-//      onDonePress: this.onDonePress,
-//      colorDoneBtn: Color(0x33000000),
-//      highlightColorDoneBtn: Color(0xff000000),
-//
-//      // Dot indicator
-//      colorDot: Color(0x33D02090),
-//      colorActiveDot: Color(0xffD02090),
-//      sizeDot: 13.0,
-//
-//      // Show or hide status bar
-//      shouldHideStatusBar: true,
-//      backgroundColorAllSlides: Colors.grey,
-//
-//      // Scrollbar
-//      verticalScrollbarBehavior: scrollbarBehavior.SHOW_ALWAYS,
-//    );
-//  }
-// }
-
-//------------------ Custom your own tabs ------------------
 class IntroScreenState extends State<IntroScreen> {
   List<Slide> slides = new List();
 
@@ -152,6 +23,11 @@ class IntroScreenState extends State<IntroScreen> {
   @override
   void initState() {
     super.initState();
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
 
     slides.add(
       new Slide(
@@ -168,7 +44,9 @@ class IntroScreenState extends State<IntroScreen> {
             fontSize: 20.0,
             fontStyle: FontStyle.italic,
             fontFamily: 'Raleway'),
-        pathImage: "images/dog.png",
+        pathImage: "images/introScreen/screen1.png",
+        backgroundImage: "images/introScreen/screen3.jpg",
+        backgroundImageFit: BoxFit.fill,
       ),
     );
     slides.add(
@@ -186,7 +64,8 @@ class IntroScreenState extends State<IntroScreen> {
             fontSize: 20.0,
             fontStyle: FontStyle.italic,
             fontFamily: 'Raleway'),
-        pathImage: "images/dog.png",
+        pathImage: "images/introScreen/screen1.png",
+        backgroundImage: "images/introScreen/screen1.png",
       ),
     );
     slides.add(
@@ -204,7 +83,8 @@ class IntroScreenState extends State<IntroScreen> {
             fontSize: 20.0,
             fontStyle: FontStyle.italic,
             fontFamily: 'Raleway'),
-        pathImage: "images/dog.png",
+        pathImage: "images/introScreen/screen1.png",
+        backgroundImage: "images/introScreen/screen1.png",
       ),
     );
   }
@@ -244,24 +124,22 @@ class IntroScreenState extends State<IntroScreen> {
       tabs.add(Container(
         width: double.infinity,
         height: double.infinity,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(currentSlide.backgroundImage), fit: BoxFit.cover)),
         child: Container(
           margin: EdgeInsets.only(bottom: 60.0, top: 60.0),
           child: ListView(
             children: <Widget>[
-              GestureDetector(
-                  child: Image.asset(
-                    currentSlide.pathImage,
-                    width: 200.0,
-                    height: 200.0,
-                    fit: BoxFit.contain,
-                  )),
               Container(
                 child: Text(
                   currentSlide.title,
                   style: currentSlide.styleTitle,
                   textAlign: TextAlign.center,
                 ),
-                margin: EdgeInsets.only(top: 20.0),
+                margin: i==0
+                    ? EdgeInsets.only(top: 80.0)
+                    : EdgeInsets.only(top: 400.0),
               ),
               Container(
                 child: Text(
@@ -296,9 +174,11 @@ class IntroScreenState extends State<IntroScreen> {
 
 
     void onDonePress() {
-      if(appState.termsAndCondsAccepted || !appState.userPreferences.firstTime)
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()),);
-      else
+      if(appState.termsAndCondsAccepted || !appState.userPreferences.firstTime) {
+        _allowRotation();
+        Navigator.push(
+          context, MaterialPageRoute(builder: (context) => HomeScreen()),);
+      }else
         showTerms();
     }
 
@@ -308,8 +188,8 @@ class IntroScreenState extends State<IntroScreen> {
 
       // Skip button
       renderSkipBtn: this.renderSkipBtn(),
-      colorSkipBtn: Colors.lightBlue[100],
-      highlightColorSkipBtn: Colors.blue,
+      colorSkipBtn: Colors.lightBlue[50],
+      highlightColorSkipBtn: Colors.blue[100],
 
       // Next button
       renderNextBtn: this.renderNextBtn(),
@@ -317,8 +197,8 @@ class IntroScreenState extends State<IntroScreen> {
       // Done button
       renderDoneBtn: this.renderDoneBtn(),
       onDonePress: onDonePress,
-      colorDoneBtn: Colors.lightBlue[100],
-      highlightColorDoneBtn: Colors.blue,
+      colorDoneBtn: Colors.lightBlue[50],
+      highlightColorDoneBtn: Colors.blue[100],
 
       // Dot indicator
       colorDot: Colors.blue,
@@ -327,7 +207,6 @@ class IntroScreenState extends State<IntroScreen> {
 
       // Tabs
       listCustomTabs: this.renderListCustomTabs(),
-      backgroundColorAllSlides: Colors.white,
       refFuncGoToTab: (refFunc) {
         this.goToTab = refFunc;
       },
@@ -339,52 +218,14 @@ class IntroScreenState extends State<IntroScreen> {
       onTabChangeCompleted: this.onTabChangeCompleted,
     );
   }
-}
 
-//------------------ Default config ------------------
-//class IntroScreenState extends State<IntroScreen> {
-//  List<Slide> slides = new List();
-//
-//  @override
-//  void initState() {
-//    super.initState();
-//
-//    slides.add(
-//      new Slide(
-//        title: "ERASER",
-//        description: "Allow miles wound place the leave had. To sitting subject no improve studied limited",
-//        pathImage: "images/photo_eraser.png",
-//        backgroundColor: Color(0xfff5a623),
-//      ),
-//    );
-//    slides.add(
-//      new Slide(
-//        title: "PENCIL",
-//        description: "Ye indulgence unreserved connection alteration appearance",
-//        pathImage: "images/photo_pencil.png",
-//        backgroundColor: Color(0xff203152),
-//      ),
-//    );
-//    slides.add(
-//      new Slide(
-//        title: "RULER",
-//        description:
-//        "Much evil soon high in hope do view. Out may few northward believing attempted. Yet timed being songs marry one defer men our. Although finished blessing do of",
-//        pathImage: "images/photo_ruler.png",
-//        backgroundColor: Color(0xff9932CC),
-//      ),
-//    );
-//  }
-//
-//  void onDonePress() {
-//    // Do what you want
-//  }
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    return new IntroSlider(
-//      slides: this.slides,
-//      onDonePress: this.onDonePress,
-//    );
-//  }
-//}
+
+  _allowRotation(){
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+  }
+}

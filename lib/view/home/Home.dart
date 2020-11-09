@@ -20,6 +20,7 @@ class Home extends StatelessWidget {
 
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: Styles.themeData(darkState.darkTheme, context),
       home: appState.userPreferences.firstTime
       ? IntroScreen()

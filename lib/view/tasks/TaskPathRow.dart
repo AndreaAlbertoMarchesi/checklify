@@ -1,7 +1,6 @@
 import 'package:checklist_app/model/AppState.dart';
 import 'package:checklist_app/model/DarkThemeState.dart';
 import 'package:checklist_app/view/Settings/Styles.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

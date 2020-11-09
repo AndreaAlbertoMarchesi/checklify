@@ -59,6 +59,9 @@ class ModifyName extends StatelessWidget {
     }
 
     return AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20.0))),
+      scrollable: true,
       title: Form(
         key: _formKey,
         child: TextFormField(

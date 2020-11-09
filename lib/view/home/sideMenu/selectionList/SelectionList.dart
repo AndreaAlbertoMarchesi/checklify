@@ -1,6 +1,5 @@
 import 'package:checklist_app/model/AppState.dart';
 import 'package:checklist_app/view/home/sideMenu/selectionList/SelectionItem.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

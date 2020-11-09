@@ -26,12 +26,14 @@ class _ImageDialogState extends State<ImageDialog> {
 
       List<String> s = manifestMap.keys
           .where((String key) => key.contains('images/'))
+        .where((String key) => !key.contains('images/introScreen'))
           .where((String key) => key.contains('.png'))
           .toList();
       return s;
     }
 
     return AlertDialog(
+      scrollable: true,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(20.0))),
         content: FutureBuilder(
@@ -39,7 +41,6 @@ class _ImageDialogState extends State<ImageDialog> {
           builder:
               (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
             if (snapshot.hasError) print(snapshot.error);
-
             return snapshot.hasData
                 ? Container(
                     height: 400.0,
@@ -52,7 +53,7 @@ class _ImageDialogState extends State<ImageDialog> {
                       itemBuilder: (context, index) {
                         return ListTile(
                           title: Text(
-                              snapshot.data[index].substring(7).toUpperCase(),
+                              snapshot.data[index].substring(7, snapshot.data[index].indexOf('.')).toUpperCase(),
                             style: TextStyle(
                               fontSize: Styles.getFontSizeChildren(appState.size),
                             ),

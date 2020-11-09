@@ -1,13 +1,13 @@
 import 'dart:io';
-
 import 'package:checklist_app/model/AppState.dart';
 import 'package:checklist_app/model/DarkThemeState.dart';
 import 'package:checklist_app/view/Settings/SettingsPage.dart';
 import 'package:checklist_app/view/Settings/Styles.dart';
 import 'package:checklist_app/view/home/IntroApp.dart';
+import 'package:checklist_app/view/home/dialogs/DonateDialog.dart';
 import 'package:checklist_app/view/home/sideMenu/selectionList/SelectionList.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
 
 class SideMenu extends StatelessWidget {
@@ -104,6 +104,22 @@ class SideMenu extends StatelessWidget {
                               builder: (context) => IntroScreen()));
                     },
                   ),
+                  ListTile(
+                    leading: Icon(AntDesign.gift),
+                    title: Text(
+                      'Buy me a coffee',
+                      style: TextStyle(
+                        fontSize: Styles.getFontSizeChildren(appState.size),
+                        letterSpacing: 0.6,
+                        fontWeight: FontWeight.bold,
+                        color: Styles.getFont(darkState.darkTheme),
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.of(context).pop();
+                      openAddDialog(context);
+                    },
+                  ),
                 ],
               ),
             ),
@@ -111,6 +127,15 @@ class SideMenu extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void openAddDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return DonateDialog();
+      },
     );
   }
 }

@@ -59,6 +59,9 @@ class AddDialog extends StatelessWidget {
     }
 
     return AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20.0))),
+      scrollable: true,
       title: Form(
         key: _formKey,
         child: TextFormField(
@@ -73,7 +76,7 @@ class AddDialog extends StatelessWidget {
               borderSide: BorderSide(color: Styles.getBorder(darkState.darkTheme), width: 2.0),
             ),
           ),
-          validator: (val) => (val.isEmpty | (val.length > 16)) ? 'Enter a valid name ( not too long )' : null,
+          validator: (val) => (val.isEmpty | (val.length > 15)) ? 'Enter a valid name ( not too long )' : null,
           onChanged: (val) {
            taskName = val;
           },

@@ -4,7 +4,6 @@ import 'package:checklist_app/model/Task.dart';
 import 'package:checklist_app/view/Settings/Styles.dart';
 import 'package:checklist_app/view/home/dialogs/DeleteDialog.dart';
 import 'package:checklist_app/view/home/dialogs/UpdateDialog.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:swipe_to/swipe_to.dart';
 import 'package:vibration/vibration.dart';
@@ -28,7 +27,7 @@ class TaskItem extends StatelessWidget {
         animationDuration: const Duration(milliseconds: 300),
         iconOnLeftSwipe: Icons.delete_outline,
         iconColor: Styles.getFont(darkState.darkTheme),
-        iconOnRightSwipe: Icons.article_outlined,
+        iconOnRightSwipe: Icons.create_outlined,
         onRightSwipe: () {
           if(appState.appUser.vibrate)
             Vibration.vibrate(duration: 80);

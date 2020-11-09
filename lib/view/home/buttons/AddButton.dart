@@ -10,7 +10,8 @@ class AddButton extends StatelessWidget {
     final appState = context.watch<AppState>();
     if (appState.getSelectedTasks().isEmpty) {
       return Padding(
-        padding: const EdgeInsets.all(8.0),
+        //padding: const EdgeInsets.fromLTRB(15,15,15,70 ),
+        padding: const EdgeInsets.all(15.0),
         child: Container(
             height: 80,
             child: Stack(
@@ -31,7 +32,8 @@ class AddButton extends StatelessWidget {
       );
     }else{
       return Padding(
-        padding: const EdgeInsets.all(8.0),
+        //padding: const EdgeInsets.fromLTRB(15,15,15,60 ),
+        padding: const EdgeInsets.all(15.0),
         child: Container(
             height: 80,
             child: Stack(

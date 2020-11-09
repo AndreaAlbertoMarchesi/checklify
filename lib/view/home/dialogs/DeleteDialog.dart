@@ -17,6 +17,9 @@ class DeleteDialog extends StatelessWidget {
     final darkState = context.watch<DarkThemeState>();
 
     return AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20.0))),
+      scrollable: true,
       title: Text(
           "Item Selected",
         style: TextStyle(
@@ -38,7 +41,7 @@ class DeleteDialog extends StatelessWidget {
           child: Text(
             "Yes",
             style: TextStyle(
-              fontSize: 16,
+              fontSize: Styles.getFontSizeChildren(appState.size),
               letterSpacing: 0.6,
               fontWeight: FontWeight.bold,
               color: Styles.getFont(darkState.darkTheme),
@@ -53,7 +56,7 @@ class DeleteDialog extends StatelessWidget {
           child: Text(
             "No",
             style: TextStyle(
-              fontSize: 16,
+              fontSize: Styles.getFontSizeChildren(appState.size),
               letterSpacing: 0.6,
               fontWeight: FontWeight.bold,
               color: Styles.getFont(darkState.darkTheme),

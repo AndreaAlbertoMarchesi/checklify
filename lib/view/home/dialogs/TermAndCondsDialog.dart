@@ -44,31 +44,40 @@ class _TermAndCondsDialogState extends State<TermAndCondsDialog> {
     }
 
     return AlertDialog(
-      title: Center(
-          child: InkWell(
-            onTap: () {
-              setState(() {
-                _value = !_value;
-              });
-            },
-            child: Row(
-              children: [
-                Checkbox(
-                    value: _value,
-                    onChanged: (value){}
+      scrollable: true,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20.0))),
+      title: Container(
+        width: 400.0,
+        child: InkWell(
+          onTap: () {
+            setState(() {
+              _value = !_value;
+            });
+          },
+          child: Row(
+            children: [
+              Checkbox(
+                  value: _value,
+                  onChanged: (value){
+                    setState(() {
+                      _value = !_value;
+                    });
+                  }
+              ),
+              Text(
+                "Accept Terms & Conditions",
+                style: TextStyle(
+                  fontSize: Styles.getFontSizeChildren(appState.size)-2,
+                  letterSpacing: 0.6,
+                  fontWeight: FontWeight.bold,
+                  color: Styles.getFont(darkState.darkTheme),
                 ),
-                Text(
-                  "Accept Terms & Conditions",
-                  style: TextStyle(
-                    fontSize: Styles.getFontSizeChildren(appState.size),
-                    letterSpacing: 0.6,
-                    fontWeight: FontWeight.bold,
-                    color: Styles.getFont(darkState.darkTheme),
-                  ),
-                ),
-              ],
-            )
-          )),
+              ),
+            ],
+          )
+        ),
+      ),
       actions: [
         acceptButton(context),
       ],

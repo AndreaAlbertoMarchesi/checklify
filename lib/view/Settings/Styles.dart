@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class Styles {
@@ -66,7 +65,7 @@ class Styles {
         s = 29;
         break;
       case 'Big':
-        s = 36;
+        s = 34;
         break;
     }
     return s;
@@ -161,8 +160,21 @@ class Styles {
     }
     return s;
   }
-
-
+  static double getFontSizeCoffee(String size) {
+    double s;
+    switch (size) {
+      case 'Small':
+        s = 13;
+        break;
+      case 'Medium':
+        s = 15;
+        break;
+      case 'Big':
+        s = 16;
+        break;
+    }
+    return s;
+  }
 
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(
@@ -176,7 +188,6 @@ class Styles {
       ),
 
       indicatorColor: isDarkTheme ? Color(0xff0E1D36) : Color(0xffCBDCF8),
-      buttonColor: isDarkTheme ? Color(0xff3B3B3B) : Color(0xffF1F5FB),
 
       hintColor: isDarkTheme ? Colors.blue[200] : Colors.blue[800],
 
@@ -190,8 +201,6 @@ class Styles {
 
       floatingActionButtonTheme: FloatingActionButtonThemeData(foregroundColor: Colors.white,),
       brightness: isDarkTheme ? Brightness.dark : Brightness.light,
-      buttonTheme: Theme.of(context).buttonTheme.copyWith(
-          colorScheme: isDarkTheme ? ColorScheme.dark() : ColorScheme.light()),
       appBarTheme: AppBarTheme(
         shadowColor: Colors.black,
         elevation: 10.0,

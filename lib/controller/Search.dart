@@ -3,7 +3,6 @@ import 'package:checklist_app/model/DarkThemeState.dart';
 import 'package:checklist_app/model/supportClasses/SearchedTask.dart';
 import 'package:checklist_app/model/supportClasses/TaskPath.dart';
 import 'package:checklist_app/view/Settings/Styles.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -38,9 +37,20 @@ class Search extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
+    final appState = context.watch<AppState>();
+    final darkState = context.watch<DarkThemeState>();
+
     return Container(
       child: Center(
-        child: Text(selectedResult),
+        child: Text(
+            selectedResult,
+          style: TextStyle(
+            fontSize: Styles.getFontSizeChildren(appState.size),
+            letterSpacing: 0.6,
+            fontWeight: FontWeight.bold,
+            color: Styles.getFont(darkState.darkTheme),
+          ),
+        ),
       ),
     );
   }
@@ -48,6 +58,7 @@ class Search extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     final appState = context.watch<AppState>();
+    final darkState = context.watch<DarkThemeState>();
 
     List<SearchedTask> searchedTasks;
 
@@ -67,9 +78,21 @@ class Search extends SearchDelegate {
           return ListTile(
             title: Text(
               searchedTask.task.title,
+              style: TextStyle(
+                fontSize: Styles.getFontSizeChildren(appState.size),
+                letterSpacing: 0.6,
+                fontWeight: FontWeight.bold,
+                color: Styles.getFont(darkState.darkTheme),
+              ),
             ),
             subtitle: Text(
               searchedTask.taskPath.toString(),
+              style: TextStyle(
+                fontSize: Styles.getFontSizeChildren(appState.size)-4,
+                letterSpacing: 0.6,
+                fontWeight: FontWeight.bold,
+                color: Styles.getFont(darkState.darkTheme),
+              ),
             ),
             onTap: () {
               appState.openTask(searchedTask.task, searchedTask.taskPath);
