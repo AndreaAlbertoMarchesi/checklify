@@ -29,16 +29,14 @@ class TaskItem extends StatelessWidget {
         iconColor: Styles.getFont(darkState.darkTheme),
         iconOnRightSwipe: Icons.create_outlined,
         onRightSwipe: () {
-          if(appState.appUser.vibrate)
-            Vibration.vibrate(duration: 80);
+          if (appState.appUser.vibrate) Vibration.vibrate(duration: 80);
           showDialog(
             context: context,
             child: UpdateDialog(task),
           );
         },
         onLeftSwipe: () {
-          if(appState.appUser.vibrate)
-            Vibration.vibrate(duration: 80);
+          if (appState.appUser.vibrate) Vibration.vibrate(duration: 80);
           showDialog(
             context: context,
             child: DeleteDialog(task),
@@ -46,18 +44,31 @@ class TaskItem extends StatelessWidget {
         },
         child: Card(
           elevation: 0,
-          color: isSelected ? Colors.lightGreenAccent[100] : Colors.white,
           margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
-          child:
-              task.children.isEmpty ? CheckboxRow(task) : PercentageRow(task),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: isSelected
+                  ? Colors.lightGreenAccent[100]
+                  : Styles.getColor(darkState.darkTheme),
+              boxShadow: [
+                BoxShadow(
+                    color: Styles.getBorder(darkState.darkTheme),
+                    spreadRadius: 2),
+              ],
+            ),
+            constraints: BoxConstraints(
+                maxHeight: Styles.getTileSizeChildren(appState.size)),
+            child:
+                task.children.isEmpty ? CheckboxRow(task) : PercentageRow(task),
+          ),
         ),
       ),
       onTap: () {
         if (!isSelected) appState.openTask(task);
       },
       onDoubleTap: () {
-        if(appState.appUser.vibrate)
-          Vibration.vibrate(duration: 80);
+        if (appState.appUser.vibrate) Vibration.vibrate(duration: 80);
         isSelected ? appState.deselect(task) : appState.selectTask(task);
       },
     );

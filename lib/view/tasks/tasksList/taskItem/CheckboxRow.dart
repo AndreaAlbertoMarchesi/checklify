@@ -16,41 +16,31 @@ class CheckboxRow extends StatelessWidget {
     final darkState = context.watch<DarkThemeState>();
 
 
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Styles.getColor(darkState.darkTheme),
-        boxShadow: [
-          BoxShadow(color: Styles.getBorder(darkState.darkTheme), spreadRadius: 2),
-        ],
-      ),
-      constraints: BoxConstraints(maxHeight: Styles.getTileSizeChildren(appState.size)),
-      child: Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(9.0),
-            child: Text(
-              task.title,
-              style: TextStyle(
-                fontSize: Styles.getFontSizeChildren(appState.size),
-                letterSpacing: 0.5,
-                fontWeight: FontWeight.bold,
-                color: Styles.getFont(darkState.darkTheme),
-              ),
+    return Row(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(9.0),
+          child: Text(
+            task.title,
+            style: TextStyle(
+              fontSize: Styles.getFontSizeChildren(appState.size),
+              letterSpacing: 0.5,
+              fontWeight: FontWeight.bold,
+              color: Styles.getFont(darkState.darkTheme),
             ),
           ),
-          Expanded(child: Container()),
-          Checkbox(
-            activeColor: Colors.greenAccent[700],
-            checkColor: Styles.getColor(darkState.darkTheme),
-            value: task.percentage == 1,
-            onChanged: (bool value) {
-              appState.updateTask(task,
-                  percentage: task.percentage == 0 ? 1 : 0);
-            },
-          ),
-        ],
-      ),
+        ),
+        Expanded(child: Container()),
+        Checkbox(
+          activeColor: Colors.greenAccent[700],
+          checkColor: Styles.getColor(darkState.darkTheme),
+          value: task.percentage == 1,
+          onChanged: (bool value) {
+            appState.updateTask(task,
+                percentage: task.percentage == 0 ? 1 : 0);
+          },
+        ),
+      ],
     );
   }
 }
