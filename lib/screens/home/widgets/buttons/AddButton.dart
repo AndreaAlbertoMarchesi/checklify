@@ -1,8 +1,7 @@
+import 'package:checklist_app/sharedWidgets/taskDialog/TaskDialog.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../dialogs/AddDialog.dart';
 
 class AddButton extends StatelessWidget {
   @override
@@ -65,7 +64,7 @@ class AddButton extends StatelessWidget {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AddDialog();
+        return TaskDialog();
       },
     );
   }

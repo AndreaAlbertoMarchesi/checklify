@@ -1,5 +1,6 @@
 import 'dart:io';
-import 'package:checklist_app/screens/home/local_widgets/dialogs/ModifyName.dart';
+
+import 'file:///C:/Users/AndreaMarchesi/AndroidStudioProjects/checklify/lib/screens/settings/widgets/dialogs/ModifyName.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/DarkThemeState.dart';
 import 'package:checklist_app/utils/Styles.dart';
@@ -9,7 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:vibration/vibration.dart';
 
-import 'BottomSheet.dart';
+import 'widgets/BottomSheet.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -17,8 +18,6 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-
-
   @override
   Widget build(BuildContext context) {
     final darkThemeState = context.watch<DarkThemeState>();
@@ -27,15 +26,12 @@ class _SettingsPageState extends State<SettingsPage> {
     double radius = 50;
     double iconSize = 30;
     double distance = 10;
-    const List<String> FONTS =["Small", "Medium", "Big"];
+    const List<String> FONTS = ["Small", "Medium", "Big"];
 
     final Uri _emailLaunchUri = Uri(
         scheme: 'mailto',
         path: 'smith@example.com',
-        queryParameters: {
-          'subject': 'Report a Bug'
-        }
-    );
+        queryParameters: {'subject': 'Report a Bug'});
 
     return Scaffold(
       resizeToAvoidBottomPadding: false,
@@ -51,34 +47,32 @@ class _SettingsPageState extends State<SettingsPage> {
                 padding: const EdgeInsets.all(10.0),
                 child: InkWell(
                   customBorder: CircleBorder(),
-                  onTap: (){
+                  onTap: () {
                     _settingModalBottomSheet(context);
                   },
                   child: Stack(
-                    alignment: Alignment.center,
-                    overflow: Overflow.visible,
-                    children : [
-                      CircleAvatar(
-                        backgroundImage: appState.isPhotoFromGallery
-                        ? FileImage(File(appState.appUser.photoURL))
-                        : AssetImage("${appState.appUser.photoURL}"),
-                        backgroundColor: Colors.transparent,
-                        radius: radius,
-                        //background image
-                      ),
-                      Positioned(
-                          top: -(iconSize + radius-30),
-                          right: -(radius-40 + iconSize - distance),
-                          bottom: iconSize,
-                          left: radius,
-                          child: Icon(
-                            Icons.auto_awesome,
-                            color: Colors.blue,
-                            size: iconSize,
-                          )
-                      ),
-                    ]
-                  ),
+                      alignment: Alignment.center,
+                      overflow: Overflow.visible,
+                      children: [
+                        CircleAvatar(
+                          backgroundImage: appState.isPhotoFromGallery
+                              ? FileImage(File(appState.appUser.photoURL))
+                              : AssetImage("${appState.appUser.photoURL}"),
+                          backgroundColor: Colors.transparent,
+                          radius: radius,
+                          //background image
+                        ),
+                        Positioned(
+                            top: -(iconSize + radius - 30),
+                            right: -(radius - 40 + iconSize - distance),
+                            bottom: iconSize,
+                            left: radius,
+                            child: Icon(
+                              Icons.auto_awesome,
+                              color: Colors.blue,
+                              size: iconSize,
+                            )),
+                      ]),
                 ),
               ),
             ),
@@ -92,19 +86,21 @@ class _SettingsPageState extends State<SettingsPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(Icons.create_outlined),
-                        Container(child: Padding(
+                        Container(
+                            child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                              appState.appUser.userName,
+                            appState.appUser.userName,
                             style: TextStyle(
-                              fontSize: Styles.getFontSizeChildren(appState.size),
+                              fontSize:
+                                  Styles.getFontSizeChildren(appState.size),
                             ),
                           ),
                         )),
                       ],
                     ),
                   ),
-                  onPressed: (){
+                  onPressed: () {
                     openAddDialog(context);
                   },
                 ),
@@ -114,36 +110,36 @@ class _SettingsPageState extends State<SettingsPage> {
               secondary: const Icon(Icons.lightbulb_outline),
               value: darkThemeState.darkTheme,
               title: Text(
-                  "Dark mode",
+                "Dark mode",
                 style: TextStyle(
                   fontSize: Styles.getFontSizeChildren(appState.size),
                 ),
               ),
               onChanged: (value) {
-                if(appState.appUser.vibrate)
-                  Vibration.vibrate(duration: 20);
+                if (appState.appUser.vibrate) Vibration.vibrate(duration: 20);
                 darkThemeState.setDarkTheme(value);
               },
             ),
             ListTile(
               title: Text(
-                  "Select the Font Size",
+                "Select the Font Size",
                 style: TextStyle(
                   fontSize: Styles.getFontSizeChildren(appState.size),
                 ),
               ),
               leading: Icon(Icons.text_fields_rounded),
-              trailing : PopupMenuButton(
+              trailing: PopupMenuButton(
                 itemBuilder: (BuildContext context) {
                   return FONTS.map((fontSize) {
                     return PopupMenuItem(
-                        value: fontSize,
-                        child: Text(
-                            fontSize,
-                            style: TextStyle(
-                              fontSize: Styles.getFontSizeChildren(appState.size),
-                            ),
-                        ),);
+                      value: fontSize,
+                      child: Text(
+                        fontSize,
+                        style: TextStyle(
+                          fontSize: Styles.getFontSizeChildren(appState.size),
+                        ),
+                      ),
+                    );
                   }).toList();
                 },
                 tooltip: "Size",
@@ -162,8 +158,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
               onChanged: (value) {
-                if(appState.appUser.vibrate)
-                  Vibration.vibrate(duration: 20);
+                if (appState.appUser.vibrate) Vibration.vibrate(duration: 20);
                 appState.setVibration(value);
               },
             ),
@@ -178,10 +173,10 @@ class _SettingsPageState extends State<SettingsPage> {
               subtitle: Text(
                 "Write an email to notify a bug",
                 style: TextStyle(
-                  fontSize: Styles.getFontSizeChildren(appState.size)-4.0,
+                  fontSize: Styles.getFontSizeChildren(appState.size) - 4.0,
                 ),
               ),
-              onTap: (){
+              onTap: () {
                 launch(_emailLaunchUri.toString());
               },
             ),
@@ -202,7 +197,8 @@ class _SettingsPageState extends State<SettingsPage> {
 
               },
             ),*/
-            Center(child: Text(
+            Center(
+                child: Text(
               "version 1.0.0",
               style: TextStyle(
                 fontSize: Styles.getFontSizeChildren(appState.size),
@@ -213,14 +209,15 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
     );
   }
-  void _settingModalBottomSheet(context){
+
+  void _settingModalBottomSheet(context) {
     showModalBottomSheet(
         context: context,
-        builder: (BuildContext bc){
+        builder: (BuildContext bc) {
           return AppBottomSheet();
-        }
-    );
+        });
   }
+
   void openAddDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -229,5 +226,4 @@ class _SettingsPageState extends State<SettingsPage> {
       },
     );
   }
-
 }

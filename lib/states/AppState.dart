@@ -69,8 +69,11 @@ class AppState extends ChangeNotifier {
     return _selectionState.tasks;
   }
 
-  void addTask(String title) {
-    task.children.add(Task(title));
+  void addTask(String title,
+      {int colorValue, String notes, DateTime dateTime}) {
+    Task createdTask =
+        Task(title, colorValue: colorValue, notes: notes, dateTime: dateTime);
+    task.children.add(createdTask);
     taskPath.updatePercentage();
     _storage.writeData(root);
     notifyListeners();
@@ -83,14 +86,15 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateTask(Task task, {num percentage, String title}) {
+  void updateTask(Task task, {num percentage, String title, int colorValue}) {
     if (percentage != null) {
       task.percentage = percentage;
       taskPath.updatePercentage();
     }
-    if (title != null) {
+    if (title != null)
       task.title = title;
-    }
+    if (colorValue != null)
+      task.colorValue = colorValue;
 
     _storage.writeData(root);
     notifyListeners();

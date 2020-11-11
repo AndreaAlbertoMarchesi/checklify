@@ -2,7 +2,7 @@ import 'package:checklist_app/states/AppState.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'SelectionItem.dart';
+import 'widgets/SelectionItem.dart';
 
 class SelectionList extends StatelessWidget {
   @override

@@ -1,16 +1,16 @@
-
 import 'package:checklist_app/models/Task.dart';
-import 'package:checklist_app/screens/home/local_widgets/dialogs/DeleteDialog.dart';
-import 'package:checklist_app/screens/home/local_widgets/dialogs/UpdateDialog.dart';
+import 'package:checklist_app/screens/home/widgets/tasks/tasksList/widgets/taskItem/widgets/dialogs/DeleteDialog.dart';
+import 'package:checklist_app/screens/home/widgets/tasks/tasksList/widgets/taskItem/widgets/dialogs/UpdateDialog.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/DarkThemeState.dart';
 import 'package:checklist_app/utils/Styles.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:swipe_to/swipe_to.dart';
 import 'package:vibration/vibration.dart';
-import 'CheckboxRow.dart';
-import 'PercentageRow.dart';
-import 'package:provider/provider.dart';
+
+import 'widgets/CheckboxRow.dart';
+import 'widgets/PercentageRow.dart';
 
 class TaskItem extends StatelessWidget {
   TaskItem(this.task);
@@ -51,7 +51,9 @@ class TaskItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               color: isSelected
                   ? Colors.lightGreenAccent[100]
-                  : Styles.getColor(darkState.darkTheme),
+                  : (task.colorValue != null
+                      ? Color(task.colorValue)
+                      : Styles.getColor(darkState.darkTheme)),
               boxShadow: [
                 BoxShadow(
                     color: Styles.getBorder(darkState.darkTheme),

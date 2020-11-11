@@ -9,6 +9,11 @@ part of 'Task.dart';
 Task _$TaskFromJson(Map<String, dynamic> json) {
   return Task(
     json['title'] as String,
+    notes: json['notes'] as String,
+    colorValue: json['colorValue'] as int,
+    dateTime: json['dateTime'] == null
+        ? null
+        : DateTime.parse(json['dateTime'] as String),
   )
     ..children = (json['children'] as List)
         ?.map(
@@ -18,7 +23,10 @@ Task _$TaskFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
-      'title': instance.title,
       'children': instance.children?.map((e) => e?.toJson())?.toList(),
+      'title': instance.title,
+      'notes': instance.notes,
       'percentage': instance.percentage,
+      'colorValue': instance.colorValue,
+      'dateTime': instance.dateTime?.toIso8601String(),
     };

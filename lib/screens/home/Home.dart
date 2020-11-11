@@ -1,16 +1,16 @@
-import 'package:checklist_app/screens/home/local_widgets/Search.dart';
-import 'package:checklist_app/screens/home/local_widgets/tasks/TaskPathRow.dart';
+import 'package:checklist_app/screens/home/widgets/Search.dart';
+import 'package:checklist_app/screens/home/widgets/buttons/AddButton.dart';
+import 'package:checklist_app/screens/home/widgets/sideMenu/SideMenu.dart';
+import 'package:checklist_app/screens/home/widgets/tasks/ParentTaskItem.dart';
+import 'package:checklist_app/screens/home/widgets/tasks/TaskPathRow.dart';
+import 'package:checklist_app/screens/home/widgets/tasks/tasksList/TasksList.dart';
+import 'package:checklist_app/screens/intro/IntroApp.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/DarkThemeState.dart';
 import 'package:checklist_app/utils/Styles.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../intro/IntroApp.dart';
-import 'local_widgets/buttons/AddButton.dart';
-import 'local_widgets/sideMenu/SideMenu.dart';
-import 'local_widgets/tasks/ParentTaskItem.dart';
-import 'local_widgets/tasks/tasksList/TasksList.dart';
 
 class Home extends StatelessWidget {
   @override

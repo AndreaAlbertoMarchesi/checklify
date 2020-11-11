@@ -1,5 +1,4 @@
-
-import 'package:checklist_app/screens/home/local_widgets/dialogs/ImageDialog.dart';
+import 'file:///C:/Users/AndreaMarchesi/AndroidStudioProjects/checklify/lib/screens/settings/widgets/dialogs/ImageDialog.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/utils/Styles.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,8 +17,7 @@ class _AppBottomSheetState extends State<AppBottomSheet> {
 
   _imgFromGallery() async {
     PickedFile image = await _imagePicker.getImage(
-        source: ImageSource.gallery, imageQuality: 50
-    );
+        source: ImageSource.gallery, imageQuality: 50);
     setState(() {
       _image = image;
     });
@@ -35,23 +33,20 @@ class _AppBottomSheetState extends State<AppBottomSheet> {
           new ListTile(
             leading: new Icon(Icons.account_circle_outlined),
             title: new Text(
-                'Select from app avatar',
+              'Select from app avatar',
               style: TextStyle(
                 fontSize: Styles.getFontSizeChildren(appState.size),
               ),
             ),
             onTap: () async {
-              await showDialog(
-                  context: context,
-                  builder: (_) => ImageDialog()
-              );
+              await showDialog(context: context, builder: (_) => ImageDialog());
               Navigator.of(context).pop();
             },
           ),
           new ListTile(
             leading: new Icon(Icons.photo_library_outlined),
             title: new Text(
-                'Choose existing photo',
+              'Choose existing photo',
               style: TextStyle(
                 fontSize: Styles.getFontSizeChildren(appState.size),
               ),
@@ -60,11 +55,10 @@ class _AppBottomSheetState extends State<AppBottomSheet> {
               await _imgFromGallery();
               appState.modifyPhoto(_image.path);
               Navigator.of(context).pop();
-           },
+            },
           ),
         ],
       ),
     );
   }
 }
-

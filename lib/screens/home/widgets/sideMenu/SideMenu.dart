@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:checklist_app/screens/home/local_widgets/dialogs/DonateDialog.dart';
-import 'package:checklist_app/screens/home/local_widgets/sideMenu/selectionList/SelectionList.dart';
-import 'package:checklist_app/screens/home/local_widgets/sideMenu/settings/SettingsPage.dart';
+import 'package:checklist_app/screens/home/widgets/sideMenu/widgets/dialogs/DonateDialog.dart';
+import 'package:checklist_app/screens/home/widgets/sideMenu/widgets/selectionList/SelectionList.dart';
 import 'package:checklist_app/screens/intro/IntroApp.dart';
+import 'package:checklist_app/screens/settings/SettingsPage.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/DarkThemeState.dart';
 import 'package:checklist_app/utils/Styles.dart';

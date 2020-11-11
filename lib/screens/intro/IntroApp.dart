@@ -1,13 +1,12 @@
-
 import 'package:checklist_app/screens/home/Home.dart';
-import 'package:checklist_app/screens/home/local_widgets/dialogs/TermAndCondsDialog.dart';
+import 'file:///C:/Users/AndreaMarchesi/AndroidStudioProjects/checklify/lib/screens/intro/widgets/TermAndCondsDialog.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intro_slider/dot_animation_enum.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/services.dart';
 
 class IntroScreen extends StatefulWidget {
   IntroScreen({Key key}) : super(key: key);
@@ -38,8 +37,7 @@ class IntroScreenState extends State<IntroScreen> {
             fontSize: 30.0,
             fontWeight: FontWeight.bold,
             fontFamily: 'RobotoMono'),
-        description:
-        "DESCRIZIONE APP",
+        description: "DESCRIZIONE APP",
         styleDescription: TextStyle(
             color: Color(0xfffe9c8f),
             fontSize: 20.0,
@@ -58,8 +56,7 @@ class IntroScreenState extends State<IntroScreen> {
             fontSize: 30.0,
             fontWeight: FontWeight.bold,
             fontFamily: 'RobotoMono'),
-        description:
-        "SPIEGARE COME SI AGGIUNGONO LE TASK",
+        description: "SPIEGARE COME SI AGGIUNGONO LE TASK",
         styleDescription: TextStyle(
             color: Color(0xfffe9c8f),
             fontSize: 20.0,
@@ -77,8 +74,7 @@ class IntroScreenState extends State<IntroScreen> {
             fontSize: 30.0,
             fontWeight: FontWeight.bold,
             fontFamily: 'RobotoMono'),
-        description:
-        "SPIEGARE COME SI MUOVONO LE TASK",
+        description: "SPIEGARE COME SI MUOVONO LE TASK",
         styleDescription: TextStyle(
             color: Color(0xfffe9c8f),
             fontSize: 20.0,
@@ -89,8 +85,6 @@ class IntroScreenState extends State<IntroScreen> {
       ),
     );
   }
-
-
 
   void onTabChangeCompleted(index) {
     // Index of current tab is focused
@@ -127,7 +121,8 @@ class IntroScreenState extends State<IntroScreen> {
         height: double.infinity,
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage(currentSlide.backgroundImage), fit: BoxFit.cover)),
+                image: AssetImage(currentSlide.backgroundImage),
+                fit: BoxFit.cover)),
         child: Container(
           margin: EdgeInsets.only(bottom: 60.0, top: 60.0),
           child: ListView(
@@ -138,7 +133,7 @@ class IntroScreenState extends State<IntroScreen> {
                   style: currentSlide.styleTitle,
                   textAlign: TextAlign.center,
                 ),
-                margin: i==0
+                margin: i == 0
                     ? EdgeInsets.only(top: 80.0)
                     : EdgeInsets.only(top: 400.0),
               ),
@@ -164,7 +159,7 @@ class IntroScreenState extends State<IntroScreen> {
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
 
-    showTerms(){
+    showTerms() {
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -173,13 +168,15 @@ class IntroScreenState extends State<IntroScreen> {
       );
     }
 
-
     void onDonePress() {
-      if(appState.termsAndCondsAccepted || !appState.userPreferences.firstTime) {
+      if (appState.termsAndCondsAccepted ||
+          !appState.userPreferences.firstTime) {
         _allowRotation();
         Navigator.push(
-          context, MaterialPageRoute(builder: (context) => HomeScreen()),);
-      }else
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+        );
+      } else
         showTerms();
     }
 
@@ -220,8 +217,7 @@ class IntroScreenState extends State<IntroScreen> {
     );
   }
 
-
-  _allowRotation(){
+  _allowRotation() {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
