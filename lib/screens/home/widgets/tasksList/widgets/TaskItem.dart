@@ -1,6 +1,9 @@
 import 'package:checklist_app/models/Task.dart';
-import 'package:checklist_app/screens/home/widgets/tasks/tasksList/widgets/taskItem/widgets/dialogs/DeleteDialog.dart';
-import 'package:checklist_app/screens/home/widgets/tasks/tasksList/widgets/taskItem/widgets/dialogs/UpdateDialog.dart';
+import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/CheckboxRow.dart';
+import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/NotesText.dart';
+import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/PercentageRow.dart';
+import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/dialogs/DeleteDialog.dart';
+import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/dialogs/UpdateDialog.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/DarkThemeState.dart';
 import 'package:checklist_app/utils/Styles.dart';
@@ -8,9 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swipe_to/swipe_to.dart';
 import 'package:vibration/vibration.dart';
-
-import 'widgets/CheckboxRow.dart';
-import 'widgets/PercentageRow.dart';
 
 class TaskItem extends StatelessWidget {
   TaskItem(this.task);
@@ -47,24 +47,33 @@ class TaskItem extends StatelessWidget {
           elevation: 0,
           margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
           child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: isSelected
-                  ? Colors.lightGreenAccent[100]
-                  : (task.colorValue != null
-                      ? Color(task.colorValue)
-                      : Styles.getColor(darkState.darkTheme)),
-              boxShadow: [
-                BoxShadow(
-                    color: Styles.getBorder(darkState.darkTheme),
-                    spreadRadius: 2),
-              ],
-            ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: isSelected
+                    ? Colors.lightGreenAccent[100]
+                    : (task.colorValue != null
+                        ? Color(task.colorValue)
+                        : Styles.getColor(darkState.darkTheme)),
+                boxShadow: [
+                  BoxShadow(
+                      color: Styles.getBorder(darkState.darkTheme),
+                      spreadRadius: 2),
+                ],
+              ),
+              // fixed constraints on widgets are probably not ideal cause widgets needs to be resizable
+              /*
             constraints: BoxConstraints(
                 maxHeight: Styles.getTileSizeChildren(appState.size)),
-            child:
-                task.children.isEmpty ? CheckboxRow(task) : PercentageRow(task),
-          ),
+             */
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  task.children.isEmpty
+                      ? CheckboxRow(task)
+                      : PercentageRow(task),
+                  if (task.notes.isNotEmpty) NotesText(task.notes),
+                ],
+              )),
         ),
       ),
       onTap: () {

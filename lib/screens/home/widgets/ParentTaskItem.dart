@@ -1,4 +1,3 @@
-
 import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/DarkThemeState.dart';
@@ -13,7 +12,6 @@ class ParentTaskItem extends StatelessWidget {
     final appState = context.watch<AppState>();
     final darkState = context.watch<DarkThemeState>();
 
-
     return Padding(
       padding: EdgeInsets.all(7),
       child: Container(
@@ -21,7 +19,8 @@ class ParentTaskItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           color: Styles.getColor(darkState.darkTheme),
           boxShadow: [
-            BoxShadow(color: Styles.getBorder(darkState.darkTheme), spreadRadius: 2),
+            BoxShadow(
+                color: Styles.getBorder(darkState.darkTheme), spreadRadius: 2),
           ],
         ),
         child: Row(
@@ -50,7 +49,10 @@ class ParentTaskItem extends StatelessWidget {
                 backgroundColor: Styles.getColor(darkState.darkTheme),
                 circularStrokeCap: CircularStrokeCap.round,
                 center: isCompleted(
-                    appState.task, appState.task.percentage.toDouble(), darkState.darkTheme, appState.size),
+                    appState.task,
+                    appState.task.percentage.toDouble(),
+                    darkState.darkTheme,
+                    appState.size),
                 linearGradient: LinearGradient(colors: [
                   Colors.green,
                   Colors.lightGreen,

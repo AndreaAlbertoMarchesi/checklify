@@ -1,4 +1,3 @@
-
 import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/DarkThemeState.dart';
@@ -16,7 +15,6 @@ class CheckboxRow extends StatelessWidget {
     final appState = context.watch<AppState>();
     final darkState = context.watch<DarkThemeState>();
 
-
     return Row(
       children: [
         Padding(
@@ -32,14 +30,17 @@ class CheckboxRow extends StatelessWidget {
           ),
         ),
         Expanded(child: Container()),
-        Checkbox(
-          activeColor: Colors.greenAccent[700],
-          checkColor: Styles.getColor(darkState.darkTheme),
-          value: task.percentage == 1,
-          onChanged: (bool value) {
-            appState.updateTask(task,
-                percentage: task.percentage == 0 ? 1 : 0);
-          },
+        Padding(
+          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+          child: Checkbox(
+            activeColor: Colors.greenAccent[700],
+            checkColor: Styles.getColor(darkState.darkTheme),
+            value: task.percentage == 1,
+            onChanged: (bool value) {
+              appState.updateTask(task,
+                  percentage: task.percentage == 0 ? 1 : 0);
+            },
+          ),
         ),
       ],
     );

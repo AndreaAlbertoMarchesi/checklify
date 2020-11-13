@@ -1,9 +1,12 @@
 import 'package:checklist_app/models/Task.dart';
-import 'package:checklist_app/sharedWidgets/DialogButton.dart';
-import 'package:checklist_app/sharedWidgets/taskDialog/widgets/ColorPicker.dart';
+import 'package:checklist_app/sharedWidgets/taskDialog/widgets/buttons/AddConfirmButton.dart';
+import 'package:checklist_app/sharedWidgets/taskDialog/widgets/buttons/CancelButton.dart';
+import 'package:checklist_app/sharedWidgets/taskDialog/widgets/buttons/UpdateConfirmButton.dart';
+import 'package:checklist_app/sharedWidgets/taskDialog/widgets/inputs/ColorPicker.dart';
+import 'package:checklist_app/sharedWidgets/taskDialog/widgets/inputs/DeadlineInput.dart';
+import 'package:checklist_app/sharedWidgets/taskDialog/widgets/inputs/NotesInput.dart';
+import 'package:checklist_app/sharedWidgets/taskDialog/widgets/inputs/TitleInput.dart';
 import 'package:checklist_app/states/AppState.dart';
-import 'package:checklist_app/states/DarkThemeState.dart';
-import 'package:checklist_app/utils/Styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vibration/vibration.dart';
@@ -14,110 +17,95 @@ class TaskDialog extends StatefulWidget {
   final Task task;
 
   @override
-  _TaskDialogState createState() => _TaskDialogState(task);
+  _TaskDialogState createState() => task == null
+      ? _TaskDialogState(
+          isAdding: true,
+          title: '',
+          color: Colors.lightBlue,
+          notes: '',
+        )
+      : _TaskDialogState(
+          isAdding: false,
+          title: task.title,
+          color: Color(task.colorValue),
+          notes: task.notes,
+        );
 }
 
 class _TaskDialogState extends State<TaskDialog> {
-  _TaskDialogState(this.task);
+  _TaskDialogState({this.isAdding, this.title, this.color, this.notes});
 
-  final Task task;
-  String taskName;
-  Color selectedColor;
-
-  @override
-  void initState() {
-    super.initState();
-    taskName = task == null ? '' : task.title;
-    selectedColor =
-        selectedColor == null ? Colors.white : Color(task.colorValue);
-  }
+  final bool isAdding;
+  String title;
+  Color color;
+  String notes;
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
+    final _titleFormKey = GlobalKey<FormState>();
+    final _notesFormKey = GlobalKey<FormState>();
     final appState = context.watch<AppState>();
-    final darkState = context.watch<DarkThemeState>();
+
+    void addTask() {
+      if (_titleFormKey.currentState.validate()) {
+        appState.addTask(title, colorValue: color.value, notes: notes);
+        Navigator.of(context).pop();
+      } else if (appState.appUser.vibrate) Vibration.vibrate(duration: 80);
+    }
+
+    void updateTask() {
+      if (_titleFormKey.currentState.validate()) {
+        appState.updateTask(
+          widget.task,
+          notes: notes,
+          title: title,
+          colorValue: color.value,
+        );
+        Navigator.pop(context);
+      } else if (appState.appUser.vibrate) Vibration.vibrate(duration: 80);
+    }
 
     return AlertDialog(
+
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(20.0))),
         scrollable: true,
-        title: Form(
-          key: _formKey,
-          child: TextFormField(
-            decoration: InputDecoration(
-              hintText: task == null ? "add a task" : taskName,
-              filled: true,
-              contentPadding: EdgeInsets.all(12.0),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                    color: Styles.getBorder(darkState.darkTheme), width: 2.0),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                    color: Styles.getBorder(darkState.darkTheme), width: 2.0),
-              ),
-            ),
-            validator: (val) => (val.isEmpty | (val.length > 15))
-                ? 'Enter a valid name ( not too long )'
-                : null,
-            onChanged: (val) {
-              taskName = val;
-            },
-          ),
-        ),
+        title: Text(isAdding ? "add a task" : "update " + widget.task.title),
         content: Container(
-
-          width: 100,
-          height: 100,
+          width: 150,
+          height: 200,
           child: ListView(children: [
-            ColorPicker(setColorValue, selectedColor),
-
+            Form(
+                key: _titleFormKey,
+                child: TitleInput(title, isAdding, setTitle)),
+            ColorPicker(setColor, color),
+            Form(
+              key: _notesFormKey,
+              child: NotesInput(notes, setNotes),
+            ),
+            DeadlineInput(),
           ]),
         ),
-        actions: task == null
+        actions: isAdding
             ? [
-                DialogButton(
-                  context: context,
-                  onPressed: () => Navigator.pop(context),
-                  text: 'cancel',
-                ),
-                DialogButton(
-                  context: context,
-                  onPressed: () {
-                    if (_formKey.currentState.validate()) {
-                      appState.addTask(taskName,
-                          colorValue: selectedColor.value);
-                      Navigator.of(context).pop();
-                    } else {
-                      if (appState.appUser.vibrate)
-                        Vibration.vibrate(duration: 80);
-                    }
-                  },
-                  text: 'add',
-                ),
+                CancelButton(),
+                AddConfirmButton(addTask),
               ]
             : [
-                DialogButton(
-                  context: context,
-                  onPressed: () => Navigator.pop(context),
-                  text: 'cancel',
-                ),
-                DialogButton(
-                  context: context,
-                  onPressed: () {
-                    appState.updateTask(task,
-                        title: taskName, colorValue: selectedColor.value);
-                    Navigator.pop(context);
-                  },
-                  text: 'update',
-                ),
+                CancelButton(),
+                UpdateConfirmButton(updateTask),
               ]);
   }
 
-  setColorValue(Color color) {
-    setState(() {
-      selectedColor = color;
-    });
+  setColor(Color color) {
+    this.color = color;
+  }
+
+  setNotes(String notes) {
+    this.notes = notes;
+  }
+
+  setTitle(String title) {
+    this.title = title;
   }
 }

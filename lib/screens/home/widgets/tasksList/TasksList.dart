@@ -1,4 +1,4 @@
-import 'package:checklist_app/screens/home/widgets/tasks/tasksList/widgets/taskItem/TaskItem.dart';
+import 'package:checklist_app/screens/home/widgets/tasksList/widgets/TaskItem.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

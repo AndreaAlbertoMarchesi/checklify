@@ -1,9 +1,9 @@
+import 'package:checklist_app/screens/home/widgets/ParentTaskItem.dart';
 import 'package:checklist_app/screens/home/widgets/Search.dart';
+import 'package:checklist_app/screens/home/widgets/TaskPathRow.dart';
 import 'package:checklist_app/screens/home/widgets/buttons/AddButton.dart';
 import 'package:checklist_app/screens/home/widgets/sideMenu/SideMenu.dart';
-import 'package:checklist_app/screens/home/widgets/tasks/ParentTaskItem.dart';
-import 'package:checklist_app/screens/home/widgets/tasks/TaskPathRow.dart';
-import 'package:checklist_app/screens/home/widgets/tasks/tasksList/TasksList.dart';
+import 'package:checklist_app/screens/home/widgets/tasksList/TasksList.dart';
 import 'package:checklist_app/screens/intro/IntroApp.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/DarkThemeState.dart';

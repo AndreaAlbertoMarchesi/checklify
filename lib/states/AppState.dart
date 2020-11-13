@@ -86,7 +86,7 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateTask(Task task, {num percentage, String title, int colorValue}) {
+  void updateTask(Task task, {num percentage, String title, int colorValue, String notes}) {
     if (percentage != null) {
       task.percentage = percentage;
       taskPath.updatePercentage();
@@ -95,6 +95,8 @@ class AppState extends ChangeNotifier {
       task.title = title;
     if (colorValue != null)
       task.colorValue = colorValue;
+    if (notes != null)
+      task.notes = notes;
 
     _storage.writeData(root);
     notifyListeners();
