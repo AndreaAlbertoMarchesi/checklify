@@ -18,6 +18,7 @@ class SelectionState {
     taskPaths.add(taskPath);
   }
 
+
   void deselect(Task task){
     taskPaths.removeAt(tasks.indexOf(task));
     tasks.remove(task);

@@ -1,9 +1,7 @@
 import 'dart:io';
 
-import 'file:///C:/Users/AndreaMarchesi/AndroidStudioProjects/checklify/lib/screens/settings/widgets/dialogs/ModifyName.dart';
-import 'package:checklist_app/states/AppState.dart';
-import 'package:checklist_app/states/DarkThemeState.dart';
-import 'package:checklist_app/utils/Styles.dart';
+import 'package:checklist_app/screens/settings/widgets/dialogs/ModifyName.dart';
+import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,8 +18,8 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
-    final darkThemeState = context.watch<DarkThemeState>();
-    final appState = context.watch<AppState>();
+    final settings = context.watch<Settings>();
+    //final appState = context.watch<AppState>();
 
     double radius = 50;
     double iconSize = 30;
@@ -55,9 +53,9 @@ class _SettingsPageState extends State<SettingsPage> {
                       overflow: Overflow.visible,
                       children: [
                         CircleAvatar(
-                          backgroundImage: appState.isPhotoFromGallery
-                              ? FileImage(File(appState.appUser.photoURL))
-                              : AssetImage("${appState.appUser.photoURL}"),
+                          backgroundImage: settings.isPhotoFromGallery
+                              ? FileImage(File(settings.appUser.photoURL))
+                              : AssetImage("${settings.appUser.photoURL}"),
                           backgroundColor: Colors.transparent,
                           radius: radius,
                           //background image
@@ -90,10 +88,10 @@ class _SettingsPageState extends State<SettingsPage> {
                             child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            appState.appUser.userName,
+                            settings.appUser.userName,
                             style: TextStyle(
                               fontSize:
-                                  Styles.getFontSizeChildren(appState.size),
+                                  settings.getFontSizeChildren(),
                             ),
                           ),
                         )),
@@ -108,23 +106,23 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             SwitchListTile(
               secondary: const Icon(Icons.lightbulb_outline),
-              value: darkThemeState.darkTheme,
+              value: settings.darkTheme,
               title: Text(
                 "Dark mode",
                 style: TextStyle(
-                  fontSize: Styles.getFontSizeChildren(appState.size),
+                  fontSize: settings.getFontSizeChildren(),
                 ),
               ),
               onChanged: (value) {
-                if (appState.appUser.vibrate) Vibration.vibrate(duration: 20);
-                darkThemeState.setDarkTheme(value);
+                if (settings.vibrate) Vibration.vibrate(duration: 20);
+                settings.darkTheme = value;
               },
             ),
             ListTile(
               title: Text(
                 "Select the Font Size",
                 style: TextStyle(
-                  fontSize: Styles.getFontSizeChildren(appState.size),
+                  fontSize: settings.getFontSizeChildren(),
                 ),
               ),
               leading: Icon(Icons.text_fields_rounded),
@@ -136,7 +134,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       child: Text(
                         fontSize,
                         style: TextStyle(
-                          fontSize: Styles.getFontSizeChildren(appState.size),
+                          fontSize: settings.getFontSizeChildren(),
                         ),
                       ),
                     );
@@ -144,22 +142,22 @@ class _SettingsPageState extends State<SettingsPage> {
                 },
                 tooltip: "Size",
                 onSelected: (fontSize) {
-                  appState.setFontSize(fontSize);
+                  settings.fontSize = fontSize;
                 },
               ),
             ),
             SwitchListTile(
               secondary: const Icon(Icons.vibration_rounded),
-              value: appState.appUser.vibrate,
+              value: settings.vibrate,
               title: Text(
                 "Vibration",
                 style: TextStyle(
-                  fontSize: Styles.getFontSizeChildren(appState.size),
+                  fontSize: settings.getFontSizeChildren(),
                 ),
               ),
               onChanged: (value) {
-                if (appState.appUser.vibrate) Vibration.vibrate(duration: 20);
-                appState.setVibration(value);
+                if (settings.vibrate) Vibration.vibrate(duration: 20);
+                settings.vibrate = value;
               },
             ),
             ListTile(
@@ -167,13 +165,13 @@ class _SettingsPageState extends State<SettingsPage> {
               title: Text(
                 "Report a bug",
                 style: TextStyle(
-                  fontSize: Styles.getFontSizeChildren(appState.size),
+                  fontSize: settings.getFontSizeChildren(),
                 ),
               ),
               subtitle: Text(
                 "Write an email to notify a bug",
                 style: TextStyle(
-                  fontSize: Styles.getFontSizeChildren(appState.size) - 4.0,
+                  fontSize: settings.getFontSizeChildren() - 4.0,
                 ),
               ),
               onTap: () {
@@ -201,7 +199,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 child: Text(
               "version 1.0.0",
               style: TextStyle(
-                fontSize: Styles.getFontSizeChildren(appState.size),
+                fontSize: settings.getFontSizeChildren(),
               ),
             ))
           ],

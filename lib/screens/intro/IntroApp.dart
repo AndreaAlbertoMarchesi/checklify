@@ -1,6 +1,6 @@
 import 'package:checklist_app/screens/home/Home.dart';
-import 'file:///C:/Users/AndreaMarchesi/AndroidStudioProjects/checklify/lib/screens/intro/widgets/TermAndCondsDialog.dart';
-import 'package:checklist_app/states/AppState.dart';
+import 'package:checklist_app/screens/intro/widgets/TermAndCondsDialog.dart';
+import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intro_slider/dot_animation_enum.dart';
@@ -157,7 +157,7 @@ class IntroScreenState extends State<IntroScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final appState = context.watch<AppState>();
+    final settings = context.watch<Settings>();
 
     showTerms() {
       showDialog(
@@ -169,8 +169,7 @@ class IntroScreenState extends State<IntroScreen> {
     }
 
     void onDonePress() {
-      if (appState.termsAndCondsAccepted ||
-          !appState.userPreferences.firstTime) {
+      if (settings.termsAndCondsAccepted || !settings.firstTime) {
         _allowRotation();
         Navigator.push(
           context,
@@ -181,8 +180,6 @@ class IntroScreenState extends State<IntroScreen> {
     }
 
     return new IntroSlider(
-
-
       // List slides
       slides: this.slides,
 

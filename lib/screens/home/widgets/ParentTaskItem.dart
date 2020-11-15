@@ -1,7 +1,6 @@
 import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/states/AppState.dart';
-import 'package:checklist_app/states/DarkThemeState.dart';
-import 'package:checklist_app/utils/Styles.dart';
+import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
@@ -10,17 +9,16 @@ class ParentTaskItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
-    final darkState = context.watch<DarkThemeState>();
+    final settings = context.watch<Settings>();
 
     return Padding(
       padding: EdgeInsets.all(7),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Styles.getColor(darkState.darkTheme),
+          color: settings.getColor(),
           boxShadow: [
-            BoxShadow(
-                color: Styles.getBorder(darkState.darkTheme), spreadRadius: 2),
+            BoxShadow(color: settings.getBorder(), spreadRadius: 2),
           ],
         ),
         child: Row(
@@ -30,10 +28,10 @@ class ParentTaskItem extends StatelessWidget {
               child: Text(
                 appState.task.title,
                 style: TextStyle(
-                  fontSize: Styles.getFontSizeParent(appState.size),
+                  fontSize: settings.getFontSizeParent(),
                   letterSpacing: 0.5,
                   fontWeight: FontWeight.bold,
-                  color: Styles.getFont(darkState.darkTheme),
+                  color: settings.getFont(),
                 ),
               ),
             ),
@@ -41,18 +39,17 @@ class ParentTaskItem extends StatelessWidget {
             Padding(
               padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
               child: CircularPercentIndicator(
-                radius: Styles.getPercentageSizeParent(appState.size),
+                radius: settings.getPercentageSizeParent(),
                 lineWidth: 8.0,
                 percent: appState.task.percentage.toDouble(),
                 animation: true,
                 animateFromLastPercent: true,
-                backgroundColor: Styles.getColor(darkState.darkTheme),
+                backgroundColor: settings.getColor(),
                 circularStrokeCap: CircularStrokeCap.round,
                 center: isCompleted(
                     appState.task,
                     appState.task.percentage.toDouble(),
-                    darkState.darkTheme,
-                    appState.size),
+                    settings),
                 linearGradient: LinearGradient(colors: [
                   Colors.green,
                   Colors.lightGreen,
@@ -65,21 +62,21 @@ class ParentTaskItem extends StatelessWidget {
     );
   }
 
-  Widget isCompleted(Task task, num percentage, bool isDarkTheme, String size) {
+  Widget isCompleted(Task task, num percentage, Settings settings) {
     if ((percentage * 100) == 100.0) {
       return Icon(
         const IconData(0xe0de, fontFamily: 'MaterialIcons'),
         color: Colors.greenAccent[700],
-        size: Styles.getFontSizeParent(size),
+        size: settings.getFontSizeParent(),
       );
     } else
       return Text(
         (task.percentage * 100).toInt().toString() + "%",
         style: TextStyle(
-          fontSize: Styles.getFontPercentageParent(size),
+          fontSize: settings.getFontPercentageParent(),
           letterSpacing: 0.5,
           fontWeight: FontWeight.bold,
-          color: Styles.getFont(isDarkTheme),
+          color: settings.getFont(),
         ),
       );
   }

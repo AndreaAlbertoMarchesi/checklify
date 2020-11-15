@@ -7,6 +7,7 @@ import 'package:checklist_app/sharedWidgets/taskDialog/widgets/inputs/DeadlineIn
 import 'package:checklist_app/sharedWidgets/taskDialog/widgets/inputs/NotesInput.dart';
 import 'package:checklist_app/sharedWidgets/taskDialog/widgets/inputs/TitleInput.dart';
 import 'package:checklist_app/states/AppState.dart';
+import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vibration/vibration.dart';
@@ -45,12 +46,13 @@ class _TaskDialogState extends State<TaskDialog> {
     final _titleFormKey = GlobalKey<FormState>();
     final _notesFormKey = GlobalKey<FormState>();
     final appState = context.watch<AppState>();
+    final settings = context.watch<Settings>();
 
     void addTask() {
       if (_titleFormKey.currentState.validate()) {
         appState.addTask(title, colorValue: color.value, notes: notes);
         Navigator.of(context).pop();
-      } else if (appState.appUser.vibrate) Vibration.vibrate(duration: 80);
+      } else if (settings.vibrate) Vibration.vibrate(duration: 80);
     }
 
     void updateTask() {
@@ -62,7 +64,7 @@ class _TaskDialogState extends State<TaskDialog> {
           colorValue: color.value,
         );
         Navigator.pop(context);
-      } else if (appState.appUser.vibrate) Vibration.vibrate(duration: 80);
+      } else if (settings.vibrate) Vibration.vibrate(duration: 80);
     }
 
     return AlertDialog(

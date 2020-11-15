@@ -1,8 +1,6 @@
-import 'package:checklist_app/models/AppUser.dart';
 import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/models/supportClasses/TaskPath.dart';
 import 'package:checklist_app/utils/PhoneStorage.dart';
-import 'package:checklist_app/utils/SharedPreferences.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'SelectionState.dart';
@@ -12,44 +10,16 @@ class AppState extends ChangeNotifier {
   Task task = Task.emptyRoot;
   TaskPath taskPath = TaskPath();
 
-  final PhoneStorage _storage = PhoneStorage();
+  final PhoneStorage _storage;
   final _selectionState = SelectionState();
 
-  AppUser appUser;
-  UserPreferences userPreferences;
-  bool isPhotoFromGallery;
-  bool termsAndCondsAccepted = false;
-  String size;
-
-  AppState(this.userPreferences) {
+  AppState(this._storage) {
     _storage.readData().then((Task value) {
       root = value;
       task = root;
       taskPath.add(root);
       notifyListeners();
     });
-    appUser = userPreferences.appUser;
-    size = userPreferences.appUser.fontSize;
-    isPhotoFromGallery = userPreferences.isPhotoFromGallery;
-    userPreferences.setUser(appUser);
-  }
-
-  void acceptTermsConditions() {
-    termsAndCondsAccepted = true;
-    notifyListeners();
-  }
-
-  void setFontSize(String size) {
-    this.size = size;
-    appUser.fontSize = size;
-    userPreferences.setUser(appUser);
-    notifyListeners();
-  }
-
-  void setVibration(bool vibration) {
-    appUser.vibrate = vibration;
-    userPreferences.setUser(appUser);
-    notifyListeners();
   }
 
   void selectTask(Task task) {
@@ -86,35 +56,17 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateTask(Task task, {num percentage, String title, int colorValue, String notes}) {
+  void updateTask(Task task,
+      {num percentage, String title, int colorValue, String notes}) {
     if (percentage != null) {
       task.percentage = percentage;
       taskPath.updatePercentage();
     }
-    if (title != null)
-      task.title = title;
-    if (colorValue != null)
-      task.colorValue = colorValue;
-    if (notes != null)
-      task.notes = notes;
+    if (title != null) task.title = title;
+    if (colorValue != null) task.colorValue = colorValue;
+    if (notes != null) task.notes = notes;
 
     _storage.writeData(root);
-    notifyListeners();
-  }
-
-  void modifyName(String name) {
-    appUser.userName = name;
-    userPreferences.setUser(appUser);
-    notifyListeners();
-  }
-
-  void modifyPhoto(String path) {
-    appUser.photoURL = path;
-    userPreferences.setUser(appUser);
-    if (path.startsWith('images', 0))
-      isPhotoFromGallery = false;
-    else
-      isPhotoFromGallery = true;
     notifyListeners();
   }
 

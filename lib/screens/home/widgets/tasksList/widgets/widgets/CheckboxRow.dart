@@ -1,7 +1,6 @@
 import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/states/AppState.dart';
-import 'package:checklist_app/states/DarkThemeState.dart';
-import 'package:checklist_app/utils/Styles.dart';
+import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +12,7 @@ class CheckboxRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
-    final darkState = context.watch<DarkThemeState>();
+    final settings = context.watch<Settings>();
 
     return Row(
       children: [
@@ -22,10 +21,10 @@ class CheckboxRow extends StatelessWidget {
           child: Text(
             task.title,
             style: TextStyle(
-              fontSize: Styles.getFontSizeChildren(appState.size),
+              fontSize: settings.getFontSizeChildren(),
               letterSpacing: 0.5,
               fontWeight: FontWeight.bold,
-              color: Styles.getFont(darkState.darkTheme),
+              color: settings.getFont(),
             ),
           ),
         ),
@@ -34,7 +33,7 @@ class CheckboxRow extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
           child: Checkbox(
             activeColor: Colors.greenAccent[700],
-            checkColor: Styles.getColor(darkState.darkTheme),
+            checkColor: settings.getColor(),
             value: task.percentage == 1,
             onChanged: (bool value) {
               appState.updateTask(task,

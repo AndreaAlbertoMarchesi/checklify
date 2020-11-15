@@ -1,30 +1,24 @@
-import 'package:checklist_app/states/AppState.dart';
-import 'package:checklist_app/states/DarkThemeState.dart';
-import 'package:checklist_app/utils/Styles.dart';
+import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:provider/provider.dart';
 
 
 class DonateDialog extends StatelessWidget {
 
-
-
   @override
   Widget build(BuildContext context) {
-
-    final appState = context.watch<AppState>();
-    final darkState = context.watch<DarkThemeState>();
+    final settings = context.watch<Settings>();
 
     Widget backButton(context) {
       return FlatButton(
         child: Text(
           "Back",
           style: TextStyle(
-            fontSize: Styles.getFontSizeChildren(appState.size),
+            fontSize: settings.getFontSizeChildren(),
             letterSpacing: 0.6,
             fontWeight: FontWeight.bold,
-            color: Styles.getFont(darkState.darkTheme),
+            color: settings.getFont(),
           ),
         ),
         onPressed: () {
@@ -38,10 +32,10 @@ class DonateDialog extends StatelessWidget {
       title: Text(
           "Buy a coffee to the team ",
         style: TextStyle(
-          fontSize: Styles.getFontSizeCoffee(appState.size),
+          fontSize: settings.getFontSizeCoffee(),
           letterSpacing: 0.6,
           fontWeight: FontWeight.bold,
-          color: Styles.getFont(darkState.darkTheme),
+          color: settings.getFont(),
         ),
       ),
       shape: RoundedRectangleBorder(
@@ -71,19 +65,19 @@ class DonateDialog extends StatelessWidget {
                   Text(
                     "Espresso",
                     style: TextStyle(
-                      fontSize: Styles.getFontSizeCoffee(appState.size),
+                      fontSize: settings.getFontSizeCoffee(),
                       letterSpacing: 0.6,
                       fontWeight: FontWeight.bold,
-                      color: Styles.getFont(darkState.darkTheme),
+                      color: settings.getFont(),
                     ),
                   ),
                   Text(
                     "\$ 1.99",
                     style: TextStyle(
-                      fontSize: Styles.getFontSizeCoffee(appState.size),
+                      fontSize: settings.getFontSizeCoffee(),
                       letterSpacing: 0.6,
                       fontWeight: FontWeight.bold,
-                      color: Styles.getFont(darkState.darkTheme),
+                      color: settings.getFont(),
                     ),
                   ),
                 ],
@@ -110,19 +104,19 @@ class DonateDialog extends StatelessWidget {
                   Text(
                     "Cappuccino",
                     style: TextStyle(
-                      fontSize: Styles.getFontSizeCoffee(appState.size),
+                      fontSize: settings.getFontSizeCoffee(),
                       letterSpacing: 0.6,
                       fontWeight: FontWeight.bold,
-                      color: Styles.getFont(darkState.darkTheme),
+                      color: settings.getFont(),
                     ),
                   ),
                   Text(
                     "\$ 2.99",
                     style: TextStyle(
-                      fontSize: Styles.getFontSizeCoffee(appState.size),
+                      fontSize: settings.getFontSizeCoffee(),
                       letterSpacing: 0.6,
                       fontWeight: FontWeight.bold,
-                      color: Styles.getFont(darkState.darkTheme),
+                      color: settings.getFont(),
                     ),
                   ),
                 ],
@@ -149,19 +143,19 @@ class DonateDialog extends StatelessWidget {
                   Text(
                     "Americano",
                     style: TextStyle(
-                      fontSize: Styles.getFontSizeCoffee(appState.size),
+                      fontSize: settings.getFontSizeCoffee(),
                       letterSpacing: 0.6,
                       fontWeight: FontWeight.bold,
-                      color: Styles.getFont(darkState.darkTheme),
+                      color: settings.getFont(),
                     ),
                   ),
                   Text(
                     "\$ 3.99",
                     style: TextStyle(
-                      fontSize: Styles.getFontSizeCoffee(appState.size),
+                      fontSize: settings.getFontSizeCoffee(),
                       letterSpacing: 0.6,
                       fontWeight: FontWeight.bold,
-                      color: Styles.getFont(darkState.darkTheme),
+                      color: settings.getFont(),
                     ),
                   ),
                 ],

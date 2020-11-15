@@ -1,12 +1,10 @@
 import 'package:checklist_app/states/AppState.dart';
-import 'package:checklist_app/states/DarkThemeState.dart';
-import 'package:checklist_app/utils/Styles.dart';
+import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class DialogButton extends StatelessWidget {
-  DialogButton(
-      {@required this.context, this.onPressed, @required this.text});
+  DialogButton({@required this.context, this.onPressed, @required this.text});
 
   final BuildContext context;
   final Function onPressed;
@@ -14,16 +12,15 @@ class DialogButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appState = context.watch<AppState>();
-    final darkState = context.watch<DarkThemeState>();
+    final settings = context.watch<Settings>();
     return FlatButton(
       child: Text(
         text,
         style: TextStyle(
-          fontSize: Styles.getFontSizeChildren(appState.size),
+          fontSize: settings.getFontSizeChildren(),
           letterSpacing: 0.6,
           fontWeight: FontWeight.bold,
-          color: Styles.getFont(darkState.darkTheme),
+          color: settings.getFont(),
         ),
       ),
       onPressed: onPressed,

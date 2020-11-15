@@ -11,8 +11,6 @@ AppUser _$AppUserFromJson(Map<String, dynamic> json) {
     userName: json['userName'] as String,
     photoURL: json['photoURL'] as String,
     isAnon: json['isAnon'] as bool,
-    fontSize: json['fontSize'] as String,
-    vibrate: json['vibrate'] as bool,
   );
 }
 
@@ -20,6 +18,4 @@ Map<String, dynamic> _$AppUserToJson(AppUser instance) => <String, dynamic>{
       'userName': instance.userName,
       'photoURL': instance.photoURL,
       'isAnon': instance.isAnon,
-      'fontSize': instance.fontSize,
-      'vibrate': instance.vibrate,
     };

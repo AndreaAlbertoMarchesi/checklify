@@ -1,21 +1,13 @@
-import 'package:checklist_app/states/AppState.dart';
-import 'package:checklist_app/states/DarkThemeState.dart';
-import 'package:checklist_app/utils/Styles.dart';
+import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
-import 'package:vibration/vibration.dart';
 import 'package:provider/provider.dart';
-
+import 'package:vibration/vibration.dart';
 
 class ModifyName extends StatelessWidget {
-
-
-
   @override
   Widget build(BuildContext context) {
-
     final _formKey = GlobalKey<FormState>();
-    final appState = context.watch<AppState>();
-    final darkState = context.watch<DarkThemeState>();
+    final settings = context.watch<Settings>();
     String userName = '';
 
     Widget doneButton(context) {
@@ -23,10 +15,10 @@ class ModifyName extends StatelessWidget {
         child: Text(
           "Back",
           style: TextStyle(
-            fontSize: Styles.getFontSizeChildren(appState.size),
+            fontSize: settings.getFontSizeChildren(),
             letterSpacing: 0.6,
             fontWeight: FontWeight.bold,
-            color: Styles.getFont(darkState.darkTheme),
+            color: settings.getFont(),
           ),
         ),
         onPressed: () {
@@ -40,19 +32,18 @@ class ModifyName extends StatelessWidget {
         child: Text(
           "Rename",
           style: TextStyle(
-            fontSize: Styles.getFontSizeChildren(appState.size),
+            fontSize: settings.getFontSizeChildren(),
             letterSpacing: 0.6,
             fontWeight: FontWeight.bold,
-            color: Styles.getFont(darkState.darkTheme),
+            color: settings.getFont(),
           ),
         ),
         onPressed: () {
           if (_formKey.currentState.validate()) {
-            appState.modifyName(userName);
+            settings.appUser.userName = userName;
             Navigator.of(context).pop();
           } else {
-            if(appState.appUser.vibrate)
-              Vibration.vibrate(duration: 80);
+            if (settings.vibrate) Vibration.vibrate(duration: 80);
           }
         },
       );
@@ -70,13 +61,15 @@ class ModifyName extends StatelessWidget {
             filled: true,
             contentPadding: EdgeInsets.all(12.0),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Styles.getBorder(darkState.darkTheme), width: 2.0),
+              borderSide: BorderSide(color: settings.getBorder(), width: 2.0),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Styles.getBorder(darkState.darkTheme), width: 2.0),
+              borderSide: BorderSide(color: settings.getBorder(), width: 2.0),
             ),
           ),
-          validator: (val) => (val.isEmpty | (val.length > 10)) ? 'Enter a valid name ( not too long )' : null,
+          validator: (val) => (val.isEmpty | (val.length > 10))
+              ? 'Enter a valid name ( not too long )'
+              : null,
           onChanged: (val) {
             userName = val;
           },

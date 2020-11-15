@@ -1,5 +1,4 @@
-import 'package:checklist_app/states/DarkThemeState.dart';
-import 'package:checklist_app/utils/Styles.dart';
+import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +10,7 @@ class NotesInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final darkState = context.watch<DarkThemeState>();
+    final settings = context.watch<Settings>();
 
     final TextEditingController _controller = new TextEditingController(
       text: notes,
@@ -26,12 +25,10 @@ class NotesInput extends StatelessWidget {
         filled: true,
         contentPadding: EdgeInsets.all(12.0),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-              color: Styles.getBorder(darkState.darkTheme), width: 2.0),
+          borderSide: BorderSide(color: settings.getBorder(), width: 2.0),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-              color: Styles.getBorder(darkState.darkTheme), width: 2.0),
+          borderSide: BorderSide(color: settings.getBorder(), width: 2.0),
         ),
       ),
       validator: (val) => (val.length > 100) ? 'too much text' : null,

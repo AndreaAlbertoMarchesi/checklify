@@ -1,15 +1,14 @@
-
 import 'package:checklist_app/models/supportClasses/SearchedTask.dart';
 import 'package:checklist_app/models/supportClasses/TaskPath.dart';
 import 'package:checklist_app/states/AppState.dart';
-import 'package:checklist_app/states/DarkThemeState.dart';
-import 'package:checklist_app/utils/Styles.dart';
+import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Search extends SearchDelegate {
   String selectedResult;
   List<String> titles = [];
+
   //List<String> recentList = [];
 
   @override
@@ -38,18 +37,17 @@ class Search extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    final appState = context.watch<AppState>();
-    final darkState = context.watch<DarkThemeState>();
+    final settings = context.watch<Settings>();
 
     return Container(
       child: Center(
         child: Text(
-            selectedResult,
+          selectedResult,
           style: TextStyle(
-            fontSize: Styles.getFontSizeChildren(appState.size),
+            fontSize: settings.getFontSizeChildren(),
             letterSpacing: 0.6,
             fontWeight: FontWeight.bold,
-            color: Styles.getFont(darkState.darkTheme),
+            color: settings.getFont(),
           ),
         ),
       ),
@@ -59,19 +57,18 @@ class Search extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     final appState = context.watch<AppState>();
-    final darkState = context.watch<DarkThemeState>();
+    final settings = context.watch<Settings>();
 
     List<SearchedTask> searchedTasks;
 
     //if (query.isEmpty)
-      //suggestionList = recentList;
+    //suggestionList = recentList;
     //else
-      {
-        TaskPath taskPath = appState.taskPath.getCopy();
-        taskPath.backToPrevious();
-        searchedTasks = appState.task.searchTasks(
-            query, taskPath);
-      }
+    {
+      TaskPath taskPath = appState.taskPath.getCopy();
+      taskPath.backToPrevious();
+      searchedTasks = appState.task.searchTasks(query, taskPath);
+    }
     return ListView.builder(
         itemCount: searchedTasks.length,
         itemBuilder: (context, index) {
@@ -80,19 +77,19 @@ class Search extends SearchDelegate {
             title: Text(
               searchedTask.task.title,
               style: TextStyle(
-                fontSize: Styles.getFontSizeChildren(appState.size),
+                fontSize: settings.getFontSizeChildren(),
                 letterSpacing: 0.6,
                 fontWeight: FontWeight.bold,
-                color: Styles.getFont(darkState.darkTheme),
+                color: settings.getFont(),
               ),
             ),
             subtitle: Text(
               searchedTask.taskPath.toString(),
               style: TextStyle(
-                fontSize: Styles.getFontSizeChildren(appState.size)-4,
+                fontSize: settings.getFontSizeChildren() - 4,
                 letterSpacing: 0.6,
                 fontWeight: FontWeight.bold,
-                color: Styles.getFont(darkState.darkTheme),
+                color: settings.getFont(),
               ),
             ),
             onTap: () {
@@ -105,7 +102,7 @@ class Search extends SearchDelegate {
 
   @override
   ThemeData appBarTheme(BuildContext context) {
-    final darkState = context.watch<DarkThemeState>();
-    return Styles.themeData(darkState.darkTheme, context);
+    final settings = context.watch<Settings>();
+    return settings.themeData(context);
   }
 }

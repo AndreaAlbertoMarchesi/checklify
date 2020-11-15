@@ -1,7 +1,5 @@
 import 'package:checklist_app/models/Task.dart';
-import 'package:checklist_app/states/AppState.dart';
-import 'package:checklist_app/states/DarkThemeState.dart';
-import 'package:checklist_app/utils/Styles.dart';
+import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
@@ -13,8 +11,7 @@ class PercentageRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appState = context.watch<AppState>();
-    final darkState = context.watch<DarkThemeState>();
+    final settings = context.watch<Settings>();
 
     return Row(
       children: [
@@ -23,10 +20,10 @@ class PercentageRow extends StatelessWidget {
           child: Text(
             task.title,
             style: TextStyle(
-              fontSize: Styles.getFontSizeChildren(appState.size),
+              fontSize: settings.getFontSizeChildren(),
               letterSpacing: 0.5,
               fontWeight: FontWeight.bold,
-              color: Styles.getFont(darkState.darkTheme),
+              color: settings.getFont(),
             ),
           ),
         ),
@@ -34,15 +31,14 @@ class PercentageRow extends StatelessWidget {
         Padding(
           padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
           child: CircularPercentIndicator(
-            radius: Styles.getPercentageSizeChildren(appState.size),
+            radius: settings.getPercentageSizeChildren(),
             lineWidth: 7.0,
             percent: task.percentage.toDouble(),
             animation: true,
             animateFromLastPercent: true,
-            backgroundColor: Styles.getColor(darkState.darkTheme),
+            backgroundColor: settings.getColor(),
             circularStrokeCap: CircularStrokeCap.round,
-            center: isCompleted(
-                task.percentage.toDouble(), darkState.darkTheme, appState.size),
+            center: isCompleted(task.percentage.toDouble(), settings),
             linearGradient: LinearGradient(colors: [
               Colors.green,
               Colors.lightGreen,
@@ -53,21 +49,21 @@ class PercentageRow extends StatelessWidget {
     );
   }
 
-  Widget isCompleted(num percentage, bool isDarkTheme, String size) {
+  Widget isCompleted(num percentage, Settings settings) {
     if ((percentage * 100) == 100.0) {
       return Icon(
         const IconData(0xe0de, fontFamily: 'MaterialIcons'),
         color: Colors.greenAccent[700],
-        size: Styles.getFontSizeParent(size) - 3,
+        size: settings.getFontSizeParent() - 3,
       );
     } else
       return Text(
         (task.percentage * 100).toInt().toString() + "%",
         style: TextStyle(
-          fontSize: Styles.getFontPercentageChildren(size),
+          fontSize: settings.getFontPercentageChildren(),
           letterSpacing: 0.6,
           fontWeight: FontWeight.bold,
-          color: Styles.getFont(isDarkTheme),
+          color: settings.getFont(),
         ),
       );
   }

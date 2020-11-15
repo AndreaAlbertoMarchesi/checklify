@@ -1,7 +1,6 @@
-
 import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/states/AppState.dart';
-import 'package:checklist_app/utils/Styles.dart';
+import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,11 +10,12 @@ class SelectionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
+    final settings = context.watch<Settings>();
     return ListTile(
       title: Text(
           task.title,
         style: TextStyle(
-          fontSize: Styles.getFontSizeChildren(appState.size),
+          fontSize: settings.getFontSizeChildren(),
         ),
       ),
       trailing: IconButton(

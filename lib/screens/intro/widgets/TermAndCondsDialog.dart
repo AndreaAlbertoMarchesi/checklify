@@ -1,9 +1,7 @@
-import 'package:checklist_app/states/AppState.dart';
-import 'package:checklist_app/states/DarkThemeState.dart';
-import 'package:checklist_app/utils/Styles.dart';
+import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
-import 'package:vibration/vibration.dart';
 import 'package:provider/provider.dart';
+import 'package:vibration/vibration.dart';
 
 class TermAndCondsDialog extends StatefulWidget {
   @override
@@ -12,12 +10,11 @@ class TermAndCondsDialog extends StatefulWidget {
 
 class _TermAndCondsDialogState extends State<TermAndCondsDialog> {
 
+
   bool _value = false;
   @override
   Widget build(BuildContext context) {
-
-    final darkState = context.watch<DarkThemeState>();
-    final appState = context.watch<AppState>();
+    final settings = context.watch<Settings>();
 
 
     Widget acceptButton(context) {
@@ -25,18 +22,18 @@ class _TermAndCondsDialogState extends State<TermAndCondsDialog> {
         child: Text(
           "Accept",
           style: TextStyle(
-            fontSize: Styles.getFontSizeChildren(appState.size),
+            fontSize: settings.getFontSizeChildren(),
             letterSpacing: 0.6,
             fontWeight: FontWeight.bold,
-            color: Styles.getFont(darkState.darkTheme),
+            color: settings.getFont(),
           ),
         ),
         onPressed: () {
           if (_value) {
-            appState.acceptTermsConditions();
+            settings.acceptTermsConditions();
             Navigator.of(context).pop();
           } else {
-            if(appState.appUser.vibrate)
+            if(settings.vibrate)
               Vibration.vibrate(duration: 80);
           }
         },
@@ -68,10 +65,10 @@ class _TermAndCondsDialogState extends State<TermAndCondsDialog> {
               Text(
                 "Accept Terms & Conditions",
                 style: TextStyle(
-                  fontSize: Styles.getFontSizeChildren(appState.size)-2,
+                  fontSize: settings.getFontSizeChildren()-2,
                   letterSpacing: 0.6,
                   fontWeight: FontWeight.bold,
-                  color: Styles.getFont(darkState.darkTheme),
+                  color: settings.getFont(),
                 ),
               ),
             ],

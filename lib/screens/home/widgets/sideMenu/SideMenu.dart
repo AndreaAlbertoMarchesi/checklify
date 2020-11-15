@@ -5,8 +5,7 @@ import 'package:checklist_app/screens/home/widgets/sideMenu/widgets/selectionLis
 import 'package:checklist_app/screens/intro/IntroApp.dart';
 import 'package:checklist_app/screens/settings/SettingsPage.dart';
 import 'package:checklist_app/states/AppState.dart';
-import 'package:checklist_app/states/DarkThemeState.dart';
-import 'package:checklist_app/utils/Styles.dart';
+import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
@@ -15,9 +14,9 @@ class SideMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
-    final darkState = context.watch<DarkThemeState>();
+    final settings = context.watch<Settings>();
     return Theme(
-      data: Styles.themeData(darkState.darkTheme, context),
+      data: settings.themeData(context),
       child: Drawer(
         child: Column(
           children: [
@@ -32,35 +31,34 @@ class SideMenu extends StatelessWidget {
                           padding: EdgeInsets.all(15),
                           child: CircleAvatar(
                             radius: 50,
-                            backgroundImage: appState.isPhotoFromGallery
-                                ? FileImage(File(appState.appUser.photoURL))
-                                : AssetImage("${appState.appUser.photoURL}"),
+                            backgroundImage: settings.isPhotoFromGallery
+                                ? FileImage(File(settings.appUser.photoURL))
+                                : AssetImage("${settings.appUser.photoURL}"),
                             backgroundColor: Colors.transparent,
                           ),
                         ),
                         Text(
-                          appState.appUser.userName,
+                          settings.appUser.userName,
                           style: TextStyle(
-                            fontSize: Styles.getFontSizeChildren(appState.size),
+                            fontSize: settings.getFontSizeChildren(),
                             letterSpacing: 0.6,
                             fontWeight: FontWeight.bold,
-                            color: Styles.getFont(darkState.darkTheme),
+                            color: settings.getFont(),
                           ),
                         )
                       ],
                     ),
-                    decoration: BoxDecoration(
-                        color: Styles.getSideMenu(darkState.darkTheme)),
+                    decoration: BoxDecoration(color: settings.getSideMenu()),
                   ),
                   ListTile(
                     leading: Icon(Icons.home_outlined),
                     title: Text(
                       "Home",
                       style: TextStyle(
-                        fontSize: Styles.getFontSizeChildren(appState.size),
+                        fontSize: settings.getFontSizeChildren(),
                         letterSpacing: 0.6,
                         fontWeight: FontWeight.bold,
-                        color: Styles.getFont(darkState.darkTheme),
+                        color: settings.getFont(),
                       ),
                     ),
                     onTap: () {
@@ -73,10 +71,10 @@ class SideMenu extends StatelessWidget {
                     title: Text(
                       'Settings',
                       style: TextStyle(
-                        fontSize: Styles.getFontSizeChildren(appState.size),
+                        fontSize: settings.getFontSizeChildren(),
                         letterSpacing: 0.6,
                         fontWeight: FontWeight.bold,
-                        color: Styles.getFont(darkState.darkTheme),
+                        color: settings.getFont(),
                       ),
                     ),
                     onTap: () {
@@ -92,10 +90,10 @@ class SideMenu extends StatelessWidget {
                     title: Text(
                       'Help',
                       style: TextStyle(
-                        fontSize: Styles.getFontSizeChildren(appState.size),
+                        fontSize: settings.getFontSizeChildren(),
                         letterSpacing: 0.6,
                         fontWeight: FontWeight.bold,
-                        color: Styles.getFont(darkState.darkTheme),
+                        color: settings.getFont(),
                       ),
                     ),
                     onTap: () {
@@ -110,10 +108,10 @@ class SideMenu extends StatelessWidget {
                     title: Text(
                       'Buy me a coffee',
                       style: TextStyle(
-                        fontSize: Styles.getFontSizeChildren(appState.size),
+                        fontSize: settings.getFontSizeChildren(),
                         letterSpacing: 0.6,
                         fontWeight: FontWeight.bold,
-                        color: Styles.getFont(darkState.darkTheme),
+                        color: settings.getFont(),
                       ),
                     ),
                     onTap: () {

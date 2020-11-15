@@ -6,8 +6,7 @@ import 'package:checklist_app/screens/home/widgets/sideMenu/SideMenu.dart';
 import 'package:checklist_app/screens/home/widgets/tasksList/TasksList.dart';
 import 'package:checklist_app/screens/intro/IntroApp.dart';
 import 'package:checklist_app/states/AppState.dart';
-import 'package:checklist_app/states/DarkThemeState.dart';
-import 'package:checklist_app/utils/Styles.dart';
+import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,13 +14,12 @@ import 'package:provider/provider.dart';
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final darkState = context.watch<DarkThemeState>();
-    final appState = context.watch<AppState>();
+    final settings = context.watch<Settings>();
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: Styles.themeData(darkState.darkTheme, context),
-      home: appState.userPreferences.firstTime ? IntroScreen() : HomeScreen(),
+      theme: settings.themeData(context),
+      home: settings.firstTime ? IntroScreen() : HomeScreen(),
     );
   }
 }
@@ -30,8 +28,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
-    final darkState = context.watch<DarkThemeState>();
+    final settings = context.watch<Settings>();
     int selectionLength = appState.getSelectedTasks().length;
+
 
     return WillPopScope(
       onWillPop: () async {
@@ -41,8 +40,7 @@ class HomeScreen extends StatelessWidget {
       child: Scaffold(
         extendBody: true,
         appBar: AppBar(
-          actionsIconTheme:
-              IconThemeData(color: Styles.getFont(darkState.darkTheme)),
+          actionsIconTheme: IconThemeData(color: settings.getFont()),
           leading: Builder(
             builder: (context) => Container(
               child: Stack(
@@ -54,7 +52,7 @@ class HomeScreen extends StatelessWidget {
                   IconButton(
                     icon: Icon(
                       Icons.menu,
-                      color: Styles.getAppBarIcon(darkState.darkTheme),
+                      color: settings.getAppBarIcon(),
                       size: 30,
                     ),
                     onPressed: () => Scaffold.of(context).openDrawer(),
@@ -68,7 +66,7 @@ class HomeScreen extends StatelessWidget {
                 builder: (context) => IconButton(
                     icon: Icon(
                       Icons.search_outlined,
-                      color: Styles.getAppBarIcon(darkState.darkTheme),
+                      color: settings.getAppBarIcon(),
                       size: 30,
                     ),
                     onPressed: () {

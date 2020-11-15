@@ -1,6 +1,5 @@
 import 'package:checklist_app/states/AppState.dart';
-import 'package:checklist_app/states/DarkThemeState.dart';
-import 'package:checklist_app/utils/Styles.dart';
+import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,7 +7,7 @@ class TaskPathRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
-    final darkState = context.watch<DarkThemeState>();
+    final settings = context.watch<Settings>();
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -44,18 +43,17 @@ class TaskPathRow extends StatelessWidget {
                     Padding(
                         padding: EdgeInsets.all(5.0),
                         child: Icon(
-                            Icons.arrow_forward_ios_rounded,
-                          color: Styles.getFont(darkState.darkTheme),
-                          size: Styles.getFontSizeChildren(appState.size),
-                        )
-                    ),
+                          Icons.arrow_forward_ios_rounded,
+                          color: settings.getFont(),
+                          size: settings.getFontSizeChildren(),
+                        )),
                     Padding(
                       padding: EdgeInsets.all(5.0),
                       child: Text(
                         task.title,
                         style: TextStyle(
-                          color: Styles.getFont(darkState.darkTheme),
-                            fontSize: Styles.getFontSizeChildren(appState.size),
+                          color: settings.getFont(),
+                          fontSize: settings.getFontSizeChildren(),
                         ),
                       ),
                     )

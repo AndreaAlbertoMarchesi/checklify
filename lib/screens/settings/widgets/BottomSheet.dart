@@ -1,6 +1,5 @@
-import 'file:///C:/Users/AndreaMarchesi/AndroidStudioProjects/checklify/lib/screens/settings/widgets/dialogs/ImageDialog.dart';
-import 'package:checklist_app/states/AppState.dart';
-import 'package:checklist_app/utils/Styles.dart';
+import 'package:checklist_app/screens/settings/widgets/dialogs/ImageDialog.dart';
+import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -25,7 +24,7 @@ class _AppBottomSheetState extends State<AppBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    final appState = context.watch<AppState>();
+    final settings = context.watch<Settings>();
 
     return Container(
       child: new Wrap(
@@ -35,7 +34,7 @@ class _AppBottomSheetState extends State<AppBottomSheet> {
             title: new Text(
               'Select from app avatar',
               style: TextStyle(
-                fontSize: Styles.getFontSizeChildren(appState.size),
+                fontSize: settings.getFontSizeChildren(),
               ),
             ),
             onTap: () async {
@@ -48,12 +47,12 @@ class _AppBottomSheetState extends State<AppBottomSheet> {
             title: new Text(
               'Choose existing photo',
               style: TextStyle(
-                fontSize: Styles.getFontSizeChildren(appState.size),
+                fontSize: settings.getFontSizeChildren(),
               ),
             ),
             onTap: () async {
               await _imgFromGallery();
-              appState.modifyPhoto(_image.path);
+              settings.modifyPhoto(_image.path);
               Navigator.of(context).pop();
             },
           ),

@@ -1,7 +1,7 @@
-import 'dart:ui';
-import 'package:flutter/material.dart';
 
-class Styles {
+
+part of 'package:checklist_app/states/Settings.dart';
+class _Styles {
 
   static Color getColor(bool isDarkTheme){
     if(isDarkTheme){

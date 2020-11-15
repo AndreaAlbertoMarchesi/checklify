@@ -5,8 +5,7 @@ import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/Per
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/dialogs/DeleteDialog.dart';
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/dialogs/UpdateDialog.dart';
 import 'package:checklist_app/states/AppState.dart';
-import 'package:checklist_app/states/DarkThemeState.dart';
-import 'package:checklist_app/utils/Styles.dart';
+import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swipe_to/swipe_to.dart';
@@ -20,24 +19,24 @@ class TaskItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
-    final darkState = context.watch<DarkThemeState>();
+    final settings = context.watch<Settings>();
     bool isSelected = appState.getSelectedTasks().contains(task);
 
     return InkWell(
       child: SwipeTo(
         animationDuration: const Duration(milliseconds: 300),
         iconOnLeftSwipe: Icons.delete_outline,
-        iconColor: Styles.getFont(darkState.darkTheme),
+        iconColor: settings.getFont(),
         iconOnRightSwipe: Icons.create_outlined,
         onRightSwipe: () {
-          if (appState.appUser.vibrate) Vibration.vibrate(duration: 80);
+          if (settings.vibrate) Vibration.vibrate(duration: 80);
           showDialog(
             context: context,
             child: UpdateDialog(task),
           );
         },
         onLeftSwipe: () {
-          if (appState.appUser.vibrate) Vibration.vibrate(duration: 80);
+          if (settings.vibrate) Vibration.vibrate(duration: 80);
           showDialog(
             context: context,
             child: DeleteDialog(task),
@@ -53,11 +52,9 @@ class TaskItem extends StatelessWidget {
                     ? Colors.lightGreenAccent[100]
                     : (task.colorValue != null
                         ? Color(task.colorValue)
-                        : Styles.getColor(darkState.darkTheme)),
+                        : settings.getColor()),
                 boxShadow: [
-                  BoxShadow(
-                      color: Styles.getBorder(darkState.darkTheme),
-                      spreadRadius: 2),
+                  BoxShadow(color: settings.getBorder(), spreadRadius: 2),
                 ],
               ),
               // fixed constraints on widgets are probably not ideal cause widgets needs to be resizable
@@ -80,7 +77,7 @@ class TaskItem extends StatelessWidget {
         if (!isSelected) appState.openTask(task);
       },
       onDoubleTap: () {
-        if (appState.appUser.vibrate) Vibration.vibrate(duration: 80);
+        if (settings.vibrate) Vibration.vibrate(duration: 80);
         isSelected ? appState.deselect(task) : appState.selectTask(task);
       },
     );
