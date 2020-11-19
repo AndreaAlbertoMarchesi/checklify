@@ -19,7 +19,8 @@ Task _$TaskFromJson(Map<String, dynamic> json) {
         ?.map(
             (e) => e == null ? null : Task.fromJson(e as Map<String, dynamic>))
         ?.toList()
-    ..percentage = json['percentage'] as num;
+    ..percentage = json['percentage'] as num
+    ..isStarred = json['isStarred'] as bool;
 }
 
 Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
@@ -29,4 +30,5 @@ Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
       'percentage': instance.percentage,
       'colorValue': instance.colorValue,
       'dateTime': instance.dateTime?.toIso8601String(),
+      'isStarred': instance.isStarred,
     };

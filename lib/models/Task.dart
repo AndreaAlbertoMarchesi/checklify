@@ -21,6 +21,7 @@ class Task {
   num percentage = 0;
   int colorValue;
   DateTime dateTime;
+  bool isStarred = false;
 
   static final Task emptyRoot = Task("⌂");
 

@@ -1,4 +1,7 @@
+import 'package:checklist_app/states/AppState.dart';
+import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 
 class ColorPicker extends StatefulWidget {
@@ -18,9 +21,16 @@ class _ColorPickerState extends State<ColorPicker> {
 
   @override
   Widget build(BuildContext context) {
+    final settings = context.watch<Settings>();
     return ListTile(
       title: Text(
-        "color",
+        "Color",
+        style: TextStyle(
+          fontSize: settings.getFontSizeChildren(),
+          letterSpacing: 0.6,
+          fontWeight: FontWeight.bold,
+          color: settings.getFont(),
+        ),
       ),
       trailing: CircleColor(
         color: selectedColor,

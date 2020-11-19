@@ -1,5 +1,6 @@
 import 'package:checklist_app/models/AppUser.dart';
 import 'package:checklist_app/utils/PhoneStorage.dart';
+import 'package:checklist_app/utils/URL.dart';
 import 'package:checklist_app/utils/phoneStorage/Keys.dart';
 import 'package:flutter/material.dart';
 
@@ -11,19 +12,24 @@ class Settings with ChangeNotifier {
 
   AppUser appUser;
   bool firstTime;
-  bool isPhotoFromGallery = false;
+  bool isPhotoFromGallery ;
   bool termsAndCondsAccepted = false;
-  String size;
   String fontSize;
-  bool vibrate;
   bool darkTheme;
+  bool vibrate;
+  bool fullScreen;
+  bool notifications;
+
 
   Settings(this._storage) {
     darkTheme = _storage.getValue(Keys.darkTheme, false);
-    size = _storage.getValue(Keys.size, 'Medium');
-    vibrate = _storage.getValue(Keys.size, false);
-    appUser = _storage.getValue(Keys.appUser, AppUser.anonymous);
+    fontSize = _storage.getValue(Keys.size, 'Medium');
+    vibrate = _storage.getValue(Keys.vibrate, false);
+    appUser = _storage.readUser(Keys.appUser, AppUser.anonymous);
     firstTime = _storage.getValue(Keys.firstTime, true);
+    fullScreen = _storage.getValue(Keys.fullScreen, false);
+    notifications = _storage.getValue(Keys.notifications, true);
+    isPhotoFromGallery = _storage.getValue(Keys.isPhotoFromGallery, false);
   }
 
   void acceptTermsConditions() {
@@ -32,33 +38,50 @@ class Settings with ChangeNotifier {
     notifyListeners();
   }
 
-  set setDarkTheme(bool darkTheme) {
+  void setDarkTheme(bool darkTheme) {
     this.darkTheme = darkTheme;
     _storage.setValue(Keys.darkTheme, darkTheme);
     notifyListeners();
   }
 
-  set setFontSize(String size) {
-    this.size = size;
+  void setFontSize(String size) {
+    this.fontSize = size;
+    _storage.setValue(Keys.size, size);
     notifyListeners();
   }
 
-  set setVibration(bool vibrate) {
+  void setVibration(bool vibrate) {
     this.vibrate = vibrate;
+    _storage.setValue(Keys.vibrate, vibrate);
+    notifyListeners();
+  }
+  void setFullScreen(bool fullScreen){
+    this.fullScreen = fullScreen;
+    _storage.setValue(Keys.fullScreen, fullScreen);
+    notifyListeners();
+  }
+  void setNotification(bool notifications){
+    this.notifications = notifications ;
+    _storage.setValue(Keys.notifications, notifications);
     notifyListeners();
   }
 
-  set modifyName(String name) {
+  void modifyName(String name) {
     appUser.userName = name;
+    _storage.writeUser(Keys.appUser, appUser);
     notifyListeners();
   }
 
   void modifyPhoto(String path) {
     appUser.photoURL = path;
-    if (path.startsWith('images', 0))
+    if (path.startsWith(URL.imagesFolder, 0)) {
       isPhotoFromGallery = false;
-    else
+      _storage.setValue(Keys.isPhotoFromGallery, false);
+    }else {
       isPhotoFromGallery = true;
+      _storage.setValue(Keys.isPhotoFromGallery, true);
+    }
+    _storage.writeUser(Keys.appUser, appUser);
     notifyListeners();
   }
 
@@ -72,23 +95,23 @@ class Settings with ChangeNotifier {
 
   Color getAppBarIcon() => _Styles.getAppBarIcon(darkTheme);
 
-  double getFontSizeChildren() => _Styles.getFontPercentageChildren(size);
+  double getFontSizeChildren() => _Styles.getFontSizeChildren(fontSize);
 
-  double getFontSizeParent() => _Styles.getFontSizeParent(size);
+  double getFontSizeParent() => _Styles.getFontSizeParent(fontSize);
 
-  double getTileSizeChildren() => _Styles.getTileSizeChildren(size);
+  double getTileSizeChildren() => _Styles.getTileSizeChildren(fontSize);
 
-  double getTileSizeParent() => _Styles.getTileSizeParent(size);
+  double getTileSizeParent() => _Styles.getTileSizeParent(fontSize);
 
-  double getPercentageSizeChildren() => _Styles.getPercentageSizeChildren(size);
+  double getPercentageSizeChildren() => _Styles.getPercentageSizeChildren(fontSize);
 
-  double getPercentageSizeParent() => _Styles.getPercentageSizeParent(size);
+  double getPercentageSizeParent() => _Styles.getPercentageSizeParent(fontSize);
 
-  double getFontPercentageChildren() => _Styles.getFontPercentageChildren(size);
+  double getFontPercentageChildren() => _Styles.getFontPercentageChildren(fontSize);
 
-  double getFontPercentageParent() => _Styles.getFontPercentageParent(size);
+  double getFontPercentageParent() => _Styles.getFontPercentageParent(fontSize);
 
-  double getFontSizeCoffee() => _Styles.getFontSizeCoffee(size);
+  double getFontSizeCoffee() => _Styles.getFontSizeCoffee(fontSize);
 
   ThemeData themeData(BuildContext context) =>
       _Styles.themeData(darkTheme, context);

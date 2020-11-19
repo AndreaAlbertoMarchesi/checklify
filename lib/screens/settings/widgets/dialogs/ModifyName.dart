@@ -40,7 +40,7 @@ class ModifyName extends StatelessWidget {
         ),
         onPressed: () {
           if (_formKey.currentState.validate()) {
-            settings.appUser.userName = userName;
+            settings.modifyName(userName);
             Navigator.of(context).pop();
           } else {
             if (settings.vibrate) Vibration.vibrate(duration: 80);

@@ -196,7 +196,6 @@ class _Styles {
 
 
       disabledColor: Colors.grey,
-      textSelectionColor: isDarkTheme ? Colors.black : Colors.black,
       cardColor: isDarkTheme ? Color(0xFF151515) : Colors.white,
 
       floatingActionButtonTheme: FloatingActionButtonThemeData(foregroundColor: Colors.white,),

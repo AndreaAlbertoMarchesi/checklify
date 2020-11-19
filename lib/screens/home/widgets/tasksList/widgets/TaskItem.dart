@@ -58,10 +58,11 @@ class TaskItem extends StatelessWidget {
                 ],
               ),
               // fixed constraints on widgets are probably not ideal cause widgets needs to be resizable
+
               /*
             constraints: BoxConstraints(
-                maxHeight: Styles.getTileSizeChildren(appState.size)),
-             */
+                maxHeight: settings.getTileSizeChildren()),
+              */
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

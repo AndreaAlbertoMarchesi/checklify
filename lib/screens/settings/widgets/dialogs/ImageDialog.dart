@@ -26,7 +26,7 @@ class _ImageDialogState extends State<ImageDialog> {
 
       List<String> s = manifestMap.keys
           .where((String key) => key.contains(URL.imagesFolder))
-          .where((String key) => !key.contains('images/introScreen'))
+          .where((String key) => !key.contains(URL.introFolder))
           .where((String key) => key.contains('.png'))
           .toList();
       return s;
@@ -54,7 +54,7 @@ class _ImageDialogState extends State<ImageDialog> {
                         return ListTile(
                           title: Text(
                             snapshot.data[index]
-                                .substring(7, snapshot.data[index].indexOf('.'))
+                                .substring(URL.imagesFolder.length, snapshot.data[index].indexOf('.'))
                                 .toUpperCase(),
                             style: TextStyle(
                               fontSize: settings.getFontSizeChildren(),

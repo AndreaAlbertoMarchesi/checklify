@@ -29,6 +29,19 @@ class CheckboxRow extends StatelessWidget {
           ),
         ),
         Expanded(child: Container()),
+        task.isStarred ?
+              IconButton(
+                  icon: Icon(Icons.star, color: Colors.yellowAccent),
+                onPressed: (){
+                    appState.setStarredTask(task, false);
+                },
+              )
+            : IconButton(
+                  icon: Icon(Icons.star_border, color: Colors.yellowAccent),
+                onPressed:(){
+                  appState.setStarredTask(task, true);
+                } ,
+        ),
         Padding(
           padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
           child: Checkbox(

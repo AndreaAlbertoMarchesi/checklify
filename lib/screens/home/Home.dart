@@ -9,6 +9,7 @@ import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
@@ -25,6 +26,7 @@ class Home extends StatelessWidget {
 }
 
 class HomeScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
@@ -32,12 +34,18 @@ class HomeScreen extends StatelessWidget {
     int selectionLength = appState.getSelectedTasks().length;
 
 
+    if(settings.fullScreen)
+      SystemChrome.setEnabledSystemUIOverlays([]);
+    else
+      SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+
     return WillPopScope(
       onWillPop: () async {
         appState.backToPreviousTask();
         return false;
       },
       child: Scaffold(
+        resizeToAvoidBottomPadding: false,
         extendBody: true,
         appBar: AppBar(
           actionsIconTheme: IconThemeData(color: settings.getFont()),

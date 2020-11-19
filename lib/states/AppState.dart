@@ -22,6 +22,14 @@ class AppState extends ChangeNotifier {
     });
   }
 
+  void setStarredTask(Task selectedTask, bool starred){
+    if(starred)
+      handleReorder(task.children.indexOf(selectedTask), 0);
+    selectedTask.isStarred = starred;
+    _storage.writeData(root);
+    notifyListeners();
+  }
+
   void selectTask(Task task) {
     if (!_selectionState.hasSelected(task))
       _selectionState.select(task, taskPath.getCopy());
@@ -111,12 +119,24 @@ class AppState extends ChangeNotifier {
   }
 
   void handleReorder(int oldIndex, int newIndex) {
-    if (oldIndex < newIndex) {
-      newIndex -= 1;
-    }
-    final element = task.children.removeAt(oldIndex);
-    task.children.insert(newIndex, element);
+    if(!task.children.elementAt(oldIndex).isStarred){
+      if (oldIndex < newIndex) {
+        newIndex -= 1;
+        final element = task.children.removeAt(oldIndex);
+        task.children.insert(newIndex, element);
+      }else{
+        int index = 0;
+        task.children.forEach((element) {
+          if(element.isStarred) index++;
+        });
+        final element = task.children.removeAt(oldIndex);
+        if( index > newIndex )
+          task.children.insert(index, element);
+        else
+          task.children.insert(newIndex, element);
+      }
 
-    notifyListeners();
+      notifyListeners();
+    }
   }
 }

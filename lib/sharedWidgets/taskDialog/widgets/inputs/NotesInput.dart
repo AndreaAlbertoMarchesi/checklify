@@ -3,17 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class NotesInput extends StatelessWidget {
-  NotesInput(this.notes, this.setNotes);
+  NotesInput(this.notes, this.isAdding, this.setNotes);
 
   final String notes;
   final Function setNotes;
+  final bool isAdding;
 
   @override
   Widget build(BuildContext context) {
     final settings = context.watch<Settings>();
 
     final TextEditingController _controller = new TextEditingController(
-      text: notes,
+      text: isAdding ? '' : notes,
     );
 
     return TextFormField(
@@ -21,7 +22,7 @@ class NotesInput extends StatelessWidget {
       maxLines: null,
       maxLength: 100,
       decoration: InputDecoration(
-        hintText: notes,
+        hintText: isAdding ? "insert additional notes" : notes,
         filled: true,
         contentPadding: EdgeInsets.all(12.0),
         enabledBorder: OutlineInputBorder(

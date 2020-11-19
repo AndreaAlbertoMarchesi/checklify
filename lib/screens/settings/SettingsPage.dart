@@ -1,13 +1,12 @@
 import 'dart:io';
-
+import 'package:checklist_app/screens/settings/widgets/AppSwitchListTile.dart';
 import 'package:checklist_app/screens/settings/widgets/dialogs/ModifyName.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:vibration/vibration.dart';
-
 import 'widgets/BottomSheet.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -19,7 +18,6 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     final settings = context.watch<Settings>();
-    //final appState = context.watch<AppState>();
 
     double radius = 50;
     double iconSize = 30;
@@ -30,6 +28,25 @@ class _SettingsPageState extends State<SettingsPage> {
         scheme: 'mailto',
         path: 'smith@example.com',
         queryParameters: {'subject': 'Report a Bug'});
+
+    _setDarkMode(darkTheme) {
+      settings.setDarkTheme(darkTheme);
+    }
+    _setVibration(vibration) {
+      settings.setVibration(vibration);
+    }
+    _setNotification(notifications) {
+      settings.setNotification(notifications);
+    }
+    _setFullScreen(fullScreen) {
+      settings.setFullScreen(fullScreen);
+    }
+
+
+    if(settings.fullScreen)
+      SystemChrome.setEnabledSystemUIOverlays([]);
+    else
+      SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
 
     return Scaffold(
       resizeToAvoidBottomPadding: false,
@@ -50,7 +67,6 @@ class _SettingsPageState extends State<SettingsPage> {
                   },
                   child: Stack(
                       alignment: Alignment.center,
-                      overflow: Overflow.visible,
                       children: [
                         CircleAvatar(
                           backgroundImage: settings.isPhotoFromGallery
@@ -104,19 +120,10 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
             ),
-            SwitchListTile(
-              secondary: const Icon(Icons.lightbulb_outline),
-              value: settings.darkTheme,
-              title: Text(
-                "Dark mode",
-                style: TextStyle(
-                  fontSize: settings.getFontSizeChildren(),
-                ),
-              ),
-              onChanged: (value) {
-                if (settings.vibrate) Vibration.vibrate(duration: 20);
-                settings.darkTheme = value;
-              },
+            AppSwitchListTile(title: "Dark mode",
+                icon: Icons.lightbulb_outline,
+                value: settings.darkTheme,
+                function: _setDarkMode
             ),
             ListTile(
               title: Text(
@@ -142,23 +149,24 @@ class _SettingsPageState extends State<SettingsPage> {
                 },
                 tooltip: "Size",
                 onSelected: (fontSize) {
-                  settings.fontSize = fontSize;
+                  settings.setFontSize(fontSize);
                 },
               ),
             ),
-            SwitchListTile(
-              secondary: const Icon(Icons.vibration_rounded),
-              value: settings.vibrate,
-              title: Text(
-                "Vibration",
-                style: TextStyle(
-                  fontSize: settings.getFontSizeChildren(),
-                ),
-              ),
-              onChanged: (value) {
-                if (settings.vibrate) Vibration.vibrate(duration: 20);
-                settings.vibrate = value;
-              },
+            AppSwitchListTile(title: "Vibration",
+                icon: Icons.vibration_rounded,
+                value: settings.vibrate,
+                function: _setVibration
+            ),
+            AppSwitchListTile(title: "Notifications",
+                icon: Icons.notifications_active_outlined,
+                value: settings.notifications,
+                function: _setNotification
+            ),
+            AppSwitchListTile(title: "FullScreen",
+                icon: Icons.fullscreen,
+                value: settings.fullScreen,
+                function: _setFullScreen
             ),
             ListTile(
               leading: const Icon(Icons.bug_report),
@@ -208,7 +216,7 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  void _settingModalBottomSheet(context) {
+  void _settingModalBottomSheet(BuildContext context) {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext bc) {

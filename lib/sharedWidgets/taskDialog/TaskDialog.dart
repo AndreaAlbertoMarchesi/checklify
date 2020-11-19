@@ -72,7 +72,15 @@ class _TaskDialogState extends State<TaskDialog> {
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(20.0))),
         scrollable: true,
-        title: Text(isAdding ? "add a task" : "update " + widget.task.title),
+        title: Text(
+            isAdding ? "Add a task" : "Update " + widget.task.title,
+          style: TextStyle(
+            fontSize: settings.getFontSizeChildren(),
+            letterSpacing: 0.6,
+            fontWeight: FontWeight.bold,
+            color: settings.getFont(),
+          ),
+        ),
         content: Container(
           width: 150,
           height: 200,
@@ -83,7 +91,7 @@ class _TaskDialogState extends State<TaskDialog> {
             ColorPicker(setColor, color),
             Form(
               key: _notesFormKey,
-              child: NotesInput(notes, setNotes),
+              child: NotesInput(notes, isAdding, setNotes),
             ),
             DeadlineInput(),
           ]),

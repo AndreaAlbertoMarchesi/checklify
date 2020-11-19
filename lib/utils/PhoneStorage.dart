@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:checklist_app/models/AppUser.dart';
 import 'package:checklist_app/models/Task.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -61,4 +62,19 @@ class PhoneStorage {
     final file = await _localFile;
     return file.writeAsString(jsonEncode(root.toJson()));
   }
+
+  readUser(String key, defaultValue) {
+    if(sharedPreferences.containsKey(key)) {
+      return AppUser.fromJson(jsonDecode(sharedPreferences.getString(key)));
+    }else {
+      return defaultValue;
+    }
+  }
+
+  writeUser(String key, AppUser user){
+    sharedPreferences.setString( key , jsonEncode(user));
+  }
+
+
+
 }
