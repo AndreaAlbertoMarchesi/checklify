@@ -89,11 +89,17 @@ class Settings with ChangeNotifier {
 
   Color getFont() => _Styles.getFont(darkTheme);
 
+  Color getFontTiles() => _Styles.getFontTiles(darkTheme);
+
   Color getBorder() => _Styles.getBorder(darkTheme);
 
   Color getSideMenu() => _Styles.getSideMenu(darkTheme);
 
   Color getAppBarIcon() => _Styles.getAppBarIcon(darkTheme);
+
+  Color getHighlightedColor(int colorValue) => _Styles.getHighlightedColor(colorValue);
+
+  List<ColorSwatch<dynamic>> getPossibleColors() => _Styles.getPossibleColors();
 
   double getFontSizeChildren() => _Styles.getFontSizeChildren(fontSize);
 
@@ -115,4 +121,6 @@ class Settings with ChangeNotifier {
 
   ThemeData themeData(BuildContext context) =>
       _Styles.themeData(darkTheme, context);
+
+
 }

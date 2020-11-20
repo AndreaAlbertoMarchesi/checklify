@@ -45,16 +45,19 @@ class TaskItem extends StatelessWidget {
         child: Card(
           elevation: 0,
           margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
+
           child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: isSelected
-                    ? Colors.lightGreenAccent[100]
+                    ? (task.colorValue != null
+                      ? settings.getHighlightedColor(task.colorValue)
+                      : Colors.lightGreenAccent[100])
                     : (task.colorValue != null
                         ? Color(task.colorValue)
                         : settings.getColor()),
                 boxShadow: [
-                  BoxShadow(color: settings.getBorder(), spreadRadius: 2),
+                  BoxShadow(color: settings.getHighlightedColor(task.colorValue), spreadRadius: 2),
                 ],
               ),
               // fixed constraints on widgets are probably not ideal cause widgets needs to be resizable
@@ -65,13 +68,15 @@ class TaskItem extends StatelessWidget {
               */
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   task.children.isEmpty
                       ? CheckboxRow(task)
                       : PercentageRow(task),
                   if (task.notes.isNotEmpty) NotesText(task.notes),
                 ],
-              )),
+              )
+          ),
         ),
       ),
       onTap: () {

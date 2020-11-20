@@ -36,11 +36,12 @@ class _ColorPickerState extends State<ColorPicker> {
         color: selectedColor,
         circleSize: 30,
       ),
-      onTap: () => openColorDialog(context),
+      onTap: () => openColorDialog(context, settings),
     );
   }
 
-  void openColorDialog(BuildContext context) {
+  void openColorDialog(BuildContext context, Settings settings) {
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -51,7 +52,7 @@ class _ColorPickerState extends State<ColorPicker> {
           child: MaterialColorPicker(
             shrinkWrap: true,
             allowShades: false,
-            colors: accentColors,
+            colors: settings.getPossibleColors(),
             onMainColorChange: (Color color) {
               widget.setColor(color);
               setState(() {

@@ -22,7 +22,7 @@ class TaskDialog extends StatefulWidget {
       ? _TaskDialogState(
           isAdding: true,
           title: '',
-          color: Colors.lightBlue,
+          color: Colors.grey[200],
           notes: '',
         )
       : _TaskDialogState(

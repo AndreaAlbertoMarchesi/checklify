@@ -73,29 +73,34 @@ class Search extends SearchDelegate {
         itemCount: searchedTasks.length,
         itemBuilder: (context, index) {
           SearchedTask searchedTask = searchedTasks[index];
-          return ListTile(
-            title: Text(
-              searchedTask.task.title,
-              style: TextStyle(
-                fontSize: settings.getFontSizeChildren(),
-                letterSpacing: 0.6,
-                fontWeight: FontWeight.bold,
-                color: settings.getFont(),
+          return Container(
+            child: ListTile(
+              title: Text(
+                searchedTask.task.title,
+                style: TextStyle(
+                  fontSize: settings.getFontSizeChildren(),
+                  letterSpacing: 0.6,
+                  fontWeight: FontWeight.bold,
+                  color: settings.getFont(),
+                ),
               ),
-            ),
-            subtitle: Text(
-              searchedTask.taskPath.toString(),
-              style: TextStyle(
-                fontSize: settings.getFontSizeChildren() - 4,
-                letterSpacing: 0.6,
-                fontWeight: FontWeight.bold,
-                color: settings.getFont(),
+              subtitle: Text(
+                searchedTask.taskPath.toString(),
+                style: TextStyle(
+                  fontSize: settings.getFontSizeChildren() - 4,
+                  letterSpacing: 0.6,
+                  fontWeight: FontWeight.bold,
+                  color: settings.getFont(),
+                ),
               ),
+              onTap: () {
+                appState.openTask(searchedTask.task, searchedTask.taskPath);
+                Navigator.of(context).pop();
+              },
             ),
-            onTap: () {
-              appState.openTask(searchedTask.task, searchedTask.taskPath);
-              Navigator.of(context).pop();
-            },
+            decoration: BoxDecoration(
+                border: Border.all(color: settings.getColor())
+            ),
           );
         });
   }

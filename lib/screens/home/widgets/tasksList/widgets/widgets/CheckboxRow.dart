@@ -24,7 +24,7 @@ class CheckboxRow extends StatelessWidget {
               fontSize: settings.getFontSizeChildren(),
               letterSpacing: 0.5,
               fontWeight: FontWeight.bold,
-              color: settings.getFont(),
+              color: settings.getFontTiles(),
             ),
           ),
         ),
