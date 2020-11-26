@@ -1,6 +1,6 @@
+import 'package:checklist_app/sharedWidgets/DialogButton.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../../DialogButton.dart';
 
 class UpdateConfirmButton extends StatelessWidget {
   UpdateConfirmButton(this.onPressed);

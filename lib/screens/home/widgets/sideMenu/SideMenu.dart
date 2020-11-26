@@ -1,9 +1,12 @@
 import 'dart:io';
 
-import 'package:checklist_app/screens/home/widgets/sideMenu/widgets/dialogs/DonateDialog.dart';
+import 'file:///C:/Users/AndreaMarchesi/AndroidStudioProjects/checklify/lib/screens/home/widgets/sideMenu/widgets/items/donateItem/widgets/DonateDialog.dart';
+import 'package:checklist_app/screens/home/widgets/sideMenu/widgets/items/HelpItem.dart';
+import 'package:checklist_app/screens/home/widgets/sideMenu/widgets/items/SettingItem.dart';
+import 'package:checklist_app/screens/home/widgets/sideMenu/widgets/items/donateItem/DonateItem.dart';
+import 'package:checklist_app/screens/home/widgets/sideMenu/widgets/items/timelineItem/TimelineItem.dart';
 import 'package:checklist_app/screens/home/widgets/sideMenu/widgets/selectionList/SelectionList.dart';
 import 'package:checklist_app/screens/intro/IntroApp.dart';
-import 'package:checklist_app/screens/settings/SettingsPage.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
@@ -66,59 +69,10 @@ class SideMenu extends StatelessWidget {
                       Navigator.of(context).pop();
                     },
                   ),
-                  ListTile(
-                    leading: Icon(Icons.settings),
-                    title: Text(
-                      'Settings',
-                      style: TextStyle(
-                        fontSize: settings.getFontSizeChildren(),
-                        letterSpacing: 0.6,
-                        fontWeight: FontWeight.bold,
-                        color: settings.getFont(),
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.of(context).pop();
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SettingsPage()));
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.help_outline),
-                    title: Text(
-                      'Help',
-                      style: TextStyle(
-                        fontSize: settings.getFontSizeChildren(),
-                        letterSpacing: 0.6,
-                        fontWeight: FontWeight.bold,
-                        color: settings.getFont(),
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => IntroScreen()));
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(AntDesign.gift),
-                    title: Text(
-                      'Buy me a coffee',
-                      style: TextStyle(
-                        fontSize: settings.getFontSizeChildren(),
-                        letterSpacing: 0.6,
-                        fontWeight: FontWeight.bold,
-                        color: settings.getFont(),
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.of(context).pop();
-                      openAddDialog(context);
-                    },
-                  ),
+                  SettingItem(),
+                  HelpItem(),
+                  DonateItem(),
+                  TimelineItem(),
                 ],
               ),
             ),
@@ -129,12 +83,5 @@ class SideMenu extends StatelessWidget {
     );
   }
 
-  void openAddDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return DonateDialog();
-      },
-    );
-  }
+
 }

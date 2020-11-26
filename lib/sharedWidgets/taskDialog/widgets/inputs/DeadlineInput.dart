@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DeadlineInput extends StatelessWidget {
+  DeadlineInput(this.setDeadline);
+  final setDeadline;
   @override
   Widget build(BuildContext context) {
     return DateTimePicker(
@@ -22,12 +24,14 @@ class DeadlineInput extends StatelessWidget {
 
         return true;
       },
-      onChanged: (val) => print(val),
+      onChanged: (val) {
+        setDeadline(DateTime.parse(val));
+      },
       validator: (val) {
         print(val);
         return null;
       },
-      onSaved: (val) => print(val),
+      onSaved: (val) => setDeadline(DateTime.parse(val)),
     );
   }
 }

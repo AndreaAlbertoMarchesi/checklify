@@ -1,3 +1,4 @@
+
 import 'package:checklist_app/screens/AppStateProvider.dart';
 import 'package:checklist_app/utils/PhoneStorage.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,3 +10,7 @@ void main() async {
   SharedPreferences.getInstance()
       .then((sharedPref) => runApp(AppStateProvider(PhoneStorage(sharedPref))));
 }
+
+
+
+

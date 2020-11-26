@@ -1,5 +1,6 @@
 import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/CheckboxRow.dart';
+import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/DeadlineText.dart';
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/NotesText.dart';
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/PercentageRow.dart';
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/dialogs/DeleteDialog.dart';
@@ -73,6 +74,7 @@ class TaskItem extends StatelessWidget {
                   task.children.isEmpty
                       ? CheckboxRow(task)
                       : PercentageRow(task),
+                  if (task.dateTime!=null) DeadlineText(task.dateTime),
                   if (task.notes.isNotEmpty) NotesText(task.notes),
                 ],
               )

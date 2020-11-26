@@ -7,19 +7,25 @@ import 'package:checklist_app/screens/home/widgets/tasksList/TasksList.dart';
 import 'package:checklist_app/screens/intro/IntroApp.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
+import 'package:device_calendar/device_calendar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:checklist_app/utils/CalendarLoader.dart';
 
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final settings = context.watch<Settings>();
 
+
     return MaterialApp(
+
+
       debugShowCheckedModeBanner: false,
       theme: settings.themeData(context),
+
       home: settings.firstTime ? IntroScreen() : HomeScreen(),
     );
   }

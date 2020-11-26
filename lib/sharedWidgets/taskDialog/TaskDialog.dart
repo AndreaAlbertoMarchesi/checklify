@@ -40,6 +40,7 @@ class _TaskDialogState extends State<TaskDialog> {
   String title;
   Color color;
   String notes;
+  DateTime deadline;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +51,7 @@ class _TaskDialogState extends State<TaskDialog> {
 
     void addTask() {
       if (_titleFormKey.currentState.validate()) {
-        appState.addTask(title, colorValue: color.value, notes: notes);
+        appState.addTask(title, colorValue: color.value, notes: notes,dateTime: deadline);
         Navigator.of(context).pop();
       } else if (settings.vibrate) Vibration.vibrate(duration: 80);
     }
@@ -62,12 +63,14 @@ class _TaskDialogState extends State<TaskDialog> {
           notes: notes,
           title: title,
           colorValue: color.value,
+          deadline: deadline,
         );
         Navigator.pop(context);
       } else if (settings.vibrate) Vibration.vibrate(duration: 80);
     }
 
     return AlertDialog(
+
 
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(20.0))),
@@ -93,7 +96,7 @@ class _TaskDialogState extends State<TaskDialog> {
               key: _notesFormKey,
               child: NotesInput(notes, isAdding, setNotes),
             ),
-            DeadlineInput(),
+            DeadlineInput(setDeadline),
           ]),
         ),
         actions: isAdding
@@ -117,5 +120,10 @@ class _TaskDialogState extends State<TaskDialog> {
 
   setTitle(String title) {
     this.title = title;
+  }
+
+  setDeadline(DateTime deadline) {
+    print("yo"+deadline.toString());
+    this.deadline = deadline;
   }
 }
