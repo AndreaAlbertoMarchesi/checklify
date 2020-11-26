@@ -1,4 +1,4 @@
-import 'package:checklist_app/sharedWidgets/taskDialog/TaskDialog.dart';
+import 'package:checklist_app/screens/modifyTask/ModifyTask.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -26,10 +26,9 @@ class AddButton extends StatelessWidget {
                   ),
                 ),
               ],
-            )
-        ),
+            )),
       );
-    }else{
+    } else {
       return Padding(
         //padding: const EdgeInsets.fromLTRB(15,15,15,60 ),
         padding: const EdgeInsets.all(15.0),
@@ -54,8 +53,7 @@ class AddButton extends StatelessWidget {
                   ),
                 ),
               ],
-            )
-        ),
+            )),
       );
     }
   }
@@ -64,7 +62,7 @@ class AddButton extends StatelessWidget {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return TaskDialog();
+        return ModifyTask();
       },
     );
   }
