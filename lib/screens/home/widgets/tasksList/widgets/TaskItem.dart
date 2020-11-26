@@ -1,5 +1,6 @@
 import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/CheckboxRow.dart';
+import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/CountdownText.dart';
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/DeadlineText.dart';
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/NotesText.dart';
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/PercentageRow.dart';
@@ -46,19 +47,20 @@ class TaskItem extends StatelessWidget {
         child: Card(
           elevation: 0,
           margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
-
           child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: isSelected
                     ? (task.colorValue != null
-                      ? settings.getHighlightedColor(task.colorValue)
-                      : Colors.lightGreenAccent[100])
+                        ? settings.getHighlightedColor(task.colorValue)
+                        : Colors.lightGreenAccent[100])
                     : (task.colorValue != null
                         ? Color(task.colorValue)
                         : settings.getColor()),
                 boxShadow: [
-                  BoxShadow(color: settings.getHighlightedColor(task.colorValue), spreadRadius: 2),
+                  BoxShadow(
+                      color: settings.getHighlightedColor(task.colorValue),
+                      spreadRadius: 2),
                 ],
               ),
               // fixed constraints on widgets are probably not ideal cause widgets needs to be resizable
@@ -74,11 +76,11 @@ class TaskItem extends StatelessWidget {
                   task.children.isEmpty
                       ? CheckboxRow(task)
                       : PercentageRow(task),
-                  if (task.dateTime!=null) DeadlineText(task.dateTime),
+                  if (task.dateTime != null) DeadlineText(task.dateTime),
+                  if (task.dateTime != null) CountdownText(task.dateTime),
                   if (task.notes.isNotEmpty) NotesText(task.notes),
                 ],
-              )
-          ),
+              )),
         ),
       ),
       onTap: () {
