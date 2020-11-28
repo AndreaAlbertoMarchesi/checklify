@@ -1,16 +1,13 @@
 import 'dart:io';
 
-import 'file:///C:/Users/AndreaMarchesi/AndroidStudioProjects/checklify/lib/screens/home/widgets/sideMenu/widgets/items/donateItem/widgets/DonateDialog.dart';
 import 'package:checklist_app/screens/home/widgets/sideMenu/widgets/items/HelpItem.dart';
 import 'package:checklist_app/screens/home/widgets/sideMenu/widgets/items/SettingItem.dart';
 import 'package:checklist_app/screens/home/widgets/sideMenu/widgets/items/donateItem/DonateItem.dart';
 import 'package:checklist_app/screens/home/widgets/sideMenu/widgets/items/timelineItem/TimelineItem.dart';
 import 'package:checklist_app/screens/home/widgets/sideMenu/widgets/selectionList/SelectionList.dart';
-import 'package:checklist_app/screens/intro/IntroApp.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
 
 class SideMenu extends StatelessWidget {

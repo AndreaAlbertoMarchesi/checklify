@@ -55,7 +55,7 @@ class PercentageRow extends StatelessWidget {
             circularStrokeCap: CircularStrokeCap.round,
             center: isCompleted(task.percentage.toDouble(), settings),
             linearGradient: LinearGradient(colors: [
-              Colors.green,
+              Colors.green[600],
               Colors.lightGreen,
             ]),
           ),
@@ -68,7 +68,7 @@ class PercentageRow extends StatelessWidget {
     if ((percentage * 100) == 100.0) {
       return Icon(
         const IconData(0xe0de, fontFamily: 'MaterialIcons'),
-        color: Colors.greenAccent[700],
+        color: Colors.lightGreen[900],
         size: settings.getFontSizeParent() - 3,
       );
     } else
