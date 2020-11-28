@@ -1,4 +1,5 @@
 import 'package:checklist_app/models/Task.dart';
+import 'package:checklist_app/sharedWidgets/PercentageCircle.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +61,7 @@ class PercentageRow extends StatelessWidget {
                 animateFromLastPercent: true,
                 backgroundColor: Colors.transparent,
                 circularStrokeCap: CircularStrokeCap.round,
-                center: isCompleted(task.percentage.toDouble(), settings),
+                center: PercentageCircle(task.percentage),
                 linearGradient: LinearGradient(colors: [
                   Colors.green[600],
                   Colors.lightGreen,
@@ -71,24 +72,5 @@ class PercentageRow extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  Widget isCompleted(num percentage, Settings settings) {
-    if ((percentage * 100) == 100.0) {
-      return Icon(
-        const IconData(0xe0de, fontFamily: 'MaterialIcons'),
-        color: Colors.lightGreen[900],
-        size: settings.getFontSizeParent() - 3,
-      );
-    } else
-      return Text(
-        (task.percentage * 100).toInt().toString() + "%",
-        style: TextStyle(
-          fontSize: settings.getFontPercentageChildren(),
-          letterSpacing: 0.6,
-          fontWeight: FontWeight.bold,
-          color: settings.getFontTiles(),
-        ),
-      );
   }
 }
