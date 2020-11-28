@@ -73,11 +73,17 @@ class TaskItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  Row(
+                    children: [
+                      if (task.dateTime != null) DeadlineText(task.dateTime),
+                      Expanded(child: Container()),
+                      if (task.dateTime != null) CountdownText(task.dateTime),
+                    ],
+                  ),
                   task.children.isEmpty
                       ? CheckboxRow(task)
                       : PercentageRow(task),
-                  if (task.dateTime != null) DeadlineText(task.dateTime),
-                  if (task.dateTime != null) CountdownText(task.dateTime),
+
                   if (task.notes.isNotEmpty) NotesText(task.notes),
                 ],
               )),

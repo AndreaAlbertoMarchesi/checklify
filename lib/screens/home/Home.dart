@@ -11,6 +11,7 @@ import 'package:device_calendar/device_calendar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:checklist_app/utils/CalendarLoader.dart';
 
@@ -39,6 +40,7 @@ class HomeScreen extends StatelessWidget {
     final settings = context.watch<Settings>();
     int selectionLength = appState.getSelectedTasks().length;
 
+    const List<String> FONTS = ["Name", "Due Date"];
 
     if(settings.fullScreen)
       SystemChrome.setEnabledSystemUIOverlays([]);
@@ -77,6 +79,28 @@ class HomeScreen extends StatelessWidget {
           ),
           actions: <Widget>[
             Builder(
+                builder: (context) =>  PopupMenuButton(
+                  itemBuilder: (BuildContext context) {
+                    return FONTS.map((order) {
+                      return PopupMenuItem(
+                        value: order,
+                        child: Text(
+                          order,
+                          style: TextStyle(
+                            fontSize: settings.getFontSizeChildren(),
+                          ),
+                        ),
+                      );
+                    }).toList();
+                  },
+                  icon: Icon(Icons.sort),
+                  tooltip: "Order By",
+                  onSelected: (order) {
+                    appState.setTaskOrder(order);
+                  },
+                ),
+            ),
+            Builder(
                 builder: (context) => IconButton(
                     icon: Icon(
                       Icons.search_outlined,
@@ -85,7 +109,8 @@ class HomeScreen extends StatelessWidget {
                     ),
                     onPressed: () {
                       showSearch(context: context, delegate: Search());
-                    })),
+                    })
+            ),
           ],
         ),
         body: Column(

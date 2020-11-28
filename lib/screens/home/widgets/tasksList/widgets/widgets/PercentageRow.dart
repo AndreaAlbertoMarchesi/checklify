@@ -44,20 +44,29 @@ class PercentageRow extends StatelessWidget {
           } ,
         ),
         Padding(
-          padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-          child: CircularPercentIndicator(
-            radius: settings.getPercentageSizeChildren(),
-            lineWidth: 7.0,
-            percent: task.percentage.toDouble(),
-            animation: true,
-            animateFromLastPercent: true,
-            backgroundColor: Colors.transparent,
-            circularStrokeCap: CircularStrokeCap.round,
-            center: isCompleted(task.percentage.toDouble(), settings),
-            linearGradient: LinearGradient(colors: [
-              Colors.green[600],
-              Colors.lightGreen,
-            ]),
+          padding: EdgeInsets.fromLTRB(0, 6, 6, 6),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+              color: settings.getHighlightedColor(task.colorValue),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(15, 12, 15, 12),
+              child: CircularPercentIndicator(
+                radius: settings.getPercentageSizeChildren(),
+                lineWidth: 7.0,
+                percent: task.percentage.toDouble(),
+                animation: true,
+                animateFromLastPercent: true,
+                backgroundColor: Colors.transparent,
+                circularStrokeCap: CircularStrokeCap.round,
+                center: isCompleted(task.percentage.toDouble(), settings),
+                linearGradient: LinearGradient(colors: [
+                  Colors.green[600],
+                  Colors.lightGreen,
+                ]),
+              ),
+            ),
           ),
         ),
       ],

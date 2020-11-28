@@ -14,7 +14,7 @@ class ConfirmButton extends StatelessWidget {
     final settings = context.watch<Settings>();
     return IconButton(
       icon: Icon(
-        Icons.keyboard_arrow_down,
+        Icons.check,
         color: settings.getAppBarIcon(),
         size: 30,
       ),

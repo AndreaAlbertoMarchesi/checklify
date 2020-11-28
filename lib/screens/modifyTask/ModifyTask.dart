@@ -21,7 +21,7 @@ class ModifyTask extends StatefulWidget {
       ? _ModifyTaskState(
           isAdding: true,
           title: '',
-          color: Colors.grey[200],
+          color: Colors.blue[300],
           notes: '',
         )
       : _ModifyTaskState(
@@ -86,13 +86,101 @@ class _ModifyTaskState extends State<ModifyTask> {
         ),
       ),
       body: ListView(children: [
-        Form(key: _titleFormKey, child: TitleInput(title, isAdding, setTitle)),
-        ColorPicker(setColor, color),
-        Form(
-          key: _notesFormKey,
-          child: NotesInput(notes, isAdding, setNotes),
+        Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 15, 6, 6),
+                child: Text(
+                  "Title",
+                  style: TextStyle(
+                    fontSize: settings.getFontSizeChildren(),
+                    letterSpacing: 0.6,
+                    fontWeight: FontWeight.bold,
+                    color: settings.getFont(),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Form(key: _titleFormKey, child: TitleInput(title, isAdding, setTitle)),
+              ),
+            ],
+          ),
+            decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                      color: settings.getColor()
+                  ),
+                  bottom: BorderSide(
+                      color: settings.getColor()
+                  ),
+                )
+            )
         ),
-        DeadlineInput(setDeadline),
+        Container(
+            child: ColorPicker(setColor, color),
+            decoration: BoxDecoration(
+                border: Border(
+
+                  bottom: BorderSide(
+                      color: settings.getColor()
+                  ),
+                )
+            )
+        ),
+        Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 15, 6, 6),
+                child: Text(
+                  "Notes",
+                  style: TextStyle(
+                    fontSize: settings.getFontSizeChildren(),
+                    letterSpacing: 0.6,
+                    fontWeight: FontWeight.bold,
+                    color: settings.getFont(),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Form(
+                  key: _notesFormKey,
+                  child: NotesInput(notes, isAdding, setNotes),
+                ),
+              ),
+            ],
+          ),
+            decoration: BoxDecoration(
+                border: Border(
+
+                  bottom: BorderSide(
+                      color: settings.getColor()
+                  ),
+                )
+            )
+        ),
+
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 15, 6, 6),
+          child: Text(
+            "Due Date",
+            style: TextStyle(
+              fontSize: settings.getFontSizeChildren(),
+              letterSpacing: 0.6,
+              fontWeight: FontWeight.bold,
+              color: settings.getFont(),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: DeadlineInput(setDeadline),
+        ),
       ]),
     );
   }

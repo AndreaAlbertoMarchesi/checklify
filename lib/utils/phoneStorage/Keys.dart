@@ -7,4 +7,6 @@ class Keys{
   static const fullScreen = "fullScreen";
   static const notifications = "notifications";
   static const isPhotoFromGallery = "isPhotoFromGallery";
+  static const orderByName = "Name";
+  static const orderByDate = "Due Date";
 }

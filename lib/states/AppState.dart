@@ -1,6 +1,7 @@
 import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/models/supportClasses/TaskPath.dart';
 import 'package:checklist_app/utils/PhoneStorage.dart';
+import 'package:checklist_app/utils/phoneStorage/Keys.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'SelectionState.dart';
@@ -22,9 +23,8 @@ class AppState extends ChangeNotifier {
     });
   }
 
-  void setStarredTask(Task selectedTask, bool starred){
-    if(starred)
-      handleReorder(task.children.indexOf(selectedTask), 0);
+  void setStarredTask(Task selectedTask, bool starred) {
+    if (starred) handleReorder(task.children.indexOf(selectedTask), 0);
     selectedTask.isStarred = starred;
     _storage.writeData(root);
     notifyListeners();
@@ -65,7 +65,11 @@ class AppState extends ChangeNotifier {
   }
 
   void updateTask(Task task,
-      {num percentage, String title, int colorValue, String notes, DateTime deadline}) {
+      {num percentage,
+      String title,
+      int colorValue,
+      String notes,
+      DateTime deadline}) {
     if (percentage != null) {
       task.percentage = percentage;
       taskPath.updatePercentage();
@@ -73,7 +77,7 @@ class AppState extends ChangeNotifier {
     if (title != null) task.title = title;
     if (colorValue != null) task.colorValue = colorValue;
     if (notes != null) task.notes = notes;
-    if(deadline != null) task.dateTime = deadline;
+    if (deadline != null) task.dateTime = deadline;
 
     _storage.writeData(root);
     notifyListeners();
@@ -120,18 +124,18 @@ class AppState extends ChangeNotifier {
   }
 
   void handleReorder(int oldIndex, int newIndex) {
-    if(!task.children.elementAt(oldIndex).isStarred){
+    if (!task.children.elementAt(oldIndex).isStarred) {
       if (oldIndex < newIndex) {
         newIndex -= 1;
         final element = task.children.removeAt(oldIndex);
         task.children.insert(newIndex, element);
-      }else{
+      } else {
         int index = 0;
         task.children.forEach((element) {
-          if(element.isStarred) index++;
+          if (element.isStarred) index++;
         });
         final element = task.children.removeAt(oldIndex);
-        if( index > newIndex )
+        if (index > newIndex)
           task.children.insert(index, element);
         else
           task.children.insert(newIndex, element);
@@ -139,5 +143,20 @@ class AppState extends ChangeNotifier {
 
       notifyListeners();
     }
+  }
+  //TODO aggiungere controllo per le starred task
+  void setTaskOrder(order) {
+    if (order == Keys.orderByName) {
+      task.children.sort((a, b) {
+        //qui
+        return a.title.compareTo(b.title);
+      });
+    } else {
+      task.children.sort((a, b) {
+        //qui
+        return a.dateTime.compareTo(b.dateTime);
+      });
+    }
+    notifyListeners();
   }
 }

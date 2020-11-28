@@ -43,15 +43,21 @@ class CheckboxRow extends StatelessWidget {
                 } ,
         ),
         Padding(
-          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-          child: Checkbox(
-            activeColor: Colors.greenAccent[700],
-            checkColor: settings.getColor(),
-            value: task.percentage == 1,
-            onChanged: (bool value) {
-              appState.updateTask(task,
-                  percentage: task.percentage == 0 ? 1 : 0);
-            },
+          padding: EdgeInsets.fromLTRB(0, 6, 6, 6),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              color: settings.getHighlightedColor(task.colorValue),
+            ),
+            child: Checkbox(
+              activeColor: Colors.greenAccent[700],
+              checkColor: settings.getColor(),
+              value: task.percentage == 1,
+              onChanged: (bool value) {
+                appState.updateTask(task,
+                    percentage: task.percentage == 0 ? 1 : 0);
+              },
+            ),
           ),
         ),
       ],

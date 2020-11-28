@@ -13,13 +13,26 @@ class NotesText extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.all(9.0),
-      child: Text(
-        notes,
-        style: TextStyle(
-          letterSpacing: 0.5,
-          fontWeight: FontWeight.bold,
-          color: settings.getFontTiles(),
-        ),
+      child: Row(
+        children: [
+          Text(
+            "Notes: ",
+            style: TextStyle(
+              letterSpacing: 0.5,
+              fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.italic,
+              color: settings.getFontTiles(),
+            ),
+          ),
+          Text(
+            notes,
+            style: TextStyle(
+              letterSpacing: 0.5,
+              fontStyle: FontStyle.italic,
+              color: settings.getFontTiles(),
+            ),
+          ),
+        ],
       ),
     );
   }
