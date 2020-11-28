@@ -1,4 +1,3 @@
-import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/sharedWidgets/PercentageCircle.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';

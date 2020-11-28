@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CountdownText extends StatelessWidget {
-  CountdownText(this._dateTime);
+  CountdownText(this._deadline);
 
-  final DateTime _dateTime;
+  final DateTime _deadline;
 
   @override
   Widget build(BuildContext context) {
     final settings = context.watch<Settings>();
 
-    final Duration countdown = _dateTime.difference(DateTime.now());
+    final Duration countdown = _deadline.difference(DateTime.now());
     return Padding(
       padding: const EdgeInsets.all(9.0),
       child: Container(
