@@ -39,9 +39,9 @@ class _Styles {
 
   static Color getColor(bool isDarkTheme){
     if(isDarkTheme){
-      return Colors.grey[800];
+      return Colors.blueGrey[800];
     }else{
-      return Colors.lightBlue[50];
+      return Colors.blue[300];
     }
   }
 
@@ -79,11 +79,20 @@ class _Styles {
       return Colors.black54;
     }
   }
+
+  static Color getShadowParent(bool isDarkTheme){
+    if(isDarkTheme){
+      return Colors.grey[900];
+    }else{
+      return Colors.blue[600];
+    }
+  }
+
   static Color getBorder(bool isDarkTheme){
     if(isDarkTheme){
       return Colors.black12;
     }else{
-      return Colors.lightBlue[100];
+      return Colors.lightBlue[300];
     }
   }
   static Color getSideMenu(bool isDarkTheme){
@@ -240,8 +249,8 @@ class _Styles {
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(
       primarySwatch: Colors.blue,
-      scaffoldBackgroundColor: isDarkTheme? Color(0xff121212) : Colors.white,
-      canvasColor: isDarkTheme ? Color(0xff121212) : Colors.lightBlue[50] ,
+      scaffoldBackgroundColor: isDarkTheme? Color(0xff121212) : Colors.lightBlue[100],
+      canvasColor: isDarkTheme ? Color(0xff121212) : Colors.lightBlue[100] ,
 
       textTheme: TextTheme().apply(
         bodyColor: isDarkTheme ? Colors.black : Colors.black,
@@ -257,7 +266,7 @@ class _Styles {
 
 
       disabledColor: Colors.grey,
-      cardColor: isDarkTheme ? Color(0xFF151515) : Colors.white,
+      cardColor: isDarkTheme ? Color(0xFF151515) : Colors.lightBlue[100],
       unselectedWidgetColor: isDarkTheme ? Colors.black54 : Colors.black54 ,
 
       floatingActionButtonTheme: FloatingActionButtonThemeData(foregroundColor: Colors.white,),

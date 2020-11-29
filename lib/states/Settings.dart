@@ -93,6 +93,8 @@ class Settings with ChangeNotifier {
 
   Color getBorder() => _Styles.getBorder(darkTheme);
 
+  Color getShadowParent() => _Styles.getShadowParent(darkTheme);
+
   Color getSideMenu() => _Styles.getSideMenu(darkTheme);
 
   Color getAppBarIcon() => _Styles.getAppBarIcon(darkTheme);

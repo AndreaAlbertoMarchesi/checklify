@@ -81,7 +81,7 @@ class _ModifyTaskState extends State<ModifyTask> {
             fontSize: settings.getFontSizeChildren(),
             letterSpacing: 0.6,
             fontWeight: FontWeight.bold,
-            color: settings.getFont(),
+            color: settings.getAppBarIcon(),
           ),
         ),
       ),

@@ -7,13 +7,10 @@ import 'package:checklist_app/screens/home/widgets/tasksList/TasksList.dart';
 import 'package:checklist_app/screens/intro/IntroApp.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
-import 'package:device_calendar/device_calendar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
-import 'package:checklist_app/utils/CalendarLoader.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -88,12 +85,19 @@ class HomeScreen extends StatelessWidget {
                           order,
                           style: TextStyle(
                             fontSize: settings.getFontSizeChildren(),
+                            letterSpacing: 0.5,
+                            fontWeight: FontWeight.bold,
+                            color: settings.getFont(),
                           ),
                         ),
                       );
                     }).toList();
                   },
-                  icon: Icon(Icons.sort),
+                  icon: Icon(
+                      Icons.sort,
+                    color: settings.getAppBarIcon(),
+                    size: 30,
+                  ),
                   tooltip: "Order By",
                   onSelected: (order) {
                     appState.setTaskOrder(order);

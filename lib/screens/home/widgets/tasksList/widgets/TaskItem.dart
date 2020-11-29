@@ -47,10 +47,10 @@ class TaskItem extends StatelessWidget {
         },
         child: Card(
           elevation: 0,
-          margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
+          margin: EdgeInsets.fromLTRB(13, 5, 13, 5),
           child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(12),
                 color: isSelected
                     ? (task.colorValue != null
                         ? settings.getHighlightedColor(task.colorValue)
@@ -61,15 +61,12 @@ class TaskItem extends StatelessWidget {
                 boxShadow: [
                   BoxShadow(
                       color: settings.getHighlightedColor(task.colorValue),
-                      spreadRadius: 2),
+                    blurRadius: 2.0,
+                    spreadRadius: 0.0,
+                    offset: Offset(2.0, 2.0),
+                  ),
                 ],
               ),
-              // fixed constraints on widgets are probably not ideal cause widgets needs to be resizable
-
-              /*
-            constraints: BoxConstraints(
-                maxHeight: settings.getTileSizeChildren()),
-              */
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,

@@ -29,6 +29,7 @@ class TitleInput extends StatelessWidget {
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: settings.getBorder(), width: 2.0),
         ),
+
       ),
       validator: (val) => (val.isEmpty | (val.length > 15))
           ? 'Enter a valid name ( not too long )'

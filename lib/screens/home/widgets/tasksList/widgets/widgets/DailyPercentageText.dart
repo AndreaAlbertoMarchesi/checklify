@@ -15,16 +15,19 @@ class DailyPercentageText extends StatelessWidget {
     int intPercentage = (percentage * 100).round();
 
     final Duration countdown = _deadline.difference(DateTime.now());
-    return Text(
-      "Daily percentage: " +
-          (countdown.inDays > 1
-                  ? intPercentage / countdown.inDays
-                  : intPercentage)
-              .toString(),
-      style: TextStyle(
-        letterSpacing: 0.5,
-        fontWeight: FontWeight.bold,
-        color: settings.getFontTiles(),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(
+        "Daily percentage: " +
+            (countdown.inDays >= 1
+                    ? intPercentage / countdown.inDays
+                    : intPercentage)
+                .toString(),
+        style: TextStyle(
+          letterSpacing: 0.5,
+          fontWeight: FontWeight.bold,
+          color: settings.getFontTiles(),
+        ),
       ),
     );
   }

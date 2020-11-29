@@ -48,8 +48,16 @@ class PercentageRow extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(0, 6, 6, 6),
           child: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(50),
-              color: settings.getHighlightedColor(task.colorValue),
+              color: Colors.white54,
+              borderRadius: BorderRadius.circular(40),
+              boxShadow: [
+                BoxShadow(
+                  color: settings.getHighlightedColor(task.colorValue),
+                  blurRadius: 2.0,
+                  spreadRadius: 0.0,
+                  offset: Offset(2.0, 2.0),
+                ),
+              ],
             ),
             child: Padding(
               padding: const EdgeInsets.fromLTRB(15, 12, 15, 12),

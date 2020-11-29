@@ -20,14 +20,14 @@ class CountdownText extends StatelessWidget {
           borderRadius: BorderRadius.circular(5),
           color: countdown.inDays > 2
               ? Colors.lightGreen
-              : countdown.inDays <= 1
+              : countdown.inDays < 1
               ? Colors.redAccent
               : Colors.orangeAccent,
         ),
         child: Padding(
           padding: const EdgeInsets.all(2.0),
           child: Text(
-            countdown.inDays > 1
+            countdown.inDays >= 1
                 ? "Days left: " + countdown.inDays.toString()
                 : "Hours left: " + countdown.inHours.toString(),
             style: TextStyle(
