@@ -1,10 +1,9 @@
-import 'file:///C:/Users/AndreaMarchesi/AndroidStudioProjects/checklify/lib/screens/home/widgets/tasksList/widgets/widgets/Items/CountdownText.dart';
-import 'file:///C:/Users/AndreaMarchesi/AndroidStudioProjects/checklify/lib/screens/home/widgets/tasksList/widgets/widgets/Items/DeadlineText.dart';
+import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/Items/CountdownText.dart';
+import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/Items/DeadlineText.dart';
 import 'package:checklist_app/sharedWidgets/PercentageCircle.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
 class ParentTaskItem extends StatelessWidget {
@@ -36,9 +35,9 @@ class ParentTaskItem extends StatelessWidget {
           children: [
             Row(
               children: [
-                if (appState.task.dateTime != null) DeadlineText(appState.task.dateTime),
+                if (appState.task.deadline != null) DeadlineText(appState.task.deadline),
                 Expanded(child: Container()),
-                if (appState.task.dateTime != null) CountdownText(appState.task.dateTime),
+                if (appState.task.deadline != null) CountdownText(appState.task.deadline),
               ],
             ),
 

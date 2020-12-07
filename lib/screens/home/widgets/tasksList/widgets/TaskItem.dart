@@ -22,7 +22,7 @@ class TaskItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
     final settings = context.watch<Settings>();
-    bool isSelected = appState.getSelectedTasks().contains(task);
+    bool isSelected = appState.isSelected(task);
 
     return InkWell(
       child: SwipeTo(
@@ -72,16 +72,16 @@ class TaskItem extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      if (task.dateTime != null) DeadlineText(task.dateTime),
+                      if (task.deadline != null) DeadlineText(task.deadline),
                       Expanded(child: Container()),
-                      if (task.dateTime != null) CountdownText(task.dateTime),
+                      if (task.deadline != null) CountdownText(task.deadline),
                     ],
                   ),
                   PercentageRow(task),
 
                   if (task.notes.isNotEmpty) NotesText(task.notes),
 
-                  if (task.dateTime != null) DailyPercentageText(task.dateTime, task.percentage),
+                  if (task.deadline != null) DailyPercentageText(task.deadline, task.percentage),
                 ],
               )),
         ),

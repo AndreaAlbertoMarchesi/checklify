@@ -73,7 +73,7 @@ class SideMenu extends StatelessWidget {
                 ],
               ),
             ),
-            if (appState.getSelectedTasks().isNotEmpty) SelectionList(),
+            if (appState.getSelectedTaskWithPaths().isNotEmpty) SelectionList(),
           ],
         ),
       ),

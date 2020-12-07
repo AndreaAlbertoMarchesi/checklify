@@ -1,5 +1,6 @@
 import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/models/supportClasses/TaskPath.dart';
+import 'package:checklist_app/models/supportClasses/TaskWithPath.dart';
 import 'package:checklist_app/utils/PhoneStorage.dart';
 import 'package:checklist_app/utils/phoneStorage/Keys.dart';
 import 'package:flutter/cupertino.dart';
@@ -31,7 +32,7 @@ class AppState extends ChangeNotifier {
   }
 
   void selectTask(Task task) {
-    if (!_selectionState.hasSelected(task))
+    if (!_selectionState.isSelected(task))
       _selectionState.select(task, taskPath.getCopy());
     notifyListeners();
   }
@@ -43,8 +44,12 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<Task> getSelectedTasks() {
-    return _selectionState.tasks;
+  List<TaskWithPath> getSelectedTaskWithPaths() {
+    return _selectionState.taskWithPaths;
+  }
+
+  bool isSelected([Task task]){
+    return _selectionState.isSelected(task);
   }
 
   void addTask(String title,
@@ -58,7 +63,7 @@ class AppState extends ChangeNotifier {
     Task createdTask = Task(title,
         colorValue: colorValue,
         notes: notes,
-        dateTime: dateTime,
+        deadline: dateTime,
         isStarred: isStarred,
         progressType: progressType,
         counterMax: counterMax);
@@ -93,7 +98,7 @@ class AppState extends ChangeNotifier {
     if (title != null) task.title = title;
     if (colorValue != null) task.colorValue = colorValue;
     if (notes != null) task.notes = notes;
-    if (deadline != null) task.dateTime = deadline;
+    if (deadline != null) task.deadline = deadline;
     if (isStarred != null) task.isStarred = isStarred;
     if (progressType != null) task.progressType = progressType;
     if(counterMax != null) task.counterMax = counterMax;
@@ -126,13 +131,15 @@ class AppState extends ChangeNotifier {
     this.task = task;
     if (taskPath == null)
       this.taskPath.add(task);
-    else
+    else {
+      taskPath.add(task);
       this.taskPath = taskPath;
+    }
     notifyListeners();
   }
 
   void moveTask() {
-    task.children.addAll(_selectionState.tasks);
+    task.children.addAll(_selectionState.getTasks());
     taskPath.updatePercentage();
 
     _selectionState.removeTasksFromOldParents();
@@ -174,7 +181,7 @@ class AppState extends ChangeNotifier {
     } else {
       task.children.sort((a, b) {
         //qui
-        return a.dateTime.compareTo(b.dateTime);
+        return a.deadline.compareTo(b.deadline);
       });
     }
     notifyListeners();

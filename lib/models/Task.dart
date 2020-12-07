@@ -1,4 +1,4 @@
-import 'package:checklist_app/models/supportClasses/SearchedTask.dart';
+import 'package:checklist_app/models/supportClasses/TaskWithPath.dart';
 import 'package:checklist_app/models/supportClasses/TaskPath.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -25,14 +25,14 @@ class Task {
   String notes;
   num percentage = 0;
   int colorValue;
-  DateTime dateTime;
+  DateTime deadline;
   bool isStarred = false;
   ProgressType progressType;
   int counterMax;
 
   static final Task emptyRoot = Task("⌂");
 
-  Task(this.title,{this.notes, this.colorValue, this.dateTime, this.isStarred, this.progressType, this.counterMax});
+  Task(this.title,{this.notes, this.colorValue, this.deadline, this.isStarred, this.progressType, this.counterMax});
 
   void updatePercentage() {
     percentage = 0;
@@ -44,17 +44,32 @@ class Task {
 
   Map<String, dynamic> toJson() => _$TaskToJson(this);
 
-  List<SearchedTask> searchTasks(String searchInput, TaskPath taskPath) {
-    var foundTasks = List<SearchedTask>();
+  List<TaskWithPath> searchTasks(String searchInput, TaskPath taskPath) {
+    var foundTasks = List<TaskWithPath>();
 
     children.forEach((child) {
       var childPath = taskPath.getCopy();
       childPath.add(this);
 
       if (child.title.contains(searchInput))
-        foundTasks.add(SearchedTask(child, childPath));
+        foundTasks.add(TaskWithPath(child, childPath));
 
       foundTasks.addAll(child.searchTasks(searchInput, childPath));
+    });
+    return foundTasks;
+  }
+
+  List<TaskWithPath> getTimelineTasks(TaskPath taskPath) {
+    var foundTasks = List<TaskWithPath>();
+
+    children.forEach((child) {
+      var childPath = taskPath.getCopy();
+      childPath.add(this);
+
+      if (child.deadline!=null)
+        foundTasks.add(TaskWithPath(child, childPath));
+
+      foundTasks.addAll(child.getTimelineTasks(childPath));
     });
     return foundTasks;
   }

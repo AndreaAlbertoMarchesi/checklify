@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
     final settings = context.watch<Settings>();
-    int selectionLength = appState.getSelectedTasks().length;
+    int selectionLength = appState.getSelectedTaskWithPaths().length;
 
     const List<String> FONTS = ["Name", "Due Date"];
 

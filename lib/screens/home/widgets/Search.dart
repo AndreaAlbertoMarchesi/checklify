@@ -1,4 +1,4 @@
-import 'package:checklist_app/models/supportClasses/SearchedTask.dart';
+import 'package:checklist_app/models/supportClasses/TaskWithPath.dart';
 import 'package:checklist_app/models/supportClasses/TaskPath.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
@@ -59,7 +59,7 @@ class Search extends SearchDelegate {
     final appState = context.watch<AppState>();
     final settings = context.watch<Settings>();
 
-    List<SearchedTask> searchedTasks;
+    List<TaskWithPath> searchedTasks;
 
     //if (query.isEmpty)
     //suggestionList = recentList;
@@ -72,7 +72,7 @@ class Search extends SearchDelegate {
     return ListView.builder(
         itemCount: searchedTasks.length,
         itemBuilder: (context, index) {
-          SearchedTask searchedTask = searchedTasks[index];
+          TaskWithPath searchedTask = searchedTasks[index];
           return Container(
             child: ListTile(
               title: Text(

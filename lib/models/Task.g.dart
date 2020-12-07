@@ -11,9 +11,9 @@ Task _$TaskFromJson(Map<String, dynamic> json) {
     json['title'] as String,
     notes: json['notes'] as String,
     colorValue: json['colorValue'] as int,
-    dateTime: json['dateTime'] == null
+    deadline: json['deadline'] == null
         ? null
-        : DateTime.parse(json['dateTime'] as String),
+        : DateTime.parse(json['deadline'] as String),
     isStarred: json['isStarred'] as bool,
     progressType:
         _$enumDecodeNullable(_$ProgressTypeEnumMap, json['progressType']),
@@ -32,7 +32,7 @@ Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
       'notes': instance.notes,
       'percentage': instance.percentage,
       'colorValue': instance.colorValue,
-      'dateTime': instance.dateTime?.toIso8601String(),
+      'deadline': instance.deadline?.toIso8601String(),
       'isStarred': instance.isStarred,
       'progressType': _$ProgressTypeEnumMap[instance.progressType],
       'counterMax': instance.counterMax,

@@ -1,3 +1,4 @@
+import 'package:checklist_app/screens/home/widgets/sideMenu/widgets/selectionList/widgets/SelectionListTile.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,12 +11,17 @@ class SelectionList extends StatelessWidget {
     final appState = context.watch<AppState>();
 
     return Expanded(
-      child: ListView(
-        children: appState
-            .getSelectedTasks()
-            .map((task) => SelectionItem(task))
-            .toList(),
-      ),
+      child: Column(children: [
+        SelectionListTile(),
+        Expanded(
+          child: ListView(
+            children: appState
+                .getSelectedTaskWithPaths()
+                .map((task) => SelectionItem(task))
+                .toList(),
+          ),
+        ),
+      ]),
     );
   }
 }

@@ -1,44 +1,35 @@
+import 'package:checklist_app/models/supportClasses/TaskWithPath.dart';
+
 import '../models/Task.dart';
 import '../models/supportClasses/TaskPath.dart';
 
 class SelectionState {
 
-  List<TaskPath> taskPaths = List<TaskPath>();
-  List<Task> tasks = List<Task>();
+  List<TaskWithPath> taskWithPaths = List<TaskWithPath>();
 
-  bool hasSelected([Task task]){
+  bool isSelected([Task task]){
     if(task==null)
-      return tasks.length>0;
+      return getTasks().length>0;
     else
-      return tasks.contains(task);
+      return getTasks().contains(task);
   }
 
-  void select(Task task, TaskPath taskPath){
-    tasks.add(task);
-    taskPaths.add(taskPath);
-  }
+  void select(Task task, TaskPath taskPath)=> taskWithPaths.add(TaskWithPath(task, taskPath));
 
 
-  void deselect(Task task){
-    taskPaths.removeAt(tasks.indexOf(task));
-    tasks.remove(task);
-  }
+  void deselect(Task task)=> taskWithPaths.removeWhere((e) => e.task == task);
 
-  void clearSelection(){
-    tasks.clear();
-    taskPaths.clear();
-  }
+  void clearSelection()=> taskWithPaths.clear();
 
   void removeTasksFromOldParents(){
-    for(int i = 0; i < tasks.length; i++){
-      TaskPath taskPath = taskPaths[i];
-      taskPath.getLastTask().children.remove(tasks[i]);
-      taskPath.updatePercentage();
-    }
+    taskWithPaths.forEach((e) {
+      e.taskPath.getLastTask().children.remove(e.task);
+      e.taskPath.updatePercentage();
+    });
   }
 
-  int getLength(){
-    return tasks.length;
-  }
+  List<Task> getTasks()=> taskWithPaths.map((e) => e.task).toList();
+
+  int getLength()=> taskWithPaths.length;
 
 }

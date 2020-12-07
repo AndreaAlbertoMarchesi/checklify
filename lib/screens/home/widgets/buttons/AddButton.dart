@@ -7,7 +7,7 @@ class AddButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
-    if (appState.getSelectedTasks().isEmpty) {
+    if (!appState.isSelected()) {
       return Padding(
         //padding: const EdgeInsets.fromLTRB(15,15,15,70 ),
         padding: const EdgeInsets.all(15.0),
