@@ -34,9 +34,7 @@ class TitleInput extends StatelessWidget {
       validator: (val) => (val.isEmpty | (val.length > 15))
           ? 'Enter a valid name ( not too long )'
           : null,
-      onChanged: (val) {
-        setTitle(val);
-      },
+      onChanged: (val) => setTitle(val),
     );
   }
 }

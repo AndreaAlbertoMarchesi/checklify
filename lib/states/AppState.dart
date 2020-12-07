@@ -48,9 +48,21 @@ class AppState extends ChangeNotifier {
   }
 
   void addTask(String title,
-      {int colorValue, String notes, DateTime dateTime}) {
-    Task createdTask =
-        Task(title, colorValue: colorValue, notes: notes, dateTime: dateTime);
+      {int colorValue,
+      String notes,
+      DateTime dateTime,
+      bool isStarred,
+      ProgressType progressType,
+      int counterMax}) {
+
+    Task createdTask = Task(title,
+        colorValue: colorValue,
+        notes: notes,
+        dateTime: dateTime,
+        isStarred: isStarred,
+        progressType: progressType,
+        counterMax: counterMax);
+
     task.children.add(createdTask);
     taskPath.updatePercentage();
     _storage.writeData(root);
@@ -69,7 +81,11 @@ class AppState extends ChangeNotifier {
       String title,
       int colorValue,
       String notes,
-      DateTime deadline}) {
+      DateTime deadline,
+      bool isStarred,
+      ProgressType progressType,
+      int counterMax}) {
+
     if (percentage != null) {
       task.percentage = percentage;
       taskPath.updatePercentage();
@@ -78,6 +94,9 @@ class AppState extends ChangeNotifier {
     if (colorValue != null) task.colorValue = colorValue;
     if (notes != null) task.notes = notes;
     if (deadline != null) task.dateTime = deadline;
+    if (isStarred != null) task.isStarred = isStarred;
+    if (progressType != null) task.progressType = progressType;
+    if(counterMax != null) task.counterMax = counterMax;
 
     _storage.writeData(root);
     notifyListeners();
@@ -144,6 +163,7 @@ class AppState extends ChangeNotifier {
       notifyListeners();
     }
   }
+
   //TODO aggiungere controllo per le starred task
   void setTaskOrder(order) {
     if (order == Keys.orderByName) {

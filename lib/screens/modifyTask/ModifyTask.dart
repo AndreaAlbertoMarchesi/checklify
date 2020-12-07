@@ -4,6 +4,8 @@ import 'package:checklist_app/screens/modifyTask/widgets/buttons/ConfirmButton.d
 import 'package:checklist_app/screens/modifyTask/widgets/inputs/ColorPicker.dart';
 import 'package:checklist_app/screens/modifyTask/widgets/inputs/DeadlineInput.dart';
 import 'package:checklist_app/screens/modifyTask/widgets/inputs/NotesInput.dart';
+import 'package:checklist_app/screens/modifyTask/widgets/inputs/ProgressTypeInput.dart';
+import 'package:checklist_app/screens/modifyTask/widgets/inputs/StarInput.dart';
 import 'package:checklist_app/screens/modifyTask/widgets/inputs/TitleInput.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
@@ -23,23 +25,31 @@ class ModifyTask extends StatefulWidget {
           title: '',
           color: Colors.blue[300],
           notes: '',
+          isStarred: false,
+          progressType: ProgressType.checkbox,
         )
       : _ModifyTaskState(
           isAdding: false,
           title: task.title,
           color: Color(task.colorValue),
           notes: task.notes,
+          isStarred: task.isStarred,
+          progressType: task.progressType,
         );
 }
 
 class _ModifyTaskState extends State<ModifyTask> {
-  _ModifyTaskState({this.isAdding, this.title, this.color, this.notes});
+  _ModifyTaskState({this.isAdding, this.title, this.color, this.notes, this.isStarred, this.progressType});
 
   final bool isAdding;
   String title;
   Color color;
   String notes;
   DateTime deadline;
+  bool isStarred;
+  ProgressType progressType = ProgressType.checkbox;
+  int counterMax;
+
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +61,7 @@ class _ModifyTaskState extends State<ModifyTask> {
     void addTask() {
       if (_titleFormKey.currentState.validate()) {
         appState.addTask(title,
-            colorValue: color.value, notes: notes, dateTime: deadline);
+            colorValue: color.value, notes: notes, dateTime: deadline, isStarred: isStarred, progressType: progressType, counterMax: counterMax);
         Navigator.of(context).pop();
       } else if (settings.vibrate) Vibration.vibrate(duration: 80);
     }
@@ -64,6 +74,9 @@ class _ModifyTaskState extends State<ModifyTask> {
           title: title,
           colorValue: color.value,
           deadline: deadline,
+          isStarred: isStarred,
+          progressType: progressType,
+          counterMax: counterMax,
         );
         Navigator.pop(context);
       } else if (settings.vibrate) Vibration.vibrate(duration: 80);
@@ -87,84 +100,69 @@ class _ModifyTaskState extends State<ModifyTask> {
       ),
       body: ListView(children: [
         Container(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(15, 15, 6, 6),
-                child: Text(
-                  "Title",
-                  style: TextStyle(
-                    fontSize: settings.getFontSizeChildren(),
-                    letterSpacing: 0.6,
-                    fontWeight: FontWeight.bold,
-                    color: settings.getFont(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 15, 6, 6),
+                  child: Text(
+                    "Title",
+                    style: TextStyle(
+                      fontSize: settings.getFontSizeChildren(),
+                      letterSpacing: 0.6,
+                      fontWeight: FontWeight.bold,
+                      color: settings.getFont(),
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Form(key: _titleFormKey, child: TitleInput(title, isAdding, setTitle)),
-              ),
-            ],
-          ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Form(
+                      key: _titleFormKey,
+                      child: TitleInput(title, isAdding, setTitle)),
+                ),
+              ],
+            ),
             decoration: BoxDecoration(
                 border: Border(
-                  top: BorderSide(
-                      color: settings.getColor()
-                  ),
-                  bottom: BorderSide(
-                      color: settings.getColor()
-                  ),
-                )
-            )
-        ),
+              top: BorderSide(color: settings.getColor()),
+              bottom: BorderSide(color: settings.getColor()),
+            ))),
         Container(
             child: ColorPicker(setColor, color),
             decoration: BoxDecoration(
                 border: Border(
-
-                  bottom: BorderSide(
-                      color: settings.getColor()
-                  ),
-                )
-            )
-        ),
+              bottom: BorderSide(color: settings.getColor()),
+            ))),
         Container(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 15, 6, 6),
-                child: Text(
-                  "Notes",
-                  style: TextStyle(
-                    fontSize: settings.getFontSizeChildren(),
-                    letterSpacing: 0.6,
-                    fontWeight: FontWeight.bold,
-                    color: settings.getFont(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 15, 6, 6),
+                  child: Text(
+                    "Notes",
+                    style: TextStyle(
+                      fontSize: settings.getFontSizeChildren(),
+                      letterSpacing: 0.6,
+                      fontWeight: FontWeight.bold,
+                      color: settings.getFont(),
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Form(
-                  key: _notesFormKey,
-                  child: NotesInput(notes, isAdding, setNotes),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Form(
+                    key: _notesFormKey,
+                    child: NotesInput(notes, isAdding, setNotes),
+                  ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
             decoration: BoxDecoration(
                 border: Border(
-
-                  bottom: BorderSide(
-                      color: settings.getColor()
-                  ),
-                )
-            )
-        ),
-
+              bottom: BorderSide(color: settings.getColor()),
+            ))),
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 15, 6, 6),
           child: Text(
@@ -181,6 +179,8 @@ class _ModifyTaskState extends State<ModifyTask> {
           padding: const EdgeInsets.all(8.0),
           child: DeadlineInput(setDeadline),
         ),
+        StarInput(isStarred, setStar),
+        ProgressTypeInput(progressType, setProgressType, counterMax, setCounterMax),
       ]),
     );
   }
@@ -198,7 +198,26 @@ class _ModifyTaskState extends State<ModifyTask> {
   }
 
   setDeadline(DateTime deadline) {
-    print("yo" + deadline.toString());
     this.deadline = deadline;
+  }
+
+  setStar(bool isStarred){
+    setState(() {
+      this.isStarred = isStarred;
+    });
+  }
+
+  setProgressType(ProgressType progressType){
+    setState(() {
+      this.progressType = progressType;
+      if(progressType==ProgressType.counter)
+        counterMax=1;
+    });
+  }
+
+  setCounterMax(int counterMax){
+    setState(() {
+      this.counterMax = counterMax;
+    });
   }
 }

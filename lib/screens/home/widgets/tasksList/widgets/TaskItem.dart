@@ -1,10 +1,9 @@
 import 'package:checklist_app/models/Task.dart';
-import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/CheckboxRow.dart';
-import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/CountdownText.dart';
-import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/DailyPercentageText.dart';
-import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/DeadlineText.dart';
-import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/NotesText.dart';
-import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/PercentageRow.dart';
+import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/Items/CountdownText.dart';
+import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/Items/DailyPercentageText.dart';
+import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/Items/DeadlineText.dart';
+import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/Items/NotesText.dart';
+import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/Items/percentageRow/PercentageRow.dart';
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/dialogs/DeleteDialog.dart';
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/dialogs/UpdateDialog.dart';
 import 'package:checklist_app/states/AppState.dart';
@@ -78,9 +77,7 @@ class TaskItem extends StatelessWidget {
                       if (task.dateTime != null) CountdownText(task.dateTime),
                     ],
                   ),
-                  task.children.isEmpty
-                      ? CheckboxRow(task)
-                      : PercentageRow(task),
+                  PercentageRow(task),
 
                   if (task.notes.isNotEmpty) NotesText(task.notes),
 

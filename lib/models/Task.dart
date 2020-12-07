@@ -13,6 +13,11 @@ flutter pub run build_runner build --delete-conflicting-outputs
 
  */
 
+enum ProgressType{
+  checkbox,
+  counter,
+  slider,
+}
 @JsonSerializable(explicitToJson: true)
 class Task {
   List<Task> children = List<Task>();
@@ -22,10 +27,12 @@ class Task {
   int colorValue;
   DateTime dateTime;
   bool isStarred = false;
+  ProgressType progressType;
+  int counterMax;
 
   static final Task emptyRoot = Task("⌂");
 
-  Task(this.title,{this.notes, this.colorValue, this.dateTime});
+  Task(this.title,{this.notes, this.colorValue, this.dateTime, this.isStarred, this.progressType, this.counterMax});
 
   void updatePercentage() {
     percentage = 0;

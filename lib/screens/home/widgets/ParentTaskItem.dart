@@ -1,5 +1,5 @@
-import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/CountdownText.dart';
-import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/DeadlineText.dart';
+import 'file:///C:/Users/AndreaMarchesi/AndroidStudioProjects/checklify/lib/screens/home/widgets/tasksList/widgets/widgets/Items/CountdownText.dart';
+import 'file:///C:/Users/AndreaMarchesi/AndroidStudioProjects/checklify/lib/screens/home/widgets/tasksList/widgets/widgets/Items/DeadlineText.dart';
 import 'package:checklist_app/sharedWidgets/PercentageCircle.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
@@ -57,42 +57,7 @@ class ParentTaskItem extends StatelessWidget {
                   ),
                 ),
                 Expanded(child: Container()),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 6, 6, 6),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white54,
-                      borderRadius: BorderRadius.circular(30),
-                      boxShadow: [
-                        BoxShadow(
-                          color: appState.task.colorValue != null
-                              ? settings.getHighlightedColor(appState.task.colorValue)
-                              : settings.getShadowParent(),
-                          blurRadius: 2.0,
-                          spreadRadius: 0.0,
-                          offset: Offset(2.0, 2.0),
-                        ),
-                      ],
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(10, 9, 10, 9),
-                      child: CircularPercentIndicator(
-                        radius: settings.getPercentageSizeParent(),
-                        lineWidth: 8.0,
-                        percent: appState.task.percentage.toDouble(),
-                        animation: true,
-                        animateFromLastPercent: true,
-                        backgroundColor: Colors.transparent,
-                        circularStrokeCap: CircularStrokeCap.round,
-                        center: PercentageCircle(appState.task.percentage),
-                        linearGradient: LinearGradient(colors: [
-                          Colors.green[600],
-                          Colors.lightGreen,
-                        ]),
-                      ),
-                    ),
-                  ),
-                ),
+                PercentageCircle(appState.task),
               ],
             ),
           ],

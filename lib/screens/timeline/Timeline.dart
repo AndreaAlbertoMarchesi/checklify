@@ -1,13 +1,7 @@
 import 'package:cell_calendar/cell_calendar.dart';
-import 'package:checklist_app/screens/intro/IntroApp.dart';
-import 'package:checklist_app/states/Settings.dart';
 
-//import 'package:device_calendar/device_calendar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:checklist_app/utils/CalendarLoader.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 /*
  @override
@@ -102,6 +96,43 @@ class Timeline extends StatelessWidget {
     );
   }
 }
+
+/*
+
+  final DeviceCalendarPlugin _deviceCalendarPlugin = DeviceCalendarPlugin();
+  var calendarsResult;
+  List<Calendar> _calendars;
+
+  fun() async {
+    calendarsResult = await _deviceCalendarPlugin.retrieveCalendars();
+    _calendars = calendarsResult?.data;
+  }
+
+  @override
+  initState() {
+    super.initState();
+    fun();
+  }
+
+
+    print(_calendars[2].name);
+    _deviceCalendarPlugin.createOrUpdateEvent(Event(
+      _calendars[2].id,
+      title: "yo",
+      start: DateTime(
+        2021,
+        1,
+        1,
+      ),
+      end: DateTime(
+        2021,
+        1,
+        2,
+      ),
+      allDay: true,
+    ));
+*
+* */
 
 /*
 
