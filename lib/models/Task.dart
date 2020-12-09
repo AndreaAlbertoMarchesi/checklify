@@ -13,11 +13,25 @@ flutter pub run build_runner build --delete-conflicting-outputs
 
  */
 
-enum ProgressType{
+enum ProgressType {
   checkbox,
   counter,
   slider,
 }
+
+@JsonSerializable()
+class TaskNotification {
+  TaskNotification(this.dateTime, this.id);
+
+  DateTime dateTime;
+  int id;
+
+  factory TaskNotification.fromJson(Map<String, dynamic> json) =>
+      _$TaskNotificationFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TaskNotificationToJson(this);
+}
+
 @JsonSerializable(explicitToJson: true)
 class Task {
   List<Task> children = List<Task>();
@@ -26,13 +40,21 @@ class Task {
   num percentage = 0;
   int colorValue;
   DateTime deadline;
+  TaskNotification notification;
   bool isStarred = false;
   ProgressType progressType;
   int counterMax;
 
   static final Task emptyRoot = Task("⌂");
 
-  Task(this.title,{this.notes, this.colorValue, this.deadline, this.isStarred, this.progressType, this.counterMax});
+  Task(this.title,
+      {this.notes,
+      this.colorValue,
+      this.deadline,
+      this.notification,
+      this.isStarred,
+      this.progressType,
+      this.counterMax});
 
   void updatePercentage() {
     percentage = 0;
@@ -66,7 +88,7 @@ class Task {
       var childPath = taskPath.getCopy();
       childPath.add(this);
 
-      if (child.deadline!=null)
+      if (child.deadline != null)
         foundTasks.add(TaskWithPath(child, childPath));
 
       foundTasks.addAll(child.getTimelineTasks(childPath));

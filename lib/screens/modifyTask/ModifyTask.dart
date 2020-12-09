@@ -1,7 +1,9 @@
 import 'package:checklist_app/models/Task.dart';
+import 'package:checklist_app/models/supportClasses/TaskValues.dart';
 import 'package:checklist_app/screens/modifyTask/widgets/buttons/CancelButton.dart';
 import 'package:checklist_app/screens/modifyTask/widgets/buttons/ConfirmButton.dart';
 import 'package:checklist_app/screens/modifyTask/widgets/inputs/ColorPicker.dart';
+import 'package:checklist_app/screens/modifyTask/widgets/inputs/DateTimeNotificationInput.dart';
 import 'package:checklist_app/screens/modifyTask/widgets/inputs/DeadlineInput.dart';
 import 'package:checklist_app/screens/modifyTask/widgets/inputs/NotesInput.dart';
 import 'package:checklist_app/screens/modifyTask/widgets/inputs/ProgressTypeInput.dart';
@@ -22,34 +24,19 @@ class ModifyTask extends StatefulWidget {
   _ModifyTaskState createState() => task == null
       ? _ModifyTaskState(
           isAdding: true,
-          title: '',
-          color: Colors.blue[300],
-          notes: '',
-          isStarred: false,
-          progressType: ProgressType.checkbox,
+          taskValues: TaskValues(),
         )
       : _ModifyTaskState(
           isAdding: false,
-          title: task.title,
-          color: Color(task.colorValue),
-          notes: task.notes,
-          isStarred: task.isStarred,
-          progressType: task.progressType,
+          taskValues: TaskValues(task),
         );
 }
 
 class _ModifyTaskState extends State<ModifyTask> {
-  _ModifyTaskState({this.isAdding, this.title, this.color, this.notes, this.isStarred, this.progressType});
+  _ModifyTaskState({this.isAdding, this.taskValues});
 
   final bool isAdding;
-  String title;
-  Color color;
-  String notes;
-  DateTime deadline;
-  bool isStarred;
-  ProgressType progressType = ProgressType.checkbox;
-  int counterMax;
-
+  TaskValues taskValues;
 
   @override
   Widget build(BuildContext context) {
@@ -60,24 +47,14 @@ class _ModifyTaskState extends State<ModifyTask> {
 
     void addTask() {
       if (_titleFormKey.currentState.validate()) {
-        appState.addTask(title,
-            colorValue: color.value, notes: notes, dateTime: deadline, isStarred: isStarred, progressType: progressType, counterMax: counterMax);
+        appState.addTask(taskValues);
         Navigator.of(context).pop();
       } else if (settings.vibrate) Vibration.vibrate(duration: 80);
     }
 
     void updateTask() {
       if (_titleFormKey.currentState.validate()) {
-        appState.updateTask(
-          widget.task,
-          notes: notes,
-          title: title,
-          colorValue: color.value,
-          deadline: deadline,
-          isStarred: isStarred,
-          progressType: progressType,
-          counterMax: counterMax,
-        );
+        appState.updateTask(widget.task, taskValues);
         Navigator.pop(context);
       } else if (settings.vibrate) Vibration.vibrate(duration: 80);
     }
@@ -119,7 +96,7 @@ class _ModifyTaskState extends State<ModifyTask> {
                   padding: const EdgeInsets.all(8.0),
                   child: Form(
                       key: _titleFormKey,
-                      child: TitleInput(title, isAdding, setTitle)),
+                      child: TitleInput(taskValues, isAdding)),
                 ),
               ],
             ),
@@ -129,7 +106,7 @@ class _ModifyTaskState extends State<ModifyTask> {
               bottom: BorderSide(color: settings.getColor()),
             ))),
         Container(
-            child: ColorPicker(setColor, color),
+            child: ColorPicker(taskValues),
             decoration: BoxDecoration(
                 border: Border(
               bottom: BorderSide(color: settings.getColor()),
@@ -154,7 +131,7 @@ class _ModifyTaskState extends State<ModifyTask> {
                   padding: const EdgeInsets.all(8.0),
                   child: Form(
                     key: _notesFormKey,
-                    child: NotesInput(notes, isAdding, setNotes),
+                    child: NotesInput(taskValues, isAdding),
                   ),
                 ),
               ],
@@ -177,47 +154,14 @@ class _ModifyTaskState extends State<ModifyTask> {
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: DeadlineInput(setDeadline),
+          child: DeadlineInput(taskValues, refreshModifyTask),
         ),
-        StarInput(isStarred, setStar),
-        ProgressTypeInput(progressType, setProgressType, counterMax, setCounterMax),
+        StarInput(taskValues, refreshModifyTask),
+        ProgressTypeInput(taskValues, refreshModifyTask),
+        if (taskValues.deadline != null)
+          DateTimeNotificationInput(taskValues, refreshModifyTask),
       ]),
     );
   }
-
-  setColor(Color color) {
-    this.color = color;
-  }
-
-  setNotes(String notes) {
-    this.notes = notes;
-  }
-
-  setTitle(String title) {
-    this.title = title;
-  }
-
-  setDeadline(DateTime deadline) {
-    this.deadline = deadline;
-  }
-
-  setStar(bool isStarred){
-    setState(() {
-      this.isStarred = isStarred;
-    });
-  }
-
-  setProgressType(ProgressType progressType){
-    setState(() {
-      this.progressType = progressType;
-      if(progressType==ProgressType.counter)
-        counterMax=1;
-    });
-  }
-
-  setCounterMax(int counterMax){
-    setState(() {
-      this.counterMax = counterMax;
-    });
-  }
+  refreshModifyTask() => setState(() {});
 }

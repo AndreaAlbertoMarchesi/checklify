@@ -1,9 +1,7 @@
-import 'package:checklist_app/models/supportClasses/TaskWithPath.dart';
 
-import '../models/Task.dart';
-import '../models/supportClasses/TaskPath.dart';
+part of 'package:checklist_app/states/AppState.dart';
 
-class SelectionState {
+class _SelectionState {
 
   List<TaskWithPath> taskWithPaths = List<TaskWithPath>();
 

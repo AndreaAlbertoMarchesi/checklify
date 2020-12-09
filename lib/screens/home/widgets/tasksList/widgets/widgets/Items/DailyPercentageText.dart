@@ -12,7 +12,7 @@ class DailyPercentageText extends StatelessWidget {
   Widget build(BuildContext context) {
     final settings = context.watch<Settings>();
 
-    int intPercentage = (percentage * 100).round();
+    int intPercentage = ((1-percentage) * 100).round();
 
     final Duration countdown = _deadline.difference(DateTime.now());
     return Padding(

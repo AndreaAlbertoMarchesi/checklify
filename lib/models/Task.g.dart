@@ -6,6 +6,21 @@ part of 'Task.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+TaskNotification _$TaskNotificationFromJson(Map<String, dynamic> json) {
+  return TaskNotification(
+    json['dateTime'] == null
+        ? null
+        : DateTime.parse(json['dateTime'] as String),
+    json['id'] as int,
+  );
+}
+
+Map<String, dynamic> _$TaskNotificationToJson(TaskNotification instance) =>
+    <String, dynamic>{
+      'dateTime': instance.dateTime?.toIso8601String(),
+      'id': instance.id,
+    };
+
 Task _$TaskFromJson(Map<String, dynamic> json) {
   return Task(
     json['title'] as String,
@@ -14,6 +29,10 @@ Task _$TaskFromJson(Map<String, dynamic> json) {
     deadline: json['deadline'] == null
         ? null
         : DateTime.parse(json['deadline'] as String),
+    notification: json['notification'] == null
+        ? null
+        : TaskNotification.fromJson(
+            json['notification'] as Map<String, dynamic>),
     isStarred: json['isStarred'] as bool,
     progressType:
         _$enumDecodeNullable(_$ProgressTypeEnumMap, json['progressType']),
@@ -33,6 +52,7 @@ Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
       'percentage': instance.percentage,
       'colorValue': instance.colorValue,
       'deadline': instance.deadline?.toIso8601String(),
+      'notification': instance.notification?.toJson(),
       'isStarred': instance.isStarred,
       'progressType': _$ProgressTypeEnumMap[instance.progressType],
       'counterMax': instance.counterMax,

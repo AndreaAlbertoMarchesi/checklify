@@ -4,7 +4,7 @@ import 'package:checklist_app/utils/URL.dart';
 import 'package:checklist_app/utils/phoneStorage/Keys.dart';
 import 'package:flutter/material.dart';
 
-part 'Styles.dart';
+part 'SettingsParts/Styles.dart';
 class Settings with ChangeNotifier {
   
 

@@ -5,8 +5,8 @@ import 'package:checklist_app/utils/PhoneStorage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AppStateProvider extends StatelessWidget {
-  AppStateProvider(this._phoneStorage);
+class Providers extends StatelessWidget {
+  Providers(this._phoneStorage);
 
   final PhoneStorage _phoneStorage;
 

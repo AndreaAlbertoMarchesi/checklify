@@ -1,11 +1,15 @@
 import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/models/supportClasses/TaskPath.dart';
+import 'package:checklist_app/models/supportClasses/TaskValues.dart';
 import 'package:checklist_app/models/supportClasses/TaskWithPath.dart';
 import 'package:checklist_app/utils/PhoneStorage.dart';
 import 'package:checklist_app/utils/phoneStorage/Keys.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-import 'SelectionState.dart';
+part 'AppStateParts/NotificationManager.dart';
+
+part 'AppStateParts/SelectionState.dart';
 
 class AppState extends ChangeNotifier {
   Task root = Task.emptyRoot;
@@ -13,7 +17,8 @@ class AppState extends ChangeNotifier {
   TaskPath taskPath = TaskPath();
 
   final PhoneStorage _storage;
-  final _selectionState = SelectionState();
+  final _selectionState = _SelectionState();
+  final _NotificationManager _notificationManager = _NotificationManager();
 
   AppState(this._storage) {
     _storage.readData().then((Task value) {
@@ -22,6 +27,7 @@ class AppState extends ChangeNotifier {
       taskPath.add(root);
       notifyListeners();
     });
+    _notificationManager.initialize(this);
   }
 
   void setStarredTask(Task selectedTask, bool starred) {
@@ -48,25 +54,22 @@ class AppState extends ChangeNotifier {
     return _selectionState.taskWithPaths;
   }
 
-  bool isSelected([Task task]){
+  bool isSelected([Task task]) {
     return _selectionState.isSelected(task);
   }
 
-  void addTask(String title,
-      {int colorValue,
-      String notes,
-      DateTime dateTime,
-      bool isStarred,
-      ProgressType progressType,
-      int counterMax}) {
+  void addTask(TaskValues taskValues) {
+    Task createdTask = Task(taskValues.title,
+        colorValue: taskValues.colorValue,
+        notes: taskValues.notes,
+        deadline: taskValues.deadline,
+        isStarred: taskValues.isStarred,
+        progressType: taskValues.progressType,
+        counterMax: taskValues.counterMax);
 
-    Task createdTask = Task(title,
-        colorValue: colorValue,
-        notes: notes,
-        deadline: dateTime,
-        isStarred: isStarred,
-        progressType: progressType,
-        counterMax: counterMax);
+    if (taskValues.dateTimeNotification != null)
+      createdTask.notification = _notificationManager.scheduleNotification(
+          taskValues.dateTimeNotification, root, createdTask);
 
     task.children.add(createdTask);
     taskPath.updatePercentage();
@@ -75,35 +78,40 @@ class AppState extends ChangeNotifier {
   }
 
   void deleteTask(Task task) {
+    if (task.notification != null)
+      _notificationManager.cancelNotification(task.notification.id);
+
     this.task.children.remove(task);
     taskPath.updatePercentage();
     _storage.writeData(root);
     notifyListeners();
   }
 
-  void updateTask(Task task,
-      {num percentage,
-      String title,
-      int colorValue,
-      String notes,
-      DateTime deadline,
-      bool isStarred,
-      ProgressType progressType,
-      int counterMax}) {
+  void updateTask(Task task, TaskValues taskValues) {
+    DateTime newNotificationDateTime = taskValues.dateTimeNotification;
+    DateTime oldNotificationDateTime =
+        task.notification == null ? null : task.notification.dateTime;
 
-    if (percentage != null) {
-      task.percentage = percentage;
-      taskPath.updatePercentage();
-    }
-    if (title != null) task.title = title;
-    if (colorValue != null) task.colorValue = colorValue;
-    if (notes != null) task.notes = notes;
-    if (deadline != null) task.deadline = deadline;
-    if (isStarred != null) task.isStarred = isStarred;
-    if (progressType != null) task.progressType = progressType;
-    if(counterMax != null) task.counterMax = counterMax;
+    if (newNotificationDateTime != null &&
+        newNotificationDateTime != oldNotificationDateTime)
+      task.notification = _notificationManager.scheduleNotification(
+          taskValues.dateTimeNotification, root, task);
+
+    task.title = taskValues.title;
+    task.colorValue = taskValues.colorValue;
+    task.notes = taskValues.notes;
+    task.deadline = taskValues.deadline;
+    task.isStarred = taskValues.isStarred;
+    task.progressType = taskValues.progressType;
+    task.counterMax = taskValues.counterMax;
 
     _storage.writeData(root);
+    notifyListeners();
+  }
+
+  void updatePercentage(Task task, num percentage) {
+    task.percentage = percentage;
+    taskPath.updatePercentage();
     notifyListeners();
   }
 
@@ -166,7 +174,6 @@ class AppState extends ChangeNotifier {
         else
           task.children.insert(newIndex, element);
       }
-
       notifyListeners();
     }
   }

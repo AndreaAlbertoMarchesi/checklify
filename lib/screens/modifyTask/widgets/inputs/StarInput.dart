@@ -1,22 +1,26 @@
+import 'package:checklist_app/models/supportClasses/TaskValues.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class StarInput extends StatelessWidget {
-  StarInput(this.isStarred, this.setStar);
+  StarInput(this.taskValues, this.refreshModifyTask);
 
-  final Function setStar;
-  final bool isStarred;
+  final Function refreshModifyTask;
+  final TaskValues taskValues;
 
   @override
   Widget build(BuildContext context) {
     final settings = context.watch<Settings>();
 
     return IconButton(
-      icon: isStarred
+      icon: taskValues.isStarred
           ? Icon(Icons.star, color: Colors.yellowAccent)
           : Icon(Icons.star_border, color: Colors.yellowAccent),
-      onPressed: () => setStar(!isStarred),
+      onPressed: () {
+        taskValues.isStarred = !taskValues.isStarred;
+        refreshModifyTask();
+      },
     );
   }
 }

@@ -3,8 +3,8 @@ import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class DeadlineInput extends StatelessWidget {
-  DeadlineInput(this.taskValues, this.refreshModifyTask);
+class DateTimeNotificationInput extends StatelessWidget {
+  DateTimeNotificationInput(this.taskValues, this.refreshModifyTask);
 
   final TaskValues taskValues;
   final Function refreshModifyTask;
@@ -14,7 +14,7 @@ class DeadlineInput extends StatelessWidget {
     return DateTimePicker(
       type: DateTimePickerType.dateTimeSeparate,
       dateMask: 'd MMM, yyyy',
-      initialValue: DateTime.now().toString(),
+      initialValue: taskValues.dateTimeNotification.toString(),
       firstDate: DateTime(2000),
       lastDate: DateTime(2100),
       icon: Icon(Icons.event),
@@ -24,7 +24,7 @@ class DeadlineInput extends StatelessWidget {
         return true;
       },
       onChanged: (val) {
-        taskValues.deadline = DateTime.parse(val);
+        taskValues.dateTimeNotification = DateTime.parse(val);
         refreshModifyTask();
       },
       validator: (val) {
@@ -32,7 +32,7 @@ class DeadlineInput extends StatelessWidget {
         return null;
       },
       onSaved: (val) {
-        taskValues.deadline = DateTime.parse(val);
+        taskValues.dateTimeNotification = DateTime.parse(val);
         refreshModifyTask();
       },
     );

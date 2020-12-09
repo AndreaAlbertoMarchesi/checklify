@@ -1,5 +1,4 @@
 import 'package:checklist_app/models/Task.dart';
-import 'package:checklist_app/sharedWidgets/PercentageCircle.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +17,7 @@ class PercentageSlider extends StatelessWidget {
     return Slider(
       value: task.percentage.toDouble(),
       onChanged: (double value) {
-        appState.updateTask(task,percentage: value);
+        appState.updatePercentage(task, value);
       },
     );
   }

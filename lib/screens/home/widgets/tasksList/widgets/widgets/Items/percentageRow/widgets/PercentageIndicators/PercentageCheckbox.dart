@@ -53,8 +53,8 @@ class PercentageCheckbox extends StatelessWidget {
                   checkColor: settings.getFontTiles(),
                   value: task.percentage == 1,
                   onChanged: (bool value) {
-                    appState.updateTask(task,
-                        percentage: task.percentage == 0 ? 1 : 0);
+                    appState.updatePercentage(
+                        task, task.percentage == 0 ? 1 : 0);
                   },
                 ),
               ),

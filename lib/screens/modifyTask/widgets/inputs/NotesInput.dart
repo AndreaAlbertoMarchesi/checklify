@@ -1,12 +1,12 @@
+import 'package:checklist_app/models/supportClasses/TaskValues.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class NotesInput extends StatelessWidget {
-  NotesInput(this.notes, this.isAdding, this.setNotes);
+  NotesInput(this.taskValues, this.isAdding);
 
-  final String notes;
-  final Function setNotes;
+  final TaskValues taskValues;
   final bool isAdding;
 
   @override
@@ -14,7 +14,7 @@ class NotesInput extends StatelessWidget {
     final settings = context.watch<Settings>();
 
     final TextEditingController _controller = new TextEditingController(
-      text: isAdding ? '' : notes,
+      text: isAdding ? '' : taskValues.notes,
     );
 
     return TextFormField(
@@ -22,7 +22,7 @@ class NotesInput extends StatelessWidget {
       maxLines: null,
       maxLength: 100,
       decoration: InputDecoration(
-        hintText: isAdding ? "insert additional notes" : notes,
+        hintText: isAdding ? "insert additional notes" : taskValues.notes,
         filled: true,
         contentPadding: EdgeInsets.all(12.0),
         enabledBorder: OutlineInputBorder(
@@ -33,9 +33,7 @@ class NotesInput extends StatelessWidget {
         ),
       ),
       validator: (val) => (val.length > 100) ? 'too much text' : null,
-      onChanged: (val) {
-        setNotes(val);
-      },
+      onChanged: (val) => taskValues.notes = val,
     );
   }
 }

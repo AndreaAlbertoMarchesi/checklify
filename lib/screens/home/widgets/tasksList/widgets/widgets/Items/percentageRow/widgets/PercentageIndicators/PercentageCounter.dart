@@ -24,22 +24,10 @@ class PercentageCounter extends StatelessWidget {
       decimalPlaces: 0,
       
       onChanged: (num value) {
-        print(value);
-        if(value<=max && value>0)
-          appState.updateTask(task, percentage: value/max);
+        if(value<=max && value>=0)
+          appState.updatePercentage(task, value/max);
       },
       initialValue: (task.percentage*max).round(),
     );
-
-    /*Counter(
-      maxValue: task.counterMax,
-      minValue: 0,
-      decimalPlaces: 0,
-      onChanged: (num value) {
-        appState.updateTask(task, percentage: value);
-      },
-      initialValue: task.percentage,
-
-    );*/
   }
 }

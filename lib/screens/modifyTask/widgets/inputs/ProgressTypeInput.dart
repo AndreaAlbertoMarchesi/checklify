@@ -1,19 +1,17 @@
 import 'dart:developer';
 
 import 'package:checklist_app/models/Task.dart';
+import 'package:checklist_app/models/supportClasses/TaskValues.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_counter/flutter_counter.dart';
 import 'package:provider/provider.dart';
 
 class ProgressTypeInput extends StatelessWidget {
-  ProgressTypeInput(this.progressType, this.setProgressType, this.counterMax, this.setCounterMax);
+  ProgressTypeInput(this.taskValues, this.refreshModifyTask);
 
-  final Function setProgressType;
-  final Function setCounterMax;
-  final ProgressType progressType;
-  final int counterMax;
-
+  final Function refreshModifyTask;
+  final TaskValues taskValues;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +20,7 @@ class ProgressTypeInput extends StatelessWidget {
     return Row(
       children: [
         DropdownButton<ProgressType>(
-          value: progressType,
+          value: taskValues.progressType,
           icon: Icon(Icons.arrow_downward),
           iconSize: 24,
           elevation: 16,
@@ -32,7 +30,8 @@ class ProgressTypeInput extends StatelessWidget {
             color: Colors.deepPurpleAccent,
           ),
           onChanged: (ProgressType newValue) {
-            setProgressType(newValue);
+            taskValues.progressType = newValue;
+            refreshModifyTask();
           },
           items: <ProgressType>[
             ProgressType.checkbox,
@@ -45,13 +44,15 @@ class ProgressTypeInput extends StatelessWidget {
             );
           }).toList(),
         ),
-        if (progressType == ProgressType.counter)
+        if (taskValues.progressType == ProgressType.counter)
           Counter(
             maxValue: double.maxFinite,
-            initialValue: counterMax == null ? 0 : counterMax,
+            initialValue:
+                taskValues.counterMax == null ? 1 : taskValues.counterMax,
             decimalPlaces: 0,
             onChanged: (num value) {
-              setCounterMax(value);
+              taskValues.counterMax = value;
+              refreshModifyTask();
             },
             minValue: 1,
           ),

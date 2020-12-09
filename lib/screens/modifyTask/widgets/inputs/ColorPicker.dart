@@ -1,17 +1,17 @@
-import 'package:checklist_app/states/AppState.dart';
+import 'package:checklist_app/models/supportClasses/TaskValues.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
+import 'package:provider/provider.dart';
 
 class ColorPicker extends StatefulWidget {
-  ColorPicker(this.setColor, this.selectedColor);
+  ColorPicker(this.taskValues);
 
-  final Function setColor;
-  final Color selectedColor;
+  final TaskValues taskValues;
 
   @override
-  _ColorPickerState createState() => _ColorPickerState(selectedColor);
+  _ColorPickerState createState() =>
+      _ColorPickerState(Color(taskValues.colorValue));
 }
 
 class _ColorPickerState extends State<ColorPicker> {
@@ -41,7 +41,6 @@ class _ColorPickerState extends State<ColorPicker> {
   }
 
   void openColorDialog(BuildContext context, Settings settings) {
-
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -54,13 +53,13 @@ class _ColorPickerState extends State<ColorPicker> {
             allowShades: false,
             colors: settings.getPossibleColors(),
             onMainColorChange: (Color color) {
-              widget.setColor(color);
+              widget.taskValues.colorValue = color.value;
               setState(() {
                 selectedColor = color;
               });
               Navigator.pop(context);
             },
-            selectedColor: widget.selectedColor,
+            selectedColor: selectedColor,
           ),
         );
       },
