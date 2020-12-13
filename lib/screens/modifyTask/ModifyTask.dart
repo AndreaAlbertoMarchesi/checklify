@@ -77,7 +77,7 @@ class _ModifyTaskState extends State<ModifyTask> {
       body: ListView(children: [
 
         //TITLE
-        TitleComponent(taskValues,isAdding),
+        TitleComponent(taskValues,isAdding, _titleFormKey),
 
         //COLOR PIKER
         ColorPickerComponent(taskValues),

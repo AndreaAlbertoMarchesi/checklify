@@ -37,6 +37,7 @@ Task _$TaskFromJson(Map<String, dynamic> json) {
     progressType:
         _$enumDecodeNullable(_$ProgressTypeEnumMap, json['progressType']),
     counterMax: json['counterMax'] as int,
+    sliderDivisions: json['sliderDivisions'] as int,
   )
     ..children = (json['children'] as List)
         ?.map(
@@ -56,6 +57,7 @@ Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
       'isStarred': instance.isStarred,
       'progressType': _$ProgressTypeEnumMap[instance.progressType],
       'counterMax': instance.counterMax,
+      'sliderDivisions': instance.sliderDivisions,
     };
 
 T _$enumDecode<T>(

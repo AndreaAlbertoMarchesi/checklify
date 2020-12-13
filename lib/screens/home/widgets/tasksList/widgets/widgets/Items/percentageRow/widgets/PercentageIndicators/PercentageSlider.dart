@@ -15,7 +15,7 @@ class PercentageSlider extends StatelessWidget {
     final settings = context.watch<Settings>();
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0,3,2,3),
+      padding: const EdgeInsets.fromLTRB(0,7,3,7),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white54,
@@ -31,7 +31,9 @@ class PercentageSlider extends StatelessWidget {
         ),
         child: Slider(
           value: task.percentage.toDouble(),
-          divisions: 3,
+          divisions: task.sliderDivisions != null
+                      ? task.sliderDivisions
+                      : 3,
           onChanged: (double value) {
             appState.updatePercentage(task, value);
           },

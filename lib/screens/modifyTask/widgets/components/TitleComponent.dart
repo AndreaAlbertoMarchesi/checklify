@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TitleComponent extends StatelessWidget {
-  TitleComponent(this.taskValues, this.isAdding);
+  TitleComponent(this.taskValues, this.isAdding, this.titleFormKey);
 
   final TaskValues taskValues;
   final bool isAdding;
+  final GlobalKey<FormState> titleFormKey ;
 
   @override
   Widget build(BuildContext context) {
-    final _titleFormKey = GlobalKey<FormState>();
     final settings = context.watch<Settings>();
 
     return Container(
@@ -34,7 +34,7 @@ class TitleComponent extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Form(
-                  key: _titleFormKey, child: TitleInput(taskValues, isAdding)),
+                  key: titleFormKey, child: TitleInput(taskValues, isAdding)),
             ),
           ],
         ),

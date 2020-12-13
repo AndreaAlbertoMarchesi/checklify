@@ -67,7 +67,8 @@ class AppState extends ChangeNotifier {
         deadline: taskValues.deadline,
         isStarred: taskValues.isStarred,
         progressType: taskValues.progressType,
-        counterMax: taskValues.counterMax);
+        counterMax: taskValues.counterMax,
+        sliderDivisions: taskValues.sliderDivisions);
 
     if (taskValues.dateTimeNotification != null)
       createdTask.notification = _notificationManager.scheduleNotification(
@@ -107,6 +108,7 @@ class AppState extends ChangeNotifier {
     task.isStarred = taskValues.isStarred;
     task.progressType = taskValues.progressType;
     task.counterMax = taskValues.counterMax;
+    task.sliderDivisions = taskValues.sliderDivisions;
     setStarredTask();
     _storage.writeData(root);
     notifyListeners();

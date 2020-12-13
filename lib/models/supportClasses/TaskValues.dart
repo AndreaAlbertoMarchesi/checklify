@@ -14,6 +14,7 @@ class TaskValues {
       isStarred = task.isStarred;
       progressType = task.progressType;
       counterMax = task.counterMax;
+      sliderDivisions = task.sliderDivisions;
     }
   }
 
@@ -25,4 +26,5 @@ class TaskValues {
   bool isStarred = false;
   ProgressType progressType = ProgressType.checkbox;
   int counterMax;
+  int sliderDivisions;
 }
