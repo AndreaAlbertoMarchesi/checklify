@@ -22,7 +22,7 @@ class DailyPercentageText extends StatelessWidget {
             (countdown.inDays >= 1
                     ? intPercentage / countdown.inDays
                     : intPercentage)
-                .toString(),
+                .round().toString() +"%",
         style: TextStyle(
           letterSpacing: 0.5,
           fontWeight: FontWeight.bold,

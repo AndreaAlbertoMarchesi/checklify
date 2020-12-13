@@ -9,4 +9,16 @@ class Keys{
   static const isPhotoFromGallery = "isPhotoFromGallery";
   static const orderByName = "Name";
   static const orderByDate = "Due Date";
+  static const january = "january";
+  static const february = "february";
+  static const march = "march";
+  static const april = "april";
+  static const may = "may";
+  static const june = "june";
+  static const july = "july";
+  static const august = "august";
+  static const september = "september";
+  static const october = "october";
+  static const november = "november";
+  static const december = "december";
 }

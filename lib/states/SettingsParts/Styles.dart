@@ -268,6 +268,7 @@ class _Styles {
       disabledColor: Colors.grey,
       cardColor: isDarkTheme ? Color(0xFF151515) : Colors.lightBlue[100],
       unselectedWidgetColor: isDarkTheme ? Colors.black54 : Colors.black54 ,
+      dialogBackgroundColor: isDarkTheme ? Color(0xff121212) : Colors.lightBlue[50] ,
 
       floatingActionButtonTheme: FloatingActionButtonThemeData(foregroundColor: Colors.white,),
       brightness: isDarkTheme ? Brightness.dark : Brightness.light,

@@ -23,13 +23,21 @@ class PercentageRow extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-          child: Text(
-            task.title,
-            style: TextStyle(
-              fontSize: settings.getFontSizeChildren(),
-              letterSpacing: 0.5,
-              fontWeight: FontWeight.bold,
-              color: settings.getFontTiles(),
+          child: Container(
+            width: task.progressType == ProgressType.slider
+            ? 154
+            : 200,
+            child: RichText(
+              overflow: TextOverflow.ellipsis,
+              text: TextSpan(
+                text:task.title,
+                style: TextStyle(
+                  fontSize: settings.getFontSizeChildren(),
+                  letterSpacing: 0.5,
+                  fontWeight: FontWeight.bold,
+                  color: settings.getFontTiles(),
+                ),
+              ),
             ),
           ),
         ),

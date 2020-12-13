@@ -1,3 +1,4 @@
+import 'package:checklist_app/screens/timeline/widgets/widgets/MonthWidget.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -43,64 +44,13 @@ class TimelineFreeDays extends StatelessWidget {
       );
     }
 
-    _getMonth(int month){
-      switch(month){
-        case 01 :
-          return "january";
-          break;
-        case 02 :
-          return "february";
-          break;
-        case 03 :
-          return "march";
-          break;
-        case 04 :
-          return "april";
-          break;
-        case 05 :
-          return "may";
-          break;
-        case 06 :
-          return "june";
-          break;
-        case 07 :
-          return "july";
-          break;
-        case 08 :
-          return "august";
-          break;
-        case 09 :
-          return "september";
-          break;
-        case 10 :
-          return "october";
-          break;
-        case 11 :
-          return "november";
-          break;
-        case 12 :
-          return "december";
-          break;
-      }
-    }
-
     return durationFromLastDeadline.inDays.toDouble()<=2
         ? Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment :MainAxisAlignment.start,
             children: [
               getChild(),
-              prevDeadline.month < currentDeadline.month || prevDeadline.year < currentDeadline.year
-                  ? Text(
-                      _getMonth(currentDeadline.month),
-                      style: TextStyle(
-                          fontSize: 11,
-                          letterSpacing: 0.6,
-                          color: settings.getFont(),
-                          fontStyle: FontStyle.italic
-                      ),
-                    )
-                  : Text(""),
+              MonthWidget(prevDeadline, currentDeadline, settings.getMonth)
             ],
         )
         : Column(
@@ -111,17 +61,7 @@ class TimelineFreeDays extends StatelessWidget {
             ),
             Container(
                 height: 12,
-                child: prevDeadline.month < currentDeadline.month || prevDeadline.year < currentDeadline.year
-                        ? Text(
-                            _getMonth(currentDeadline.month),
-                            style: TextStyle(
-                              fontSize: 11,
-                              letterSpacing: 0.6,
-                              color: settings.getFont(),
-                              fontStyle: FontStyle.italic
-                            ),
-                          )
-                        : Text(""),
+                child: MonthWidget(prevDeadline,currentDeadline,settings.getMonth)
             ),
           ],
         );

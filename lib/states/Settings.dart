@@ -85,6 +85,47 @@ class Settings with ChangeNotifier {
     notifyListeners();
   }
 
+  getMonth(int month){
+    switch(month){
+      case 01 :
+        return Keys.january;
+        break;
+      case 02 :
+        return Keys.february;
+        break;
+      case 03 :
+        return Keys.march;
+        break;
+      case 04 :
+        return Keys.april;
+        break;
+      case 05 :
+        return Keys.may;
+        break;
+      case 06 :
+        return Keys.june;
+        break;
+      case 07 :
+        return Keys.july;
+        break;
+      case 08 :
+        return Keys.august;
+        break;
+      case 09 :
+        return Keys.september;
+        break;
+      case 10 :
+        return Keys.october;
+        break;
+      case 11 :
+        return Keys.november;
+        break;
+      case 12 :
+        return Keys.december;
+        break;
+    }
+  }
+
   Color getColor() => _Styles.getColor(darkTheme);
 
   Color getFont() => _Styles.getFont(darkTheme);

@@ -5,6 +5,7 @@ import 'package:checklist_app/models/supportClasses/TaskWithPath.dart';
 import 'package:checklist_app/screens/timeline/widgets/TimeLineStructure.dart';
 import 'package:checklist_app/screens/timeline/widgets/TimelineFreeDays.dart';
 import 'package:checklist_app/screens/timeline/widgets/TimelineTask.dart';
+import 'package:checklist_app/screens/timeline/widgets/widgets/MonthWidget.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
 
@@ -26,6 +27,8 @@ class Timeline extends StatelessWidget {
       List<Widget> items = List<Widget>();
       DateTime previousDeadline;
 
+      items.add(MonthWidget(null, tasksWithPaths.first.task.deadline, settings.getMonth));
+      extra++;
       tasksWithPaths.forEach((e) {
         DateTime currentDeadline = e.task.deadline;
         bool hasSameDateAsPrevious =
