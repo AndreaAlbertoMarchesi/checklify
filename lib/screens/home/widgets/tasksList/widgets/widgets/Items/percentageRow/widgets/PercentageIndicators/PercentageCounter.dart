@@ -18,16 +18,36 @@ class PercentageCounter extends StatelessWidget {
     final settings = context.watch<Settings>();
 
     final max = task.counterMax;
-    return Counter(
-      maxValue: max,
-      minValue: 0,
-      decimalPlaces: 0,
-      
-      onChanged: (num value) {
-        if(value<=max && value>=0)
-          appState.updatePercentage(task, value/max);
-      },
-      initialValue: (task.percentage*max).round(),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white54,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: settings.getHighlightedColor(task.colorValue),
+              blurRadius: 2.0,
+              spreadRadius: 0.0,
+              offset: Offset(2.0, 2.0),
+            ),
+          ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(3.0),
+          child: Counter(
+            maxValue: max,
+            minValue: 0,
+            decimalPlaces: 0,
+            color: settings.getAppBarIcon(),
+            onChanged: (num value) {
+              if(value<=max && value>=0)
+                appState.updatePercentage(task, value/max);
+            },
+            initialValue: (task.percentage*max).round(),
+          ),
+        ),
+      ),
     );
   }
 }

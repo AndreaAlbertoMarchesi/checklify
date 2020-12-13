@@ -30,10 +30,12 @@ class AppState extends ChangeNotifier {
     _notificationManager.initialize(this);
   }
 
-  void setStarredTask(Task selectedTask, bool starred) {
-    if (starred) handleReorder(task.children.indexOf(selectedTask), 0);
-    selectedTask.isStarred = starred;
-    _storage.writeData(root);
+  void setStarredTask(){
+
+    task.children.forEach((element) {
+      if (element.isStarred)
+        handleReorder(task.children.indexOf(element), 0, true);
+    });
     notifyListeners();
   }
 
@@ -73,6 +75,7 @@ class AppState extends ChangeNotifier {
 
     task.children.add(createdTask);
     taskPath.updatePercentage();
+    setStarredTask();
     _storage.writeData(root);
     notifyListeners();
   }
@@ -104,7 +107,7 @@ class AppState extends ChangeNotifier {
     task.isStarred = taskValues.isStarred;
     task.progressType = taskValues.progressType;
     task.counterMax = taskValues.counterMax;
-
+    setStarredTask();
     _storage.writeData(root);
     notifyListeners();
   }
@@ -157,8 +160,8 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  void handleReorder(int oldIndex, int newIndex) {
-    if (!task.children.elementAt(oldIndex).isStarred) {
+  void handleReorder(int oldIndex, int newIndex, bool isUpdated) {
+    if (!task.children.elementAt(oldIndex).isStarred && !isUpdated) {
       if (oldIndex < newIndex) {
         newIndex -= 1;
         final element = task.children.removeAt(oldIndex);
@@ -175,10 +178,13 @@ class AppState extends ChangeNotifier {
           task.children.insert(newIndex, element);
       }
       notifyListeners();
+    }else if(isUpdated && task.children.elementAt(oldIndex).isStarred) {
+
+      final element = task.children.removeAt(oldIndex);
+      task.children.insert(newIndex, element);
     }
   }
 
-  //TODO aggiungere controllo per le starred task
   void setTaskOrder(order) {
     if (order == Keys.orderByName) {
       task.children.sort((a, b) {
@@ -188,9 +194,14 @@ class AppState extends ChangeNotifier {
     } else {
       task.children.sort((a, b) {
         //qui
-        return a.deadline.compareTo(b.deadline);
+        return a.deadline != null && b.deadline != null
+          ? a.deadline.compareTo(b.deadline)
+          : 0;
       });
     }
+    task.children.forEach((element) {
+      handleReorder(task.children.indexOf(element), 0, true);
+    });
     notifyListeners();
   }
 }

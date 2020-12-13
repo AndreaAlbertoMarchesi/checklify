@@ -4,6 +4,7 @@ import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/Ite
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/Items/DeadlineText.dart';
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/Items/NotesText.dart';
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/Items/percentageRow/PercentageRow.dart';
+import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/Items/percentageRow/widgets/NotificationIcon.dart';
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/dialogs/DeleteDialog.dart';
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/dialogs/UpdateDialog.dart';
 import 'package:checklist_app/states/AppState.dart';
@@ -74,6 +75,9 @@ class TaskItem extends StatelessWidget {
                     children: [
                       if (task.deadline != null) DeadlineText(task.deadline),
                       Expanded(child: Container()),
+                      if (task.notification != null &&
+                          task.notification.dateTime.isAfter(DateTime.now()))
+                        NotificationIcon(),
                       if (task.deadline != null) CountdownText(task.deadline),
                     ],
                   ),

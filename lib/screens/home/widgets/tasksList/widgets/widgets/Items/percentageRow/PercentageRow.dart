@@ -1,5 +1,4 @@
 import 'package:checklist_app/models/Task.dart';
-import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/Items/percentageRow/widgets/NotificationIcon.dart';
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/Items/percentageRow/widgets/PercentageIndicators/PercentageCheckbox.dart';
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/Items/percentageRow/widgets/PercentageIndicators/PercentageCounter.dart';
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/Items/percentageRow/widgets/PercentageIndicators/PercentageSlider.dart';
@@ -35,9 +34,6 @@ class PercentageRow extends StatelessWidget {
           ),
         ),
         Expanded(child: Container()),
-        if (task.notification != null &&
-            task.notification.dateTime.isAfter(DateTime.now()))
-          NotificationIcon(),
         if (task.isStarred) Star(),
         getPercentageIndicator(task),
       ],

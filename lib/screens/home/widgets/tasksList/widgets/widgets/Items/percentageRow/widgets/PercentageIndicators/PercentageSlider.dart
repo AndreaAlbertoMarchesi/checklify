@@ -14,11 +14,29 @@ class PercentageSlider extends StatelessWidget {
     final appState = context.watch<AppState>();
     final settings = context.watch<Settings>();
 
-    return Slider(
-      value: task.percentage.toDouble(),
-      onChanged: (double value) {
-        appState.updatePercentage(task, value);
-      },
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0,3,2,3),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white54,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: settings.getHighlightedColor(task.colorValue),
+              blurRadius: 2.0,
+              spreadRadius: 0.0,
+              offset: Offset(2.0, 2.0),
+            ),
+          ],
+        ),
+        child: Slider(
+          value: task.percentage.toDouble(),
+          divisions: 3,
+          onChanged: (double value) {
+            appState.updatePercentage(task, value);
+          },
+        ),
+      ),
     );
   }
 }

@@ -2,13 +2,13 @@ import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/models/supportClasses/TaskValues.dart';
 import 'package:checklist_app/screens/modifyTask/widgets/buttons/CancelButton.dart';
 import 'package:checklist_app/screens/modifyTask/widgets/buttons/ConfirmButton.dart';
-import 'package:checklist_app/screens/modifyTask/widgets/inputs/ColorPicker.dart';
-import 'package:checklist_app/screens/modifyTask/widgets/inputs/DateTimeNotificationInput.dart';
-import 'package:checklist_app/screens/modifyTask/widgets/inputs/DeadlineInput.dart';
-import 'package:checklist_app/screens/modifyTask/widgets/inputs/NotesInput.dart';
-import 'package:checklist_app/screens/modifyTask/widgets/inputs/ProgressTypeInput.dart';
-import 'package:checklist_app/screens/modifyTask/widgets/inputs/StarInput.dart';
-import 'package:checklist_app/screens/modifyTask/widgets/inputs/TitleInput.dart';
+import 'package:checklist_app/screens/modifyTask/widgets/components/ColorPickerComponent.dart';
+import 'package:checklist_app/screens/modifyTask/widgets/components/DueDateComponent.dart';
+import 'package:checklist_app/screens/modifyTask/widgets/components/NotesComponent.dart';
+import 'package:checklist_app/screens/modifyTask/widgets/components/NotificationComponent.dart';
+import 'package:checklist_app/screens/modifyTask/widgets/components/ProgressTypeComponent.dart';
+import 'package:checklist_app/screens/modifyTask/widgets/components/StarComponent.dart';
+import 'package:checklist_app/screens/modifyTask/widgets/components/TitleComponent.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +41,6 @@ class _ModifyTaskState extends State<ModifyTask> {
   @override
   Widget build(BuildContext context) {
     final _titleFormKey = GlobalKey<FormState>();
-    final _notesFormKey = GlobalKey<FormState>();
     final appState = context.watch<AppState>();
     final settings = context.watch<Settings>();
 
@@ -76,90 +75,27 @@ class _ModifyTaskState extends State<ModifyTask> {
         ),
       ),
       body: ListView(children: [
-        Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 15, 6, 6),
-                  child: Text(
-                    "Title",
-                    style: TextStyle(
-                      fontSize: settings.getFontSizeChildren(),
-                      letterSpacing: 0.6,
-                      fontWeight: FontWeight.bold,
-                      color: settings.getFont(),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Form(
-                      key: _titleFormKey,
-                      child: TitleInput(taskValues, isAdding)),
-                ),
-              ],
-            ),
-            decoration: BoxDecoration(
-                border: Border(
-              top: BorderSide(color: settings.getColor()),
-              bottom: BorderSide(color: settings.getColor()),
-            ))),
-        Container(
-            child: ColorPicker(taskValues),
-            decoration: BoxDecoration(
-                border: Border(
-              bottom: BorderSide(color: settings.getColor()),
-            ))),
-        Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 15, 6, 6),
-                  child: Text(
-                    "Notes",
-                    style: TextStyle(
-                      fontSize: settings.getFontSizeChildren(),
-                      letterSpacing: 0.6,
-                      fontWeight: FontWeight.bold,
-                      color: settings.getFont(),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Form(
-                    key: _notesFormKey,
-                    child: NotesInput(taskValues, isAdding),
-                  ),
-                ),
-              ],
-            ),
-            decoration: BoxDecoration(
-                border: Border(
-              bottom: BorderSide(color: settings.getColor()),
-            ))),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 15, 6, 6),
-          child: Text(
-            "Due Date",
-            style: TextStyle(
-              fontSize: settings.getFontSizeChildren(),
-              letterSpacing: 0.6,
-              fontWeight: FontWeight.bold,
-              color: settings.getFont(),
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: DeadlineInput(taskValues, refreshModifyTask),
-        ),
-        StarInput(taskValues, refreshModifyTask),
-        ProgressTypeInput(taskValues, refreshModifyTask),
+
+        //TITLE
+        TitleComponent(taskValues,isAdding),
+
+        //COLOR PIKER
+        ColorPickerComponent(taskValues),
+
+        //NOTES
+        NotesComponent(taskValues,isAdding),
+        //DUE DATE
+        DueDateComponent(taskValues,refreshModifyTask),
+
+        //STAR
+        StarComponent(taskValues,refreshModifyTask),
+
+        //TYPE INDICATOR
+        ProgressTypeComponent(taskValues,refreshModifyTask),
+
+        //NOTIFICATION
         if (taskValues.deadline != null)
-          DateTimeNotificationInput(taskValues, refreshModifyTask),
+          NotificationComponent(taskValues,refreshModifyTask)
       ]),
     );
   }

@@ -15,11 +15,11 @@ class PercentageCheckbox extends StatelessWidget {
     final settings = context.watch<Settings>();
 
     return Padding(
-      padding: EdgeInsets.fromLTRB(0, 6, 6, 6),
+      padding: EdgeInsets.fromLTRB(0, 12, 12, 12),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white54,
-          borderRadius: BorderRadius.circular(40),
+          borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
               color: settings.getHighlightedColor(task.colorValue),
@@ -29,36 +29,16 @@ class PercentageCheckbox extends StatelessWidget {
             ),
           ],
         ),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(15, 12, 15, 12),
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(0, 6, 6, 6),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white54,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: settings.getHighlightedColor(task.colorValue),
-                    blurRadius: 2.0,
-                    spreadRadius: 0.0,
-                    offset: Offset(2.0, 2.0),
-                  ),
-                ],
-              ),
-              child: Transform.scale(
-                scale: 1.3,
-                child: Checkbox(
-                  activeColor: Colors.greenAccent[700],
-                  checkColor: settings.getFontTiles(),
-                  value: task.percentage == 1,
-                  onChanged: (bool value) {
-                    appState.updatePercentage(
-                        task, task.percentage == 0 ? 1 : 0);
-                  },
-                ),
-              ),
-            ),
+        child: Transform.scale(
+          scale: 1.3,
+          child: Checkbox(
+            activeColor: Colors.greenAccent[700],
+            checkColor: settings.getFontTiles(),
+            value: task.percentage == 1,
+            onChanged: (bool value) {
+              appState.updatePercentage(
+                  task, task.percentage == 0 ? 1 : 0);
+            },
           ),
         ),
       ),

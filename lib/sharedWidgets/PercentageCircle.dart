@@ -20,7 +20,7 @@ class PercentageCircle extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white54,
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(40),
           boxShadow: [
             BoxShadow(
               color: task.colorValue != null
@@ -33,7 +33,7 @@ class PercentageCircle extends StatelessWidget {
           ],
         ),
         child: Padding(
-          padding: EdgeInsets.fromLTRB(10, 9, 10, 9),
+          padding: EdgeInsets.fromLTRB(15, 12, 15, 12),
           child: CircularPercentIndicator(
             radius: settings.getPercentageSizeChildren(),
             lineWidth: 7.0,

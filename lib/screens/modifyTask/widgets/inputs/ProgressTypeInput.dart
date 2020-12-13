@@ -17,6 +17,20 @@ class ProgressTypeInput extends StatelessWidget {
   Widget build(BuildContext context) {
     final settings = context.watch<Settings>();
 
+    _getTypeName(ProgressType type){
+      switch (type) {
+        case ProgressType.checkbox:
+          return Text("CheckBox");
+          break;
+        case ProgressType.counter:
+          return Text("Counter");
+          break;
+        case ProgressType.slider:
+          return Text("Slider");
+          break;
+      }
+
+    }
     return Row(
       children: [
         DropdownButton<ProgressType>(
@@ -24,7 +38,11 @@ class ProgressTypeInput extends StatelessWidget {
           icon: Icon(Icons.arrow_downward),
           iconSize: 24,
           elevation: 16,
-          style: TextStyle(color: Colors.deepPurple),
+          style: TextStyle(
+            fontSize: settings.getFontSizeChildren(),
+            letterSpacing: 0.6,
+            color: settings.getFont(),
+          ),
           underline: Container(
             height: 2,
             color: Colors.deepPurpleAccent,
@@ -40,21 +58,25 @@ class ProgressTypeInput extends StatelessWidget {
           ].map<DropdownMenuItem<ProgressType>>((ProgressType progressType) {
             return DropdownMenuItem<ProgressType>(
               value: progressType,
-              child: Text(progressType.toString()),
+              child: _getTypeName(progressType),
             );
           }).toList(),
         ),
+
         if (taskValues.progressType == ProgressType.counter)
-          Counter(
-            maxValue: double.maxFinite,
-            initialValue:
-                taskValues.counterMax == null ? 1 : taskValues.counterMax,
-            decimalPlaces: 0,
-            onChanged: (num value) {
-              taskValues.counterMax = value;
-              refreshModifyTask();
-            },
-            minValue: 1,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15,0,0,0),
+            child: Counter(
+              maxValue: double.maxFinite,
+              initialValue:
+                  taskValues.counterMax == null ? 1 : taskValues.counterMax,
+              decimalPlaces: 0,
+              onChanged: (num value) {
+                taskValues.counterMax = value;
+                refreshModifyTask();
+              },
+              minValue: 1,
+            ),
           ),
       ],
     );

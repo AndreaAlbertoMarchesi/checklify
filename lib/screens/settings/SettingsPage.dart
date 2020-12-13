@@ -32,8 +32,7 @@ class _SettingsPageState extends State<SettingsPage> {
           children: [
             AccountSettings(),
             GeneralSettings(),
-            NotificationSettings(),
-
+            //NotificationSettings(),
             /*ListTile(
               title: Center(child: Text(
                   "Terms & Conditions",
