@@ -37,7 +37,7 @@ class ParentTaskItem extends StatelessWidget {
               children: [
                 if (appState.task.deadline != null) DeadlineText(appState.task.deadline),
                 Expanded(child: Container()),
-                if (appState.task.deadline != null) CountdownText(appState.task.deadline),
+                if (appState.task.deadline != null) CountdownText(appState.task.deadline,appState.task.percentage),
               ],
             ),
 

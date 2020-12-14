@@ -27,7 +27,7 @@ class TaskItem extends StatelessWidget {
 
     return InkWell(
       child: SwipeTo(
-        animationDuration: const Duration(milliseconds: 300),
+        animationDuration: const Duration(milliseconds: 200),
         iconOnLeftSwipe: Icons.delete_outline,
         iconColor: settings.getFont(),
         iconOnRightSwipe: Icons.create_outlined,
@@ -78,7 +78,7 @@ class TaskItem extends StatelessWidget {
                       if (task.notification != null &&
                           task.notification.dateTime.isAfter(DateTime.now()))
                         NotificationIcon(),
-                      if (task.deadline != null) CountdownText(task.deadline),
+                      if (task.deadline != null) CountdownText(task.deadline,task.percentage),
                     ],
                   ),
                   PercentageRow(task),

@@ -36,7 +36,7 @@ class PercentageCounter extends StatelessWidget {
             ],
           ),
           child: Padding(
-            padding: const EdgeInsets.all(3.0),
+            padding: const EdgeInsets.all(5.0),
             child: Counter(
               maxValue: max != null ? max : 1,
               minValue: 0,
