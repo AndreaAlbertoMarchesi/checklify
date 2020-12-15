@@ -1,5 +1,6 @@
 import 'package:checklist_app/screens/home/widgets/ParentTaskItem.dart';
 import 'package:checklist_app/screens/home/widgets/Search.dart';
+import 'package:checklist_app/screens/home/widgets/SelectionCounter.dart';
 import 'package:checklist_app/screens/home/widgets/TaskPathRow.dart';
 import 'package:checklist_app/screens/home/widgets/buttons/AddButton.dart';
 import 'package:checklist_app/screens/home/widgets/sideMenu/SideMenu.dart';
@@ -59,9 +60,7 @@ class HomeScreen extends StatelessWidget {
               child: Stack(
                 children: [
                   if (selectionLength > 0)
-                    Align(
-                        alignment: Alignment.topRight,
-                        child: Text(selectionLength.toString())),
+                    SelectionCounter(selectionLength),
                   IconButton(
                     icon: Icon(
                       Icons.menu,

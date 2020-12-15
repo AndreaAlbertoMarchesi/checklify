@@ -19,13 +19,19 @@ class SelectionItem extends StatelessWidget {
           task.title,
         style: TextStyle(
           fontSize: settings.getFontSizeChildren(),
+          letterSpacing: 0.6,
+          fontWeight: FontWeight.bold,
+          color: settings.getFont(),
         ),
       ),
       subtitle: Text(
           taskPath.toString(),
-          style: TextStyle(
-            fontSize: settings.getFontSizeChildren(),
-          ),
+        style: TextStyle(
+          fontSize: settings.getFontSizeChildren()-4,
+          letterSpacing: 0.6,
+          fontWeight: FontWeight.bold,
+          color: settings.getFont(),
+        ),
       ),
       trailing: IconButton(
         icon: Icon(Icons.clear),

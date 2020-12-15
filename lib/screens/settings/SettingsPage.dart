@@ -25,7 +25,10 @@ class _SettingsPageState extends State<SettingsPage> {
       resizeToAvoidBottomPadding: false,
       extendBody: true,
       appBar: AppBar(
-        title: Text("Settings"),
+        title: Text(
+            "Settings",
+
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(

@@ -19,7 +19,7 @@ class MonthWidget extends StatelessWidget {
           child: Text(
               getMonth(currentDeadLine.month),
               style: TextStyle(
-                  fontSize: 15,
+                  fontSize: 12,
                   letterSpacing: 0.6,
                   color: settings.getFont(),
                   fontStyle: FontStyle.italic),

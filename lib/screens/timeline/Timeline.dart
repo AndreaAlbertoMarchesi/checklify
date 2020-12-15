@@ -2,6 +2,7 @@ import 'package:cell_calendar/cell_calendar.dart';
 import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/models/supportClasses/TaskPath.dart';
 import 'package:checklist_app/models/supportClasses/TaskWithPath.dart';
+import 'package:checklist_app/screens/timeline/InAppCalendar/InAppCalendar.dart';
 import 'package:checklist_app/screens/timeline/widgets/TimeLineStructure.dart';
 import 'package:checklist_app/screens/timeline/widgets/TimelineFreeDays.dart';
 import 'package:checklist_app/screens/timeline/widgets/TimelineTask.dart';
@@ -18,7 +19,7 @@ class Timeline extends StatelessWidget {
   Widget build(BuildContext context) {
     final settings = context.watch<Settings>();
     final appState = context.watch<AppState>();
-    int extra=0;
+    int extra = 0;
 
     List<Widget> getItems(Task root) {
       List<TaskWithPath> tasksWithPaths = root.getTimelineTasks(TaskPath());
@@ -27,12 +28,15 @@ class Timeline extends StatelessWidget {
       List<Widget> items = List<Widget>();
       DateTime previousDeadline;
 
-      items.add(MonthWidget(null, tasksWithPaths.first.task.deadline, settings.getMonth));
-      extra++;
+      if (tasksWithPaths.isNotEmpty) {
+        items.add(MonthWidget(
+            null, tasksWithPaths.first.task.deadline, settings.getMonth));
+        extra++;
+      }
       tasksWithPaths.forEach((e) {
         DateTime currentDeadline = e.task.deadline;
         bool hasSameDateAsPrevious =
-        haveSameDate(currentDeadline, previousDeadline);
+            haveSameDate(currentDeadline, previousDeadline);
 
         if (previousDeadline != null &&
             currentDeadline.difference(previousDeadline).inDays > 1) {
@@ -45,7 +49,8 @@ class Timeline extends StatelessWidget {
       });
       return items;
     }
-    List<Icon> getIndicator(Task root){
+
+    List<Icon> getIndicator(Task root) {
       List<TaskWithPath> tasksWithPaths = root.getTimelineTasks(TaskPath());
       List<Icon> items = List<Icon>();
 
@@ -53,7 +58,7 @@ class Timeline extends StatelessWidget {
         items.add(Icon(Icons.calendar_today_outlined));
       });
 
-      for(int i=0; i<extra; i++)
+      for (int i = 0; i < extra; i++)
         items.add(Icon(Icons.calendar_today_outlined));
       return items;
     }
@@ -62,17 +67,30 @@ class Timeline extends StatelessWidget {
         resizeToAvoidBottomPadding: false,
         extendBody: true,
         appBar: AppBar(
-          title: Text("TimeLine"),
+          title: Text(
+              "TimeLine",
+
+          ),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.calendar_today_outlined),
+              onPressed: () {
+                List<TaskWithPath> tasksWithPaths = appState.root.getTimelineTasks(TaskPath());
+                tasksWithPaths.sort((a, b) => a.task.deadline.compareTo(b.task.deadline));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => InAppCalendar(tasksWithPaths)));
+              },
+            )
+          ],
         ),
         body: TimelineStructure(
           children: getItems(appState.root),
           indicators: getIndicator(appState.root),
-          indicatorStyle : PaintingStyle.stroke,
-      ));
-
-
+          indicatorStyle: PaintingStyle.stroke,
+        ));
   }
-
 
   bool haveSameDate(DateTime deadline, DateTime prevDeadline) {
     return prevDeadline == null
