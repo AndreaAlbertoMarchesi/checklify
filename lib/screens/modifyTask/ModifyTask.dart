@@ -9,6 +9,8 @@ import 'package:checklist_app/screens/modifyTask/widgets/components/Notification
 import 'package:checklist_app/screens/modifyTask/widgets/components/ProgressTypeComponent.dart';
 import 'package:checklist_app/screens/modifyTask/widgets/components/StarComponent.dart';
 import 'package:checklist_app/screens/modifyTask/widgets/components/TitleComponent.dart';
+import 'package:checklist_app/screens/modifyTask/widgets/deadlineInput/DeadlineInput.dart';
+import 'package:checklist_app/screens/modifyTask/widgets/reminderInput/ReminderInput.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +87,7 @@ class _ModifyTaskState extends State<ModifyTask> {
         //NOTES
         NotesComponent(taskValues,isAdding),
         //DUE DATE
-        DueDateComponent(taskValues,refreshModifyTask),
+        DeadlineInput(taskValues,refreshModifyTask),
 
         //STAR
         StarComponent(taskValues,refreshModifyTask),
@@ -94,8 +96,7 @@ class _ModifyTaskState extends State<ModifyTask> {
         ProgressTypeComponent(taskValues,refreshModifyTask),
 
         //NOTIFICATION
-        if (taskValues.deadline != null)
-          NotificationComponent(taskValues,refreshModifyTask)
+        ReminderInput(taskValues,refreshModifyTask)
       ]),
     );
   }

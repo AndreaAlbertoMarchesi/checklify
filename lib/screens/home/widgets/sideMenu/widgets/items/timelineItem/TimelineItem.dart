@@ -1,4 +1,3 @@
-import 'package:checklist_app/screens/intro/IntroApp.dart';
 import 'package:checklist_app/screens/timeline/Timeline.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/cupertino.dart';

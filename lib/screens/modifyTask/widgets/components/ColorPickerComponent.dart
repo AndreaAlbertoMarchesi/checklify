@@ -6,19 +6,18 @@ import 'package:provider/provider.dart';
 
 class ColorPickerComponent extends StatelessWidget {
   ColorPickerComponent(this.taskValues);
+
   final TaskValues taskValues;
+
   @override
   Widget build(BuildContext context) {
     final settings = context.watch<Settings>();
 
     return Container(
-    child: ColorPicker(taskValues),
+        child: ColorPicker(taskValues),
         decoration: BoxDecoration(
             border: Border(
-            bottom: BorderSide(color: settings.getColor()),
-            )
-        )
-    );
+          bottom: BorderSide(color: settings.getColor()),
+        )));
   }
-
 }

@@ -1,12 +1,10 @@
 import 'package:checklist_app/models/Task.dart';
-import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/Items/CountdownText.dart';
-import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/Items/DailyPercentageText.dart';
-import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/Items/DeadlineText.dart';
-import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/Items/NotesText.dart';
-import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/Items/percentageRow/PercentageRow.dart';
-import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/Items/percentageRow/widgets/NotificationIcon.dart';
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/dialogs/DeleteDialog.dart';
-import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/dialogs/UpdateDialog.dart';
+import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/rows/DailyPercentageText.dart';
+import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/rows/NotesText.dart';
+import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/rows/percentageRow/PercentageRow.dart';
+import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/rows/topRow/TopRow.dart';
+import 'package:checklist_app/screens/modifyTask/ModifyTask.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +33,7 @@ class TaskItem extends StatelessWidget {
           if (settings.vibrate) Vibration.vibrate(duration: 80);
           showDialog(
             context: context,
-            child: UpdateDialog(task),
+            child: ModifyTask(task: task),
           );
         },
         onLeftSwipe: () {
@@ -71,18 +69,8 @@ class TaskItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Row(
-                    children: [
-                      if (task.deadline != null) DeadlineText(task.deadline),
-                      Expanded(child: Container()),
-                      if (task.notification != null &&
-                          task.notification.dateTime.isAfter(DateTime.now()))
-                        NotificationIcon(),
-                      if (task.deadline != null) CountdownText(task.deadline,task.percentage),
-                    ],
-                  ),
+                  TopRow(task),
                   PercentageRow(task),
-
                   if (task.notes.isNotEmpty) NotesText(task.notes),
 
                   if (task.deadline != null) DailyPercentageText(task.deadline, task.percentage),

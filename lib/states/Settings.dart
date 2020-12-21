@@ -165,5 +165,7 @@ class Settings with ChangeNotifier {
   ThemeData themeData(BuildContext context) =>
       _Styles.themeData(darkTheme, context);
 
+  OutlinedBorder getDialogShape() => _Styles.getDialogShape();
+
 
 }

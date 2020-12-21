@@ -30,7 +30,7 @@ class StarComponent extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(30.0, 8, 8, 8),
+              padding: EdgeInsets.all(15),
               child: StarInput(taskValues, refreshModifyTask),
             ),
           ],

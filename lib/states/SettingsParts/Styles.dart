@@ -1,9 +1,7 @@
-
-
 part of 'package:checklist_app/states/Settings.dart';
-class _Styles {
 
-  static List<ColorSwatch<dynamic>> getPossibleColors(){
+class _Styles {
+  static List<ColorSwatch<dynamic>> getPossibleColors() {
     List<ColorSwatch<dynamic>> colors = [];
 
     colors.add(createMaterialColor(Colors.grey[200]));
@@ -37,82 +35,84 @@ class _Styles {
     return MaterialColor(color.value, swatch);
   }
 
-  static Color getColor(bool isDarkTheme){
-    if(isDarkTheme){
+  static Color getColor(bool isDarkTheme) {
+    if (isDarkTheme) {
       return Colors.blueGrey[800];
-    }else{
+    } else {
       return Colors.blue[300];
     }
   }
 
   static Color getHighlightedColor(int colorValue) {
-
-    if(colorValue == Colors.blue[300].hashCode){
+    if (colorValue == Colors.blue[300].hashCode) {
       return Colors.blue[600];
-    }else if(colorValue == Colors.red[300].hashCode){
+    } else if (colorValue == Colors.red[300].hashCode) {
       return Colors.red[500];
-    }else if(colorValue == Colors.deepPurple[300].hashCode){
+    } else if (colorValue == Colors.deepPurple[300].hashCode) {
       return Colors.deepPurple[500];
-    }else if(colorValue == Colors.green[300].hashCode){
+    } else if (colorValue == Colors.green[300].hashCode) {
       return Colors.green[500];
-    }else if(colorValue == Colors.deepOrange[300].hashCode){
+    } else if (colorValue == Colors.deepOrange[300].hashCode) {
       return Colors.deepOrange[500];
-    }else if(colorValue == Colors.pink[300].hashCode){
+    } else if (colorValue == Colors.pink[300].hashCode) {
       return Colors.pink[500];
-    }else if(colorValue == Colors.tealAccent[200].hashCode){
+    } else if (colorValue == Colors.tealAccent[200].hashCode) {
       return Colors.tealAccent[700];
-    }else
+    } else
       return Colors.grey[500];
   }
 
-  static Color getFont(bool isDarkTheme){
-    if(isDarkTheme){
+  static Color getFont(bool isDarkTheme) {
+    if (isDarkTheme) {
       return Colors.blue[200];
-    }else{
+    } else {
       return Colors.blue[800];
     }
   }
-  static Color getFontTiles(bool isDarkTheme){
-    if(isDarkTheme){
+
+  static Color getFontTiles(bool isDarkTheme) {
+    if (isDarkTheme) {
       return Colors.black54;
-    }else{
+    } else {
       return Colors.black54;
     }
   }
 
-  static Color getShadowParent(bool isDarkTheme){
-    if(isDarkTheme){
+  static Color getShadowParent(bool isDarkTheme) {
+    if (isDarkTheme) {
       return Colors.grey[900];
-    }else{
+    } else {
       return Colors.blue[600];
     }
   }
 
-  static Color getBorder(bool isDarkTheme){
-    if(isDarkTheme){
+  static Color getBorder(bool isDarkTheme) {
+    if (isDarkTheme) {
       return Colors.black12;
-    }else{
+    } else {
       return Colors.lightBlue[300];
     }
   }
-  static Color getSideMenu(bool isDarkTheme){
-    if(isDarkTheme){
+
+  static Color getSideMenu(bool isDarkTheme) {
+    if (isDarkTheme) {
       return Color(0xff121212);
-    }else{
+    } else {
       return Colors.lightBlue[200];
     }
   }
-  static Color getAppBarIcon(bool isDarkTheme){
-    if(isDarkTheme){
+
+  static Color getAppBarIcon(bool isDarkTheme) {
+    if (isDarkTheme) {
       return Colors.blue[200];
-    }else{
+    } else {
       return Colors.lightBlue[50];
     }
   }
 
-  static double getFontSizeChildren(String size){
+  static double getFontSizeChildren(String size) {
     double s;
-    switch (size){
+    switch (size) {
       case 'Small':
         s = 13;
         break;
@@ -125,9 +125,10 @@ class _Styles {
     }
     return s;
   }
-  static double getFontSizeParent(String size){
+
+  static double getFontSizeParent(String size) {
     double s;
-    switch (size){
+    switch (size) {
       case 'Small':
         s = 22;
         break;
@@ -140,9 +141,10 @@ class _Styles {
     }
     return s;
   }
-  static double getTileSizeChildren(String size){
+
+  static double getTileSizeChildren(String size) {
     double s;
-    switch (size){
+    switch (size) {
       case 'Small':
         s = 40;
         break;
@@ -155,9 +157,10 @@ class _Styles {
     }
     return s;
   }
-  static double getTileSizeParent(String size){
+
+  static double getTileSizeParent(String size) {
     double s;
-    switch (size){
+    switch (size) {
       case 'Small':
         s = 22;
         break;
@@ -170,9 +173,10 @@ class _Styles {
     }
     return s;
   }
-  static double getPercentageSizeChildren(String size){
+
+  static double getPercentageSizeChildren(String size) {
     double s;
-    switch (size){
+    switch (size) {
       case 'Small':
         s = 33;
         break;
@@ -185,9 +189,10 @@ class _Styles {
     }
     return s;
   }
-  static double getPercentageSizeParent(String size){
+
+  static double getPercentageSizeParent(String size) {
     double s;
-    switch (size){
+    switch (size) {
       case 'Small':
         s = 38;
         break;
@@ -200,9 +205,10 @@ class _Styles {
     }
     return s;
   }
-  static double getFontPercentageChildren(String size){
+
+  static double getFontPercentageChildren(String size) {
     double s;
-    switch (size){
+    switch (size) {
       case 'Small':
         s = 9.5;
         break;
@@ -215,9 +221,10 @@ class _Styles {
     }
     return s;
   }
-  static double getFontPercentageParent(String size){
+
+  static double getFontPercentageParent(String size) {
     double s;
-    switch (size){
+    switch (size) {
       case 'Small':
         s = 10.5;
         break;
@@ -230,6 +237,7 @@ class _Styles {
     }
     return s;
   }
+
   static double getFontSizeCoffee(String size) {
     double s;
     switch (size) {
@@ -249,34 +257,35 @@ class _Styles {
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(
       primarySwatch: Colors.blue,
-      scaffoldBackgroundColor: isDarkTheme? Color(0xff121212) : Colors.lightBlue[100],
-      canvasColor: isDarkTheme ? Color(0xff121212) : Colors.lightBlue[100] ,
-
+      scaffoldBackgroundColor:
+          isDarkTheme ? Color(0xff121212) : Colors.lightBlue[100],
+      canvasColor: isDarkTheme ? Color(0xff121212) : Colors.lightBlue[100],
       textTheme: TextTheme().apply(
         bodyColor: isDarkTheme ? Colors.black : Colors.black,
         displayColor: isDarkTheme ? Colors.black : Colors.black,
       ),
-
       indicatorColor: isDarkTheme ? Color(0xff0E1D36) : Color(0xffCBDCF8),
-
       hintColor: isDarkTheme ? Colors.blue[200] : Colors.blue[800],
-
-      highlightColor: isDarkTheme ? Colors.blueGrey: Colors.lightBlue[100],
+      highlightColor: isDarkTheme ? Colors.blueGrey : Colors.lightBlue[100],
       hoverColor: isDarkTheme ? Color(0xff3A3A3B) : Color(0xff4285F4),
-
-
       disabledColor: Colors.grey,
       cardColor: isDarkTheme ? Color(0xFF151515) : Colors.lightBlue[100],
-      unselectedWidgetColor: isDarkTheme ? Colors.black54 : Colors.black54 ,
-      dialogBackgroundColor: isDarkTheme ? Color(0xff121212) : Colors.lightBlue[50] ,
-
-      floatingActionButtonTheme: FloatingActionButtonThemeData(foregroundColor: Colors.white,),
+      unselectedWidgetColor: isDarkTheme ? Colors.black54 : Colors.black54,
+      dialogBackgroundColor:
+          isDarkTheme ? Color(0xff121212) : Colors.lightBlue[50],
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        foregroundColor: Colors.white,
+      ),
       brightness: isDarkTheme ? Brightness.dark : Brightness.light,
       appBarTheme: AppBarTheme(
         shadowColor: Colors.black,
         elevation: 10.0,
       ),
     );
+  }
 
+  static OutlinedBorder getDialogShape() {
+    return RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(30)));
   }
 }

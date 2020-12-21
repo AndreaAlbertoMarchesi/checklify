@@ -1,5 +1,5 @@
-import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/Items/CountdownText.dart';
-import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/Items/DeadlineText.dart';
+import 'package:checklist_app/sharedWidgets/CountdownText.dart';
+import 'package:checklist_app/sharedWidgets/DeadlineText.dart';
 import 'package:checklist_app/sharedWidgets/PercentageCircle.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';

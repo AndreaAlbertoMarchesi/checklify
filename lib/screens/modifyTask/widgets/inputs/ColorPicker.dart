@@ -22,22 +22,30 @@ class _ColorPickerState extends State<ColorPicker> {
   @override
   Widget build(BuildContext context) {
     final settings = context.watch<Settings>();
-    return ListTile(
-      title: Text(
-        "Color",
-        style: TextStyle(
-          fontSize: settings.getFontSizeChildren(),
-          letterSpacing: 0.6,
-          fontWeight: FontWeight.bold,
-          color: settings.getFont(),
+    return Row(children: [
+      Padding(
+        padding: EdgeInsets.all(15),
+        child: Text(
+          "Color",
+          style: TextStyle(
+            fontSize: settings.getFontSizeChildren(),
+            letterSpacing: 0.6,
+            fontWeight: FontWeight.bold,
+            color: settings.getFont(),
+          ),
         ),
       ),
-      trailing: CircleColor(
-        color: selectedColor,
-        circleSize: 30,
-      ),
-      onTap: () => openColorDialog(context, settings),
-    );
+      Padding(
+        padding: EdgeInsets.all(15),
+        child: InkWell(
+          child: CircleColor(
+            color: selectedColor,
+            circleSize: 30,
+          ),
+          onTap: () => openColorDialog(context, settings),
+        ),
+      )
+    ]);
   }
 
   void openColorDialog(BuildContext context, Settings settings) {
