@@ -3,9 +3,10 @@ import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/models/supportClasses/TaskPath.dart';
 import 'package:checklist_app/models/supportClasses/TaskWithPath.dart';
 import 'package:checklist_app/screens/timeline/InAppCalendar/InAppCalendar.dart';
-import 'package:checklist_app/screens/timeline/widgets/TimeLineStructure.dart';
+import 'file:///C:/Users/Ilaria/AndroidStudioProjects/checklify/lib/screens/timeline/widgets/timeLineStructure/TimeLineStructure.dart';
 import 'package:checklist_app/screens/timeline/widgets/TimelineFreeDays.dart';
 import 'package:checklist_app/screens/timeline/widgets/TimelineTask.dart';
+import 'package:checklist_app/screens/timeline/widgets/widgets/DueDateWidget.dart';
 import 'package:checklist_app/screens/timeline/widgets/widgets/MonthWidget.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
@@ -31,7 +32,6 @@ class Timeline extends StatelessWidget {
       if (tasksWithPaths.isNotEmpty) {
         items.add(MonthWidget(
             null, tasksWithPaths.first.task.deadline, settings.getMonth));
-        extra++;
       }
       tasksWithPaths.forEach((e) {
         DateTime currentDeadline = e.task.deadline;
@@ -50,16 +50,42 @@ class Timeline extends StatelessWidget {
       return items;
     }
 
-    List<Icon> getIndicator(Task root) {
+    List<Widget> getIndicator(Task root) {
       List<TaskWithPath> tasksWithPaths = root.getTimelineTasks(TaskPath());
-      List<Icon> items = List<Icon>();
+      tasksWithPaths.sort((a, b) => a.task.deadline.compareTo(b.task.deadline));
+      List<Widget> items = List<Widget>();
+      DateTime previousDeadline;
+
+      items.add(Icon(
+          Icons.calendar_today_outlined,
+          color: settings.getFont(),
+      ));
 
       tasksWithPaths.forEach((element) {
-        items.add(Icon(Icons.calendar_today_outlined));
-      });
+        DateTime currentDeadline = element.task.deadline;
+        bool hasSameDateAsPrevious =
+          haveSameDate(currentDeadline, previousDeadline);
 
-      for (int i = 0; i < extra; i++)
-        items.add(Icon(Icons.calendar_today_outlined));
+        if (previousDeadline != null &&
+            currentDeadline.difference(previousDeadline).inDays > 1) {
+          items.add(Icon(
+              Icons.swap_vertical_circle,
+            color: settings.getFont(),
+          ));
+        }
+
+        if(hasSameDateAsPrevious){
+          items.add(Icon(
+            Icons.fiber_manual_record_outlined,
+            color: settings.getFont(),
+          ));
+        }else {
+          items.add(DueDateWidget(element.task));
+        }
+        previousDeadline = element.task.deadline;
+
+
+      });
       return items;
     }
 

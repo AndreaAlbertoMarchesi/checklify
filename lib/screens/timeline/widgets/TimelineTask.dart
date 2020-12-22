@@ -21,7 +21,7 @@ class TimelineTask extends StatelessWidget {
     final taskPath = taskWithPath.taskPath;
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(1, 0, 1, 0),
+      padding: const EdgeInsets.fromLTRB(9, 0, 3, 0),
       child: Container(
         height: 90,
         decoration: BoxDecoration(
@@ -37,12 +37,6 @@ class TimelineTask extends StatelessWidget {
           ],
         ),
         child: ListTile(
-          leading: hasSameDateAsPrevious
-              ? Container(
-                  width: 40,
-                  height: 40,
-                )
-              : DueDateWidget(task),
           title: Text(
               task.title,
               style: TextStyle(

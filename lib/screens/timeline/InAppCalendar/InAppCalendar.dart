@@ -52,7 +52,6 @@ class InAppCalendar extends StatelessWidget {
           allowedViews: [
             CalendarView.month,
             CalendarView.week,
-            CalendarView.day
           ],
           dataSource: MeetingDataSource(_getDataSource()),
           monthViewSettings: MonthViewSettings(

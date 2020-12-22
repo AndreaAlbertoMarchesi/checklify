@@ -9,7 +9,7 @@ class NotificationIcon extends StatelessWidget {
     final settings = context.watch<Settings>();
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(2,4,0,0),
+      padding: const EdgeInsets.fromLTRB(2,4,12,0),
       child: Icon(
             Icons.notifications_active_outlined,
             color: settings.getFontTiles(),

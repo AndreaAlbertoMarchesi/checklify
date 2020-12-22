@@ -17,7 +17,7 @@ class PercentageSlider extends StatelessWidget {
     final settings = context.watch<Settings>();
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 12, 12, 12),
+      padding: const EdgeInsets.fromLTRB(0, 12, 12, 15),
       child: InkWell(
         child: Container(
           decoration: BoxDecoration(
@@ -33,13 +33,13 @@ class PercentageSlider extends StatelessWidget {
             ],
           ),
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.fromLTRB(8,14,8,14),
             child: LinearPercentIndicator(
               width: 55,
               lineHeight: 14.0,
               percent: task.percentage.toDouble(),
               animation: true,
-              backgroundColor: Colors.grey,
+              backgroundColor: Colors.grey[300],
               progressColor: Colors.lightGreen,
             ),
           ),

@@ -24,7 +24,7 @@ class TimelineFreeDays extends StatelessWidget {
       return  Center(
         child: ListTile(
           title: Text(
-            "Days between tasks "+durationFromLastDeadline.inDays.toString(),
+            durationFromLastDeadline.inDays.toString() +"   days between tasks",
             style: TextStyle(
               letterSpacing: 0.6,
               fontWeight: FontWeight.bold,
@@ -33,7 +33,7 @@ class TimelineFreeDays extends StatelessWidget {
 
           ),
           subtitle: Text(
-            "Day from now "+durationFromNow.inDays.toString(),
+            durationFromNow.inDays.toString()+"   days from now",
             style: TextStyle(
               letterSpacing: 0.6,
               fontSize: settings.getFontSizeCoffee(),
@@ -56,7 +56,9 @@ class TimelineFreeDays extends StatelessWidget {
         : Column(
           children: [
             Container(
-                height: 20 * durationFromLastDeadline.inDays.toDouble(),
+                height: durationFromLastDeadline.inDays.toDouble() > 31
+                    ? 600
+                    : 20 * durationFromLastDeadline.inDays.toDouble(),
                 child:getChild()
             ),
             Container(

@@ -1,4 +1,5 @@
 import 'package:checklist_app/screens/settings/SettingsPage.dart';
+import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,8 @@ class SettingItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final settings = context.watch<Settings>();
+    final appState = context.watch<AppState>();
+
     return ListTile(
       leading: Icon(Icons.settings),
       title: Text(
@@ -22,6 +25,7 @@ class SettingItem extends StatelessWidget {
         ),
       ),
       onTap: () {
+        appState.deselect();
         Navigator.of(context).pop();
         Navigator.push(
             context,

@@ -16,10 +16,8 @@ class DueDateWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final settings = context.watch<Settings>();
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
+    return
+        /*Text(
             "Due Date:",
           style: TextStyle(
             fontSize: settings.getFontSizeCoffee(),
@@ -27,10 +25,8 @@ class DueDateWidget extends StatelessWidget {
             fontWeight: FontWeight.bold,
             color: settings.getFontTiles(),
           ),
-        ),
+        ),*/
         Container(
-          height: 37,
-          width: 50,
           child: Center(
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -41,70 +37,56 @@ class DueDateWidget extends StatelessWidget {
                       fontSize: settings.getFontSizeCoffee(),
                       letterSpacing: 0.5,
                       fontWeight: FontWeight.bold,
-                      color: settings.getFontTiles(),
+                      color: settings.getFont(),
                    ),
                 ),
                 task.deadline.day == 1
                     ? Text(
                         " st",
                       style: TextStyle(
-                        fontSize: settings.getFontSizeCoffee(),
+                        fontSize: settings.getFontSizeCoffee()-4,
                           letterSpacing: 0.5,
                           fontStyle: FontStyle.italic,
                           fontWeight: FontWeight.bold,
-                        color: settings.getFontTiles(),
+                        color: settings.getFont(),
                         ),
                       )
                     : task.deadline.day == 2
                           ? Text(
                               " nd",
                               style: TextStyle(
-                                fontSize: settings.getFontSizeCoffee(),
+                                fontSize: settings.getFontSizeCoffee()-4,
                                 letterSpacing: 0.5,
                                 fontStyle: FontStyle.italic,
                                 fontWeight: FontWeight.bold,
-                                color: settings.getFontTiles(),
+                                color: settings.getFont(),
                                 ),
                             )
                           : task.deadline.day == 3
                               ? Text(
                                   " rd",
                                   style: TextStyle(
-                                    fontSize: settings.getFontSizeCoffee(),
+                                    fontSize: settings.getFontSizeCoffee()-4,
                                     letterSpacing: 0.5,
                                     fontStyle: FontStyle.italic,
                                     fontWeight: FontWeight.bold,
-                                    color: settings.getFontTiles(),
+                                    color: settings.getFont(),
                                   ),
                                 )
                               : Text(
                                 " th",
                                   style: TextStyle(
-                                    fontSize: settings.getFontSizeCoffee(),
+                                    fontSize: settings.getFontSizeCoffee()-4,
                                     letterSpacing: 0.5,
                                     fontStyle: FontStyle.italic,
                                     fontWeight: FontWeight.bold,
-                                    color: settings.getFontTiles(),
+                                    color: settings.getFont(),
                                   ),
                                 ),
               ],
             ),
           ),
-          decoration: BoxDecoration(
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.circular(12),
-              color: Colors.white60,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.white60,
-                spreadRadius: 0.0,
-                offset: Offset(5.0, 5.0),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
+        );
   }
 
 
