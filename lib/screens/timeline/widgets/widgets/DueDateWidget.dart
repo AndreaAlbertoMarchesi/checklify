@@ -29,7 +29,7 @@ class DueDateWidget extends StatelessWidget {
           ),
         ),
         Container(
-          height: 39,
+          height: 37,
           width: 50,
           child: Center(
             child: Row(

@@ -36,11 +36,29 @@ class _ColorPickerState extends State<ColorPicker> {
         ),
       ),
       Padding(
-        padding: EdgeInsets.all(15),
+        padding: EdgeInsets.all(10),
         child: InkWell(
-          child: CircleColor(
-            color: selectedColor,
-            circleSize: 30,
+          child: Stack(
+            children: [
+              Positioned(
+                left: 2.0,
+                top: 2.0,
+                child: Padding(
+                  padding: const EdgeInsets.all(1),
+                  child: CircleColor(
+                    color: Colors.black45,
+                    circleSize: 30,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(2),
+                child: CircleColor(
+                  color: selectedColor,
+                  circleSize: 30,
+                ),
+              ),
+            ],
           ),
           onTap: () => openColorDialog(context, settings),
         ),
@@ -59,6 +77,7 @@ class _ColorPickerState extends State<ColorPicker> {
           child: MaterialColorPicker(
             shrinkWrap: true,
             allowShades: false,
+            spacing: 30,
             colors: settings.getPossibleColors(),
             onMainColorChange: (Color color) {
               widget.taskValues.colorValue = color.value;

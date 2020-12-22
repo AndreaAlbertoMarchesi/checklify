@@ -1,7 +1,7 @@
 import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/models/supportClasses/TaskValues.dart';
+import 'package:checklist_app/sharedWidgets/alertDialogWidgets/DialogButton.dart';
 import 'package:checklist_app/sharedWidgets/alertDialogWidgets/DialogTitle.dart';
-import 'file:///C:/Users/aam63/StudioProjects/checklify/lib/sharedWidgets/alertDialogWidgets/DialogButton.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:date_time_picker/date_time_picker.dart';
@@ -32,6 +32,65 @@ class _PercentageCounterDialogState extends State<PercentageCounterDialog> {
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
     final settings = context.watch<Settings>();
+
+    return Container(
+      alignment: Alignment.center,
+      height: 75,
+      width: 200,
+      decoration: BoxDecoration(
+        color: Color.fromRGBO(115, 206, 255, 0.20),
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: Row(children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: IconButton(
+            onPressed: () {
+              setState(() {
+                if (completionCount < widget.task.counterMax) completionCount++;
+              });
+              appState.updatePercentage(
+                  widget.task, completionCount / widget.task.counterMax);
+            },
+            icon: Icon(
+                Icons.keyboard_arrow_up,
+              color: settings.getAppBarIcon(),
+            ),
+          ),
+        ),
+        Expanded(
+          child: Text(
+            completionCount.toString() +
+                "/" +
+                widget.task.counterMax.toString(),
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                letterSpacing: 0.5,
+                fontWeight: FontWeight.bold,
+                color: settings.getAppBarIcon(),
+                fontSize: settings.getFontSizeChildren()
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: IconButton(
+            onPressed: () {
+              setState(() {
+                if (completionCount > 0) completionCount--;
+              });
+              appState.updatePercentage(
+                  widget.task, completionCount / widget.task.counterMax);
+            },
+            icon: Icon(
+                Icons.keyboard_arrow_down,
+                color: settings.getAppBarIcon(),
+            ),
+          ),
+        )
+      ]),
+    );
+
 
     return AlertDialog(
       shape: settings.getDialogShape(),

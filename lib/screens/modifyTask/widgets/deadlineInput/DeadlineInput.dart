@@ -38,6 +38,11 @@ class DeadlineInput extends StatelessWidget {
                       ? DateTimeFormatter.dateTimeToFullString(
                           taskValues.deadline)
                       : "add deadline...",
+                  style: TextStyle(
+                    fontSize: settings.getFontSizeCoffee(),
+                    letterSpacing: 0.6,
+                    color: settings.getFont(),
+                  ),
                 ),
               ),
             ],

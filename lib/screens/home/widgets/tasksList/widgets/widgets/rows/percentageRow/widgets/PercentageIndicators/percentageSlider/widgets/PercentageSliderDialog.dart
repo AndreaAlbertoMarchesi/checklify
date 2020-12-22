@@ -1,12 +1,11 @@
 import 'package:checklist_app/models/Task.dart';
+import 'package:checklist_app/sharedWidgets/alertDialogWidgets/DialogButton.dart';
 import 'package:checklist_app/sharedWidgets/alertDialogWidgets/DialogTitle.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'file:///C:/Users/aam63/StudioProjects/checklify/lib/sharedWidgets/alertDialogWidgets/DialogButton.dart';
 
 class PercentageSliderDialog extends StatefulWidget {
   PercentageSliderDialog(this.task);
@@ -31,7 +30,44 @@ class _PercentageSliderDialogState extends State<PercentageSliderDialog> {
     final appState = context.watch<AppState>();
     final settings = context.watch<Settings>();
 
-    return AlertDialog(
+
+    return Container(
+      alignment: Alignment.center,
+      height: 75,
+      width: 200,
+      decoration: BoxDecoration(
+        color: Color.fromRGBO(115, 206, 255, 0.20),
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+                (percentage*100).round().toString()+"%",
+              style: TextStyle(
+                letterSpacing: 0.5,
+                fontWeight: FontWeight.bold,
+                color: settings.getAppBarIcon(),
+                fontSize: settings.getFontSizeChildren()
+              ),
+            ),
+            Slider(
+              value: percentage,
+              divisions: widget.task.sliderDivisions != null
+                  ? widget.task.sliderDivisions
+                  : 3,
+              onChanged: (double value) {
+                setState(() {
+                  percentage = value;
+                });
+                appState.updatePercentage(widget.task, percentage);
+              },
+            ),
+          ]),
+    );
+
+
+    /*return AlertDialog(
       shape: settings.getDialogShape(),
       title: DialogTitle("Set progress"),
       content: Container(
@@ -67,6 +103,6 @@ class _PercentageSliderDialogState extends State<PercentageSliderDialog> {
           },
         ),
       ],
-    );
+    );*/
   }
 }

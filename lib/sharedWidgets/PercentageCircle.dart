@@ -16,7 +16,7 @@ class PercentageCircle extends StatelessWidget {
     final percentage = task.percentage;
 
     return Padding(
-      padding: EdgeInsets.fromLTRB(0, 6, 6, 6),
+      padding: EdgeInsets.fromLTRB(0, 6, 8, 6),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white54,
@@ -26,8 +26,8 @@ class PercentageCircle extends StatelessWidget {
               color: task.colorValue != null
                   ? settings.getHighlightedColor(task.colorValue)
                   : settings.getShadowParent(),
-              blurRadius: 2.0,
-              spreadRadius: 0.0,
+              blurRadius: 0.0,
+              spreadRadius: 1.0,
               offset: Offset(2.0, 2.0),
             ),
           ],

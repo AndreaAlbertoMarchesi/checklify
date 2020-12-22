@@ -15,7 +15,16 @@ class StarInput extends StatelessWidget {
 
     return IconButton(
       icon: taskValues.isStarred
-          ? Icon(Icons.star, color: Colors.yellowAccent)
+          ? Stack(
+              children: [
+                Positioned(
+                  left: 2.0,
+                  top: 2.0,
+                  child: Icon(Icons.star, color: Colors.black45),
+                ),
+                Icon(Icons.star, color: Colors.yellowAccent)
+              ],
+            )
           : Icon(Icons.star_border, color: Colors.yellowAccent),
       onPressed: () {
         taskValues.isStarred = !taskValues.isStarred;

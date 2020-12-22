@@ -8,12 +8,12 @@ class NotificationIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     final settings = context.watch<Settings>();
 
-    return IconButton(
-      icon: Icon(
-          Icons.notifications_active_outlined,
-          color: settings.getFontTiles(),
-      ),
-      onPressed: () {},
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(2,4,0,0),
+      child: Icon(
+            Icons.notifications_active_outlined,
+            color: settings.getFontTiles(),
+        ),
     );
   }
 }

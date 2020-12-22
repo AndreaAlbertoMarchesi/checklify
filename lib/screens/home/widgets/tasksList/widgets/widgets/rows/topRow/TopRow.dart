@@ -1,7 +1,7 @@
 import 'package:checklist_app/models/Task.dart';
-import 'file:///C:/Users/aam63/StudioProjects/checklify/lib/sharedWidgets/CountdownText.dart';
-import 'file:///C:/Users/aam63/StudioProjects/checklify/lib/sharedWidgets/DeadlineText.dart';
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/rows/topRow/widgets/NotificationIcon.dart';
+import 'package:checklist_app/sharedWidgets/CountdownText.dart';
+import 'package:checklist_app/sharedWidgets/DeadlineText.dart';
 import 'package:flutter/cupertino.dart';
 
 class TopRow extends StatelessWidget {

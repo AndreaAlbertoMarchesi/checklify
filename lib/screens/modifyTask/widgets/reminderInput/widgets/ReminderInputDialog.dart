@@ -38,7 +38,17 @@ class _ReminderInputDialogState extends State<ReminderInputDialog> {
       title: DialogTitle("Reminder"),
       content: dateTimeReminder == null && hasClearedReminder == true
           ? InkWell(
-              child: Text("add a reminder..."),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0,6,0,0),
+                child: Text(
+                    "add a reminder...",
+                  style: TextStyle(
+                    fontSize: settings.getFontSizeCoffee(),
+                    letterSpacing: 0.6,
+                    color: settings.getFont(),
+                  ),
+                ),
+              ),
               onTap: () {
                 setState(() {
                   dateTimeReminder = DateTime.now();

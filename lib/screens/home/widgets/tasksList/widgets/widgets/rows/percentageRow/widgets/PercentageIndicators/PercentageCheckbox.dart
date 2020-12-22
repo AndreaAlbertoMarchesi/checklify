@@ -23,8 +23,8 @@ class PercentageCheckbox extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: settings.getHighlightedColor(task.colorValue),
-              blurRadius: 2.0,
-              spreadRadius: 0.0,
+              blurRadius: 0.0,
+              spreadRadius: 1.0,
               offset: Offset(2.0, 2.0),
             ),
           ],

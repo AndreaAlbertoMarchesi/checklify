@@ -56,7 +56,7 @@ class CountdownText extends StatelessWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.all(9.0),
+      padding: const EdgeInsets.fromLTRB(10.0,13,10,8),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),

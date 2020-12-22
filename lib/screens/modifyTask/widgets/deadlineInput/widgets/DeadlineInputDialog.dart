@@ -38,7 +38,17 @@ class _DeadlineInputDialogState extends State<DeadlineInputDialog> {
       title: DialogTitle("Deadline"),
       content: deadline == null && hasClearedDeadline == true
           ? InkWell(
-              child: Text("add a deadline..."),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0,6,0,0),
+                child: Text(
+                    "add a deadline...",
+                  style: TextStyle(
+                    fontSize: settings.getFontSizeCoffee(),
+                    letterSpacing: 0.6,
+                    color: settings.getFont(),
+                  ),
+                ),
+              ),
               onTap: () {
                 setState(() {
                   deadline = DateTime.now();

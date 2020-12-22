@@ -1,6 +1,8 @@
 import 'dart:developer';
 import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/models/supportClasses/TaskValues.dart';
+import 'package:checklist_app/screens/modifyTask/widgets/inputs/progressTypeInput/widgets/CounterSetterDialog.dart';
+import 'package:checklist_app/sharedWidgets/alertDialogWidgets/DialogTitle.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_counter/flutter_counter.dart';
@@ -31,15 +33,35 @@ class ProgressTypeInput extends StatelessWidget {
       }
     }
 
-    Future _showIntDialog() async {
+    Future _showIntDialogSlider() async {
       await showDialog<int>(
         context: context,
         builder: (BuildContext context) {
           return new NumberPickerDialog.integer(
+            title: Center(child: DialogTitle("Slider divisions:")),
             minValue: 1,
             maxValue: 10,
+            infiniteLoop: true,
             initialIntegerValue:
                 taskValues.sliderDivisions == null ? 3 : taskValues.sliderDivisions,
+            cancelWidget: Text(
+              "Cancel",
+              style: TextStyle(
+                fontSize: settings.getFontSizeChildren(),
+                letterSpacing: 0.6,
+                fontWeight: FontWeight.bold,
+                color: settings.getFont(),
+              ),
+            ),
+            confirmWidget: Text(
+              "Done",
+              style: TextStyle(
+                fontSize: settings.getFontSizeChildren(),
+                letterSpacing: 0.6,
+                fontWeight: FontWeight.bold,
+                color: settings.getFont(),
+              ),
+            ),
           );
         },
       ).then((num value) {
@@ -50,6 +72,13 @@ class ProgressTypeInput extends StatelessWidget {
       });
     }
 
+    _showDialogCounter(){
+
+      showDialog(
+        context: context,
+        builder: (context) => CounterSetterDialog(refreshModifyTask,taskValues),
+      );
+    }
     return Row(
       children: [
         DropdownButton<ProgressType>(
@@ -84,23 +113,22 @@ class ProgressTypeInput extends StatelessWidget {
         if (taskValues.progressType == ProgressType.counter)
           Padding(
             padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-            child: Counter(
-              maxValue: double.maxFinite,
-              initialValue:
-                  taskValues.counterMax == null ? taskValues.counterMax=1 : taskValues.counterMax,
-              decimalPlaces: 0,
-              onChanged: (num value) {
-                taskValues.counterMax = value;
-                refreshModifyTask();
-              },
-              minValue: 1,
+            child :IconButton(
+              onPressed: () {
+                if(taskValues.counterMax == null) {
+                  taskValues.counterMax = 1;
+                  refreshModifyTask();
+                }
+                _showDialogCounter();
+                },
+              icon: Icon(Icons.format_list_numbered_rtl),
             ),
           ),
         if (taskValues.progressType == ProgressType.slider)
           Padding(
             padding: const EdgeInsets.fromLTRB(4, 0, 0, 0),
             child: IconButton(
-              onPressed: () => _showIntDialog(),
+              onPressed: () => _showIntDialogSlider(),
               icon: Icon(Icons.format_list_numbered_rtl),
             ),
           ),

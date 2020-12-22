@@ -14,7 +14,7 @@ class PercentageCounter extends StatelessWidget {
     final settings = context.watch<Settings>();
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 10, 15, 9),
+      padding: EdgeInsets.fromLTRB(0, 12, 19, 12),
       child: Transform.scale(
         scale: 1.2,
         child: InkWell(
@@ -25,24 +25,35 @@ class PercentageCounter extends StatelessWidget {
               boxShadow: [
                 BoxShadow(
                   color: settings.getHighlightedColor(task.colorValue),
-                  blurRadius: 2.0,
-                  spreadRadius: 0.0,
+                  blurRadius: 0.0,
+                  spreadRadius: 1.0,
                   offset: Offset(2.0, 2.0),
                 ),
               ],
             ),
             child: Padding(
-              padding: const EdgeInsets.all(5.0),
+              padding: const EdgeInsets.all(10.0),
               child: Text(
                   (task.percentage * task.counterMax).round().toString() +
                       "/" +
-                      task.counterMax.toString()),
+                      task.counterMax.toString(),
+                style: TextStyle(
+                    letterSpacing: 0.5,
+                    fontWeight: FontWeight.bold,
+                    color: settings.getFontTiles(),
+                ),
+              ),
             ),
           ),
           onTap: () {
             showDialog(
               context: context,
-              builder: (context) => PercentageCounterDialog(task),
+              builder: (context) => Material(
+                type: MaterialType.transparency,
+                child: Center(
+                  child: PercentageCounterDialog(task),
+                ),
+              ),
             );
           },
         ),

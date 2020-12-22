@@ -17,7 +17,7 @@ class PercentageSlider extends StatelessWidget {
     final settings = context.watch<Settings>();
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 7, 3, 7),
+      padding: const EdgeInsets.fromLTRB(0, 12, 12, 12),
       child: InkWell(
         child: Container(
           decoration: BoxDecoration(
@@ -26,25 +26,33 @@ class PercentageSlider extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: settings.getHighlightedColor(task.colorValue),
-                blurRadius: 30.0,
-                spreadRadius: 0.0,
+                blurRadius: 0.0,
+                spreadRadius: 1.0,
                 offset: Offset(2.0, 2.0),
               ),
             ],
           ),
-          child: LinearPercentIndicator(
-            width: 50,
-            lineHeight: 14.0,
-            percent: task.percentage.toDouble(),
-            animation: true,
-            backgroundColor: Colors.grey,
-            progressColor: Colors.blue,
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: LinearPercentIndicator(
+              width: 55,
+              lineHeight: 14.0,
+              percent: task.percentage.toDouble(),
+              animation: true,
+              backgroundColor: Colors.grey,
+              progressColor: Colors.lightGreen,
+            ),
           ),
         ),
         onTap: () {
           showDialog(
             context: context,
-            builder: (context) => PercentageSliderDialog(task),
+            builder: (context) => Material(
+              type: MaterialType.transparency,
+              child: Center(
+                child: PercentageSliderDialog(task),
+              ),
+            ),
           );
         },
       ),

@@ -18,29 +18,35 @@ class DeadlineText extends StatelessWidget {
       padding: const EdgeInsets.all(9.0),
       child: Row(
         children: [
-          IconButton(
-            icon: Icon(Icons.watch_later_outlined),
-            onPressed: () {},
-          ),
-          Text(
-            DateTimeFormatter.monthToString(_dateTime.month) +
-                " " +
-                _dateTime.day.toString() +
-                (_dateTime.year != DateTime.now().year
-                    ? ", " + _dateTime.year.toString()
-                    : "")
-            /*
-                "/" +
-                _dateTime.day.toString() +
-                "  " +
-                _dateTime.hour.toString() +
-                ":" +
-                _dateTime.minute.toString()*/
-            ,
-            style: TextStyle(
-              letterSpacing: 0.5,
-              fontStyle: FontStyle.italic,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(2,4,4,0),
+            child: Icon(
+              Icons.watch_later_outlined,
               color: settings.getFontTiles(),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(2,4,0,0),
+            child: Text(
+              DateTimeFormatter.monthToString(_dateTime.month) +
+                  " " +
+                  _dateTime.day.toString() +
+                  (_dateTime.year != DateTime.now().year
+                      ? ", " + _dateTime.year.toString()
+                      : "")
+              /*
+                  "/" +
+                  _dateTime.day.toString() +
+                  "  " +
+                  _dateTime.hour.toString() +
+                  ":" +
+                  _dateTime.minute.toString()*/
+              ,
+              style: TextStyle(
+                letterSpacing: 0.5,
+                fontStyle: FontStyle.italic,
+                color: settings.getFontTiles(),
+              ),
             ),
           ),
         ],

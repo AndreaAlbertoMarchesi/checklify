@@ -38,6 +38,11 @@ class ReminderInput extends StatelessWidget {
                       ? DateTimeFormatter.dateTimeToFullString(
                           taskValues.dateTimeNotification)
                       : "add a reminder...",
+                  style: TextStyle(
+                    fontSize: settings.getFontSizeCoffee(),
+                    letterSpacing: 0.6,
+                    color: settings.getFont(),
+                  ),
                 ),
               ),
             ],
