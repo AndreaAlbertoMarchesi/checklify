@@ -42,7 +42,7 @@ class DueDateWidget extends StatelessWidget {
                 ),
                 task.deadline.day == 1
                     ? Text(
-                        " st",
+                        "st",
                       style: TextStyle(
                         fontSize: settings.getFontSizeCoffee()-4,
                           letterSpacing: 0.5,
@@ -53,7 +53,7 @@ class DueDateWidget extends StatelessWidget {
                       )
                     : task.deadline.day == 2
                           ? Text(
-                              " nd",
+                              "nd",
                               style: TextStyle(
                                 fontSize: settings.getFontSizeCoffee()-4,
                                 letterSpacing: 0.5,
@@ -64,7 +64,7 @@ class DueDateWidget extends StatelessWidget {
                             )
                           : task.deadline.day == 3
                               ? Text(
-                                  " rd",
+                                  "rd",
                                   style: TextStyle(
                                     fontSize: settings.getFontSizeCoffee()-4,
                                     letterSpacing: 0.5,
@@ -74,7 +74,7 @@ class DueDateWidget extends StatelessWidget {
                                   ),
                                 )
                               : Text(
-                                " th",
+                                "th",
                                   style: TextStyle(
                                     fontSize: settings.getFontSizeCoffee()-4,
                                     letterSpacing: 0.5,

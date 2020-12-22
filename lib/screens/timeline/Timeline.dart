@@ -56,10 +56,12 @@ class Timeline extends StatelessWidget {
       List<Widget> items = List<Widget>();
       DateTime previousDeadline;
 
-      items.add(Icon(
+      if(tasksWithPaths.isNotEmpty) {
+        items.add(Icon(
           Icons.calendar_today_outlined,
           color: settings.getFont(),
-      ));
+        ));
+      }
 
       tasksWithPaths.forEach((element) {
         DateTime currentDeadline = element.task.deadline;

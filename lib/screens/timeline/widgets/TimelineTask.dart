@@ -1,5 +1,4 @@
 import 'package:checklist_app/models/supportClasses/TaskWithPath.dart';
-import 'package:checklist_app/screens/timeline/widgets/widgets/DueDateWidget.dart';
 import 'package:checklist_app/screens/timeline/widgets/widgets/PercentageWidget.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
