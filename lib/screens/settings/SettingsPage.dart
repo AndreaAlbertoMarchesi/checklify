@@ -1,7 +1,6 @@
 import 'package:checklist_app/screens/settings/widgets/settingsSection/AccountSettings.dart';
 import 'package:checklist_app/screens/settings/widgets/settingsSection/AssistanceSettings.dart';
 import 'package:checklist_app/screens/settings/widgets/settingsSection/GeneralSettings.dart';
-import 'package:checklist_app/screens/settings/widgets/settingsSection/NotificationSettings.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

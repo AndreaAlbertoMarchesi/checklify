@@ -1,4 +1,3 @@
-import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/models/supportClasses/TaskValues.dart';
 import 'package:checklist_app/sharedWidgets/alertDialogWidgets/DialogButton.dart';
 import 'package:checklist_app/sharedWidgets/alertDialogWidgets/DialogTitle.dart';
