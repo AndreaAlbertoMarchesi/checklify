@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:checklist_app/screens/settings/widgets/dialogs/ModifyName.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:provider/provider.dart';
 import '../BottomSheet.dart';
 
@@ -115,11 +116,15 @@ class AccountSettings extends StatelessWidget {
   }
 
   void openAddDialog(BuildContext context) {
-    showDialog(
+    showAnimatedDialog(
       context: context,
+      barrierDismissible: true,
       builder: (BuildContext context) {
         return ModifyName();
       },
+      animationType: DialogTransitionType.fade,
+      curve: Curves.fastOutSlowIn,
+      duration: Duration(milliseconds: 400),
     );
   }
 }

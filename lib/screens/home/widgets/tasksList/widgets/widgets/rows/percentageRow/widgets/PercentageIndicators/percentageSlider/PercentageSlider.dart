@@ -22,7 +22,7 @@ class PercentageSlider extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white54,
-            borderRadius: BorderRadius.circular(50),
+            borderRadius: BorderRadius.circular(12),
             boxShadow: [
               BoxShadow(
                 color: settings.getHighlightedColor(task.colorValue),

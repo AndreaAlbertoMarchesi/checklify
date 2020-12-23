@@ -21,7 +21,16 @@ class AddButton extends StatelessWidget {
                     onPressed: () {
                       openAddDialog(context);
                     },
-                    child: Icon(Icons.add),
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          left: 2.0,
+                          top: 2.0,
+                          child: Icon(Icons.add, color: Colors.black26),
+                        ),
+                        Icon(Icons.add)
+                      ],
+                    ),
                     backgroundColor: Colors.greenAccent[700],
                   ),
                 ),

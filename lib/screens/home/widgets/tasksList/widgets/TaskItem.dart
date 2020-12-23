@@ -8,6 +8,7 @@ import 'package:checklist_app/screens/modifyTask/ModifyTask.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:swipe_to/swipe_to.dart';
 import 'package:vibration/vibration.dart';
@@ -38,9 +39,13 @@ class TaskItem extends StatelessWidget {
         },
         onLeftSwipe: () {
           if (settings.vibrate) Vibration.vibrate(duration: 80);
-          showDialog(
+          showAnimatedDialog(
             context: context,
-            child: DeleteDialog(task),
+            barrierDismissible: true,
+            builder: (BuildContext context) => DeleteDialog(task),
+            animationType: DialogTransitionType.fade,
+            curve: Curves.fastOutSlowIn,
+            duration: Duration(milliseconds: 400),
           );
         },
         child: Card(

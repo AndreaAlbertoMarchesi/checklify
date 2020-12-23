@@ -86,9 +86,6 @@ class GeneralSettings extends StatelessWidget {
         ),
         decoration: BoxDecoration(
             border: Border(
-              top: BorderSide(
-                  color: settings.getColor()
-              ),
               bottom: BorderSide(
                   color: settings.getColor()
               ),

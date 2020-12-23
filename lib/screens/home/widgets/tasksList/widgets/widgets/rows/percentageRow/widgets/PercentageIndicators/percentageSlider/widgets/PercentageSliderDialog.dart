@@ -1,6 +1,4 @@
 import 'package:checklist_app/models/Task.dart';
-import 'package:checklist_app/sharedWidgets/alertDialogWidgets/DialogButton.dart';
-import 'package:checklist_app/sharedWidgets/alertDialogWidgets/DialogTitle.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/cupertino.dart';
@@ -33,7 +31,7 @@ class _PercentageSliderDialogState extends State<PercentageSliderDialog> {
 
     return Container(
       alignment: Alignment.center,
-      height: 75,
+      height: 90,
       width: 200,
       decoration: BoxDecoration(
         color: Color.fromRGBO(115, 206, 255, 0.20),
@@ -42,26 +40,32 @@ class _PercentageSliderDialogState extends State<PercentageSliderDialog> {
       child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-                (percentage*100).round().toString()+"%",
-              style: TextStyle(
-                letterSpacing: 0.5,
-                fontWeight: FontWeight.bold,
-                color: settings.getAppBarIcon(),
-                fontSize: settings.getFontSizeChildren()
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0,8.0,0,0),
+              child: Text(
+                  (percentage*100).round().toString()+"%",
+                style: TextStyle(
+                  letterSpacing: 0.5,
+                  fontWeight: FontWeight.bold,
+                  color: settings.getAppBarIcon(),
+                  fontSize: settings.getFontSizeChildren()
+                ),
               ),
             ),
-            Slider(
-              value: percentage,
-              divisions: widget.task.sliderDivisions != null
-                  ? widget.task.sliderDivisions
-                  : 3,
-              onChanged: (double value) {
-                setState(() {
-                  percentage = value;
-                });
-                appState.updatePercentage(widget.task, percentage);
-              },
+            Padding(
+              padding: const EdgeInsets.fromLTRB(3,0,3,3),
+              child: Slider(
+                value: percentage,
+                divisions: widget.task.sliderDivisions != null
+                    ? widget.task.sliderDivisions
+                    : 3,
+                onChanged: (double value) {
+                  setState(() {
+                    percentage = value;
+                  });
+                  appState.updatePercentage(widget.task, percentage);
+                },
+              ),
             ),
           ]),
     );

@@ -1,5 +1,5 @@
 import 'package:checklist_app/models/supportClasses/TaskValues.dart';
-import 'file:///C:/Users/Ilaria/AndroidStudioProjects/checklify/lib/screens/modifyTask/widgets/inputs/ProgressTypeInput/ProgressTypeInput.dart';
+import 'package:checklist_app/screens/modifyTask/widgets/inputs/progressTypeInput/ProgressTypeInput.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

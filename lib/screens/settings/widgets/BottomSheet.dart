@@ -2,6 +2,7 @@ import 'package:checklist_app/screens/settings/widgets/dialogs/ImageDialog.dart'
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -38,7 +39,14 @@ class _AppBottomSheetState extends State<AppBottomSheet> {
               ),
             ),
             onTap: () async {
-              await showDialog(context: context, builder: (_) => ImageDialog());
+              await showAnimatedDialog(
+                  context: context,
+                barrierDismissible: true,
+                  builder: (_) => ImageDialog(),
+                animationType: DialogTransitionType.fade,
+                curve: Curves.fastOutSlowIn,
+                duration: Duration(milliseconds: 400),
+              );
               Navigator.of(context).pop();
             },
           ),

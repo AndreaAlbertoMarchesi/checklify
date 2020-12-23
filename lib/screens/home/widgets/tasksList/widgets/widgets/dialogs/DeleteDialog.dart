@@ -31,7 +31,7 @@ class DeleteDialog extends StatelessWidget {
         "Do you want to delete it?",
         style: TextStyle(
           fontSize: settings.getFontSizeChildren(),
-          letterSpacing: 0.6,
+          letterSpacing: 0.5,
           color: settings.getFont(),
         ),
       ),

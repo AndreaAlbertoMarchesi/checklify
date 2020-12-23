@@ -42,7 +42,7 @@ class AssistanceSettings extends StatelessWidget {
               subtitle: Text(
                 "Write an email to notify a bug",
                 style: TextStyle(
-                  fontSize: settings.getFontSizeChildren() - 4.0,
+                  fontSize: settings.getFontSizeCoffee(),
                 ),
               ),
               onTap: () {
@@ -53,9 +53,6 @@ class AssistanceSettings extends StatelessWidget {
         ),
         decoration: BoxDecoration(
             border: Border(
-              top: BorderSide(
-                  color: settings.getColor()
-              ),
               bottom: BorderSide(
                   color: settings.getColor()
               ),

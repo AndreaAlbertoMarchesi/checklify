@@ -49,6 +49,8 @@ dependencies:
   numberpicker: ^1.3.0
   sticky_headers: ^0.1.8+1
   scrollable_positioned_list: ^0.1.8
+  flutter_animated_dialog: ^1.2.0
+  animations: ^1.1.2
 
 dev_dependencies:
   flutter_test:

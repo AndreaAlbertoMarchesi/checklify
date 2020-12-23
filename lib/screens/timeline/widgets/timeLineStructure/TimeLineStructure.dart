@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:checklist_app/screens/timeline/widgets/timeLineStructure/widgets/AppTimeLinePainter.dart';
+import 'package:flutter/material.dart';
 class TimelineStructure extends StatelessWidget {
   const TimelineStructure({
     @required this.children,
