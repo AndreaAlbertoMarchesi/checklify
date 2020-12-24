@@ -1,9 +1,8 @@
-
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 
 class AssistanceSettings extends StatelessWidget {
   @override
@@ -15,36 +14,21 @@ class AssistanceSettings extends StatelessWidget {
         path: 'smith@example.com',
         queryParameters: {'subject': 'Report a Bug'});
 
-
     return Container(
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "Assistance",
-                style: TextStyle(
-                  fontSize: settings.getFontSizeChildren(),
-                  letterSpacing: 0.6,
-                  fontStyle: FontStyle.italic,
-                  color: settings.getFont(),
-                ),
-              ),
-            ),
+                padding: const EdgeInsets.all(8.0),
+                child: AppTextDecoration("Assistance",
+                    fontSize: settings.getFontSizeChildren(),
+                    fontStyle: FontStyle.italic,
+                    color: settings.getFont())),
             ListTile(
               leading: const Icon(Icons.bug_report),
-              title: Text(
-                "Report a bug",
-                style: TextStyle(
-                  fontSize: settings.getFontSizeChildren(),
-                ),
-              ),
-              subtitle: Text(
-                "Write an email to notify a bug",
-                style: TextStyle(
-                  fontSize: settings.getFontSizeCoffee(),
-                ),
-              ),
+              title: AppTextDecoration("Report a bug",
+                  fontSize: settings.getFontSizeChildren()),
+              subtitle: AppTextDecoration("Write an email to notify a bug",
+                  fontSize: settings.getFontSizeCoffee()),
               onTap: () {
                 launch(_emailLaunchUri.toString());
               },
@@ -53,11 +37,7 @@ class AssistanceSettings extends StatelessWidget {
         ),
         decoration: BoxDecoration(
             border: Border(
-              bottom: BorderSide(
-                  color: settings.getColor()
-              ),
-            )
-        )
-    );
+          bottom: BorderSide(color: settings.getColor()),
+        )));
   }
 }

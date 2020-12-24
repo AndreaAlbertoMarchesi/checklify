@@ -1,6 +1,6 @@
 import 'package:checklist_app/screens/timeline/Timeline.dart';
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/Settings.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,20 +10,13 @@ class TimelineItem extends StatelessWidget {
     final settings = context.watch<Settings>();
     return ListTile(
       leading: Icon(Icons.calendar_today),
-      title: Text(
-        'Timeline',
-        style: TextStyle(
+      title: AppTextDecoration('Timeline',
           fontSize: settings.getFontSizeChildren(),
-          letterSpacing: 0.6,
           fontWeight: FontWeight.bold,
-          color: settings.getFont(),
-        ),
-      ),
+          color: settings.getFont()),
       onTap: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => Timeline()));
+            context, MaterialPageRoute(builder: (context) => Timeline()));
       },
     );
   }

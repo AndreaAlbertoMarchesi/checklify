@@ -1,5 +1,6 @@
 import 'package:checklist_app/models/supportClasses/TaskValues.dart';
 import 'package:checklist_app/screens/modifyTask/widgets/deadlineInput/widgets/DeadlineInputDialog.dart';
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:checklist_app/utils/DateTimeFormatter.dart';
 import 'package:flutter/material.dart';
@@ -21,30 +22,20 @@ class DeadlineInput extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.all(15),
-                child: Text(
-                  "Due Date",
-                  style: TextStyle(
+                child: AppTextDecoration("Due Date",
                     fontSize: settings.getFontSizeChildren(),
-                    letterSpacing: 0.6,
                     fontWeight: FontWeight.bold,
-                    color: settings.getFont(),
-                  ),
-                ),
+                    color: settings.getFont()),
               ),
               Padding(
-                padding: EdgeInsets.all(15),
-                child: Text(
-                  taskValues.deadline != null
-                      ? DateTimeFormatter.dateTimeToFullString(
-                          taskValues.deadline)
-                      : "add deadline...",
-                  style: TextStyle(
-                    fontSize: settings.getFontSizeCoffee(),
-                    letterSpacing: 0.6,
-                    color: settings.getFont(),
-                  ),
-                ),
-              ),
+                  padding: EdgeInsets.all(15),
+                  child: AppTextDecoration(
+                      taskValues.deadline != null
+                          ? DateTimeFormatter.dateTimeToFullString(
+                              taskValues.deadline)
+                          : "add deadline...",
+                      fontSize: settings.getFontSizeCoffee() - 4,
+                      color: settings.getFont())),
             ],
           ),
           decoration: BoxDecoration(

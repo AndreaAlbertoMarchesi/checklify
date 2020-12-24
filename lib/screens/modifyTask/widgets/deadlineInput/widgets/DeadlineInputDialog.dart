@@ -1,9 +1,9 @@
 import 'package:checklist_app/models/supportClasses/TaskValues.dart';
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/sharedWidgets/alertDialogWidgets/DialogButton.dart';
 import 'package:checklist_app/sharedWidgets/alertDialogWidgets/DialogTitle.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:date_time_picker/date_time_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -39,15 +39,10 @@ class _DeadlineInputDialogState extends State<DeadlineInputDialog> {
       content: deadline == null && hasClearedDeadline == true
           ? InkWell(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(0,6,0,0),
-                child: Text(
-                    "add a deadline...",
-                  style: TextStyle(
+                padding: const EdgeInsets.fromLTRB(0, 6, 0, 0),
+                child: AppTextDecoration("add a deadline...",
                     fontSize: settings.getFontSizeCoffee(),
-                    letterSpacing: 0.6,
-                    color: settings.getFont(),
-                  ),
-                ),
+                    color: settings.getFont()),
               ),
               onTap: () {
                 setState(() {

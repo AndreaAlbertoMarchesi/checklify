@@ -1,3 +1,4 @@
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,32 +10,24 @@ class TermAndCondsDialog extends StatefulWidget {
 }
 
 class _TermAndCondsDialogState extends State<TermAndCondsDialog> {
-
-
   bool _value = false;
+
   @override
   Widget build(BuildContext context) {
     final settings = context.watch<Settings>();
 
-
     Widget acceptButton(context) {
       return FlatButton(
-        child: Text(
-          "Accept",
-          style: TextStyle(
+        child: AppTextDecoration("Accept",
             fontSize: settings.getFontSizeChildren(),
-            letterSpacing: 0.6,
             fontWeight: FontWeight.bold,
-            color: settings.getFont(),
-          ),
-        ),
+            color: settings.getFont()),
         onPressed: () {
           if (_value) {
             settings.acceptTermsConditions();
             Navigator.of(context).pop();
           } else {
-            if(settings.vibrate)
-              Vibration.vibrate(duration: 80);
+            if (settings.vibrate) Vibration.vibrate(duration: 80);
           }
         },
       );
@@ -47,33 +40,26 @@ class _TermAndCondsDialogState extends State<TermAndCondsDialog> {
       title: Container(
         width: 400.0,
         child: InkWell(
-          onTap: () {
-            setState(() {
-              _value = !_value;
-            });
-          },
-          child: Row(
-            children: [
-              Checkbox(
-                  value: _value,
-                  onChanged: (value){
-                    setState(() {
-                      _value = !_value;
-                    });
-                  }
-              ),
-              Text(
-                "Accept Terms & Conditions",
-                style: TextStyle(
-                  fontSize: settings.getFontSizeChildren()-2,
-                  letterSpacing: 0.6,
-                  fontWeight: FontWeight.bold,
-                  color: settings.getFont(),
-                ),
-              ),
-            ],
-          )
-        ),
+            onTap: () {
+              setState(() {
+                _value = !_value;
+              });
+            },
+            child: Row(
+              children: [
+                Checkbox(
+                    value: _value,
+                    onChanged: (value) {
+                      setState(() {
+                        _value = !_value;
+                      });
+                    }),
+                AppTextDecoration("Accept Terms & Conditions",
+                    fontSize: settings.getFontSizeChildren() - 2,
+                    fontWeight: FontWeight.bold,
+                    color: settings.getFont())
+              ],
+            )),
       ),
       actions: [
         acceptButton(context),

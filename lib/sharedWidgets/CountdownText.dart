@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,47 +16,31 @@ class CountdownText extends StatelessWidget {
 
     getTextTimeLeft() {
       if (countdown.inDays >= 1) {
-        return Text(
-          "Days left: " + countdown.inDays.toString(),
-          style: TextStyle(
+        return AppTextDecoration("Days left: " + countdown.inDays.toString(),
             letterSpacing: 0.5,
             fontWeight: FontWeight.bold,
-            color: settings.getFontTiles(),
-          ),
-        );
+            color: settings.getFontTiles());
       } else if (countdown.inHours < 0) {
         if (percentage < 1)
-          return Text(
-            "expired",
-            style: TextStyle(
+          return AppTextDecoration("Expired",
               letterSpacing: 0.5,
               fontWeight: FontWeight.bold,
-              color: settings.getFontTiles(),
-            ),
-          );
+              color: settings.getFontTiles());
         else
-          return Text(
-            "completed",
-            style: TextStyle(
+          return AppTextDecoration("Completed",
               letterSpacing: 0.5,
               fontWeight: FontWeight.bold,
-              color: settings.getFontTiles(),
-            ),
-          );
+              color: settings.getFontTiles());
       } else {
-        return Text(
-          "Hours left: " + countdown.inHours.toString(),
-          style: TextStyle(
+        return AppTextDecoration("Hours left: " + countdown.inHours.toString(),
             letterSpacing: 0.5,
             fontWeight: FontWeight.bold,
-            color: settings.getFontTiles(),
-          ),
-        );
+            color: settings.getFontTiles());
       }
     }
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0,13,10,8),
+      padding: const EdgeInsets.fromLTRB(0, 13, 10, 8),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),

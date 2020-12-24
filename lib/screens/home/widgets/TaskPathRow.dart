@@ -1,3 +1,4 @@
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class TaskPathRow extends StatelessWidget {
               appState.backToTask(task);
             },
             onCanceled: () {
-              print('You have not chossed anything');
+              print('You have not chosen anything');
             },
             tooltip: 'Path',
             itemBuilder: (BuildContext context) {
@@ -49,13 +50,9 @@ class TaskPathRow extends StatelessWidget {
                         )),
                     Padding(
                       padding: EdgeInsets.all(5.0),
-                      child: Text(
-                        task.title,
-                        style: TextStyle(
+                      child: AppTextDecoration(task.title,
                           color: settings.getFont(),
-                          fontSize: settings.getFontSizeChildren(),
-                        ),
-                      ),
+                          fontSize: settings.getFontSizeChildren()),
                     )
                   ]),
                   onTap: () {

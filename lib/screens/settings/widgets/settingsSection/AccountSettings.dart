@@ -1,14 +1,13 @@
 import 'dart:io';
 import 'package:checklist_app/screens/settings/widgets/dialogs/ModifyName.dart';
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:provider/provider.dart';
 import '../BottomSheet.dart';
 
-
 class AccountSettings extends StatelessWidget {
-
   final double radius = 50;
   final double iconSize = 30;
   final double distance = 10;
@@ -22,15 +21,10 @@ class AccountSettings extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "Account",
-                style: TextStyle(
+              child: AppTextDecoration("Account",
                   fontSize: settings.getFontSizeChildren(),
-                  letterSpacing: 0.6,
                   fontStyle: FontStyle.italic,
-                  color: settings.getFont(),
-                ),
-              ),
+                  color: settings.getFont()),
             ),
             Center(
               child: Padding(
@@ -75,14 +69,10 @@ class AccountSettings extends StatelessWidget {
                         Icon(Icons.create_outlined),
                         Container(
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                settings.appUser.userName,
-                                style: TextStyle(
-                                  fontSize: settings.getFontSizeChildren(),
-                                ),
-                              ),
-                            )),
+                          padding: const EdgeInsets.all(8.0),
+                            child: AppTextDecoration(settings.appUser.userName,
+                                fontSize: settings.getFontSizeChildren()),
+                        )),
                       ],
                     ),
                   ),
@@ -96,15 +86,9 @@ class AccountSettings extends StatelessWidget {
         ),
         decoration: BoxDecoration(
             border: Border(
-              top: BorderSide(
-                  color: settings.getColor()
-              ),
-              bottom: BorderSide(
-                  color: settings.getColor()
-              ),
-            )
-        )
-    );
+          top: BorderSide(color: settings.getColor()),
+          bottom: BorderSide(color: settings.getColor()),
+        )));
   }
 
   void _settingModalBottomSheet(BuildContext context) {

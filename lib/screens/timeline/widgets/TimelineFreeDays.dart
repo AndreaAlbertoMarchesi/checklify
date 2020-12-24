@@ -1,6 +1,6 @@
 import 'package:checklist_app/screens/timeline/widgets/widgets/MonthWidget.dart';
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/Settings.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,52 +20,42 @@ class TimelineFreeDays extends StatelessWidget {
     print(currentDeadline);
     print(prevDeadline);
 
-    getChild(){
-      return  Center(
+    getChild() {
+      return Center(
         child: ListTile(
-          title: Text(
-            durationFromLastDeadline.inDays.toString() +"   days between tasks",
-            style: TextStyle(
-              letterSpacing: 0.6,
-              fontWeight: FontWeight.bold,
-              color: settings.getFont(),
-            ),
-
-          ),
-          subtitle: Text(
-            durationFromNow.inDays.toString()+"   days from now",
-            style: TextStyle(
-              letterSpacing: 0.6,
+          title: AppTextDecoration(
+              durationFromLastDeadline.inDays.toString() +
+                  "   days between tasks",
+              color: settings.getFont()),
+          subtitle: AppTextDecoration(
+              durationFromNow.inDays.toString() + "   days from now",
               fontSize: settings.getFontSizeCoffee(),
-              color: settings.getFont(),
-            ),
-          ),
+              color: settings.getFont()),
         ),
       );
     }
 
-    return durationFromLastDeadline.inDays.toDouble()<=2
+    return durationFromLastDeadline.inDays.toDouble() <= 2
         ? Column(
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment :MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               getChild(),
               MonthWidget(prevDeadline, currentDeadline, settings.getMonth)
             ],
-        )
+          )
         : Column(
-          children: [
-            Container(
-                height: durationFromLastDeadline.inDays.toDouble() > 31
-                    ? 600
-                    : 20 * durationFromLastDeadline.inDays.toDouble(),
-                child:getChild()
-            ),
-            Container(
-                height: 12,
-                child: MonthWidget(prevDeadline,currentDeadline,settings.getMonth)
-            ),
-          ],
-        );
+            children: [
+              Container(
+                  height: durationFromLastDeadline.inDays.toDouble() > 31
+                      ? 600
+                      : 20 * durationFromLastDeadline.inDays.toDouble(),
+                  child: getChild()),
+              Container(
+                  height: 12,
+                  child: MonthWidget(
+                      prevDeadline, currentDeadline, settings.getMonth)),
+            ],
+          );
   }
 }

@@ -33,7 +33,7 @@ class PercentageSlider extends StatelessWidget {
             ],
           ),
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(8,14,8,14),
+            padding: const EdgeInsets.fromLTRB(8, 14, 8, 14),
             child: LinearPercentIndicator(
               width: 55,
               lineHeight: 14.0,

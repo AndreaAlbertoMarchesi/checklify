@@ -1,5 +1,5 @@
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/Settings.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,25 +16,16 @@ class MonthWidget extends StatelessWidget {
 
     return prevDeadLine == null
         ? Center(
-          child: Text(
-              getMonth(currentDeadLine.month),
-              style: TextStyle(
-                  fontSize: 12,
-                  letterSpacing: 0.6,
-                  color: settings.getFont(),
-                  fontStyle: FontStyle.italic),
-            ),
-        )
+            child: AppTextDecoration(getMonth(currentDeadLine.month),
+                fontSize: 12,
+                color: settings.getFont(),
+                fontStyle: FontStyle.italic))
         : prevDeadLine.month < currentDeadLine.month ||
                 prevDeadLine.year < currentDeadLine.year
-            ? Text(
-                getMonth(currentDeadLine.month),
-                style: TextStyle(
-                    fontSize: 11,
-                    letterSpacing: 0.6,
-                    color: settings.getFont(),
-                    fontStyle: FontStyle.italic),
-              )
+            ? AppTextDecoration(getMonth(currentDeadLine.month),
+                fontSize: 11,
+                color: settings.getFont(),
+                fontStyle: FontStyle.italic)
             : Text("");
   }
 }

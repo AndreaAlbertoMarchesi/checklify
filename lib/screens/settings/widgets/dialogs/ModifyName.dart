@@ -1,3 +1,4 @@
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,15 +13,10 @@ class ModifyName extends StatelessWidget {
 
     Widget doneButton(context) {
       return FlatButton(
-        child: Text(
-          "Back",
-          style: TextStyle(
+        child: AppTextDecoration("Back",
             fontSize: settings.getFontSizeChildren(),
-            letterSpacing: 0.6,
             fontWeight: FontWeight.bold,
-            color: settings.getFont(),
-          ),
-        ),
+            color: settings.getFont()),
         onPressed: () {
           Navigator.pop(context);
         },
@@ -29,15 +25,10 @@ class ModifyName extends StatelessWidget {
 
     Widget addButton(context) {
       return FlatButton(
-        child: Text(
-          "Rename",
-          style: TextStyle(
+        child: AppTextDecoration("Rename",
             fontSize: settings.getFontSizeChildren(),
-            letterSpacing: 0.6,
             fontWeight: FontWeight.bold,
-            color: settings.getFont(),
-          ),
-        ),
+            color: settings.getFont()),
         onPressed: () {
           if (_formKey.currentState.validate()) {
             settings.modifyName(userName);

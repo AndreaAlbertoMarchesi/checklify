@@ -1,7 +1,7 @@
 import 'package:checklist_app/models/Task.dart';
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +28,6 @@ class _PercentageSliderDialogState extends State<PercentageSliderDialog> {
     final appState = context.watch<AppState>();
     final settings = context.watch<Settings>();
 
-
     return Container(
       alignment: Alignment.center,
       height: 90,
@@ -37,39 +36,31 @@ class _PercentageSliderDialogState extends State<PercentageSliderDialog> {
         color: Color.fromRGBO(115, 206, 255, 0.20),
         borderRadius: BorderRadius.circular(30),
       ),
-      child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0,8.0,0,0),
-              child: Text(
-                  (percentage*100).round().toString()+"%",
-                style: TextStyle(
-                  letterSpacing: 0.5,
-                  fontWeight: FontWeight.bold,
-                  color: settings.getAppBarIcon(),
-                  fontSize: settings.getFontSizeChildren()
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(3,0,3,3),
-              child: Slider(
-                value: percentage,
-                divisions: widget.task.sliderDivisions != null
-                    ? widget.task.sliderDivisions
-                    : 3,
-                onChanged: (double value) {
-                  setState(() {
-                    percentage = value;
-                  });
-                  appState.updatePercentage(widget.task, percentage);
-                },
-              ),
-            ),
-          ]),
+      child: Column(mainAxisSize: MainAxisSize.min, children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0, 8.0, 0, 0),
+          child: AppTextDecoration((percentage * 100).round().toString() + "%",
+              fontWeight: FontWeight.bold,
+              color: settings.getAppBarIcon(),
+              fontSize: settings.getFontSizeChildren()),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(3, 0, 3, 3),
+          child: Slider(
+            value: percentage,
+            divisions: widget.task.sliderDivisions != null
+                ? widget.task.sliderDivisions
+                : 3,
+            onChanged: (double value) {
+              setState(() {
+                percentage = value;
+              });
+              appState.updatePercentage(widget.task, percentage);
+            },
+          ),
+        ),
+      ]),
     );
-
 
     /*return AlertDialog(
       shape: settings.getDialogShape(),

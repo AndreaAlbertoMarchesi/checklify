@@ -83,9 +83,9 @@ class _NotificationManager {
         scheduledDate.toIso8601String() +
         " with id: " +
         id.toString());
-    List<PendingNotificationRequest> pendingNotifcationRequests =
+    List<PendingNotificationRequest> pendingNotificationRequests =
         await _flutterNotificationsPlugin?.pendingNotificationRequests();
     print("pending notifications: " +
-        pendingNotifcationRequests.length.toString());
+        pendingNotificationRequests.length.toString());
   }
 }

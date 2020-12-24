@@ -6,11 +6,11 @@ class DateTimeFormatter {
         " " +
         dateTime.day.toString() +
         ", " +
-        dateTime.year.toString()+
-
+        dateTime.year.toString() +
         ", at " +
-      dateTime.hour.toString()+":"+dateTime.minute.toString()
-      ;
+        dateTime.hour.toString() +
+        ":" +
+        dateTime.minute.toString();
   }
 
   static String dayToString(int dateTimeDay) {

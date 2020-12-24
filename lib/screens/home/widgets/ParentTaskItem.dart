@@ -1,6 +1,7 @@
 import 'package:checklist_app/sharedWidgets/CountdownText.dart';
 import 'package:checklist_app/sharedWidgets/DeadlineText.dart';
 import 'package:checklist_app/sharedWidgets/PercentageCircle.dart';
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
@@ -21,9 +22,10 @@ class ParentTaskItem extends StatelessWidget {
               ? Color(appState.task.colorValue)
               : settings.getColor(),
           boxShadow: [
-            BoxShadow(color: appState.task.colorValue != null
-                ? settings.getHighlightedColor(appState.task.colorValue)
-                : settings.getFontTiles(),
+            BoxShadow(
+              color: appState.task.colorValue != null
+                  ? settings.getHighlightedColor(appState.task.colorValue)
+                  : settings.getFontTiles(),
               blurRadius: 2.0,
               spreadRadius: 0.0,
               offset: Offset(2.0, 2.0),
@@ -35,25 +37,23 @@ class ParentTaskItem extends StatelessWidget {
           children: [
             Row(
               children: [
-                if (appState.task.deadline != null) DeadlineText(appState.task.deadline),
+                if (appState.task.deadline != null)
+                  DeadlineText(appState.task.deadline),
                 Expanded(child: Container()),
-                if (appState.task.deadline != null) CountdownText(appState.task.deadline,appState.task.percentage),
+                if (appState.task.deadline != null)
+                  CountdownText(
+                      appState.task.deadline, appState.task.percentage),
               ],
             ),
-
             Row(
               children: [
                 Padding(
                   padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  child: Text(
-                    appState.task.title,
-                    style: TextStyle(
+                  child: AppTextDecoration(appState.task.title,
                       fontSize: settings.getFontSizeParent(),
-                      letterSpacing: 0.5,
                       fontWeight: FontWeight.bold,
-                      color: settings.getFontTiles(),
-                    ),
-                  ),
+                      color: settings.getFontTiles()),
+                  //todo 0.5
                 ),
                 Expanded(child: Container()),
                 PercentageCircle(appState.task),

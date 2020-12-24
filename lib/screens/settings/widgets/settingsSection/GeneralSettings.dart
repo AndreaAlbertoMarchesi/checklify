@@ -1,8 +1,8 @@
 import 'package:checklist_app/screens/settings/widgets/AppSwitchListTile.dart';
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 
 class GeneralSettings extends StatelessWidget {
   @override
@@ -19,7 +19,6 @@ class GeneralSettings extends StatelessWidget {
       settings.setVibration(vibration);
     }
 
-
     _setFullScreen(fullScreen) {
       settings.setFullScreen(fullScreen);
     }
@@ -29,15 +28,10 @@ class GeneralSettings extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "General",
-                style: TextStyle(
+              child: AppTextDecoration("General",
                   fontSize: settings.getFontSizeChildren(),
-                  letterSpacing: 0.6,
                   fontStyle: FontStyle.italic,
-                  color: settings.getFont(),
-                ),
-              ),
+                  color: settings.getFont()),
             ),
             AppSwitchListTile(
                 title: "Dark mode",
@@ -45,25 +39,16 @@ class GeneralSettings extends StatelessWidget {
                 value: settings.darkTheme,
                 function: _setDarkMode),
             ListTile(
-              title: Text(
-                "Select the Font Size",
-                style: TextStyle(
-                  fontSize: settings.getFontSizeChildren(),
-                ),
-              ),
+              title: AppTextDecoration("Select the Font Size",
+                  fontSize: settings.getFontSizeChildren()),
               leading: Icon(Icons.text_fields_rounded),
               trailing: PopupMenuButton(
                 itemBuilder: (BuildContext context) {
                   return FONTS.map((fontSize) {
                     return PopupMenuItem(
-                      value: fontSize,
-                      child: Text(
-                        fontSize,
-                        style: TextStyle(
-                          fontSize: settings.getFontSizeChildren(),
-                        ),
-                      ),
-                    );
+                        value: fontSize,
+                        child: AppTextDecoration(fontSize,
+                            fontSize: settings.getFontSizeChildren()));
                   }).toList();
                 },
                 tooltip: "Size",
@@ -86,11 +71,7 @@ class GeneralSettings extends StatelessWidget {
         ),
         decoration: BoxDecoration(
             border: Border(
-              bottom: BorderSide(
-                  color: settings.getColor()
-              ),
-            )
-        )
-    );
+          bottom: BorderSide(color: settings.getColor()),
+        )));
   }
 }

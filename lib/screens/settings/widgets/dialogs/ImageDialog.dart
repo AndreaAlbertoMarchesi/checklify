@@ -16,13 +16,11 @@ class _ImageDialogState extends State<ImageDialog> {
     final settings = context.watch<Settings>();
 
     Future<List<String>> _initImages() async {
-      // >> To get paths you need these 2 lines
       final manifestContent =
           await DefaultAssetBundle.of(context).loadString('AssetManifest.json');
 
       final Map<String, dynamic> manifestMap =
           await json.decode(manifestContent);
-      // >> To get paths you need these 2 lines
 
       List<String> s = manifestMap.keys
           .where((String key) => key.contains(URL.imagesFolder))
@@ -54,7 +52,8 @@ class _ImageDialogState extends State<ImageDialog> {
                         return ListTile(
                           title: Text(
                             snapshot.data[index]
-                                .substring(URL.imagesFolder.length, snapshot.data[index].indexOf('.'))
+                                .substring(URL.imagesFolder.length,
+                                    snapshot.data[index].indexOf('.'))
                                 .toUpperCase(),
                             style: TextStyle(
                               fontSize: settings.getFontSizeChildren(),

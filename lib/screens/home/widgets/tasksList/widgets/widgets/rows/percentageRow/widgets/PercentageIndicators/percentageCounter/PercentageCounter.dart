@@ -1,5 +1,6 @@
 import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/rows/percentageRow/widgets/PercentageIndicators/percentageCounter/widgets/PercentageCounterDialog.dart';
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,16 +34,11 @@ class PercentageCounter extends StatelessWidget {
             ),
             child: Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Text(
-                  (task.percentage * task.counterMax).round().toString() +
-                      "/" +
-                      task.counterMax.toString(),
-                style: TextStyle(
-                    letterSpacing: 0.5,
-                    fontWeight: FontWeight.bold,
-                    color: settings.getFontTiles(),
-                ),
-              ),
+              child: AppTextDecoration((task.percentage * task.counterMax).round().toString() +
+                  "/" +
+                  task.counterMax.toString(),
+                  fontWeight: FontWeight.bold,
+                color: settings.getFontTiles()),
             ),
           ),
           onTap: () {

@@ -1,6 +1,6 @@
 import 'package:checklist_app/screens/settings/widgets/dialogs/ImageDialog.dart';
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/Settings.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:image_picker/image_picker.dart';
@@ -31,18 +31,14 @@ class _AppBottomSheetState extends State<AppBottomSheet> {
       child: new Wrap(
         children: <Widget>[
           new ListTile(
-            leading: new Icon(Icons.account_circle_outlined),
-            title: new Text(
-              'Select from app avatar',
-              style: TextStyle(
-                fontSize: settings.getFontSizeChildren(),
-              ),
-            ),
+            leading: Icon(Icons.account_circle_outlined),
+            title: AppTextDecoration('Select from app avatar',
+                fontSize: settings.getFontSizeChildren()),
             onTap: () async {
               await showAnimatedDialog(
-                  context: context,
+                context: context,
                 barrierDismissible: true,
-                  builder: (_) => ImageDialog(),
+                builder: (_) => ImageDialog(),
                 animationType: DialogTransitionType.fade,
                 curve: Curves.fastOutSlowIn,
                 duration: Duration(milliseconds: 400),
@@ -52,12 +48,8 @@ class _AppBottomSheetState extends State<AppBottomSheet> {
           ),
           new ListTile(
             leading: new Icon(Icons.photo_library_outlined),
-            title: new Text(
-              'Choose existing photo',
-              style: TextStyle(
-                fontSize: settings.getFontSizeChildren(),
-              ),
-            ),
+            title: AppTextDecoration('Choose existing photo',
+                fontSize: settings.getFontSizeChildren()),
             onTap: () async {
               await _imgFromGallery();
               settings.modifyPhoto(_image.path);

@@ -63,7 +63,7 @@ class TaskItem extends StatelessWidget {
                         : settings.getColor()),
                 boxShadow: [
                   BoxShadow(
-                      color: settings.getHighlightedColor(task.colorValue),
+                    color: settings.getHighlightedColor(task.colorValue),
                     blurRadius: 2.0,
                     spreadRadius: 0.0,
                     offset: Offset(2.0, 2.0),
@@ -77,8 +77,8 @@ class TaskItem extends StatelessWidget {
                   TopRow(task),
                   PercentageRow(task),
                   if (task.notes.isNotEmpty) NotesText(task.notes),
-
-                  if (task.deadline != null) DailyPercentageText(task.deadline, task.percentage),
+                  if (task.deadline != null)
+                    DailyPercentageText(task.deadline, task.percentage),
                 ],
               )),
         ),

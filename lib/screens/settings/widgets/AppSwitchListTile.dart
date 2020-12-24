@@ -1,5 +1,5 @@
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/Settings.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vibration/vibration.dart';
@@ -21,12 +21,7 @@ class AppSwitchListTile extends StatelessWidget {
     return SwitchListTile(
       secondary: Icon(icon),
       value: value,
-      title: Text(
-        title,
-        style: TextStyle(
-          fontSize: settings.getFontSizeChildren(),
-        ),
-      ),
+      title: AppTextDecoration(title,fontSize: settings.getFontSizeChildren()),
       onChanged: (value) {
         if (settings.vibrate)
           Vibration.vibrate(duration: 20);

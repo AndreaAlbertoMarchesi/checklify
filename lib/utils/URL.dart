@@ -1,4 +1,4 @@
-class URL{
+class URL {
   //IMAGES
   static const imagesFolder = "images/";
   static const dog = imagesFolder + "dog.png";

@@ -13,7 +13,6 @@ class InAppCalendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final settings = context.watch<Settings>();
-    final appState = context.watch<AppState>();
 
     return Scaffold(
         appBar: AppBar(

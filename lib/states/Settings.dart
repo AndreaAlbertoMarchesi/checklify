@@ -5,21 +5,20 @@ import 'package:checklist_app/utils/phoneStorage/Keys.dart';
 import 'package:flutter/material.dart';
 
 part 'SettingsParts/Styles.dart';
-class Settings with ChangeNotifier {
-  
 
+class Settings with ChangeNotifier {
   final PhoneStorage _storage;
 
   AppUser appUser;
   bool firstTime;
-  bool isPhotoFromGallery ;
+  bool isPhotoFromGallery;
+
   bool termsAndCondsAccepted = false;
   String fontSize;
   bool darkTheme;
   bool vibrate;
   bool fullScreen;
   bool notifications;
-
 
   Settings(this._storage) {
     darkTheme = _storage.getValue(Keys.darkTheme, false);
@@ -55,13 +54,15 @@ class Settings with ChangeNotifier {
     _storage.setValue(Keys.vibrate, vibrate);
     notifyListeners();
   }
-  void setFullScreen(bool fullScreen){
+
+  void setFullScreen(bool fullScreen) {
     this.fullScreen = fullScreen;
     _storage.setValue(Keys.fullScreen, fullScreen);
     notifyListeners();
   }
-  void setNotification(bool notifications){
-    this.notifications = notifications ;
+
+  void setNotification(bool notifications) {
+    this.notifications = notifications;
     _storage.setValue(Keys.notifications, notifications);
     notifyListeners();
   }
@@ -77,7 +78,7 @@ class Settings with ChangeNotifier {
     if (path.startsWith(URL.imagesFolder, 0)) {
       isPhotoFromGallery = false;
       _storage.setValue(Keys.isPhotoFromGallery, false);
-    }else {
+    } else {
       isPhotoFromGallery = true;
       _storage.setValue(Keys.isPhotoFromGallery, true);
     }
@@ -85,42 +86,42 @@ class Settings with ChangeNotifier {
     notifyListeners();
   }
 
-  getMonth(int month){
-    switch(month){
-      case 01 :
+  getMonth(int month) {
+    switch (month) {
+      case 01:
         return Keys.january;
         break;
-      case 02 :
+      case 02:
         return Keys.february;
         break;
-      case 03 :
+      case 03:
         return Keys.march;
         break;
-      case 04 :
+      case 04:
         return Keys.april;
         break;
-      case 05 :
+      case 05:
         return Keys.may;
         break;
-      case 06 :
+      case 06:
         return Keys.june;
         break;
-      case 07 :
+      case 07:
         return Keys.july;
         break;
-      case 08 :
+      case 08:
         return Keys.august;
         break;
-      case 09 :
+      case 09:
         return Keys.september;
         break;
-      case 10 :
+      case 10:
         return Keys.october;
         break;
-      case 11 :
+      case 11:
         return Keys.november;
         break;
-      case 12 :
+      case 12:
         return Keys.december;
         break;
     }
@@ -140,7 +141,8 @@ class Settings with ChangeNotifier {
 
   Color getAppBarIcon() => _Styles.getAppBarIcon(darkTheme);
 
-  Color getHighlightedColor(int colorValue) => _Styles.getHighlightedColor(colorValue);
+  Color getHighlightedColor(int colorValue) =>
+      _Styles.getHighlightedColor(colorValue);
 
   List<ColorSwatch<dynamic>> getPossibleColors() => _Styles.getPossibleColors();
 
@@ -152,11 +154,13 @@ class Settings with ChangeNotifier {
 
   double getTileSizeParent() => _Styles.getTileSizeParent(fontSize);
 
-  double getPercentageSizeChildren() => _Styles.getPercentageSizeChildren(fontSize);
+  double getPercentageSizeChildren() =>
+      _Styles.getPercentageSizeChildren(fontSize);
 
   double getPercentageSizeParent() => _Styles.getPercentageSizeParent(fontSize);
 
-  double getFontPercentageChildren() => _Styles.getFontPercentageChildren(fontSize);
+  double getFontPercentageChildren() =>
+      _Styles.getFontPercentageChildren(fontSize);
 
   double getFontPercentageParent() => _Styles.getFontPercentageParent(fontSize);
 
@@ -166,6 +170,4 @@ class Settings with ChangeNotifier {
       _Styles.themeData(darkTheme, context);
 
   OutlinedBorder getDialogShape() => _Styles.getDialogShape();
-
-
 }

@@ -4,8 +4,8 @@ import 'package:checklist_app/models/supportClasses/TaskValues.dart';
 import 'package:checklist_app/models/supportClasses/TaskWithPath.dart';
 import 'package:checklist_app/utils/PhoneStorage.dart';
 import 'package:checklist_app/utils/phoneStorage/Keys.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter/material.dart';
 
 part 'AppStateParts/NotificationManager.dart';
 
@@ -30,8 +30,7 @@ class AppState extends ChangeNotifier {
     _notificationManager.initialize(this);
   }
 
-  void setStarredTask(){
-
+  void setStarredTask() {
     task.children.forEach((element) {
       if (element.isStarred)
         handleReorder(task.children.indexOf(element), 0, true);
@@ -180,8 +179,7 @@ class AppState extends ChangeNotifier {
           task.children.insert(newIndex, element);
       }
       notifyListeners();
-    }else if(isUpdated && task.children.elementAt(oldIndex).isStarred) {
-
+    } else if (isUpdated && task.children.elementAt(oldIndex).isStarred) {
       final element = task.children.removeAt(oldIndex);
       task.children.insert(newIndex, element);
     }
@@ -197,8 +195,8 @@ class AppState extends ChangeNotifier {
       task.children.sort((a, b) {
         //qui
         return a.deadline != null && b.deadline != null
-          ? a.deadline.compareTo(b.deadline)
-          : 0;
+            ? a.deadline.compareTo(b.deadline)
+            : 0;
       });
     }
     task.children.forEach((element) {

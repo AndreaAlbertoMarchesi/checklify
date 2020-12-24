@@ -1,3 +1,4 @@
+import 'package:checklist_app/screens/settings/widgets/settingsSection/AboutSection.dart';
 import 'package:checklist_app/screens/settings/widgets/settingsSection/AccountSettings.dart';
 import 'package:checklist_app/screens/settings/widgets/settingsSection/AssistanceSettings.dart';
 import 'package:checklist_app/screens/settings/widgets/settingsSection/GeneralSettings.dart';
@@ -26,7 +27,7 @@ class _SettingsPageState extends State<SettingsPage> {
       extendBody: true,
       appBar: AppBar(
         title: Text(
-            "Settings",
+          "Settings",
         ),
       ),
       body: SingleChildScrollView(
@@ -53,33 +54,10 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),*/
             AssistanceSettings(),
-            Center(
-                child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "About",
-                    style: TextStyle(
-                      fontSize: settings.getFontSizeChildren(),
-                      letterSpacing: 0.6,
-                      fontStyle: FontStyle.italic,
-                      color: settings.getFont(),
-                    ),
-                  ),
-                ),
-                Text(
-                  "version 1.0.0",
-                  style: TextStyle(
-                    fontSize: settings.getFontSizeCoffee(),
-                  ),
-                ),
-              ],
-            ))
+            AboutSection()
           ],
         ),
       ),
     );
   }
-
 }

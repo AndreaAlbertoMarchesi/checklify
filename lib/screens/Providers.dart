@@ -10,7 +10,6 @@ class Providers extends StatelessWidget {
 
   final PhoneStorage _phoneStorage;
 
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(

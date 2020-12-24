@@ -1,6 +1,7 @@
 import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/models/supportClasses/TaskValues.dart';
 import 'package:checklist_app/screens/modifyTask/widgets/inputs/progressTypeInput/widgets/CounterSetterDialog.dart';
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/sharedWidgets/alertDialogWidgets/DialogTitle.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
@@ -36,31 +37,23 @@ class ProgressTypeInput extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           return new NumberPickerDialog.integer(
-            title: Center(child: DialogTitle("Slider divisions:")),
-            minValue: 1,
-            maxValue: 10,
-            infiniteLoop: true,
-            initialIntegerValue:
-                taskValues.sliderDivisions == null ? 3 : taskValues.sliderDivisions,
-            cancelWidget: Text(
-              "Cancel",
-              style: TextStyle(
+              title: Center(child: DialogTitle("Slider divisions:")),
+              minValue: 1,
+              maxValue: 10,
+              infiniteLoop: true,
+              initialIntegerValue: taskValues.sliderDivisions == null
+                  ? 3
+                  : taskValues.sliderDivisions,
+              cancelWidget: AppTextDecoration("Cancel",
+                  fontSize: settings.getFontSizeChildren(),
+                  fontWeight: FontWeight.bold,
+                  color: settings.getFont()),
+              confirmWidget: AppTextDecoration(
+                "Done",
                 fontSize: settings.getFontSizeChildren(),
-                letterSpacing: 0.6,
                 fontWeight: FontWeight.bold,
                 color: settings.getFont(),
-              ),
-            ),
-            confirmWidget: Text(
-              "Done",
-              style: TextStyle(
-                fontSize: settings.getFontSizeChildren(),
-                letterSpacing: 0.6,
-                fontWeight: FontWeight.bold,
-                color: settings.getFont(),
-              ),
-            ),
-          );
+              ));
         },
       ).then((num value) {
         if (value != null) {
@@ -70,13 +63,14 @@ class ProgressTypeInput extends StatelessWidget {
       });
     }
 
-    _showDialogCounter(){
-
+    _showDialogCounter() {
       showDialog(
         context: context,
-        builder: (context) => CounterSetterDialog(refreshModifyTask,taskValues),
+        builder: (context) =>
+            CounterSetterDialog(refreshModifyTask, taskValues),
       );
     }
+
     return Row(
       children: [
         DropdownButton<ProgressType>(
@@ -111,14 +105,14 @@ class ProgressTypeInput extends StatelessWidget {
         if (taskValues.progressType == ProgressType.counter)
           Padding(
             padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-            child :IconButton(
+            child: IconButton(
               onPressed: () {
-                if(taskValues.counterMax == null) {
+                if (taskValues.counterMax == null) {
                   taskValues.counterMax = 1;
                   refreshModifyTask();
                 }
                 _showDialogCounter();
-                },
+              },
               icon: Icon(Icons.format_list_numbered_rtl),
             ),
           ),

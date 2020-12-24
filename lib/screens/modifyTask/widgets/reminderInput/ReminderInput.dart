@@ -1,5 +1,6 @@
 import 'package:checklist_app/models/supportClasses/TaskValues.dart';
 import 'package:checklist_app/screens/modifyTask/widgets/reminderInput/widgets/ReminderInputDialog.dart';
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:checklist_app/utils/DateTimeFormatter.dart';
 import 'package:flutter/material.dart';
@@ -21,29 +22,22 @@ class ReminderInput extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.all(15),
-                child: Text(
+                child: AppTextDecoration(
                   "Reminder",
-                  style: TextStyle(
-                    fontSize: settings.getFontSizeChildren(),
-                    letterSpacing: 0.6,
-                    fontWeight: FontWeight.bold,
-                    color: settings.getFont(),
-                  ),
+                  fontSize: settings.getFontSizeChildren(),
+                  fontWeight: FontWeight.bold,
+                  color: settings.getFont(),
                 ),
               ),
               Padding(
                 padding: EdgeInsets.all(15),
-                child: Text(
-                  taskValues.dateTimeNotification != null
-                      ? DateTimeFormatter.dateTimeToFullString(
-                          taskValues.dateTimeNotification)
-                      : "add a reminder...",
-                  style: TextStyle(
+                child: AppTextDecoration(
+                    taskValues.dateTimeNotification != null
+                        ? DateTimeFormatter.dateTimeToFullString(
+                            taskValues.dateTimeNotification)
+                        : "add a reminder...",
                     fontSize: settings.getFontSizeCoffee(),
-                    letterSpacing: 0.6,
-                    color: settings.getFont(),
-                  ),
-                ),
+                    color: settings.getFont()),
               ),
             ],
           ),

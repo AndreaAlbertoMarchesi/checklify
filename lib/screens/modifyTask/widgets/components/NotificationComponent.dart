@@ -1,5 +1,6 @@
 import 'package:checklist_app/models/supportClasses/TaskValues.dart';
 import 'package:checklist_app/screens/modifyTask/widgets/inputs/DateTimeNotificationInput.dart';
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,15 +21,10 @@ class NotificationComponent extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(15, 15, 6, 6),
-            child: Text(
-              "Notification Date",
-              style: TextStyle(
+            child: AppTextDecoration("Notification Date",
                 fontSize: settings.getFontSizeChildren(),
-                letterSpacing: 0.6,
                 fontWeight: FontWeight.bold,
-                color: settings.getFont(),
-              ),
-            ),
+                color: settings.getFont()),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),

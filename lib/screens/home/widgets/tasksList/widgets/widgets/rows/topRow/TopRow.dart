@@ -2,7 +2,7 @@ import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/rows/topRow/widgets/NotificationIcon.dart';
 import 'package:checklist_app/sharedWidgets/CountdownText.dart';
 import 'package:checklist_app/sharedWidgets/DeadlineText.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class TopRow extends StatelessWidget {
   TopRow(this.task);

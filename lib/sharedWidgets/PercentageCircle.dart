@@ -1,6 +1,6 @@
 import 'package:checklist_app/models/Task.dart';
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/Settings.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
@@ -48,15 +48,10 @@ class PercentageCircle extends StatelessWidget {
                     color: Colors.lightGreen[900],
                     size: settings.getFontSizeParent() - 3,
                   )
-                : Text(
-                    (percentage * 100).round().toString() + "%",
-                    style: TextStyle(
-                      fontSize: settings.getFontPercentageChildren(),
-                      letterSpacing: 0.6,
-                      fontWeight: FontWeight.bold,
-                      color: settings.getFontTiles(),
-                    ),
-                  ),
+                : AppTextDecoration((percentage * 100).round().toString() + "%",
+                    fontSize: settings.getFontPercentageChildren(),
+                    fontWeight: FontWeight.bold,
+                    color: settings.getFontTiles()),
             linearGradient: LinearGradient(colors: [
               Colors.green[600],
               Colors.lightGreen,

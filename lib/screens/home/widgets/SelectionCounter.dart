@@ -1,9 +1,8 @@
-import 'package:checklist_app/states/AppState.dart';
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/Settings.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+
 class SelectionCounter extends StatelessWidget {
   SelectionCounter(this.selectionLength);
 
@@ -21,17 +20,11 @@ class SelectionCounter extends StatelessWidget {
           ),
           child: Padding(
             padding: const EdgeInsets.all(3.0),
-            child: Text(
-              selectionLength.toString(),
-              style: TextStyle(
+            child: AppTextDecoration(selectionLength.toString(),
                 fontSize: settings.getFontSizeChildren(),
-                letterSpacing: 0.5,
                 fontWeight: FontWeight.bold,
-                color: settings.getFontTiles(),
-              ),
-            ),
+                color: settings.getFontTiles()),
           ),
-        )
-    );
+        ));
   }
 }

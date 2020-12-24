@@ -1,4 +1,3 @@
-import 'package:cell_calendar/cell_calendar.dart';
 import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/models/supportClasses/TaskPath.dart';
 import 'package:checklist_app/models/supportClasses/TaskWithPath.dart';
@@ -6,12 +5,10 @@ import 'package:checklist_app/screens/timeline/InAppCalendar/InAppCalendar.dart'
 import 'package:checklist_app/screens/timeline/widgets/TimelineFreeDays.dart';
 import 'package:checklist_app/screens/timeline/widgets/TimelineTask.dart';
 import 'package:checklist_app/screens/timeline/widgets/timeLineStructure/TimeLineStructure.dart';
-import 'package:checklist_app/screens/timeline/widgets/widgets/DueDateWidget.dart';
+import 'package:checklist_app/screens/timeline/widgets/widgets/dueDateWidget/DueDateWidget.dart';
 import 'package:checklist_app/screens/timeline/widgets/widgets/MonthWidget.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +17,6 @@ class Timeline extends StatelessWidget {
   Widget build(BuildContext context) {
     final settings = context.watch<Settings>();
     final appState = context.watch<AppState>();
-    int extra = 0;
 
     List<Widget> getItems(Task root) {
       List<TaskWithPath> tasksWithPaths = root.getTimelineTasks(TaskPath());
@@ -41,7 +37,6 @@ class Timeline extends StatelessWidget {
         if (previousDeadline != null &&
             currentDeadline.difference(previousDeadline).inDays > 1) {
           items.add(TimelineFreeDays(previousDeadline, currentDeadline));
-          extra++;
         }
         items.add(TimelineTask(e, hasSameDateAsPrevious));
 
@@ -56,7 +51,7 @@ class Timeline extends StatelessWidget {
       List<Widget> items = List<Widget>();
       DateTime previousDeadline;
 
-      if(tasksWithPaths.isNotEmpty) {
+      if (tasksWithPaths.isNotEmpty) {
         items.add(Icon(
           Icons.calendar_today_outlined,
           color: settings.getFont(),
@@ -66,27 +61,25 @@ class Timeline extends StatelessWidget {
       tasksWithPaths.forEach((element) {
         DateTime currentDeadline = element.task.deadline;
         bool hasSameDateAsPrevious =
-          haveSameDate(currentDeadline, previousDeadline);
+            haveSameDate(currentDeadline, previousDeadline);
 
         if (previousDeadline != null &&
             currentDeadline.difference(previousDeadline).inDays > 1) {
           items.add(Icon(
-              Icons.swap_vertical_circle,
+            Icons.swap_vertical_circle,
             color: settings.getFont(),
           ));
         }
 
-        if(hasSameDateAsPrevious){
+        if (hasSameDateAsPrevious) {
           items.add(Icon(
             Icons.fiber_manual_record_outlined,
             color: settings.getFont(),
           ));
-        }else {
+        } else {
           items.add(DueDateWidget(element.task));
         }
         previousDeadline = element.task.deadline;
-
-
       });
       return items;
     }
@@ -96,15 +89,16 @@ class Timeline extends StatelessWidget {
         extendBody: true,
         appBar: AppBar(
           title: Text(
-              "TimeLine",
-
+            "TimeLine",
           ),
           actions: [
             IconButton(
               icon: Icon(Icons.calendar_today_outlined),
               onPressed: () {
-                List<TaskWithPath> tasksWithPaths = appState.root.getTimelineTasks(TaskPath());
-                tasksWithPaths.sort((a, b) => a.task.deadline.compareTo(b.task.deadline));
+                List<TaskWithPath> tasksWithPaths =
+                    appState.root.getTimelineTasks(TaskPath());
+                tasksWithPaths
+                    .sort((a, b) => a.task.deadline.compareTo(b.task.deadline));
                 Navigator.push(
                     context,
                     MaterialPageRoute(

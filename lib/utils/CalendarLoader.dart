@@ -10,22 +10,19 @@ Future<List<Event>> retrieveEvents() async {
   var _calendar;
   var _calendars;
 
-
   try {
-
     var permissionsGranted = await _deviceCalendarPlugin.hasPermissions();
     if (permissionsGranted.isSuccess && !permissionsGranted.data) {
       permissionsGranted = await _deviceCalendarPlugin.requestPermissions();
-      if (!permissionsGranted.isSuccess || !permissionsGranted.data) {
-      }
+      if (!permissionsGranted.isSuccess || !permissionsGranted.data) {}
     }
 
     final calendarsResult = await _deviceCalendarPlugin.retrieveCalendars();
 
-      _calendars = calendarsResult?.data;
+    _calendars = calendarsResult?.data;
 
-      _calendar = _calendars[2];
-      print(_calendar.toString());
+    _calendar = _calendars[2];
+    print(_calendar.toString());
 
     final startDate = DateTime.now().add(Duration(days: -30));
     final endDate = DateTime.now().add(Duration(days: 30));

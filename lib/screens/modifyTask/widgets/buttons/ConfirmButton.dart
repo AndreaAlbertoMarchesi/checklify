@@ -1,8 +1,6 @@
 import 'package:checklist_app/states/Settings.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 
 class ConfirmButton extends StatelessWidget {
   ConfirmButton(this.onPressed);

@@ -1,8 +1,8 @@
 import 'package:checklist_app/models/supportClasses/TaskWithPath.dart';
 import 'package:checklist_app/screens/timeline/widgets/widgets/PercentageWidget.dart';
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -36,23 +36,11 @@ class TimelineTask extends StatelessWidget {
           ],
         ),
         child: ListTile(
-          title: Text(
-              task.title,
-              style: TextStyle(
-                letterSpacing: 0.6,
-                fontWeight: FontWeight.bold,
-                fontSize: settings.getFontSizeChildren(),
-                color: settings.getFontTiles(),
-              ),
-          ),
-          subtitle: Text(
-              taskPath.toString(),
-              style: TextStyle(
-                letterSpacing: 0.5,
-                fontWeight: FontWeight.bold,
-                color: settings.getFontTiles(),
-              ),
-          ),
+          title: AppTextDecoration(task.title,
+              fontSize: settings.getFontSizeChildren(),
+              color: settings.getFontTiles()),
+          subtitle: AppTextDecoration(taskPath.toString(),
+              color: settings.getFontTiles()),
           trailing: PercentageWidget(task),
           onTap: () {
             Navigator.of(context).pop();

@@ -1,10 +1,10 @@
 import 'dart:io';
-
 import 'package:checklist_app/screens/home/widgets/sideMenu/widgets/items/HelpItem.dart';
 import 'package:checklist_app/screens/home/widgets/sideMenu/widgets/items/SettingItem.dart';
 import 'package:checklist_app/screens/home/widgets/sideMenu/widgets/items/donateItem/DonateItem.dart';
 import 'package:checklist_app/screens/home/widgets/sideMenu/widgets/items/timelineItem/TimelineItem.dart';
 import 'package:checklist_app/screens/home/widgets/sideMenu/widgets/selectionList/SelectionList.dart';
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
@@ -37,30 +37,20 @@ class SideMenu extends StatelessWidget {
                             backgroundColor: Colors.transparent,
                           ),
                         ),
-                        Text(
-                          settings.appUser.userName,
-                          style: TextStyle(
+                        AppTextDecoration(settings.appUser.userName,
                             fontSize: settings.getFontSizeChildren(),
-                            letterSpacing: 0.6,
                             fontWeight: FontWeight.bold,
-                            color: settings.getFont(),
-                          ),
-                        )
+                            color: settings.getFont())
                       ],
                     ),
                     decoration: BoxDecoration(color: settings.getSideMenu()),
                   ),
                   ListTile(
                     leading: Icon(Icons.home_outlined),
-                    title: Text(
-                      "Home",
-                      style: TextStyle(
+                    title: AppTextDecoration("Home",
                         fontSize: settings.getFontSizeChildren(),
-                        letterSpacing: 0.6,
                         fontWeight: FontWeight.bold,
-                        color: settings.getFont(),
-                      ),
-                    ),
+                        color: settings.getFont()),
                     onTap: () {
                       appState.backToRoot();
                       Navigator.of(context).pop();
@@ -79,6 +69,4 @@ class SideMenu extends StatelessWidget {
       ),
     );
   }
-
-
 }

@@ -1,8 +1,6 @@
 import 'package:checklist_app/states/Settings.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 
 class CancelButton extends StatelessWidget {
   @override

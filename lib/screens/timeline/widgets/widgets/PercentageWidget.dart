@@ -1,14 +1,14 @@
 import 'package:checklist_app/models/Task.dart';
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/Settings.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PercentageWidget extends StatelessWidget {
-
   PercentageWidget(this.task);
 
   final Task task;
+
   @override
   Widget build(BuildContext context) {
     final settings = context.watch<Settings>();
@@ -19,15 +19,11 @@ class PercentageWidget extends StatelessWidget {
         width: 45,
         height: 40,
         child: Center(
-          child: Text(
-            (task.percentage * 100).round().toString()+ "%",
-            style: TextStyle(
-              letterSpacing: 0.5,
-              fontWeight: FontWeight.bold,
+          child: AppTextDecoration(
+              (task.percentage * 100).round().toString() + "%",
               fontSize: settings.getFontSizeCoffee(),
-              color: settings.getFontTiles(),
-            ),
-          ),
+              color: settings.getFontTiles()),
+          //todo 0.5
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
@@ -44,6 +40,4 @@ class PercentageWidget extends StatelessWidget {
       ),
     );
   }
-
-
 }

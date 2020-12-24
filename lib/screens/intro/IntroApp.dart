@@ -171,23 +171,26 @@ class IntroScreenState extends State<IntroScreen> {
     }
 
     void onDonePress() {
-      if (/*settings.termsAndCondsAccepted && */settings.firstTime) {
+      if (/*settings.termsAndCondsAccepted && */ settings.firstTime) {
         _closeFullScreen();
         _allowRotation();
+
         ///i comment for now the terms and conditions option
         settings.acceptTermsConditions();
         Navigator.push(
           context,
-          MaterialPageRoute(maintainState: false, builder: (context) => HomeScreen()),
+          MaterialPageRoute(
+              maintainState: false, builder: (context) => HomeScreen()),
         );
       } else if (/*settings.termsAndCondsAccepted && */ !settings.firstTime) {
         _closeFullScreen();
         _allowRotation();
+
         ///i comment for now the terms and conditions option
         settings.acceptTermsConditions();
         Navigator.of(context).pop();
-      }//else
-        //showTerms();
+      } //else
+      //showTerms();
     }
 
     return new IntroSlider(
@@ -219,7 +222,6 @@ class IntroScreenState extends State<IntroScreen> {
         this.goToTab = refFunc;
       },
 
-
       // On tab change completed
       onTabChangeCompleted: this.onTabChangeCompleted,
     );
@@ -233,7 +235,8 @@ class IntroScreenState extends State<IntroScreen> {
       DeviceOrientation.portraitDown,
     ]);
   }
-  _closeFullScreen(){
+
+  _closeFullScreen() {
     SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
   }
 }

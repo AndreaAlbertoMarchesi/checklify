@@ -1,4 +1,5 @@
 import 'package:checklist_app/models/supportClasses/TaskValues.dart';
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
@@ -24,17 +25,11 @@ class _ColorPickerState extends State<ColorPicker> {
     final settings = context.watch<Settings>();
     return Row(children: [
       Padding(
-        padding: EdgeInsets.all(15),
-        child: Text(
-          "Color",
-          style: TextStyle(
-            fontSize: settings.getFontSizeChildren(),
-            letterSpacing: 0.6,
-            fontWeight: FontWeight.bold,
-            color: settings.getFont(),
-          ),
-        ),
-      ),
+          padding: EdgeInsets.all(15),
+          child: AppTextDecoration("Color",
+              fontSize: settings.getFontSizeChildren(),
+              fontWeight: FontWeight.bold,
+              color: settings.getFont())),
       Padding(
         padding: EdgeInsets.all(10),
         child: InkWell(

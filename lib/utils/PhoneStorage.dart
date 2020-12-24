@@ -12,7 +12,7 @@ class PhoneStorage {
   final SharedPreferences sharedPreferences;
 
   void setValue(String key, value) {
-    switch(value.runtimeType){
+    switch (value.runtimeType) {
       case String:
         sharedPreferences.setString(key, value);
         break;
@@ -64,17 +64,14 @@ class PhoneStorage {
   }
 
   readUser(String key, defaultValue) {
-    if(sharedPreferences.containsKey(key)) {
+    if (sharedPreferences.containsKey(key)) {
       return AppUser.fromJson(jsonDecode(sharedPreferences.getString(key)));
-    }else {
+    } else {
       return defaultValue;
     }
   }
 
-  writeUser(String key, AppUser user){
-    sharedPreferences.setString( key , jsonEncode(user));
+  writeUser(String key, AppUser user) {
+    sharedPreferences.setString(key, jsonEncode(user));
   }
-
-
-
 }

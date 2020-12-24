@@ -1,11 +1,7 @@
 import 'package:checklist_app/models/Task.dart';
-import 'package:checklist_app/models/supportClasses/TaskValues.dart';
-import 'package:checklist_app/sharedWidgets/alertDialogWidgets/DialogButton.dart';
-import 'package:checklist_app/sharedWidgets/alertDialogWidgets/DialogTitle.dart';
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
-import 'package:date_time_picker/date_time_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -53,24 +49,20 @@ class _PercentageCounterDialogState extends State<PercentageCounterDialog> {
                   widget.task, completionCount / widget.task.counterMax);
             },
             icon: Icon(
-                Icons.keyboard_arrow_up,
+              Icons.keyboard_arrow_up,
               color: settings.getAppBarIcon(),
             ),
           ),
         ),
         Expanded(
-          child: Text(
-            completionCount.toString() +
-                "/" +
-                widget.task.counterMax.toString(),
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                letterSpacing: 0.5,
-                fontWeight: FontWeight.bold,
-                color: settings.getAppBarIcon(),
-                fontSize: settings.getFontSizeChildren()
-            ),
-          ),
+          child: AppTextDecoration(
+              completionCount.toString() +
+                  "/" +
+                  widget.task.counterMax.toString(),
+              align: TextAlign.center,
+              fontWeight: FontWeight.bold,
+              color: settings.getAppBarIcon(),
+              fontSize: settings.getFontSizeChildren()),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -83,15 +75,15 @@ class _PercentageCounterDialogState extends State<PercentageCounterDialog> {
                   widget.task, completionCount / widget.task.counterMax);
             },
             icon: Icon(
-                Icons.keyboard_arrow_down,
-                color: settings.getAppBarIcon(),
+              Icons.keyboard_arrow_down,
+              color: settings.getAppBarIcon(),
             ),
           ),
         )
       ]),
     );
 
-
+/*
     return AlertDialog(
       shape: settings.getDialogShape(),
       title: DialogTitle("Set progress"),
@@ -138,5 +130,6 @@ class _PercentageCounterDialogState extends State<PercentageCounterDialog> {
         ),
       ],
     );
+*/
   }
 }

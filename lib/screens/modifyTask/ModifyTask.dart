@@ -9,6 +9,7 @@ import 'package:checklist_app/screens/modifyTask/widgets/components/StarComponen
 import 'package:checklist_app/screens/modifyTask/widgets/components/TitleComponent.dart';
 import 'package:checklist_app/screens/modifyTask/widgets/deadlineInput/DeadlineInput.dart';
 import 'package:checklist_app/screens/modifyTask/widgets/reminderInput/ReminderInput.dart';
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
@@ -64,39 +65,35 @@ class _ModifyTaskState extends State<ModifyTask> {
       appBar: AppBar(
         leading: CancelButton(),
         actions: <Widget>[ConfirmButton(isAdding ? addTask : updateTask)],
-        title: Text(
-          isAdding ? "Add a task" : "Update " + widget.task.title,
-          style: TextStyle(
+        title: AppTextDecoration(
+            isAdding ? "Add a task" : "Update " + widget.task.title,
             fontSize: settings.getFontSizeChildren(),
-            letterSpacing: 0.6,
             fontWeight: FontWeight.bold,
-            color: settings.getAppBarIcon(),
-          ),
-        ),
+            color: settings.getAppBarIcon()),
       ),
       body: ListView(children: [
-
         //TITLE
-        TitleComponent(taskValues,isAdding, _titleFormKey),
+        TitleComponent(taskValues, isAdding, _titleFormKey),
 
         //COLOR PIKER
         ColorPickerComponent(taskValues),
 
         //NOTES
-        NotesComponent(taskValues,isAdding),
+        NotesComponent(taskValues, isAdding),
         //DUE DATE
-        DeadlineInput(taskValues,refreshModifyTask),
+        DeadlineInput(taskValues, refreshModifyTask),
 
         //STAR
-        StarComponent(taskValues,refreshModifyTask),
+        StarComponent(taskValues, refreshModifyTask),
 
         //TYPE INDICATOR
-        ProgressTypeComponent(taskValues,refreshModifyTask),
+        ProgressTypeComponent(taskValues, refreshModifyTask),
 
         //NOTIFICATION
-        ReminderInput(taskValues,refreshModifyTask)
+        ReminderInput(taskValues, refreshModifyTask)
       ]),
     );
   }
+
   refreshModifyTask() => setState(() {});
 }

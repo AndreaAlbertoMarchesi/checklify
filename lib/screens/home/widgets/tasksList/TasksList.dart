@@ -3,7 +3,6 @@ import 'package:checklist_app/states/AppState.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-
 class TasksList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

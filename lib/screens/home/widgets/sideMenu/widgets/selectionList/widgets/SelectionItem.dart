@@ -1,5 +1,5 @@
-import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/models/supportClasses/TaskWithPath.dart';
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +7,9 @@ import 'package:provider/provider.dart';
 
 class SelectionItem extends StatelessWidget {
   SelectionItem(this.taskWithPath);
+
   final TaskWithPath taskWithPath;
+
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
@@ -15,24 +17,14 @@ class SelectionItem extends StatelessWidget {
     final task = taskWithPath.task;
     final taskPath = taskWithPath.taskPath;
     return ListTile(
-      title: Text(
-          task.title,
-        style: TextStyle(
+      title: AppTextDecoration(task.title,
           fontSize: settings.getFontSizeChildren(),
-          letterSpacing: 0.6,
           fontWeight: FontWeight.bold,
-          color: settings.getFont(),
-        ),
-      ),
-      subtitle: Text(
-          taskPath.toString(),
-        style: TextStyle(
-          fontSize: settings.getFontSizeChildren()-4,
-          letterSpacing: 0.6,
+          color: settings.getFont()),
+      subtitle: AppTextDecoration(taskPath.toString(),
+          fontSize: settings.getFontSizeChildren() - 4,
           fontWeight: FontWeight.bold,
-          color: settings.getFont(),
-        ),
-      ),
+          color: settings.getFont()),
       trailing: IconButton(
         icon: Icon(Icons.clear),
         onPressed: () => appState.deselect(task),

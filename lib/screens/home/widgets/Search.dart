@@ -1,5 +1,6 @@
 import 'package:checklist_app/models/supportClasses/TaskWithPath.dart';
 import 'package:checklist_app/models/supportClasses/TaskPath.dart';
+import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
@@ -41,15 +42,10 @@ class Search extends SearchDelegate {
 
     return Container(
       child: Center(
-        child: Text(
-          selectedResult,
-          style: TextStyle(
+        child: AppTextDecoration(selectedResult,
             fontSize: settings.getFontSizeChildren(),
-            letterSpacing: 0.6,
             fontWeight: FontWeight.bold,
-            color: settings.getAppBarIcon(),
-          ),
-        ),
+            color: settings.getAppBarIcon()),
       ),
     );
   }
@@ -75,32 +71,21 @@ class Search extends SearchDelegate {
           TaskWithPath searchedTask = searchedTasks[index];
           return Container(
             child: ListTile(
-              title: Text(
-                searchedTask.task.title,
-                style: TextStyle(
+              title: AppTextDecoration(searchedTask.task.title,
                   fontSize: settings.getFontSizeChildren(),
-                  letterSpacing: 0.6,
                   fontWeight: FontWeight.bold,
-                  color: settings.getFont(),
-                ),
-              ),
-              subtitle: Text(
-                searchedTask.taskPath.toString(),
-                style: TextStyle(
+                  color: settings.getFont()),
+              subtitle: AppTextDecoration(searchedTask.taskPath.toString(),
                   fontSize: settings.getFontSizeChildren() - 4,
-                  letterSpacing: 0.6,
                   fontWeight: FontWeight.bold,
-                  color: settings.getFont(),
-                ),
-              ),
+                  color: settings.getFont()),
               onTap: () {
                 appState.openTask(searchedTask.task, searchedTask.taskPath);
                 Navigator.of(context).pop();
               },
             ),
-            decoration: BoxDecoration(
-                border: Border.all(color: settings.getColor())
-            ),
+            decoration:
+                BoxDecoration(border: Border.all(color: settings.getColor())),
           );
         });
   }

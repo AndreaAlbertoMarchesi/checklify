@@ -1,7 +1,5 @@
 import 'package:checklist_app/models/supportClasses/TaskValues.dart';
-import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class StarInput extends StatelessWidget {
   StarInput(this.taskValues, this.refreshModifyTask);
@@ -11,8 +9,6 @@ class StarInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final settings = context.watch<Settings>();
-
     return IconButton(
       icon: taskValues.isStarred
           ? Stack(
