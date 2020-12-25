@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-
 class CounterSetterDialog extends StatefulWidget {
   CounterSetterDialog(this.refreshModifyTask, this.taskValues);
 
@@ -22,9 +21,10 @@ class _CounterSetterDialogState extends State<CounterSetterDialog> {
 
   @override
   void initState() {
-    counter=widget.taskValues.counterMax;
+    counter = widget.taskValues.counterMax;
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     final settings = context.watch<Settings>();
@@ -35,11 +35,13 @@ class _CounterSetterDialogState extends State<CounterSetterDialog> {
       content: Row(children: [
         IconButton(
           onPressed: () {
-           setState(() {
-             counter++;
-           });
+            setState(() {
+              counter++;
+            });
           },
-          icon: Icon(Icons.keyboard_arrow_up,),
+          icon: Icon(
+            Icons.keyboard_arrow_up,
+          ),
         ),
         Expanded(
           child: Text(
@@ -54,7 +56,7 @@ class _CounterSetterDialogState extends State<CounterSetterDialog> {
         ),
         IconButton(
           onPressed: () {
-            if(counter>1){
+            if (counter > 1) {
               setState(() {
                 counter--;
               });
@@ -73,7 +75,7 @@ class _CounterSetterDialogState extends State<CounterSetterDialog> {
           context: context,
           text: "Done",
           onPressed: () {
-            widget.taskValues.counterMax= counter;
+            widget.taskValues.counterMax = counter;
             widget.refreshModifyTask();
             Navigator.of(context).pop();
           },
