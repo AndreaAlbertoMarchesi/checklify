@@ -10,6 +10,7 @@ class _NotificationManager {
     _flutterNotificationsPlugin = FlutterLocalNotificationsPlugin();
 // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
     final _initializationSettingsAndroid =
+    /*mettere qui l icona, questa è l icona della notifica*/
         AndroidInitializationSettings('@mipmap/ic_launcher');
     final _initializationSettingsIOS = IOSInitializationSettings();
     final _initializationSettings = InitializationSettings(
@@ -39,9 +40,9 @@ class _NotificationManager {
     var iSODetails = new IOSNotificationDetails();
     var generalNotificationDetails =
         new NotificationDetails(android: androidDetails, iOS: iSODetails);
-
+  String title = task.title;
     _flutterNotificationsPlugin.schedule(
-        id, "Times Uppp", task.title, scheduledDate, generalNotificationDetails,
+        id, "Reminder for : $title)", "", scheduledDate, generalNotificationDetails,
         payload: id.toString());
 
     _printDebugInformation(scheduledDate, id);

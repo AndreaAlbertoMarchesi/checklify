@@ -64,6 +64,8 @@ class Task {
         .forEach((child) => percentage += child.percentage / children.length);
   }
 
+  bool isCompleted() => percentage == 1;
+
   factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
 
   Map<String, dynamic> toJson() => _$TaskToJson(this);
@@ -90,7 +92,7 @@ class Task {
       var childPath = taskPath.getCopy();
       childPath.add(this);
 
-      if (child.deadline != null)
+      if (child.deadline != null && !child.isCompleted())
         foundTasks.add(TaskWithPath(child, childPath));
 
       foundTasks.addAll(child.getTimelineTasks(childPath));

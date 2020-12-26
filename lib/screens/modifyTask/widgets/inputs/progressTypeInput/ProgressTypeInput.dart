@@ -1,11 +1,9 @@
 import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/models/supportClasses/TaskValues.dart';
-import 'package:checklist_app/screens/modifyTask/widgets/inputs/progressTypeInput/widgets/CounterSetterDialog.dart';
-import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
-import 'package:checklist_app/sharedWidgets/alertDialogWidgets/DialogTitle.dart';
+import 'package:checklist_app/screens/modifyTask/widgets/inputs/progressTypeInput/widgets/counterSetter/CounterSetter.dart';
+import 'package:checklist_app/screens/modifyTask/widgets/inputs/progressTypeInput/widgets/sliderSetter/SliderSetter.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
-import 'package:numberpicker/numberpicker.dart';
 import 'package:provider/provider.dart';
 
 class ProgressTypeInput extends StatelessWidget {
@@ -17,57 +15,6 @@ class ProgressTypeInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final settings = context.watch<Settings>();
-
-    _getTypeName(ProgressType type) {
-      switch (type) {
-        case ProgressType.checkbox:
-          return Text("CheckBox");
-          break;
-        case ProgressType.counter:
-          return Text("Counter");
-          break;
-        case ProgressType.slider:
-          return Text("Slider");
-          break;
-      }
-    }
-
-    Future _showIntDialogSlider() async {
-      await showDialog<int>(
-        context: context,
-        builder: (BuildContext context) {
-          return new NumberPickerDialog.integer(
-              title: Center(child: DialogTitle("Slider divisions:")),
-              minValue: 1,
-              maxValue: 10,
-              infiniteLoop: true,
-              initialIntegerValue: taskValues.sliderDivisions == null
-                  ? 3
-                  : taskValues.sliderDivisions,
-              cancelWidget: AppTextDecoration("Cancel",
-                  fontSize: settings.getFontSizeChildren(),
-                  color: settings.getFont()),
-              confirmWidget: AppTextDecoration(
-                "Done",
-                fontSize: settings.getFontSizeChildren(),
-                color: settings.getFont(),
-              ));
-        },
-      ).then((num value) {
-        if (value != null) {
-          taskValues.sliderDivisions = value;
-          refreshModifyTask();
-        }
-      });
-    }
-
-    _showDialogCounter() {
-      showDialog(
-        context: context,
-        builder: (context) =>
-            CounterSetterDialog(refreshModifyTask, taskValues),
-      );
-    }
 
     return Row(
       children: [
@@ -101,28 +48,23 @@ class ProgressTypeInput extends StatelessWidget {
           }).toList(),
         ),
         if (taskValues.progressType == ProgressType.counter)
-          Padding(
-            padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-            child: IconButton(
-              onPressed: () {
-                if (taskValues.counterMax == null) {
-                  taskValues.counterMax = 1;
-                  refreshModifyTask();
-                }
-                _showDialogCounter();
-              },
-              icon: Icon(Icons.format_list_numbered_rtl),
-            ),
-          ),
+          CounterSetter(taskValues, refreshModifyTask),
         if (taskValues.progressType == ProgressType.slider)
-          Padding(
-            padding: const EdgeInsets.fromLTRB(4, 0, 0, 0),
-            child: IconButton(
-              onPressed: () => _showIntDialogSlider(),
-              icon: Icon(Icons.format_list_numbered_rtl),
-            ),
-          ),
+          SliderSetter(taskValues, refreshModifyTask),
       ],
     );
+  }
+  _getTypeName(ProgressType type) {
+    switch (type) {
+      case ProgressType.checkbox:
+        return Text("CheckBox");
+        break;
+      case ProgressType.counter:
+        return Text("Counter");
+        break;
+      case ProgressType.slider:
+        return Text("Slider");
+        break;
+    }
   }
 }

@@ -77,8 +77,8 @@ class TaskItem extends StatelessWidget {
                   TopRow(task),
                   PercentageRow(task),
                   if (task.notes.isNotEmpty) NotesText(task.notes),
-                  if (task.deadline != null)
-                    DailyPercentageText(task.deadline, task.percentage),
+
+                  if (task.deadline != null && !task.isCompleted()) DailyPercentageText(task.deadline, task.percentage),
                 ],
               )),
         ),
