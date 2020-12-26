@@ -23,7 +23,6 @@ class NotificationComponent extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(15, 15, 6, 6),
             child: AppTextDecoration("Notification Date",
                 fontSize: settings.getFontSizeChildren(),
-                fontWeight: FontWeight.bold,
                 color: settings.getFont()),
           ),
           Padding(

@@ -44,7 +44,6 @@ class Search extends SearchDelegate {
       child: Center(
         child: AppTextDecoration(selectedResult,
             fontSize: settings.getFontSizeChildren(),
-            fontWeight: FontWeight.bold,
             color: settings.getAppBarIcon()),
       ),
     );
@@ -73,11 +72,9 @@ class Search extends SearchDelegate {
             child: ListTile(
               title: AppTextDecoration(searchedTask.task.title,
                   fontSize: settings.getFontSizeChildren(),
-                  fontWeight: FontWeight.bold,
                   color: settings.getFont()),
               subtitle: AppTextDecoration(searchedTask.taskPath.toString(),
                   fontSize: settings.getFontSizeChildren() - 4,
-                  fontWeight: FontWeight.bold,
                   color: settings.getFont()),
               onTap: () {
                 appState.openTask(searchedTask.task, searchedTask.taskPath);

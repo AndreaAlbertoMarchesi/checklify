@@ -14,7 +14,6 @@ class HelpItem extends StatelessWidget {
       leading: Icon(Icons.help_outline),
       title: AppTextDecoration('Help',
           fontSize: settings.getFontSizeChildren(),
-          fontWeight: FontWeight.bold,
           color: settings.getFont()),
       onTap: () {
         appState.deselect();

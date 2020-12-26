@@ -15,7 +15,6 @@ class SettingItem extends StatelessWidget {
       leading: Icon(Icons.settings),
       title: AppTextDecoration('Settings',
           fontSize: settings.getFontSizeChildren(),
-          fontWeight: FontWeight.bold,
           color: settings.getFont()),
       onTap: () {
         appState.deselect();

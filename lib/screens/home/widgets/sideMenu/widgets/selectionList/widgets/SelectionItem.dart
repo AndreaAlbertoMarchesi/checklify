@@ -19,11 +19,9 @@ class SelectionItem extends StatelessWidget {
     return ListTile(
       title: AppTextDecoration(task.title,
           fontSize: settings.getFontSizeChildren(),
-          fontWeight: FontWeight.bold,
           color: settings.getFont()),
       subtitle: AppTextDecoration(taskPath.toString(),
           fontSize: settings.getFontSizeChildren() - 4,
-          fontWeight: FontWeight.bold,
           color: settings.getFont()),
       trailing: IconButton(
         icon: Icon(Icons.clear),

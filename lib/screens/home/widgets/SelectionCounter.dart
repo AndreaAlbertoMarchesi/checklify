@@ -22,7 +22,6 @@ class SelectionCounter extends StatelessWidget {
             padding: const EdgeInsets.all(3.0),
             child: AppTextDecoration(selectionLength.toString(),
                 fontSize: settings.getFontSizeChildren(),
-                fontWeight: FontWeight.bold,
                 color: settings.getFontTiles()),
           ),
         ));

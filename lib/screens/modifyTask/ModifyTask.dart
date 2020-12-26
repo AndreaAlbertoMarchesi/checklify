@@ -68,7 +68,6 @@ class _ModifyTaskState extends State<ModifyTask> {
         title: AppTextDecoration(
             isAdding ? "Add a task" : "Update " + widget.task.title,
             fontSize: settings.getFontSizeChildren(),
-            fontWeight: FontWeight.bold,
             color: settings.getAppBarIcon()),
       ),
       body: ListView(children: [

@@ -20,7 +20,6 @@ class _TermAndCondsDialogState extends State<TermAndCondsDialog> {
       return FlatButton(
         child: AppTextDecoration("Accept",
             fontSize: settings.getFontSizeChildren(),
-            fontWeight: FontWeight.bold,
             color: settings.getFont()),
         onPressed: () {
           if (_value) {
@@ -56,7 +55,6 @@ class _TermAndCondsDialogState extends State<TermAndCondsDialog> {
                     }),
                 AppTextDecoration("Accept Terms & Conditions",
                     fontSize: settings.getFontSizeChildren() - 2,
-                    fontWeight: FontWeight.bold,
                     color: settings.getFont())
               ],
             )),

@@ -40,7 +40,6 @@ class _PercentageSliderDialogState extends State<PercentageSliderDialog> {
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 8.0, 0, 0),
           child: AppTextDecoration((percentage * 100).round().toString() + "%",
-              fontWeight: FontWeight.bold,
               color: settings.getAppBarIcon(),
               fontSize: settings.getFontSizeChildren()),
         ),

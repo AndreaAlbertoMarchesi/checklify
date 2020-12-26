@@ -29,7 +29,7 @@ class AppTextDecoration extends StatelessWidget {
           letterSpacing: letterSpacing == null ? 0.6 : letterSpacing,
           fontWeight: fontWeight == null ? FontWeight.bold : fontWeight,
           fontSize: fontSize,
-          color: color == null? settings.getSideMenu(): color ,
+          color: color == null? settings.getDefaultColor() : color ,
           fontStyle: fontStyle == null ? FontStyle.normal : fontStyle),
     );
   }

@@ -18,23 +18,19 @@ class CountdownText extends StatelessWidget {
       if (countdown.inDays >= 1) {
         return AppTextDecoration("Days left: " + countdown.inDays.toString(),
             letterSpacing: 0.5,
-            fontWeight: FontWeight.bold,
             color: settings.getFontTiles());
       } else if (countdown.inHours < 0) {
         if (percentage < 1)
           return AppTextDecoration("Expired",
               letterSpacing: 0.5,
-              fontWeight: FontWeight.bold,
               color: settings.getFontTiles());
         else
           return AppTextDecoration("Completed",
               letterSpacing: 0.5,
-              fontWeight: FontWeight.bold,
               color: settings.getFontTiles());
       } else {
         return AppTextDecoration("Hours left: " + countdown.inHours.toString(),
             letterSpacing: 0.5,
-            fontWeight: FontWeight.bold,
             color: settings.getFontTiles());
       }
     }

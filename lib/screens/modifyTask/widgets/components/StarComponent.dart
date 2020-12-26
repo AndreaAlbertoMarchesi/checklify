@@ -22,7 +22,6 @@ class StarComponent extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(16, 15, 6, 6),
               child: AppTextDecoration("Starred Task",
                   fontSize: settings.getFontSizeChildren(),
-                  fontWeight: FontWeight.bold,
                   color: settings.getFont()),
             ),
             Padding(

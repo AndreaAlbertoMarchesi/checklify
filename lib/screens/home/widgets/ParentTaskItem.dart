@@ -51,7 +51,6 @@ class ParentTaskItem extends StatelessWidget {
                   padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                   child: AppTextDecoration(appState.task.title,
                       fontSize: settings.getFontSizeParent(),
-                      fontWeight: FontWeight.bold,
                       color: settings.getFontTiles()),
                   //todo 0.5
                 ),

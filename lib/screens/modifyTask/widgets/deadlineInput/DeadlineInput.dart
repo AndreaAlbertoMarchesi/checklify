@@ -4,6 +4,7 @@ import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:checklist_app/utils/DateTimeFormatter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:provider/provider.dart';
 
 class DeadlineInput extends StatelessWidget {
@@ -18,13 +19,11 @@ class DeadlineInput extends StatelessWidget {
     return InkWell(
       child: Container(
           child: Row(
-            //crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: EdgeInsets.all(15),
                 child: AppTextDecoration("Due Date",
                     fontSize: settings.getFontSizeChildren(),
-                    fontWeight: FontWeight.bold,
                     color: settings.getFont()),
               ),
               Padding(
@@ -34,7 +33,7 @@ class DeadlineInput extends StatelessWidget {
                           ? DateTimeFormatter.dateTimeToFullString(
                               taskValues.deadline)
                           : "add deadline...",
-                      fontSize: settings.getFontSizeCoffee() - 4,
+                      fontSize: settings.getFontSizeCoffee() - 3,
                       color: settings.getFont())),
             ],
           ),
@@ -43,10 +42,14 @@ class DeadlineInput extends StatelessWidget {
             bottom: BorderSide(color: settings.getColor()),
           ))),
       onTap: () {
-        showDialog(
+        showAnimatedDialog(
           context: context,
           builder: (context) =>
               DeadlineInputDialog(taskValues, refreshModifyTask),
+          animationType: DialogTransitionType.fade,
+          curve: Curves.fastOutSlowIn,
+          duration: Duration(milliseconds: 400),
+          barrierDismissible: true,
         );
       },
     );

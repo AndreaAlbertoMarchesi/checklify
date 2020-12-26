@@ -15,7 +15,6 @@ class ModifyName extends StatelessWidget {
       return FlatButton(
         child: AppTextDecoration("Back",
             fontSize: settings.getFontSizeChildren(),
-            fontWeight: FontWeight.bold,
             color: settings.getFont()),
         onPressed: () {
           Navigator.pop(context);
@@ -27,7 +26,6 @@ class ModifyName extends StatelessWidget {
       return FlatButton(
         child: AppTextDecoration("Rename",
             fontSize: settings.getFontSizeChildren(),
-            fontWeight: FontWeight.bold,
             color: settings.getFont()),
         onPressed: () {
           if (_formKey.currentState.validate()) {

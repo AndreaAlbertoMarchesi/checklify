@@ -1,7 +1,6 @@
 import 'package:checklist_app/models/supportClasses/TaskWithPath.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:provider/provider.dart';
 
@@ -51,6 +50,7 @@ class InAppCalendar extends StatelessWidget {
           allowedViews: [
             CalendarView.month,
             CalendarView.week,
+            CalendarView.day
           ],
           dataSource: MeetingDataSource(_getDataSource()),
           monthViewSettings: MonthViewSettings(

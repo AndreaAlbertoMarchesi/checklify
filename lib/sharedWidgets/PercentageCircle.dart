@@ -50,7 +50,6 @@ class PercentageCircle extends StatelessWidget {
                   )
                 : AppTextDecoration((percentage * 100).round().toString() + "%",
                     fontSize: settings.getFontPercentageChildren(),
-                    fontWeight: FontWeight.bold,
                     color: settings.getFontTiles()),
             linearGradient: LinearGradient(colors: [
               Colors.green[600],

@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:checklist_app/screens/modifyTask/ModifyTask.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:flutter/material.dart';
@@ -16,24 +17,37 @@ class AddButton extends StatelessWidget {
             child: Stack(
               children: <Widget>[
                 Align(
-                  alignment: Alignment.bottomRight,
-                  child: FloatingActionButton(
-                    onPressed: () {
-                      openAddDialog(context);
-                    },
-                    child: Stack(
-                      children: [
-                        Positioned(
-                          left: 2.0,
-                          top: 2.0,
-                          child: Icon(Icons.add, color: Colors.black26),
-                        ),
-                        Icon(Icons.add)
-                      ],
-                    ),
-                    backgroundColor: Colors.greenAccent[700],
-                  ),
-                ),
+                    alignment: Alignment.bottomRight,
+                    child: OpenContainer(
+                      transitionDuration: Duration(milliseconds: 600),
+                      closedColor: Colors.transparent,
+                      openColor: Colors.transparent,
+                      openElevation: 0,
+                      closedElevation: 0,
+                      openBuilder: (BuildContext context, closedWidget) {
+                        return ModifyTask();
+                      },
+                      closedBuilder: (BuildContext context, openWidget) {
+                        return Padding(
+                          padding: const EdgeInsets.fromLTRB(0,0,0,4.0),
+                          child: FloatingActionButton(
+                            elevation: 3,
+                            onPressed: openWidget,
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                  left: 2.0,
+                                  top: 2.0,
+                                  child: Icon(Icons.add, color: Colors.black26),
+                                ),
+                                Icon(Icons.add)
+                              ],
+                            ),
+                            backgroundColor: Colors.greenAccent[700],
+                          ),
+                        );
+                      },
+                    )),
               ],
             )),
       );
@@ -47,32 +61,31 @@ class AddButton extends StatelessWidget {
               children: <Widget>[
                 Align(
                   alignment: Alignment.bottomRight,
-                  child: FloatingActionButton(
-                    onPressed: appState.moveTask,
-                    child: Icon(Icons.drive_file_move),
-                    backgroundColor: Colors.greenAccent[700],
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(0,0,0,4.0),
+                    child: FloatingActionButton(
+                      elevation: 3,
+                      onPressed: appState.moveTask,
+                      child: Icon(Icons.drive_file_move),
+                      backgroundColor: Colors.greenAccent[700],
+                    ),
                   ),
                 ),
                 Align(
                   alignment: Alignment.bottomLeft,
-                  child: FloatingActionButton(
-                    onPressed: appState.deselect,
-                    child: Icon(Icons.undo),
-                    backgroundColor: Colors.grey,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(0,0,0,4.0),
+                    child: FloatingActionButton(
+                      elevation: 3,
+                      onPressed: appState.deselect,
+                      child: Icon(Icons.undo),
+                      backgroundColor: Colors.grey,
+                    ),
                   ),
                 ),
               ],
             )),
       );
     }
-  }
-
-  void openAddDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return ModifyTask();
-      },
-    );
   }
 }

@@ -131,6 +131,8 @@ class Settings with ChangeNotifier {
 
   Color getFont() => _Styles.getFont(darkTheme);
 
+  Color getDefaultColor() => _Styles.getDefaultColor(darkTheme);
+
   Color getFontTiles() => _Styles.getFontTiles(darkTheme);
 
   Color getBorder() => _Styles.getBorder(darkTheme);

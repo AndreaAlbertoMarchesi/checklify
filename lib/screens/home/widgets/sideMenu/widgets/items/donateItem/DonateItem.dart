@@ -14,7 +14,6 @@ class DonateItem extends StatelessWidget {
       leading: Icon(AntDesign.gift),
       title: AppTextDecoration('Buy me a coffee',
           fontSize: settings.getFontSizeChildren(),
-          fontWeight: FontWeight.bold,
           color: settings.getFont()),
       onTap: () {
         Navigator.of(context).pop();

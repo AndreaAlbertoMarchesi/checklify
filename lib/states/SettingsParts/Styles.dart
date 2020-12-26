@@ -62,6 +62,15 @@ class _Styles {
       return Colors.grey[500];
   }
 
+  static Color getDefaultColor(bool isDarkTheme) {
+    if (isDarkTheme) {
+      return Colors.lightBlue[50];
+    } else {
+      return Colors.blueGrey[800];
+    }
+  }
+
+
   static Color getFont(bool isDarkTheme) {
     if (isDarkTheme) {
       return Colors.blue[200];

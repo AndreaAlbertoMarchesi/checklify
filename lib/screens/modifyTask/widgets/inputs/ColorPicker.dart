@@ -28,7 +28,6 @@ class _ColorPickerState extends State<ColorPicker> {
           padding: EdgeInsets.all(15),
           child: AppTextDecoration("Color",
               fontSize: settings.getFontSizeChildren(),
-              fontWeight: FontWeight.bold,
               color: settings.getFont())),
       Padding(
         padding: EdgeInsets.all(10),

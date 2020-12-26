@@ -21,7 +21,6 @@ class DeleteDialog extends StatelessWidget {
       scrollable: true,
       title: AppTextDecoration("Item Selected",
           fontSize: settings.getFontSizeChildren(),
-          fontWeight: FontWeight.bold,
           color: settings.getFont()),
       content: AppTextDecoration("Do you want to delete it?",
           fontSize: settings.getFontSizeChildren(),
@@ -31,7 +30,6 @@ class DeleteDialog extends StatelessWidget {
         FlatButton(
           child: AppTextDecoration("Yes",
               fontSize: settings.getFontSizeChildren(),
-              fontWeight: FontWeight.bold,
               color: settings.getFont()),
           onPressed: () {
             appState.deleteTask(task);
@@ -41,7 +39,6 @@ class DeleteDialog extends StatelessWidget {
         FlatButton(
           child: AppTextDecoration("No",
               fontSize: settings.getFontSizeChildren(),
-              fontWeight: FontWeight.bold,
               color: settings.getFont()),
           onPressed: () {
             Navigator.of(context).pop();

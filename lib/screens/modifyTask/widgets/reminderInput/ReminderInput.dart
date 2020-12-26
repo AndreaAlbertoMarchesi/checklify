@@ -4,6 +4,7 @@ import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:checklist_app/utils/DateTimeFormatter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:provider/provider.dart';
 
 class ReminderInput extends StatelessWidget {
@@ -25,7 +26,6 @@ class ReminderInput extends StatelessWidget {
                 child: AppTextDecoration(
                   "Reminder",
                   fontSize: settings.getFontSizeChildren(),
-                  fontWeight: FontWeight.bold,
                   color: settings.getFont(),
                 ),
               ),
@@ -36,7 +36,7 @@ class ReminderInput extends StatelessWidget {
                         ? DateTimeFormatter.dateTimeToFullString(
                             taskValues.dateTimeNotification)
                         : "add a reminder...",
-                    fontSize: settings.getFontSizeCoffee(),
+                    fontSize: settings.getFontSizeCoffee() - 3,
                     color: settings.getFont()),
               ),
             ],
@@ -46,10 +46,14 @@ class ReminderInput extends StatelessWidget {
             bottom: BorderSide(color: settings.getColor()),
           ))),
       onTap: () {
-        showDialog(
+        showAnimatedDialog(
           context: context,
           builder: (context) =>
               ReminderInputDialog(taskValues, refreshModifyTask),
+          animationType: DialogTransitionType.fade,
+          curve: Curves.fastOutSlowIn,
+          duration: Duration(milliseconds: 400),
+          barrierDismissible: true,
         );
       },
     );

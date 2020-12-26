@@ -37,7 +37,6 @@ class PercentageCounter extends StatelessWidget {
               child: AppTextDecoration((task.percentage * task.counterMax).round().toString() +
                   "/" +
                   task.counterMax.toString(),
-                  fontWeight: FontWeight.bold,
                 color: settings.getFontTiles()),
             ),
           ),

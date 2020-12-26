@@ -18,7 +18,6 @@ class NotesText extends StatelessWidget {
         children: [
           AppTextDecoration("Notes: ",
               letterSpacing: 0.5,
-              fontWeight: FontWeight.bold,
               fontStyle: FontStyle.italic,
               color: settings.getFontTiles()),
           AppTextDecoration(notes,

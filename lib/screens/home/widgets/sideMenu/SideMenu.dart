@@ -39,7 +39,6 @@ class SideMenu extends StatelessWidget {
                         ),
                         AppTextDecoration(settings.appUser.userName,
                             fontSize: settings.getFontSizeChildren(),
-                            fontWeight: FontWeight.bold,
                             color: settings.getFont())
                       ],
                     ),
@@ -49,7 +48,6 @@ class SideMenu extends StatelessWidget {
                     leading: Icon(Icons.home_outlined),
                     title: AppTextDecoration("Home",
                         fontSize: settings.getFontSizeChildren(),
-                        fontWeight: FontWeight.bold,
                         color: settings.getFont()),
                     onTap: () {
                       appState.backToRoot();

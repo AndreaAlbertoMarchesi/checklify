@@ -46,12 +46,10 @@ class ProgressTypeInput extends StatelessWidget {
                   : taskValues.sliderDivisions,
               cancelWidget: AppTextDecoration("Cancel",
                   fontSize: settings.getFontSizeChildren(),
-                  fontWeight: FontWeight.bold,
                   color: settings.getFont()),
               confirmWidget: AppTextDecoration(
                 "Done",
                 fontSize: settings.getFontSizeChildren(),
-                fontWeight: FontWeight.bold,
                 color: settings.getFont(),
               ));
         },

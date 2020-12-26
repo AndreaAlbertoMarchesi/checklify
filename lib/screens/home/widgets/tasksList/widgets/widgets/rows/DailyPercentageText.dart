@@ -27,7 +27,6 @@ class DailyPercentageText extends StatelessWidget {
                   .toString() +
               "%",
           letterSpacing: 0.5,
-          fontWeight: FontWeight.bold,
           color: settings.getFontTiles()),
     );
   }

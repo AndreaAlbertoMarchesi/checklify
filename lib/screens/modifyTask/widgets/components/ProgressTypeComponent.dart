@@ -22,7 +22,6 @@ class ProgressTypeComponent extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(15, 15, 6, 6),
                 child: AppTextDecoration("Indicator",
                     fontSize: settings.getFontSizeChildren(),
-                    fontWeight: FontWeight.bold,
                     color: settings.getFont())),
             Padding(
               padding: const EdgeInsets.all(8.0),

@@ -12,7 +12,6 @@ class TimelineItem extends StatelessWidget {
       leading: Icon(Icons.calendar_today),
       title: AppTextDecoration('Timeline',
           fontSize: settings.getFontSizeChildren(),
-          fontWeight: FontWeight.bold,
           color: settings.getFont()),
       onTap: () {
         Navigator.push(

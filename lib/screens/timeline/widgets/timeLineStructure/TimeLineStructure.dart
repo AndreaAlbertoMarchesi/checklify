@@ -88,7 +88,7 @@ class TimelineStructure extends StatelessWidget {
             ),
             child: SizedBox(
               height: double.infinity,
-              width: indicatorSize + 5,
+              width: indicatorSize + 6,
               child: indicator,
             ),
           ),

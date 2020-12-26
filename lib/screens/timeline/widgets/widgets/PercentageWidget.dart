@@ -23,7 +23,6 @@ class PercentageWidget extends StatelessWidget {
               (task.percentage * 100).round().toString() + "%",
               fontSize: settings.getFontSizeCoffee(),
               color: settings.getFontTiles()),
-          //todo 0.5
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),

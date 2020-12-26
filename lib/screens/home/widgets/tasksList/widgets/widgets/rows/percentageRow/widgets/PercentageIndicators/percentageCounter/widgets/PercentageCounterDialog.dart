@@ -60,7 +60,6 @@ class _PercentageCounterDialogState extends State<PercentageCounterDialog> {
                   "/" +
                   widget.task.counterMax.toString(),
               align: TextAlign.center,
-              fontWeight: FontWeight.bold,
               color: settings.getAppBarIcon(),
               fontSize: settings.getFontSizeChildren()),
         ),

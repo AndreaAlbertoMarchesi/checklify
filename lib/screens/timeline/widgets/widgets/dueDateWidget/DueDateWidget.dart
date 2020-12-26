@@ -23,11 +23,11 @@ class DueDateWidget extends StatelessWidget {
                 fontSize: settings.getFontSizeCoffee(),
                 letterSpacing: 0.5,
                 color: settings.getFont()),
-            task.deadline.day == 1
+            task.deadline.day == 1 || task.deadline.day == 21 || task.deadline.day == 31
                 ? DueDateText("st")
-                : task.deadline.day == 2
+                : task.deadline.day == 2 || task.deadline.day == 22
                     ? DueDateText("nd")
-                    : task.deadline.day == 3
+                    : task.deadline.day == 3 || task.deadline.day == 23
                         ? DueDateText("rd")
                         : DueDateText("th")
           ],

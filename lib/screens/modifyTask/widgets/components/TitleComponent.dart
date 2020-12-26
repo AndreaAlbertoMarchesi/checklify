@@ -24,7 +24,6 @@ class TitleComponent extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(15, 15, 6, 6),
               child: AppTextDecoration("Title",
                   fontSize: settings.getFontSizeChildren(),
-                  fontWeight: FontWeight.bold,
                   color: settings.getFont()),
             ),
             Padding(

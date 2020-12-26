@@ -1,7 +1,7 @@
 import 'package:checklist_app/screens/settings/widgets/settingsSection/AboutSection.dart';
-import 'package:checklist_app/screens/settings/widgets/settingsSection/AccountSettings.dart';
 import 'package:checklist_app/screens/settings/widgets/settingsSection/AssistanceSettings.dart';
 import 'package:checklist_app/screens/settings/widgets/settingsSection/GeneralSettings.dart';
+import 'package:checklist_app/screens/settings/widgets/settingsSection/accountSettings/AccountSettings.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -35,8 +35,8 @@ class _SettingsPageState extends State<SettingsPage> {
           children: [
             AccountSettings(),
             GeneralSettings(),
-            //NotificationSettings(),
-            /*ListTile(
+            /*NotificationSettings(),
+            ListTile(
               title: Center(child: Text(
                   "Terms & Conditions",
                 style: TextStyle(

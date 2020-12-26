@@ -24,7 +24,6 @@ class NotesComponent extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(16, 15, 6, 6),
               child: AppTextDecoration("Notes",
                   fontSize: settings.getFontSizeChildren(),
-                  fontWeight: FontWeight.bold,
                   color: settings.getFont()),
             ),
             Padding(

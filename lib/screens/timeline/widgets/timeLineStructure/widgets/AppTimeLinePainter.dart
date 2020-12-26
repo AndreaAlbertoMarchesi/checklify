@@ -40,7 +40,7 @@ class AppTimelinePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final indicatorRadius = indicatorSize / 2;
+    final indicatorRadius = ( indicatorSize + 5 )/ 2;
     final halfItemGap = itemGap / 2;
     final indicatorMargin = indicatorRadius + lineGap;
 
