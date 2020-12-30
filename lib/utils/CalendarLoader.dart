@@ -1,9 +1,10 @@
-import 'package:device_calendar/device_calendar.dart';
 
-List<Calendar> calendars;
-List<String> calendarsNames;
-var events;
+//import 'package:device_calendar/device_calendar.dart';
 
+//List<Calendar> calendars;
+//List<String> calendarsNames;
+//var events;
+/*
 DeviceCalendarPlugin _deviceCalendarPlugin = DeviceCalendarPlugin();
 
 Future<List<Event>> retrieveEvents() async {
@@ -35,3 +36,4 @@ Future<List<Event>> retrieveEvents() async {
     print(e);
   }
 }
+*/
