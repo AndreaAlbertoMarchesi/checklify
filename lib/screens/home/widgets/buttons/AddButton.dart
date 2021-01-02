@@ -19,7 +19,7 @@ class AddButton extends StatelessWidget {
                 Align(
                     alignment: Alignment.bottomRight,
                     child: OpenContainer(
-                      transitionDuration: Duration(milliseconds: 600),
+                      transitionDuration: Duration(milliseconds: 900),
                       closedColor: Colors.transparent,
                       openColor: Colors.transparent,
                       openElevation: 0,

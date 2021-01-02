@@ -8,9 +8,6 @@ import 'package:provider/provider.dart';
 
 class Search extends SearchDelegate {
   String selectedResult;
-  List<String> titles = [];
-
-  //List<String> recentList = [];
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -39,14 +36,34 @@ class Search extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
     final settings = context.watch<Settings>();
+    final appState = context.watch<AppState>();
+    List<TaskWithPath> searchedTasks;
 
-    return Container(
-      child: Center(
-        child: AppTextDecoration(selectedResult,
-            fontSize: settings.getFontSizeChildren(),
-            color: settings.getAppBarIcon()),
-      ),
-    );
+    TaskPath taskPath = appState.taskPath.getCopy();
+    if (taskPath.getLength() > 0) taskPath.backToPrevious();
+    searchedTasks = appState.task.searchTasks(query, taskPath);
+
+    return ListView.builder(
+        itemCount: searchedTasks.length,
+        itemBuilder: (context, index) {
+          TaskWithPath searchedTask = searchedTasks[index];
+          return Container(
+            child: ListTile(
+              title: AppTextDecoration(searchedTask.task.title,
+                  fontSize: settings.getFontSizeChildren(),
+                  color: settings.getFont()),
+              subtitle: AppTextDecoration(searchedTask.taskPath.toString(),
+                  fontSize: settings.getFontSizeChildren() - 4,
+                  color: settings.getFont()),
+              onTap: () {
+                appState.openTask(searchedTask.task, searchedTask.taskPath);
+                Navigator.of(context).pop();
+              },
+            ),
+            decoration:
+                BoxDecoration(border: Border.all(color: settings.getColor())),
+          );
+        });
   }
 
   @override
@@ -55,15 +72,10 @@ class Search extends SearchDelegate {
     final settings = context.watch<Settings>();
 
     List<TaskWithPath> searchedTasks;
+    TaskPath taskPath = appState.taskPath.getCopy();
+    taskPath.backToPrevious();
+    searchedTasks = appState.task.searchTasks(query, taskPath);
 
-    //if (query.isEmpty)
-    //suggestionList = recentList;
-    //else
-    {
-      TaskPath taskPath = appState.taskPath.getCopy();
-      taskPath.backToPrevious();
-      searchedTasks = appState.task.searchTasks(query, taskPath);
-    }
     return ListView.builder(
         itemCount: searchedTasks.length,
         itemBuilder: (context, index) {
