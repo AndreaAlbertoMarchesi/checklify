@@ -15,7 +15,7 @@ class PercentageCounter extends StatelessWidget {
     final settings = context.watch<Settings>();
 
     return Padding(
-      padding: EdgeInsets.fromLTRB(0, 12, 19, 15),
+      padding: EdgeInsets.fromLTRB(5, 12, 19, 15),
       child: Transform.scale(
         scale: 1.3,
         child: InkWell(

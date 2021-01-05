@@ -3,6 +3,7 @@ import 'package:checklist_app/screens/home/widgets/sideMenu/widgets/items/donate
 import 'package:checklist_app/screens/home/widgets/sideMenu/widgets/items/donateItem/widgets/MultiplierButton.dart';
 import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/Settings.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -70,6 +71,18 @@ class _DonateDialogState extends State<DonateDialog> {
                   ),
                 )
               ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: AppTextDecoration(
+                price == 1.99
+                    ? "espresso"
+                    : price == 3.99
+                      ? "cappuccino"
+                      : "americano",
+                color: settings.getFont(),
+                fontStyle: FontStyle.italic,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),

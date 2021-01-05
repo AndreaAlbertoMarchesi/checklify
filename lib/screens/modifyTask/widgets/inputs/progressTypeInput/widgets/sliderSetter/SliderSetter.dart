@@ -38,7 +38,7 @@ class SliderSetter extends StatelessWidget {
         ),
       ),
       Text(taskValues.sliderDivisions == null
-          ? 0.toString()
+          ? 3.toString()
           : taskValues.sliderDivisions.toString()),
     ]);
   }

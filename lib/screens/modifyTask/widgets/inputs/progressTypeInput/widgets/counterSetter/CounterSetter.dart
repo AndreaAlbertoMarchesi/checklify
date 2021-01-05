@@ -11,6 +11,12 @@ class CounterSetter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    _counterSet(){
+      taskValues.counterMax = 1;
+      return 1.toString();
+    }
+
     return Row(
       children: [
         Padding(
@@ -31,7 +37,7 @@ class CounterSetter extends StatelessWidget {
           ),
         ),
         Text(taskValues.counterMax == null
-            ? 1.toString()
+            ? _counterSet()
             : taskValues.counterMax.toString()),
       ],
     );
