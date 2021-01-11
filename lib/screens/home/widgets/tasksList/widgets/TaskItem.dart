@@ -25,7 +25,41 @@ class TaskItem extends StatelessWidget {
     bool isSelected = appState.isSelected(task);
 
     return InkWell(
-      child: SwipeTo(
+      child:Card(
+        elevation: 0,
+        margin: EdgeInsets.fromLTRB(13, 5, 13, 5),
+        child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: isSelected
+                  ? (task.colorValue != null
+                  ? settings.getHighlightedColor(task.colorValue)
+                  : Colors.lightGreenAccent[100])
+                  : (task.colorValue != null
+                  ? Color(task.colorValue)
+                  : settings.getColor()),
+              boxShadow: [
+                BoxShadow(
+                  color: settings.getHighlightedColor(task.colorValue),
+                  blurRadius: 2.0,
+                  spreadRadius: 0.0,
+                  offset: Offset(2.0, 2.0),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TopRow(task),
+                PercentageRow(task),
+                if (task.notes.isNotEmpty) NotesText(task.notes),
+
+                if (task.deadline != null && !task.isCompleted()) DailyPercentageText(task.deadline, task.percentage),
+              ],
+            )),
+      ),
+      /*SwipeTo(
         animationDuration: const Duration(milliseconds: 200),
         iconOnLeftSwipe: Icons.delete_outline,
         iconColor: settings.getFont(),
@@ -82,7 +116,7 @@ class TaskItem extends StatelessWidget {
                 ],
               )),
         ),
-      ),
+      ),*/
       onTap: () {
         if (!isSelected) appState.openTask(task);
       },
