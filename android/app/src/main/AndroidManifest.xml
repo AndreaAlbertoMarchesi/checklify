@@ -12,7 +12,7 @@
         android:allowBackup="true"
         android:name="io.flutter.app.FlutterApplication"
         android:label="checklist_app"
-        android:icon="@mipmap/doppiabianca">
+        android:icon="@mipmap/finalicon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
