@@ -43,8 +43,7 @@ class Task {
   TaskNotification notification;
   bool isStarred = false;
   ProgressType progressType;
-  int counterMax;
-  int sliderDivisions;
+  int percentageDivisions;
 
   static final Task emptyRoot = Task("⌂");
 
@@ -55,8 +54,7 @@ class Task {
       this.notification,
       this.isStarred,
       this.progressType,
-      this.counterMax,
-      this.sliderDivisions});
+      this.percentageDivisions});
 
   void updatePercentage() {
     percentage = 0;

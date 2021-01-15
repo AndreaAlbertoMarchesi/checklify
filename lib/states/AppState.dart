@@ -1,13 +1,13 @@
+import 'package:checklist_app/Services/phoneStorage/Keys.dart';
+import 'package:checklist_app/Services/phoneStorage/PhoneStorage.dart';
 import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/models/supportClasses/TaskPath.dart';
 import 'package:checklist_app/models/supportClasses/TaskValues.dart';
 import 'package:checklist_app/models/supportClasses/TaskWithPath.dart';
-import 'package:checklist_app/utils/PhoneStorage.dart';
-import 'package:checklist_app/utils/phoneStorage/Keys.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter/material.dart';
 
-part 'AppStateParts/NotificationManager.dart';
+part '../Services/NotificationManager.dart';
 
 part 'AppStateParts/SelectionState.dart';
 
@@ -66,8 +66,7 @@ class AppState extends ChangeNotifier {
         deadline: taskValues.deadline,
         isStarred: taskValues.isStarred,
         progressType: taskValues.progressType,
-        counterMax: taskValues.counterMax,
-        sliderDivisions: taskValues.sliderDivisions);
+        percentageDivisions: taskValues.percentageDivisions);
 
     if (taskValues.dateTimeNotification != null)
       createdTask.notification = _notificationManager.scheduleNotification(
@@ -106,8 +105,7 @@ class AppState extends ChangeNotifier {
     task.deadline = taskValues.deadline;
     task.isStarred = taskValues.isStarred;
     task.progressType = taskValues.progressType;
-    task.counterMax = taskValues.counterMax;
-    task.sliderDivisions = taskValues.sliderDivisions;
+    task.percentageDivisions = taskValues.percentageDivisions;
     setStarredTask();
     _storage.writeData(root);
     notifyListeners();

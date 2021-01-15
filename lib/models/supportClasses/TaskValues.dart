@@ -13,8 +13,7 @@ class TaskValues {
           task.notification != null ? task.notification.dateTime : null;
       isStarred = task.isStarred;
       progressType = task.progressType;
-      counterMax = task.counterMax;
-      sliderDivisions = task.sliderDivisions;
+      percentageDivisions = task.percentageDivisions;
     }
   }
 
@@ -25,6 +24,5 @@ class TaskValues {
   DateTime dateTimeNotification;
   bool isStarred = false;
   ProgressType progressType = ProgressType.checkbox;
-  int counterMax;
-  int sliderDivisions;
+  int percentageDivisions;
 }

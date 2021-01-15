@@ -21,7 +21,7 @@ class SliderSetterDialog extends StatelessWidget {
       maxValue: 10,
       infiniteLoop: true,
       initialIntegerValue:
-          taskValues.sliderDivisions == null ? 3 : taskValues.sliderDivisions,
+          taskValues.percentageDivisions == null ? 3 : taskValues.percentageDivisions,
       cancelWidget: Text(
         "Cancel",
         style: TextStyle(

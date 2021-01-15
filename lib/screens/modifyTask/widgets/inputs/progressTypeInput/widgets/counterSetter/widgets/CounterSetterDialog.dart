@@ -21,7 +21,7 @@ class _CounterSetterDialogState extends State<CounterSetterDialog> {
 
   @override
   void initState() {
-    counter = widget.taskValues.counterMax;
+    counter = widget.taskValues.percentageDivisions;
     super.initState();
   }
 
@@ -70,7 +70,7 @@ class _CounterSetterDialogState extends State<CounterSetterDialog> {
           context: context,
           text: "Done",
           onPressed: () {
-            widget.taskValues.counterMax = counter;
+            widget.taskValues.percentageDivisions = counter;
             widget.refreshModifyTask();
             Navigator.of(context).pop();
           },

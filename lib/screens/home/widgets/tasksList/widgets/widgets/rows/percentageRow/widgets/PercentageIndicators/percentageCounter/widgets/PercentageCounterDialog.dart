@@ -21,7 +21,7 @@ class _PercentageCounterDialogState extends State<PercentageCounterDialog> {
   @override
   void initState() {
     super.initState();
-    completionCount = (widget.task.percentage * widget.task.counterMax).round();
+    completionCount = (widget.task.percentage * widget.task.percentageDivisions).round();
   }
 
   @override
@@ -43,10 +43,10 @@ class _PercentageCounterDialogState extends State<PercentageCounterDialog> {
           child: IconButton(
             onPressed: () {
               setState(() {
-                if (completionCount < widget.task.counterMax) completionCount++;
+                if (completionCount < widget.task.percentageDivisions) completionCount++;
               });
               appState.updatePercentage(
-                  widget.task, completionCount / widget.task.counterMax);
+                  widget.task, completionCount / widget.task.percentageDivisions);
             },
             icon: Icon(
               Icons.keyboard_arrow_up,
@@ -58,7 +58,7 @@ class _PercentageCounterDialogState extends State<PercentageCounterDialog> {
           child: AppTextDecoration(
               completionCount.toString() +
                   "/" +
-                  widget.task.counterMax.toString(),
+                  widget.task.percentageDivisions.toString(),
               align: TextAlign.center,
               color: settings.getAppBarIcon(),
               fontSize: settings.getFontSizeChildren()),
@@ -71,7 +71,7 @@ class _PercentageCounterDialogState extends State<PercentageCounterDialog> {
                 if (completionCount > 0) completionCount--;
               });
               appState.updatePercentage(
-                  widget.task, completionCount / widget.task.counterMax);
+                  widget.task, completionCount / widget.task.percentageDivisions);
             },
             icon: Icon(
               Icons.keyboard_arrow_down,

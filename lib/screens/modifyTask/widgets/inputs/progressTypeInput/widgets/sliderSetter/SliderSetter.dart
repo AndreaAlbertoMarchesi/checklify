@@ -23,7 +23,7 @@ class SliderSetter extends StatelessWidget {
         },
       ).then((num value) {
         if (value != null) {
-          taskValues.sliderDivisions = value;
+          taskValues.percentageDivisions = value;
           refreshModifyTask();
         }
       });
@@ -37,9 +37,9 @@ class SliderSetter extends StatelessWidget {
           icon: Icon(Icons.format_list_numbered_rtl),
         ),
       ),
-      Text(taskValues.sliderDivisions == null
+      Text(taskValues.percentageDivisions == null
           ? 3.toString()
-          : taskValues.sliderDivisions.toString()),
+          : taskValues.percentageDivisions.toString()),
     ]);
   }
 }

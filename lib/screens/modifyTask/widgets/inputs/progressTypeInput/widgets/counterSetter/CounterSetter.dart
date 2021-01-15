@@ -13,7 +13,7 @@ class CounterSetter extends StatelessWidget {
   Widget build(BuildContext context) {
 
     _counterSet(){
-      taskValues.counterMax = 1;
+      taskValues.percentageDivisions = 1;
       return 1.toString();
     }
 
@@ -23,8 +23,8 @@ class CounterSetter extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
           child: IconButton(
             onPressed: () {
-              if (taskValues.counterMax == null) {
-                taskValues.counterMax = 1;
+              if (taskValues.percentageDivisions == null) {
+                taskValues.percentageDivisions = 1;
                 refreshModifyTask();
               }
               showDialog(
@@ -36,9 +36,9 @@ class CounterSetter extends StatelessWidget {
             icon: Icon(Icons.format_list_numbered_rtl),
           ),
         ),
-        Text(taskValues.counterMax == null
+        Text(taskValues.percentageDivisions == null
             ? _counterSet()
-            : taskValues.counterMax.toString()),
+            : taskValues.percentageDivisions.toString()),
       ],
     );
   }

@@ -1,7 +1,7 @@
+import 'package:checklist_app/Services/phoneStorage/PhoneStorage.dart';
 import 'package:checklist_app/screens/home/Home.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
-import 'package:checklist_app/utils/PhoneStorage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

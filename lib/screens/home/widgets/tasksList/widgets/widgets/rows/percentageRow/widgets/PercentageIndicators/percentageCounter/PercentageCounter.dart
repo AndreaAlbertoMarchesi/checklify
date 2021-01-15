@@ -34,9 +34,9 @@ class PercentageCounter extends StatelessWidget {
             ),
             child: Padding(
               padding: const EdgeInsets.all(10.0),
-              child: AppTextDecoration((task.percentage * task.counterMax).round().toString() +
+              child: AppTextDecoration((task.percentage * task.percentageDivisions).round().toString() +
                   "/" +
-                  task.counterMax.toString(),
+                  task.percentageDivisions.toString(),
                 color: settings.getFontTiles()),
             ),
           ),

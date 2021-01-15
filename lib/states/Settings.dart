@@ -1,7 +1,7 @@
+import 'package:checklist_app/Services/phoneStorage/Keys.dart';
+import 'package:checklist_app/Services/phoneStorage/PhoneStorage.dart';
 import 'package:checklist_app/models/AppUser.dart';
-import 'package:checklist_app/utils/PhoneStorage.dart';
 import 'package:checklist_app/utils/URL.dart';
-import 'package:checklist_app/utils/phoneStorage/Keys.dart';
 import 'package:flutter/material.dart';
 
 part 'SettingsParts/Styles.dart';

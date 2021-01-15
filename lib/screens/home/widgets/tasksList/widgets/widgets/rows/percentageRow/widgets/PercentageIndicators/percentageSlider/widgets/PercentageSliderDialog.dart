@@ -47,8 +47,8 @@ class _PercentageSliderDialogState extends State<PercentageSliderDialog> {
           padding: const EdgeInsets.fromLTRB(3, 0, 3, 3),
           child: Slider(
             value: percentage,
-            divisions: widget.task.sliderDivisions != null
-                ? widget.task.sliderDivisions
+            divisions: widget.task.percentageDivisions != null
+                ? widget.task.percentageDivisions
                 : 3,
             onChanged: (double value) {
               setState(() {
