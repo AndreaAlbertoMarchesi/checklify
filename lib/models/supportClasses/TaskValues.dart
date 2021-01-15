@@ -1,9 +1,10 @@
+import 'package:checklist_app/models/supportClasses/TaskPreferences.dart';
 import 'package:flutter/material.dart';
 
 import '../Task.dart';
 
 class TaskValues {
-  TaskValues([Task task]) {
+  TaskValues({Task task, TaskPreferences taskPreferences}) {
     if (task != null) {
       title = task.title;
       notes = task.notes;
@@ -15,14 +16,23 @@ class TaskValues {
       progressType = task.progressType;
       percentageDivisions = task.percentageDivisions;
     }
+    if(taskPreferences!=null) {
+      percentageDivisions = taskPreferences.percentageDivisions;
+      progressType = taskPreferences.progressType;
+      colorValue = taskPreferences.colorValue;
+    }
   }
 
   String title = "";
   String notes = "";
-  int colorValue = Colors.blue[300].value;
+  int colorValue = defaultColorValue;
   DateTime deadline;
   DateTime dateTimeNotification;
   bool isStarred = false;
-  ProgressType progressType = ProgressType.checkbox;
-  int percentageDivisions;
+  ProgressType progressType = defaultProgressType;
+  int percentageDivisions = defaultPercentageDivisions;
+
+  static const defaultPercentageDivisions = 3;
+  static const defaultProgressType = ProgressType.checkbox;
+  static final defaultColorValue = Colors.blue[300].value;
 }

@@ -1,6 +1,8 @@
 import 'package:checklist_app/Services/phoneStorage/Keys.dart';
 import 'package:checklist_app/Services/phoneStorage/PhoneStorage.dart';
 import 'package:checklist_app/models/AppUser.dart';
+import 'package:checklist_app/models/supportClasses/TaskPreferences.dart';
+import 'package:checklist_app/models/supportClasses/TaskValues.dart';
 import 'package:checklist_app/utils/URL.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +11,7 @@ part 'SettingsParts/Styles.dart';
 class Settings with ChangeNotifier {
   final PhoneStorage _storage;
 
+  TaskPreferences taskPreferences;
   AppUser appUser;
   bool firstTime;
   bool isPhotoFromGallery;
@@ -29,6 +32,25 @@ class Settings with ChangeNotifier {
     fullScreen = _storage.getValue(Keys.fullScreen, false);
     notifications = _storage.getValue(Keys.notifications, true);
     isPhotoFromGallery = _storage.getValue(Keys.isPhotoFromGallery, false);
+    taskPreferences = _getTaskPreferences();
+  }
+
+  _getTaskPreferences() {
+    return TaskPreferences(
+        _storage.getValue(
+            Keys.percentageDivisions, TaskValues.defaultPercentageDivisions),
+        _storage.getValue(Keys.taskColor, TaskValues.defaultColorValue),
+        _storage.getValue(Keys.progressType, TaskValues.defaultProgressType));
+  }
+
+  setTaskPreferences(TaskValues taskValues){
+    taskPreferences.percentageDivisions = taskValues.percentageDivisions;
+    taskPreferences.colorValue = taskValues.colorValue;
+    taskPreferences.progressType = taskValues.progressType;
+    _storage.setValue(Keys.percentageDivisions, taskValues.percentageDivisions);
+    _storage.setValue(Keys.taskColor, taskValues.colorValue);
+    _storage.setValue(Keys.progressType, taskValues.progressType.index);
+    notifyListeners();
   }
 
   void acceptTermsConditions() {

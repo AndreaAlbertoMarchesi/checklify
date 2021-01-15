@@ -1,4 +1,7 @@
 class Keys {
+  static const percentageDivisions = "percentageDivisions";
+  static const taskColor = "taskColor";
+  static const progressType = "progressType";
   static const darkTheme = "darkTheme";
   static const size = "size";
   static const appUser = "appUser";

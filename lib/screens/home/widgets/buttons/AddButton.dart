@@ -1,6 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:checklist_app/screens/modifyTask/ModifyTask.dart';
 import 'package:checklist_app/states/AppState.dart';
+import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,6 +9,7 @@ class AddButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
+    final settings = context.watch<Settings>();
     if (!appState.isSelected()) {
       return Padding(
         //padding: const EdgeInsets.fromLTRB(15,15,15,70 ),
@@ -27,7 +29,7 @@ class AddButton extends StatelessWidget {
                       openElevation: 0,
                       closedElevation: 0,
                       openBuilder: (BuildContext context, closedWidget) {
-                        return ModifyTask();
+                        return ModifyTask(taskPreferences: settings.taskPreferences);
                       },
                       closedBuilder: (BuildContext context, openWidget) {
                         return Padding(
