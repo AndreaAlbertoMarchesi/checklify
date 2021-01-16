@@ -15,11 +15,13 @@ class TaskValues {
       isStarred = task.isStarred;
       progressType = task.progressType;
       percentageDivisions = task.percentageDivisions;
+      doesShowDailyPercentage = task.doesShowDailyPercentage;
     }
     if(taskPreferences!=null) {
       percentageDivisions = taskPreferences.percentageDivisions;
       progressType = taskPreferences.progressType;
       colorValue = taskPreferences.colorValue;
+      doesShowDailyPercentage = taskPreferences.doesShowDailyPercentage;
     }
   }
 
@@ -31,6 +33,7 @@ class TaskValues {
   bool isStarred = false;
   ProgressType progressType = defaultProgressType;
   int percentageDivisions = defaultPercentageDivisions;
+  bool doesShowDailyPercentage = false;
 
   static const defaultPercentageDivisions = 3;
   static const defaultProgressType = ProgressType.checkbox;

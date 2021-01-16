@@ -29,7 +29,7 @@ class AddButton extends StatelessWidget {
                       openElevation: 0,
                       closedElevation: 0,
                       openBuilder: (BuildContext context, closedWidget) {
-                        return ModifyTask(taskPreferences: settings.taskPreferences);
+                        return ModifyTask(taskPreferences: settings.getTaskPreferences());
                       },
                       closedBuilder: (BuildContext context, openWidget) {
                         return Padding(

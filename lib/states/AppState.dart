@@ -106,6 +106,7 @@ class AppState extends ChangeNotifier {
     task.isStarred = taskValues.isStarred;
     task.progressType = taskValues.progressType;
     task.percentageDivisions = taskValues.percentageDivisions;
+    task.doesShowDailyPercentage = taskValues.doesShowDailyPercentage;
     setStarredTask();
     _storage.writeData(root);
     notifyListeners();

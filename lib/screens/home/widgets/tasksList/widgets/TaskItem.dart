@@ -1,16 +1,12 @@
 import 'package:checklist_app/models/Task.dart';
-import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/dialogs/DeleteDialog.dart';
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/rows/DailyPercentageText.dart';
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/rows/NotesText.dart';
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/rows/percentageRow/PercentageRow.dart';
 import 'package:checklist_app/screens/home/widgets/tasksList/widgets/widgets/rows/topRow/TopRow.dart';
-import 'package:checklist_app/screens/modifyTask/ModifyTask.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:provider/provider.dart';
-import 'package:swipe_to/swipe_to.dart';
 import 'package:vibration/vibration.dart';
 
 class TaskItem extends StatelessWidget {
@@ -25,7 +21,7 @@ class TaskItem extends StatelessWidget {
     bool isSelected = appState.isSelected(task);
 
     return InkWell(
-      child:Card(
+      child: Card(
         elevation: 0,
         margin: EdgeInsets.fromLTRB(13, 5, 13, 5),
         child: Container(
@@ -33,11 +29,11 @@ class TaskItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               color: isSelected
                   ? (task.colorValue != null
-                  ? settings.getHighlightedColor(task.colorValue)
-                  : Colors.lightGreenAccent[100])
+                      ? settings.getHighlightedColor(task.colorValue)
+                      : Colors.lightGreenAccent[100])
                   : (task.colorValue != null
-                  ? Color(task.colorValue)
-                  : settings.getColor()),
+                      ? Color(task.colorValue)
+                      : settings.getColor()),
               boxShadow: [
                 BoxShadow(
                   color: settings.getHighlightedColor(task.colorValue),
@@ -54,8 +50,11 @@ class TaskItem extends StatelessWidget {
                 TopRow(task),
                 PercentageRow(task),
                 if (task.notes.isNotEmpty) NotesText(task.notes),
-
-                if (task.deadline != null && !task.isCompleted()) DailyPercentageText(task.deadline, task.percentage),
+                if (task.doesShowDailyPercentage != null &&
+                    task.doesShowDailyPercentage &&
+                    task.deadline != null &&
+                    !task.isCompleted())
+                  DailyPercentageText(task.deadline, task.percentage),
               ],
             )),
       ),

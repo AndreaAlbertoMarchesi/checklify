@@ -37,6 +37,7 @@ Task _$TaskFromJson(Map<String, dynamic> json) {
     progressType:
         _$enumDecodeNullable(_$ProgressTypeEnumMap, json['progressType']),
     percentageDivisions: json['percentageDivisions'] as int,
+    doesShowDailyPercentage: json['doesShowDailyPercentage'] as bool,
   )
     ..children = (json['children'] as List)
         ?.map(
@@ -54,6 +55,7 @@ Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
       'deadline': instance.deadline?.toIso8601String(),
       'notification': instance.notification?.toJson(),
       'isStarred': instance.isStarred,
+      'doesShowDailyPercentage': instance.doesShowDailyPercentage,
       'progressType': _$ProgressTypeEnumMap[instance.progressType],
       'percentageDivisions': instance.percentageDivisions,
     };

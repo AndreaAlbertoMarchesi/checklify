@@ -42,6 +42,7 @@ class Task {
   DateTime deadline;
   TaskNotification notification;
   bool isStarred = false;
+  bool doesShowDailyPercentage = false;
   ProgressType progressType;
   int percentageDivisions;
 
@@ -54,7 +55,8 @@ class Task {
       this.notification,
       this.isStarred,
       this.progressType,
-      this.percentageDivisions});
+      this.percentageDivisions,
+      this.doesShowDailyPercentage});
 
   void updatePercentage() {
     percentage = 0;
