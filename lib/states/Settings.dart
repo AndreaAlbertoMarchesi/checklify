@@ -34,12 +34,12 @@ class Settings with ChangeNotifier {
     isPhotoFromGallery = _storage.getValue(Keys.isPhotoFromGallery, false);
   }
 
-  getTaskPreferences() {
+  TaskPreferences getTaskPreferences() {
     return TaskPreferences(
         _storage.getValue(
             Keys.percentageDivisions, TaskValues.defaultPercentageDivisions),
         _storage.getValue(Keys.taskColor, TaskValues.defaultColorValue),
-        ProgressType.values[_storage.getValue(Keys.progressType, TaskValues.defaultProgressType)],
+        ProgressType.values[_storage.getValue(Keys.progressType, TaskValues.defaultProgressType.index)],
         _storage.getValue(
           Keys.doesShowDailyPercentage,
           false,

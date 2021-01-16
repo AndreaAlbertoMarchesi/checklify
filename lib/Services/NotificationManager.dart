@@ -24,14 +24,14 @@ class _NotificationManager {
   Future _onSelectNotification(String payload) async {
     int id = int.parse(payload);
     TaskWithPath taskWithPathToOpen =
-        _getTaskWithPathWithID(TaskWithPath(_appState.root, TaskPath()), id);
+        TaskUtils.getTaskByNotificationID(TaskWithPath(_appState.root, TaskPath()), id);
     _appState.openTask(taskWithPathToOpen.task, taskWithPathToOpen.taskPath);
   }
 
   TaskNotification scheduleNotification(
       DateTime scheduledDate, Task root, Task task) {
     int id = task.notification == null
-        ? _getHighestNotificationId(root, 0)
+        ? TaskUtils.getHighestNotificationId(root, 0)
         : task.notification.id;
 
     var androidDetails = new AndroidNotificationDetails(
@@ -52,31 +52,6 @@ class _NotificationManager {
   cancelNotification(int notificationId) async {
     print("cancelling notification with id: " + notificationId.toString());
     await _flutterNotificationsPlugin.cancel(notificationId);
-  }
-
-  static int _getHighestNotificationId(Task task, int maxId) {
-    if (task.notification != null && task.notification.id > maxId)
-      maxId = task.notification.id;
-
-    task.children.forEach((child) {
-      int childMaxId = _getHighestNotificationId(child, maxId);
-      if (childMaxId > maxId) maxId = childMaxId;
-    });
-    return maxId;
-  }
-
-  TaskWithPath _getTaskWithPathWithID(TaskWithPath taskWithPath, int id) {
-    Task task = taskWithPath.task;
-    if (task.notification != null && task.notification.id == id)
-      return TaskWithPath(task, taskWithPath.taskPath);
-    else {
-      task.children.forEach((child) {
-        var childPath = taskWithPath.taskPath;
-        childPath.add(child);
-        return _getTaskWithPathWithID(TaskWithPath(child, childPath), id);
-      });
-    }
-    return null;
   }
 
   _printDebugInformation(DateTime scheduledDate, int id) async {

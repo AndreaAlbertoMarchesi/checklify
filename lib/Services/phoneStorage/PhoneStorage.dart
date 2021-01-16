@@ -45,7 +45,7 @@ class PhoneStorage {
     return file;
   }
 
-  Future<Task> readData() async {
+  Future<Task> readTaskTree() async {
     try {
       final file = await _localFile;
       if (file.existsSync()) {
@@ -58,7 +58,7 @@ class PhoneStorage {
     return Task.emptyRoot;
   }
 
-  Future<File> writeData(Task root) async {
+  Future<File> writeTaskTree(Task root) async {
     final file = await _localFile;
     return file.writeAsString(jsonEncode(root.toJson()));
   }

@@ -9,6 +9,7 @@ import 'package:checklist_app/screens/timeline/widgets/widgets/dueDateWidget/Due
 import 'package:checklist_app/screens/timeline/widgets/widgets/MonthWidget.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
+import 'package:checklist_app/utils/TaskUtils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,7 @@ class Timeline extends StatelessWidget {
     final appState = context.watch<AppState>();
 
     List<Widget> getItems(Task root) {
-      List<TaskWithPath> tasksWithPaths = root.getTimelineTasks(TaskPath());
+      List<TaskWithPath> tasksWithPaths = TaskUtils.getTimelineTasks(TaskPath(), root);
       tasksWithPaths.sort((a, b) => a.task.deadline.compareTo(b.task.deadline));
 
       List<Widget> items = List<Widget>();
@@ -46,7 +47,7 @@ class Timeline extends StatelessWidget {
     }
 
     List<Widget> getIndicator(Task root) {
-      List<TaskWithPath> tasksWithPaths = root.getTimelineTasks(TaskPath());
+      List<TaskWithPath> tasksWithPaths = TaskUtils.getTimelineTasks(TaskPath(), root);
       tasksWithPaths.sort((a, b) => a.task.deadline.compareTo(b.task.deadline));
       List<Widget> items = List<Widget>();
       DateTime previousDeadline;
@@ -96,7 +97,7 @@ class Timeline extends StatelessWidget {
               icon: Icon(Icons.calendar_today_outlined),
               onPressed: () {
                 List<TaskWithPath> tasksWithPaths =
-                    appState.root.getTimelineTasks(TaskPath());
+                TaskUtils.getTimelineTasks(TaskPath(), appState.root);
                 tasksWithPaths
                     .sort((a, b) => a.task.deadline.compareTo(b.task.deadline));
                 Navigator.push(

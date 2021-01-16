@@ -1,5 +1,4 @@
 import 'package:checklist_app/models/Task.dart';
-import 'package:checklist_app/models/supportClasses/TaskPreferences.dart';
 import 'package:checklist_app/models/supportClasses/TaskValues.dart';
 import 'package:checklist_app/screens/modifyTask/widgets/buttons/CancelButton.dart';
 import 'package:checklist_app/screens/modifyTask/widgets/buttons/ConfirmButton.dart';
@@ -18,7 +17,7 @@ import 'package:provider/provider.dart';
 import 'package:vibration/vibration.dart';
 
 class ModifyTask extends StatefulWidget {
-  ModifyTask({this.task,this.taskPreferences});
+  ModifyTask({this.task, this.taskPreferences});
 
   final Task task;
   final taskPreferences;
@@ -61,7 +60,6 @@ class _ModifyTaskState extends State<ModifyTask> {
         settings.setTaskPreferences(taskValues);
         Navigator.of(context).pop();
       } else if (settings.vibrate) Vibration.vibrate(duration: 80);
-
     }
 
     return Scaffold(

@@ -4,6 +4,7 @@ import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/models/supportClasses/TaskPath.dart';
 import 'package:checklist_app/models/supportClasses/TaskValues.dart';
 import 'package:checklist_app/models/supportClasses/TaskWithPath.dart';
+import 'package:checklist_app/utils/TaskUtils.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,7 @@ class AppState extends ChangeNotifier {
   final _NotificationManager _notificationManager = _NotificationManager();
 
   AppState(this._storage) {
-    _storage.readData().then((Task value) {
+    _storage.readTaskTree().then((Task value) {
       root = value;
       task = root;
       taskPath.add(root);
@@ -75,7 +76,7 @@ class AppState extends ChangeNotifier {
     task.children.add(createdTask);
     taskPath.updatePercentage();
     setStarredTask();
-    _storage.writeData(root);
+    _storage.writeTaskTree(root);
     notifyListeners();
   }
 
@@ -85,7 +86,7 @@ class AppState extends ChangeNotifier {
 
     this.task.children.remove(task);
     taskPath.updatePercentage();
-    _storage.writeData(root);
+    _storage.writeTaskTree(root);
     notifyListeners();
   }
 
@@ -108,7 +109,7 @@ class AppState extends ChangeNotifier {
     task.percentageDivisions = taskValues.percentageDivisions;
     task.doesShowDailyPercentage = taskValues.doesShowDailyPercentage;
     setStarredTask();
-    _storage.writeData(root);
+    _storage.writeTaskTree(root);
     notifyListeners();
   }
 
@@ -156,7 +157,7 @@ class AppState extends ChangeNotifier {
     _selectionState.removeTasksFromOldParents();
     _selectionState.clearSelection();
 
-    _storage.writeData(root);
+    _storage.writeTaskTree(root);
     notifyListeners();
   }
 

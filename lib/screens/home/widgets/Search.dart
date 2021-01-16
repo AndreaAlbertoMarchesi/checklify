@@ -3,6 +3,7 @@ import 'package:checklist_app/models/supportClasses/TaskPath.dart';
 import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
+import 'package:checklist_app/utils/TaskUtils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -41,7 +42,7 @@ class Search extends SearchDelegate {
 
     TaskPath taskPath = appState.taskPath.getCopy();
     if (taskPath.getLength() > 0) taskPath.backToPrevious();
-    searchedTasks = appState.task.searchTasks(query, taskPath);
+    searchedTasks = TaskUtils.getTasksByName(query, taskPath, appState.task);
 
     return ListView.builder(
         itemCount: searchedTasks.length,
@@ -74,7 +75,7 @@ class Search extends SearchDelegate {
     List<TaskWithPath> searchedTasks;
     TaskPath taskPath = appState.taskPath.getCopy();
     taskPath.backToPrevious();
-    searchedTasks = appState.task.searchTasks(query, taskPath);
+    searchedTasks = TaskUtils.getTasksByName(query, taskPath, appState.task);
 
     return ListView.builder(
         itemCount: searchedTasks.length,

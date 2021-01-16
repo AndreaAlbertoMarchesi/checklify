@@ -69,34 +69,4 @@ class Task {
   factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
 
   Map<String, dynamic> toJson() => _$TaskToJson(this);
-
-  List<TaskWithPath> searchTasks(String searchInput, TaskPath taskPath) {
-    var foundTasks = List<TaskWithPath>();
-
-    children.forEach((child) {
-      var childPath = taskPath.getCopy();
-      childPath.add(this);
-
-      if (child.title.contains(searchInput))
-        foundTasks.add(TaskWithPath(child, childPath));
-
-      foundTasks.addAll(child.searchTasks(searchInput, childPath));
-    });
-    return foundTasks;
-  }
-
-  List<TaskWithPath> getTimelineTasks(TaskPath taskPath) {
-    var foundTasks = List<TaskWithPath>();
-
-    children.forEach((child) {
-      var childPath = taskPath.getCopy();
-      childPath.add(this);
-
-      if (child.deadline != null && !child.isCompleted())
-        foundTasks.add(TaskWithPath(child, childPath));
-
-      foundTasks.addAll(child.getTimelineTasks(childPath));
-    });
-    return foundTasks;
-  }
 }
