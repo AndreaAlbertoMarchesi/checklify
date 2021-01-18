@@ -33,58 +33,61 @@ class IntroScreenState extends State<IntroScreen> {
 
     slides.add(
       new Slide(
-        title: "HOME",
-        styleTitle: TextStyle(
-            color: Colors.blue,
-            fontSize: 30.0,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'RobotoMono'),
-        description: "DESCRIZIONE APP",
-        styleDescription: TextStyle(
-            color: Color(0xfffe9c8f),
-            fontSize: 20.0,
-            fontStyle: FontStyle.italic,
-            fontFamily: 'Raleway'),
-        pathImage: "images/introScreen/screen1.png",
-        backgroundImage: "images/introScreen/screen3.jpg",
-        backgroundImageFit: BoxFit.fill,
-      ),
+          title: "CHECKLIFY",
+          styleTitle: TextStyle(
+              color: Colors.lightBlue[50],
+              fontSize: 30.0,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'RobotoMono'),
+          description: "Organize quickly your daily tasks",
+          styleDescription: TextStyle(
+              color: Colors.black54,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.italic,
+              letterSpacing: 0.2,
+              fontFamily: 'Raleway'),
+          pathImage: "images/introScreen/multitasking.png",
+          backgroundColor: Colors.blue[600]),
     );
     slides.add(
       new Slide(
-        title: "ADD TASK",
-        styleTitle: TextStyle(
-            color: Colors.blue,
-            fontSize: 30.0,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'RobotoMono'),
-        description: "SPIEGARE COME SI AGGIUNGONO LE TASK",
-        styleDescription: TextStyle(
-            color: Color(0xfffe9c8f),
-            fontSize: 20.0,
-            fontStyle: FontStyle.italic,
-            fontFamily: 'Raleway'),
-        pathImage: "images/introScreen/screen1.png",
-        backgroundImage: "images/introScreen/screen1.png",
-      ),
+          title: "EASY GESTURES",
+          styleTitle: TextStyle(
+              color: Colors.lightBlue[50],
+              fontSize: 30.0,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'RobotoMono'),
+          description: "SWIPE LEFT to delete a task,\nSWIPE RIGHT to modify a task,\nTAP on tasks to move from one to another",
+          styleDescription: TextStyle(
+              color: Colors.black54,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.italic,
+              letterSpacing: 0.2,
+              fontFamily: 'Raleway'),
+          pathImage: "images/introScreen/threetaskhomepage.jpg",
+          backgroundColor: Colors.blue[600]),
     );
     slides.add(
       new Slide(
-        title: "MOVE THEM EVERYWHERE",
-        styleTitle: TextStyle(
-            color: Colors.blue,
-            fontSize: 30.0,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'RobotoMono'),
-        description: "SPIEGARE COME SI MUOVONO LE TASK",
-        styleDescription: TextStyle(
-            color: Color(0xfffe9c8f),
-            fontSize: 20.0,
-            fontStyle: FontStyle.italic,
-            fontFamily: 'Raleway'),
-        pathImage: "images/introScreen/screen1.png",
-        backgroundImage: "images/introScreen/screen1.png",
-      ),
+          title: "MOVE TASKS AROUND",
+          styleTitle: TextStyle(
+              color: Colors.lightBlue[50],
+              fontSize: 30.0,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'RobotoMono'),
+          description:
+              "Double tap on the task you want to move,\nSelect the destination task,\nPress on the bottom right icon",
+          styleDescription: TextStyle(
+              color: Colors.black54,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.italic,
+              letterSpacing: 0.2,
+              fontFamily: 'Raleway'),
+          pathImage: "images/introScreen/movetaskhomepage.png",
+          backgroundColor: Colors.blue[600]),
     );
   }
 
@@ -121,23 +124,41 @@ class IntroScreenState extends State<IntroScreen> {
       tabs.add(Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(currentSlide.backgroundImage),
-                fit: BoxFit.cover)),
         child: Container(
-          margin: EdgeInsets.only(bottom: 60.0, top: 60.0),
+          //margin: EdgeInsets.only(bottom: 60.0, top: 60.0),
+          color: currentSlide.backgroundColor,
           child: ListView(
             children: <Widget>[
               Container(
-                child: Text(
-                  currentSlide.title,
-                  style: currentSlide.styleTitle,
-                  textAlign: TextAlign.center,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    currentSlide.title,
+                    style: currentSlide.styleTitle,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-                margin: i == 0
-                    ? EdgeInsets.only(top: 80.0)
-                    : EdgeInsets.only(top: 400.0),
+                margin: EdgeInsets.only(top: 70.0),
+              ),
+              Container(
+                height: 400.0,
+                decoration: BoxDecoration(
+                  color: Colors.blue[400],
+                  image: DecorationImage(
+                    image: AssetImage(currentSlide.pathImage),
+                    fit: BoxFit.fitHeight,
+                  ),
+                  shape: BoxShape.rectangle,
+                    border: Border.all(
+                            color: Colors.blue[400],
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(30))
+                ),
+                constraints: i==0
+                    ? BoxConstraints()
+                    : BoxConstraints(
+
+                ),
               ),
               Container(
                 child: Text(
@@ -212,7 +233,7 @@ class IntroScreenState extends State<IntroScreen> {
       highlightColorDoneBtn: Colors.blue[100],
 
       // Dot indicator
-      colorDot: Colors.blue,
+      colorDot: Colors.lightBlue[50],
       sizeDot: 13.0,
       typeDotAnimation: dotSliderAnimation.SIZE_TRANSITION,
 
