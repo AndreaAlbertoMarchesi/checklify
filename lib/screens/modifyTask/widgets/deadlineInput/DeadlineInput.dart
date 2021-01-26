@@ -29,7 +29,7 @@ class DeadlineInput extends StatelessWidget {
                       color: settings.getFont()),
                 ),
                 Padding(
-                    padding: EdgeInsets.all(15),
+                    padding: EdgeInsets.fromLTRB(2,0,0,0),
                     child: AppTextDecoration(
                         taskValues.deadline != null
                             ? DateTimeFormatter.dateTimeToFullString(

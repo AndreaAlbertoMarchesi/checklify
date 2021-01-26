@@ -1,7 +1,6 @@
 import 'package:checklist_app/sharedWidgets/CountdownText.dart';
 import 'package:checklist_app/sharedWidgets/DeadlineText.dart';
 import 'package:checklist_app/sharedWidgets/PercentageCircle.dart';
-import 'package:checklist_app/sharedWidgets/TextStyles/AppTextDecoration.dart';
 import 'package:checklist_app/states/AppState.dart';
 import 'package:checklist_app/states/Settings.dart';
 import 'package:flutter/material.dart';
@@ -47,12 +46,23 @@ class ParentTaskItem extends StatelessWidget {
             ),
             Row(
               children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  child: AppTextDecoration(appState.task.title,
-                      fontSize: settings.getFontSizeParent(),
-                      color: settings.getFontTiles()),
-                  //todo 0.5
+                Container(
+                  width: 250,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(5,0,0,0),
+                    child: RichText(
+                      overflow: TextOverflow.ellipsis,
+                      text: TextSpan(
+                        text:appState.task.title,
+                        style: TextStyle(
+                          fontSize: settings.getFontSizeParent(),
+                          letterSpacing: 0.5,
+                          fontWeight: FontWeight.bold,
+                          color: settings.getFontTiles(),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
                 Expanded(child: Container()),
                 PercentageCircle(appState.task),

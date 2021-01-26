@@ -24,9 +24,7 @@ class PercentageRow extends StatelessWidget {
         Padding(
           padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
           child: Container(
-            width: task.progressType == ProgressType.slider
-            ? 154
-            : 200,
+            width: 200,
             child: RichText(
               overflow: TextOverflow.ellipsis,
               text: TextSpan(

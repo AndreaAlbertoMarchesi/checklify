@@ -29,16 +29,13 @@ class ReminderInput extends StatelessWidget {
                   color: settings.getFont(),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.all(15),
-                child: AppTextDecoration(
-                    taskValues.dateTimeNotification != null
-                        ? DateTimeFormatter.dateTimeToFullString(
-                            taskValues.dateTimeNotification)
-                        : "add a reminder...",
-                    fontSize: settings.getFontSizeCoffee() - 3,
-                    color: settings.getFont()),
-              ),
+              AppTextDecoration(
+                  taskValues.dateTimeNotification != null
+                      ? DateTimeFormatter.dateTimeToFullString(
+                          taskValues.dateTimeNotification)
+                      : "add a reminder...",
+                  fontSize: settings.getFontSizeCoffee() - 3,
+                  color: settings.getFont()),
             ],
           ),
           decoration: BoxDecoration(

@@ -18,7 +18,7 @@ class DoesShowDailyPercentageInput extends StatelessWidget {
     return CheckboxListTile(
         title: Padding(
           padding: const EdgeInsets.fromLTRB(0, 6, 0, 0),
-          child: AppTextDecoration("show daily percentage",
+          child: AppTextDecoration("Show daily percentage",
               fontSize: settings.getFontSizeCoffee(),
               color: settings.getFont()),
         ),

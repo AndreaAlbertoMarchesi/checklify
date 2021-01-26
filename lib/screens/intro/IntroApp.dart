@@ -138,7 +138,7 @@ class IntroScreenState extends State<IntroScreen> {
                     textAlign: TextAlign.center,
                   ),
                 ),
-                margin: EdgeInsets.only(top: 70.0),
+                margin: EdgeInsets.only(top: 45.0),
               ),
               Container(
                 height: 400.0,

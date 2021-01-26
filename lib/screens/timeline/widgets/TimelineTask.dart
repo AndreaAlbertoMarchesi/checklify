@@ -37,7 +37,7 @@ class TimelineTask extends StatelessWidget {
         ),
         child: ListTile(
           title: AppTextDecoration(task.title,
-              fontSize: settings.getFontSizeChildren(),
+              fontSize: settings.getFontSizeCoffee()+4,
               color: settings.getFontTiles()),
           subtitle: AppTextDecoration(taskPath.toString(),
               color: settings.getFontTiles()),

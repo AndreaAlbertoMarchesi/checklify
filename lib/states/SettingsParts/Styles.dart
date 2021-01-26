@@ -123,7 +123,7 @@ class _Styles {
     double s;
     switch (size) {
       case 'Small':
-        s = 13;
+        s = 16;
         break;
       case 'Medium':
         s = 17;

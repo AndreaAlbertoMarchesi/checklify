@@ -28,7 +28,7 @@ class SideMenu extends StatelessWidget {
                     child: Row(
                       children: [
                         Padding(
-                          padding: EdgeInsets.all(15),
+                          padding: EdgeInsets.fromLTRB(0, 15, 8, 15),
                           child: CircleAvatar(
                             radius: 50,
                             backgroundImage: settings.isPhotoFromGallery
