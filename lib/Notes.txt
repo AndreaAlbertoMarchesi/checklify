@@ -1,3 +1,6 @@
+//to install apk
+
+//flutter run --release
 
 // to get SHA1:
 

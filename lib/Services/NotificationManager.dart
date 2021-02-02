@@ -10,7 +10,7 @@ class _NotificationManager {
     _flutterNotificationsPlugin = FlutterLocalNotificationsPlugin();
 // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
     final _initializationSettingsAndroid =
-    /*mettere qui l icona, questa è l icona della notifica*/
+        /*mettere qui l icona, questa è l icona della notifica*/
         AndroidInitializationSettings('@mipmap/ic_launcher');
     final _initializationSettingsIOS = IOSInitializationSettings();
     final _initializationSettings = InitializationSettings(
@@ -23,16 +23,19 @@ class _NotificationManager {
 
   Future _onSelectNotification(String payload) async {
     int id = int.parse(payload);
-    TaskWithPath taskWithPathToOpen =
-        TaskUtils.getTaskByNotificationID(TaskWithPath(_appState.root, TaskPath()), id);
+    TaskWithPath taskWithPathToOpen = TaskUtils.getTaskByNotificationID(id, TaskPath(),_appState.root);
+    print(taskWithPathToOpen.task.title +
+        "    " +
+        taskWithPathToOpen.taskPath.toString());
     _appState.openTask(taskWithPathToOpen.task, taskWithPathToOpen.taskPath);
   }
 
   TaskNotification scheduleNotification(
       DateTime scheduledDate, Task root, Task task) {
-    int id = task.notification == null
-        ? TaskUtils.getHighestNotificationId(root, 0)
-        : task.notification.id;
+    print("hieghst "+TaskUtils.getHighestNotificationId(root, 0).toString());
+    int id = (task.notification == null
+        ? TaskUtils.getHighestNotificationId(root, 0) + 1
+        : task.notification.id);
 
     var androidDetails = new AndroidNotificationDetails(
         "Channel ID", "Desi programmer", "This is my channel",
@@ -40,9 +43,10 @@ class _NotificationManager {
     var iSODetails = new IOSNotificationDetails();
     var generalNotificationDetails =
         new NotificationDetails(android: androidDetails, iOS: iSODetails);
-  String title = task.title;
-    _flutterNotificationsPlugin.schedule(
-        id, "Reminder for : $title)", "", scheduledDate, generalNotificationDetails,
+    String title = task.title;
+    print("yo" + id.toString());
+    _flutterNotificationsPlugin.schedule(id, "Reminder for : $title", "",
+        scheduledDate, generalNotificationDetails,
         payload: id.toString());
 
     _printDebugInformation(scheduledDate, id);

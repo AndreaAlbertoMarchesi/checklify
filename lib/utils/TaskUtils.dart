@@ -3,7 +3,6 @@ import 'package:checklist_app/models/supportClasses/TaskPath.dart';
 import 'package:checklist_app/models/supportClasses/TaskWithPath.dart';
 
 class TaskUtils {
-
   static List<TaskWithPath> getTimelineTasks(TaskPath taskPath, Task task) {
     var foundTasks = List<TaskWithPath>();
 
@@ -19,7 +18,8 @@ class TaskUtils {
     return foundTasks;
   }
 
-  static List<TaskWithPath> getTasksByName(String searchInput, TaskPath taskPath, Task task) {
+  static List<TaskWithPath> getTasksByName(
+      String searchInput, TaskPath taskPath, Task task) {
     var foundTasks = List<TaskWithPath>();
 
     task.children.forEach((child) {
@@ -34,18 +34,22 @@ class TaskUtils {
     return foundTasks;
   }
 
-  static TaskWithPath getTaskByNotificationID(TaskWithPath taskWithPath, int id) {
-    Task task = taskWithPath.task;
-    if (task.notification != null && task.notification.id == id)
-      return TaskWithPath(task, taskWithPath.taskPath);
-    else {
-      task.children.forEach((child) {
-        var childPath = taskWithPath.taskPath;
-        childPath.add(child);
-        return getTaskByNotificationID(TaskWithPath(child, childPath), id);
-      });
-    }
-    return null;
+  static TaskWithPath getTaskByNotificationID(
+      int id, TaskPath taskPath, Task task) {
+    TaskWithPath foundTask;
+
+    task.children.forEach((child) {
+      if (foundTask == null) {
+        var childPath = taskPath.getCopy();
+        childPath.add(task);
+
+        if (child.notification != null && child.notification.id == id)
+          foundTask = TaskWithPath(child, childPath);
+        else
+          foundTask = TaskUtils.getTaskByNotificationID(id, childPath, child);
+      }
+    });
+    return foundTask;
   }
 
   static int getHighestNotificationId(Task task, int maxId) {
@@ -58,5 +62,4 @@ class TaskUtils {
     });
     return maxId;
   }
-
 }
