@@ -1,7 +1,6 @@
 import 'package:checklist_app/Services/phoneStorage/Keys.dart';
 import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/models/supportClasses/TaskPath.dart';
-import 'package:checklist_app/models/supportClasses/TaskWithPath.dart';
 import 'package:checklist_app/utils/TaskUtils.dart';
 import 'package:flutter_test/flutter_test.dart';
 

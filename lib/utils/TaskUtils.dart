@@ -71,7 +71,7 @@ class TaskUtils {
 
     switch (order) {
       case Keys.orderByName:
-        return a.title.compareTo(b.title);
+        return a.title.toLowerCase().compareTo(b.title.toLowerCase());
 
       case Keys.orderByDate:
         if (a.deadline != null && b.deadline == null)
