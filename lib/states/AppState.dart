@@ -23,14 +23,12 @@ class AppState extends ChangeNotifier {
 
   AppState(this._storage) {
     _storage.readTaskTree().then((Task value) {
-      if(task == Task.emptyRoot) {
-        root = value;
-        task = root;
-        taskPath.add(root);
-        notifyListeners();
-      }
+      root = value;
+      task = root;
+      taskPath.add(root);
+      notifyListeners();
+      _notificationManager.initialize(this);
     });
-    _notificationManager.initialize(this);
   }
 
   void setStarredTask() {
