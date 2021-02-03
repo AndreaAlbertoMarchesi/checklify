@@ -186,22 +186,8 @@ class AppState extends ChangeNotifier {
   }
 
   void setTaskOrder(order) {
-    if (order == Keys.orderByName) {
-      task.children.sort((a, b) {
-        //qui
-        return a.title.compareTo(b.title);
-      });
-    } else {
-      task.children.sort((a, b) {
-        //qui
-        return a.deadline != null && b.deadline != null
-            ? a.deadline.compareTo(b.deadline)
-            : 0;
-      });
-    }
-    task.children.forEach((element) {
-      handleReorder(task.children.indexOf(element), 0, true);
-    });
+    task.children.sort((a, b) => TaskUtils.compareTasks(a, b, order));
+    _storage.writeTaskTree(root);
     notifyListeners();
   }
 }
