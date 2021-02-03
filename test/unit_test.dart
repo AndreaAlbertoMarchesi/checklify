@@ -1,3 +1,4 @@
+import 'package:checklist_app/Services/phoneStorage/Keys.dart';
 import 'package:checklist_app/models/Task.dart';
 import 'package:checklist_app/models/supportClasses/TaskPath.dart';
 import 'package:checklist_app/models/supportClasses/TaskWithPath.dart';
@@ -8,6 +9,7 @@ void main() {
   var mockTaskGrandchild1 = Task("grandchild1");
   mockTaskGrandchild1.notification = TaskNotification(null, 3);
   mockTaskGrandchild1.deadline = DateTime.now();
+  mockTaskGrandchild1.isStarred = true;
 
   var mockTaskChild1 = Task("child1");
   mockTaskChild1.notification = TaskNotification(null, 0);
@@ -88,6 +90,57 @@ void main() {
 
     test('no existing notification', () {
       expect(TaskUtils.getHighestNotificationId(mockEmptyTask, 0), 0);
+    });
+  });
+
+  group('compareTasks', () {
+    test('compareTasks by name, starred', () {
+      expect(
+          TaskUtils.compareTasks(Task("a", isStarred: false),
+              Task("b", isStarred: true), Keys.orderByName),
+          1);
+    });
+
+    test('compareTasks by name, bigger task', () {
+      expect(
+          TaskUtils.compareTasks(Task("b", isStarred: false),
+              Task("a", isStarred: false), Keys.orderByName),
+          1);
+    });
+    test('compareTasks by name, smaller task', () {
+      expect(
+          TaskUtils.compareTasks(Task("a", isStarred: false),
+              Task("b", isStarred: false), Keys.orderByName),
+          -1);
+    });
+
+    test('compareTasks by date, starred', () {
+      expect(
+          TaskUtils.compareTasks(
+              Task("a", deadline: DateTime.now(), isStarred: false),
+              Task("b", deadline: DateTime.now(), isStarred: true),
+              Keys.orderByDate),
+          1);
+    });
+    test('compareTasks by date, bigger task', () {
+      expect(
+          TaskUtils.compareTasks(
+              Task("a", deadline: DateTime.now(), isStarred: false),
+              Task("b",
+                  deadline: DateTime.now().add(Duration(days: 1)),
+                  isStarred: false),
+              Keys.orderByDate),
+          -1);
+    });
+    test('compareTasks by date, smaller task', () {
+      expect(
+          TaskUtils.compareTasks(
+              Task("a",
+                  deadline: DateTime.now().add(Duration(days: 1)),
+                  isStarred: false),
+              Task("b", deadline: DateTime.now(), isStarred: false),
+              Keys.orderByDate),
+          1);
     });
   });
 }
