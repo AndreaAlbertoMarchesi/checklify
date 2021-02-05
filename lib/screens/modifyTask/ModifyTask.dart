@@ -43,11 +43,12 @@ class _ModifyTaskState extends State<ModifyTask> {
   @override
   Widget build(BuildContext context) {
     final _titleFormKey = GlobalKey<FormState>();
+    final _notesFormKey = GlobalKey<FormState>();
     final appState = context.watch<AppState>();
     final settings = context.watch<Settings>();
 
     void addTask() {
-      if (_titleFormKey.currentState.validate()) {
+      if (_titleFormKey.currentState.validate() && _notesFormKey.currentState.validate()) {
         appState.addTask(taskValues);
         settings.setTaskPreferences(taskValues);
         Navigator.of(context).pop();
@@ -55,7 +56,7 @@ class _ModifyTaskState extends State<ModifyTask> {
     }
 
     void updateTask() {
-      if (_titleFormKey.currentState.validate()) {
+      if (_titleFormKey.currentState.validate() && _notesFormKey.currentState.validate()) {
         appState.updateTask(widget.task, taskValues);
         settings.setTaskPreferences(taskValues);
         Navigator.of(context).pop();
@@ -81,7 +82,7 @@ class _ModifyTaskState extends State<ModifyTask> {
         ColorPickerComponent(taskValues),
 
         //NOTES
-        NotesComponent(taskValues, isAdding),
+        NotesComponent(taskValues, isAdding, _notesFormKey),
         //DUE DATE
         DeadlineInput(taskValues, refreshModifyTask),
 
@@ -97,5 +98,7 @@ class _ModifyTaskState extends State<ModifyTask> {
     );
   }
 
-  refreshModifyTask() => setState(() {});
+  refreshModifyTask() => setState(() {
+
+  });
 }

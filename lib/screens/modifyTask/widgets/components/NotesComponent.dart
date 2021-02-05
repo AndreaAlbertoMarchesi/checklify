@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class NotesComponent extends StatelessWidget {
-  NotesComponent(this.taskValues, this.isAdding);
+  NotesComponent(this.taskValues, this.isAdding, this._notesFormKey);
 
   final TaskValues taskValues;
   final bool isAdding;
+  final GlobalKey<FormState> _notesFormKey;
 
   @override
   Widget build(BuildContext context) {
-    final _notesFormKey = GlobalKey<FormState>();
     final settings = context.watch<Settings>();
 
     return Container(

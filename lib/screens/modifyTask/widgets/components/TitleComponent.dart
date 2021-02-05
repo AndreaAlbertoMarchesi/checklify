@@ -6,11 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TitleComponent extends StatelessWidget {
-  TitleComponent(this.taskValues, this.isAdding, this.titleFormKey);
+  TitleComponent(this.taskValues, this.isAdding, this._titleFormKey);
 
   final TaskValues taskValues;
   final bool isAdding;
-  final GlobalKey<FormState> titleFormKey;
+  final GlobalKey<FormState> _titleFormKey;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class TitleComponent extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Form(
-                  key: titleFormKey, child: TitleInput(taskValues, isAdding)),
+                  key: _titleFormKey, child: TitleInput(taskValues, isAdding)),
             ),
           ],
         ),

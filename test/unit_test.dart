@@ -142,4 +142,58 @@ void main() {
           1);
     });
   });
+
+
+
+  group('validator', () {
+    test('validate title', () {
+      expect(
+          TaskUtils.compareTasks(Task("a", isStarred: false),
+              Task("b", isStarred: true), Keys.orderByName),
+          1);
+    });
+
+    test('compareTasks by name, bigger task', () {
+      expect(
+          TaskUtils.compareTasks(Task("b", isStarred: false),
+              Task("a", isStarred: false), Keys.orderByName),
+          1);
+    });
+    test('compareTasks by name, smaller task', () {
+      expect(
+          TaskUtils.compareTasks(Task("a", isStarred: false),
+              Task("b", isStarred: false), Keys.orderByName),
+          -1);
+    });
+
+    test('compareTasks by date, starred', () {
+      expect(
+          TaskUtils.compareTasks(
+              Task("a", deadline: DateTime.now(), isStarred: false),
+              Task("b", deadline: DateTime.now(), isStarred: true),
+              Keys.orderByDate),
+          1);
+    });
+    test('compareTasks by date, bigger task', () {
+      expect(
+          TaskUtils.compareTasks(
+              Task("a", deadline: DateTime.now(), isStarred: false),
+              Task("b",
+                  deadline: DateTime.now().add(Duration(days: 1)),
+                  isStarred: false),
+              Keys.orderByDate),
+          -1);
+    });
+    test('compareTasks by date, smaller task', () {
+      expect(
+          TaskUtils.compareTasks(
+              Task("a",
+                  deadline: DateTime.now().add(Duration(days: 1)),
+                  isStarred: false),
+              Task("b", deadline: DateTime.now(), isStarred: false),
+              Keys.orderByDate),
+          1);
+    });
+  });
+
 }

@@ -1,5 +1,6 @@
 import 'package:checklist_app/models/supportClasses/TaskValues.dart';
 import 'package:checklist_app/states/Settings.dart';
+import 'package:checklist_app/utils/Validator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +18,7 @@ class TitleInput extends StatelessWidget {
     );
 
     return TextFormField(
+      autofocus: isAdding && taskValues.title == "",
       controller: _controller,
       maxLength: 15,
       decoration: InputDecoration(
@@ -30,9 +32,7 @@ class TitleInput extends StatelessWidget {
           borderSide: BorderSide(color: settings.getBorder(), width: 2.0),
         ),
       ),
-      validator: (val) => (val.isEmpty | (val.length > 15))
-          ? 'Enter a valid name ( not too long )'
-          : null,
+      validator: Validator.validateTitle,
       onChanged: (val) => taskValues.title = val,
     );
   }

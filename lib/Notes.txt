@@ -11,3 +11,5 @@
 //  keytool -list -v -keystore "C:\Users\AndreaMarchesi\.android\debug.keystore" -alias androiddebugkey -storepass android -keypass android
 
 //Sha1:    78:CB:BF:04:44:CB:40:AD:FE:AD:DD:27:BD:9D:27:95:DD:EF:B4:EC
+
+//bug timeline first install

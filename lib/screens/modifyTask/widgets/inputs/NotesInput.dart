@@ -1,5 +1,6 @@
 import 'package:checklist_app/models/supportClasses/TaskValues.dart';
 import 'package:checklist_app/states/Settings.dart';
+import 'package:checklist_app/utils/Validator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +22,7 @@ class NotesInput extends StatelessWidget {
       controller: _controller,
       maxLines: null,
       maxLength: 100,
+      keyboardType: TextInputType.text,
       decoration: InputDecoration(
         hintText: isAdding ? "insert additional notes" : taskValues.notes,
         filled: true,
@@ -32,7 +34,7 @@ class NotesInput extends StatelessWidget {
           borderSide: BorderSide(color: settings.getBorder(), width: 2.0),
         ),
       ),
-      validator: (val) => (val.length > 100) ? 'too much text' : null,
+      validator: Validator.validateNotes,
       onChanged: (val) => taskValues.notes = val,
     );
   }
