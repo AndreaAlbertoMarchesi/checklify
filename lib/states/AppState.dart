@@ -98,6 +98,10 @@ class AppState extends ChangeNotifier {
         newNotificationDateTime != oldNotificationDateTime)
       task.notification = _notificationManager.scheduleNotification(
           taskValues.dateTimeNotification, root, task);
+    else if(newNotificationDateTime == null && task.notification != null){
+      _notificationManager.cancelNotification(task.notification.id);
+      task.notification = null;
+    }
 
     task.title = taskValues.title;
     task.colorValue = taskValues.colorValue;

@@ -1,3 +1,5 @@
+////fixare: quando task completata no deadline, starred tasks no reorder
+
 //to install apk
 
 //flutter run --release
