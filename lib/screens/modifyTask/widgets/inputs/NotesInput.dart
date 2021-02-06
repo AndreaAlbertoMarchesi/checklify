@@ -15,7 +15,7 @@ class NotesInput extends StatelessWidget {
     final settings = context.watch<Settings>();
 
     final TextEditingController _controller = new TextEditingController(
-      text: isAdding ? '' : taskValues.notes,
+      text: taskValues.notes,
     );
 
     return TextFormField(
