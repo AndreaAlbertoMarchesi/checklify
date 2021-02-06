@@ -11,7 +11,7 @@ class _NotificationManager {
 // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
     final _initializationSettingsAndroid =
         /*mettere qui l icona, questa è l icona della notifica*/
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+        AndroidInitializationSettings('@drawable/finalicon');
     final _initializationSettingsIOS = IOSInitializationSettings();
     final _initializationSettings = InitializationSettings(
       android: _initializationSettingsAndroid,
