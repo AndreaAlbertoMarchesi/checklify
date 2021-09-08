@@ -11,7 +11,7 @@ class AssistanceSettings extends StatelessWidget {
 
     final Uri _emailLaunchUri = Uri(
         scheme: 'mailto',
-        path: 'smith@example.com',
+        path: 'minimalsoftware.app@gmail.com',
         queryParameters: {'subject': 'Report a Bug'});
 
     return Container(

@@ -56,7 +56,7 @@ class SideMenu extends StatelessWidget {
                   ),
                   SettingItem(),
                   HelpItem(),
-                  DonateItem(),
+                  //DonateItem(),
                   TimelineItem(),
                 ],
               ),

@@ -18,7 +18,7 @@ class TitleInput extends StatelessWidget {
     );
 
     return TextFormField(
-      autofocus: isAdding && taskValues.title == "",
+      autofocus: false,//isAdding && taskValues.title == "",
       controller: _controller,
       maxLength: 15,
       decoration: InputDecoration(

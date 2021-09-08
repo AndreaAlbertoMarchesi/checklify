@@ -1,5 +1,9 @@
 ////fixare: quando task completata no deadline, starred tasks no reorder
 
+//to create apk properly
+
+//flutter build apk --no-shrink
+
 //to install apk
 
 //flutter run --release
